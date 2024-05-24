@@ -79,5 +79,10 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
             }
             return parameterNames;
         }
+
+        public async Task<T> GetByIdAsync(int id)
+        {
+            return await _dbContext.Set<T>().FindAsync(id);
+        }
     }
 }
