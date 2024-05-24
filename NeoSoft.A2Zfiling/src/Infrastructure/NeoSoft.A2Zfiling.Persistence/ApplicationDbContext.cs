@@ -20,11 +20,12 @@ namespace NeoSoft.A2Zfiling.Persistence
         {
         }
 
-        public DbSet<Roles> Roles { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<MunicipalCorp> MunicipalCorporations { get; set; }
 
         private IDbContextTransaction _transaction;
 
@@ -39,12 +40,12 @@ namespace NeoSoft.A2Zfiling.Persistence
             var conferenceGuid = Guid.Parse("{FE98F549-E790-4E9F-AA16-18C2292A2EE9}");
 
 
-            modelBuilder.Entity<Roles>().HasData(new Roles { RoleId=1,RoleName="End User",IsActive=true });
-            modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 2,RoleName = "Executive", IsActive = true });
-            modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 3,RoleName = "Field Executive", IsActive = true });
-            modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 4,RoleName = "Vendor User", IsActive = true });
-            modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 5,RoleName = "Alliance Manager", IsActive = true });
-            modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 6,RoleName = "Admin", IsActive = true });
+            //modelBuilder.Entity<Roles>().HasData(new Roles { RoleId=1,RoleName="End User",IsActive=true });
+            //modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 2,RoleName = "Executive", IsActive = true });
+            //modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 3,RoleName = "Field Executive", IsActive = true });
+            //modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 4,RoleName = "Vendor User", IsActive = true });
+            //modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 5,RoleName = "Alliance Manager", IsActive = true });
+            //modelBuilder.Entity<Roles>().HasData(new Roles { RoleId = 6,RoleName = "Admin", IsActive = true });
 
 
 

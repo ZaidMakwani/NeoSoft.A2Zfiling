@@ -35,4 +35,10 @@
     <ProjectReference Include="..\..\src\Infrastructure\NeoSoft.A2Zfiling.Infrastructure\NeoSoft.A2Zfiling.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FileExport\" />
+    <Folder Include="Mail\" />
+    <Folder Include="Mocks\" />
+  </ItemGroup>
+
 </Project>

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace NeosoftA2Zfilings.Views.ViewModels
 {
-    public class CreateRoleVM
+    public class RoleVM
     {
         [Required(ErrorMessage = "RoleId is required")]
 
@@ -14,6 +14,6 @@ namespace NeosoftA2Zfilings.Views.ViewModels
 
         [Required(ErrorMessage = "Name is required")]
 
-        public string Name { get; set; }
+        public string RoleName { get; set; }
     }
 }

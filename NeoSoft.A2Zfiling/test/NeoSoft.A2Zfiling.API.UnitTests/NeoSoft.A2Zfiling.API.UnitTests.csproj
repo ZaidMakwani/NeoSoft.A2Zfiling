@@ -31,4 +31,8 @@
     <ProjectReference Include="..\..\src\API\NeoSoft.A2Zfiling.Api\NeoSoft.A2Zfiling.Api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\v1\" />
+  </ItemGroup>
+
 </Project>

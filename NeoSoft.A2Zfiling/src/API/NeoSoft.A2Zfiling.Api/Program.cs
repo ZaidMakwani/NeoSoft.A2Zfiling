@@ -17,11 +17,13 @@ using Microsoft.AspNetCore.DataProtection;
 using NeoSoft.A2Zfiling.Auth;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver.Core.Configuration;
+using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
+using NeoSoft.A2Zfiling.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(ConnectionString));
-
+builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
 //SERILOG IMPLEMENTATION
 

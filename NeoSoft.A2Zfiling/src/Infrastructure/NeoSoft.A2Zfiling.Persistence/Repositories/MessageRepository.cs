@@ -1,4 +1,4 @@
-﻿using NeoSoft.A2Zfiling.Application.Contracts.Infrastructure;
+﻿
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using NeoSoft.A2Zfiling.Application.Contracts.Infrastructure;
 
 namespace NeoSoft.A2Zfiling.Persistence.Repositories
 {
