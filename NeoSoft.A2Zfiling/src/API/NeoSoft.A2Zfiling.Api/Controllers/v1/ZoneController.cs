@@ -1,115 +1,43 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.CreateZone;
-using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.DeleteZone;
-using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.UpdateZone;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList;
-using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneListWithEvent;
+using NeoSoft.A2Zfiling.Application.Responses;
+using NeoSoft.A2Zfiling.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NeoSoft.A2Zfiling.Api.Controllers.v1
+namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class ZoneController : ControllerBase
+    public class GetZoneListQueryHandler : IRequestHandler<GetZoneListQuery, Response<IEnumerable<GetZoneListDto>>>
     {
-        private readonly IMediator _mediator;
-        private readonly ILogger<ZoneController> _logger;
+        private readonly IMapper _mapper;
+        private readonly ILogger<GetZoneListQueryHandler> _logger;
+        private readonly IAsyncRepository<Zones> _asyncRepository;
 
-        public ZoneController(IMediator mediator,ILogger<ZoneController> logger)
+        public GetZoneListQueryHandler(IMapper mapper, ILogger<GetZoneListQueryHandler> logger, IAsyncRepository<Zones> asyncRepository)
         {
-            _mediator = mediator;
+            _asyncRepository = asyncRepository;
+            _mapper = mapper;
             _logger = logger;
         }
 
-        [HttpGet("all",Name ="GetAllZone")]
-        public async Task<ActionResult> GetAllZone()
+        public async Task<Response<IEnumerable<GetZoneListDto>>> Handle(GetZoneListQuery request, CancellationToken cancellationToken)
         {
-            try
-            {
-                _logger.LogInformation("GetAllZones Initiated");
-                var data = await _mediator.Send(new GetZoneListQuery());
-                _logger.LogInformation("GetAllZones Completed");
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            _logger.LogInformation("Handle Initiated");
+            var allZones = (await _asyncRepository.ListAllAsync())/*.Where(x => x.IsActive == true);*/;
+
+            var zones = _mapper.Map<IEnumerable<GetZoneListDto>>(allZones);
+
+            _logger.LogInformation("Hanlde Completed");
+            return new Response<IEnumerable<GetZoneListDto>>(zones, "Data Fetched Successfully");
         }
-
-        [HttpPost(Name ="AddZone")]
-        public async Task<ActionResult> CreateZone([FromBody] CreateZoneCommand model)
-        {
-            try
-            {
-                _logger.LogInformation("AddZones Initiated");
-                var response = await _mediator.Send(model);
-                _logger.LogInformation("AddZones Completed");
-                return Ok(response);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [HttpDelete("id",Name ="DeleteZone")]
-        public async Task<ActionResult> DeleteZone(int id)
-        {
-            try
-            {
-                _logger.LogInformation("DeleteZone Initiated");
-                DeleteZoneCommand deleteZone = new DeleteZoneCommand { ZoneId = id };
-                var data = await _mediator.Send(deleteZone);
-                _logger.LogInformation("DeleteZone Completed");
-                return Ok(data);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [HttpPut("id",Name ="UpdateZone")]
-        public async Task<ActionResult> EditZone([FromBody] UpdateZoneCommand model)
-        {
-            try
-            {
-                _logger.LogInformation("EditZone Initiated");
-                if (string.IsNullOrEmpty(model.ZoneName))
-                {
-                    return BadRequest("Zone name is required.");
-                }
-
-                UpdateZoneCommand updateZoneCommand = new UpdateZoneCommand { };
-                var data = await _mediator.Send(model);
-                _logger.LogInformation("EditZone Completed");
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [HttpGet("id",Name ="GetZoneByEvent")]
-        public async Task<ActionResult> GetZoneByEvent(int id)
-        {
-            try
-            {
-                _logger.LogInformation("GetZoneEvent Initiated");
-                GetZoneByIdCommand getZoneListQuery = new GetZoneByIdCommand() { ZoneId = id};
-                var data = await _mediator.Send(getZoneListQuery);
-                _logger.LogInformation("GetZoneEvent Completed");
-                return Ok(data);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
-        
-
     }
 }
+
+
+GetZoneListQueryHandler
