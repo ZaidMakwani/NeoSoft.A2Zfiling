@@ -9,11 +9,11 @@ using NeoSoft.A2Zfiling.Persistence;
 
 #nullable disable
 
-namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
+namespace NeoSoft.A2Zfiling.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220105101648_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240523095211_initial01")]
+    partial class initial01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -133,7 +133,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Artist = "John Egbert",
                             CategoryId = new Guid("b0788d2f-8003-43c1-92a4-edc76a7c5dde"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2022, 7, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9114),
+                            Date = new DateTime(2024, 11, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5151),
                             Description = "Join John for his farwell tour across 15 continents. John really needs no introduction since he has already mesmerized the world with his banjo.",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/banjo.jpg",
                             Name = "John Egbert Live",
@@ -145,7 +145,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Artist = "Michael Johnson",
                             CategoryId = new Guid("b0788d2f-8003-43c1-92a4-edc76a7c5dde"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2022, 10, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9208),
+                            Date = new DateTime(2025, 2, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5183),
                             Description = "Michael Johnson doesn't need an introduction. His 25 concert across the globe last year were seen by thousands. Can we add you to the list?",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/michael.jpg",
                             Name = "The State of Affairs: Michael Live!",
@@ -157,7 +157,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Artist = "DJ 'The Mike'",
                             CategoryId = new Guid("b0788d2f-8003-43c1-92a4-edc76a7c5dde"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2022, 5, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9272),
+                            Date = new DateTime(2024, 9, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5202),
                             Description = "DJs from all over the world will compete in this epic battle for eternal fame.",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/dj.jpg",
                             Name = "Clash of the DJs",
@@ -169,7 +169,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Artist = "Manuel Santinonisi",
                             CategoryId = new Guid("b0788d2f-8003-43c1-92a4-edc76a7c5dde"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2022, 5, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9330),
+                            Date = new DateTime(2024, 9, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5222),
                             Description = "Get on the hype of Spanish Guitar concerts with Manuel.",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/guitar.jpg",
                             Name = "Spanish guitar hits with Manuel",
@@ -181,7 +181,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Artist = "Many",
                             CategoryId = new Guid("fe98f549-e790-4e9f-aa16-18c2292a2ee9"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2022, 11, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9388),
+                            Date = new DateTime(2025, 3, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5240),
                             Description = "The best tech conference in the world",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/conf.jpg",
                             Name = "Techorama 2021",
@@ -193,7 +193,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Artist = "Nick Sailor",
                             CategoryId = new Guid("6313179f-7837-473a-a4d5-a5571b43e6a6"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2022, 9, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9459),
+                            Date = new DateTime(2025, 1, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5263),
                             Description = "The critics are over the moon and so will you after you've watched this sing and dance extravaganza written by Nick Sailor, the man from 'My dad and sister'.",
                             ImageUrl = "https://gillcleerenpluralsight.blob.core.windows.net/files/GloboTicket/musical.jpg",
                             Name = "To the Moon and Back",
@@ -254,6 +254,26 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                         });
                 });
 
+            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.MunicipalCorporation", b =>
+                {
+                    b.Property<int>("MunicipalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MunicipalId"), 1L, 1);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MunicipalName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MunicipalId");
+
+                    b.ToTable("MunicipalCorporations");
+                });
+
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -295,7 +315,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Id = new Guid("7e94bc5b-71a5-4c8c-bc3b-71bb7976237e"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
-                            OrderPlaced = new DateTime(2022, 1, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9536),
+                            OrderPlaced = new DateTime(2024, 5, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5287),
                             OrderTotal = 400,
                             UserId = new Guid("a441eb40-9636-4ee6-be49-a66c5ec1330b")
                         },
@@ -304,7 +324,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Id = new Guid("86d3a045-b42d-4854-8150-d6a374948b6e"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
-                            OrderPlaced = new DateTime(2022, 1, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9611),
+                            OrderPlaced = new DateTime(2024, 5, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5315),
                             OrderTotal = 135,
                             UserId = new Guid("ac3cfaf5-34fd-4e4d-bc04-ad1083ddc340")
                         },
@@ -313,7 +333,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Id = new Guid("771cca4b-066c-4ac7-b3df-4d12837fe7e0"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
-                            OrderPlaced = new DateTime(2022, 1, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9672),
+                            OrderPlaced = new DateTime(2024, 5, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5338),
                             OrderTotal = 85,
                             UserId = new Guid("d97a15fc-0d32-41c6-9ddf-62f0735c4c1c")
                         },
@@ -322,7 +342,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Id = new Guid("3dcb3ea0-80b1-4781-b5c0-4d85c41e55a6"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
-                            OrderPlaced = new DateTime(2022, 1, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9735),
+                            OrderPlaced = new DateTime(2024, 5, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5358),
                             OrderTotal = 245,
                             UserId = new Guid("4ad901be-f447-46dd-bcf7-dbe401afa203")
                         },
@@ -331,7 +351,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Id = new Guid("e6a2679c-79a3-4ef1-a478-6f4c91b405b6"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
-                            OrderPlaced = new DateTime(2022, 1, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9795),
+                            OrderPlaced = new DateTime(2024, 5, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5379),
                             OrderTotal = 142,
                             UserId = new Guid("7aeb2c01-fe8e-4b84-a5ba-330bdf950f5c")
                         },
@@ -340,7 +360,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Id = new Guid("f5a6a3a0-4227-4973-abb5-a63fbe725923"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
-                            OrderPlaced = new DateTime(2022, 1, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9866),
+                            OrderPlaced = new DateTime(2024, 5, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5402),
                             OrderTotal = 40,
                             UserId = new Guid("f5a6a3a0-4227-4973-abb5-a63fbe725923")
                         },
@@ -349,9 +369,85 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                             Id = new Guid("ba0eb0ef-b69b-46fd-b8e2-41b4178ae7cb"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             OrderPaid = true,
-                            OrderPlaced = new DateTime(2022, 1, 5, 10, 16, 45, 419, DateTimeKind.Utc).AddTicks(9932),
+                            OrderPlaced = new DateTime(2024, 5, 23, 9, 52, 10, 998, DateTimeKind.Utc).AddTicks(5422),
                             OrderTotal = 116,
                             UserId = new Guid("7aeb2c01-fe8e-4b84-a5ba-330bdf950f5c")
+                        });
+                });
+
+            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.Roles", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            RoleName = "End User"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            RoleName = "Executive"
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            RoleName = "Field Executive"
+                        },
+                        new
+                        {
+                            RoleId = 4,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            RoleName = "Vendor User"
+                        },
+                        new
+                        {
+                            RoleId = 5,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            RoleName = "Alliance Manager"
+                        },
+                        new
+                        {
+                            RoleId = 6,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            RoleName = "Admin"
                         });
                 });
 
