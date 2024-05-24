@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList
 {
-    public class GetZoneListQueryHandler : IRequestHandler<GetZoneListQuery, Response<IEnumerable<GetZoneListDto>>>
+    public class GetZoneListQueryHandler : IRequestHandler<GetListQuery, Response<IEnumerable<GetZoneListDto>>>
     {
         private readonly IMapper _mapper;
         private readonly ILogger<GetZoneListQueryHandler> _logger;
@@ -25,7 +25,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList
             _logger = logger;
         }
 
-        public async Task<Response<IEnumerable<GetZoneListDto>>> Handle(GetZoneListQuery request, CancellationToken cancellationToken)
+        public async Task<Response<IEnumerable<GetZoneListDto>>> Handle(GetListQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
             var allZones = (await _asyncRepository.ListAllAsync())/*.Where(x => x.IsActive == true);*/;
@@ -35,5 +35,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList
             _logger.LogInformation("Hanlde Completed");
             return new Response<IEnumerable<GetZoneListDto>>(zones, "Data Fetched Successfully");
         }
+
+       
     }
 }

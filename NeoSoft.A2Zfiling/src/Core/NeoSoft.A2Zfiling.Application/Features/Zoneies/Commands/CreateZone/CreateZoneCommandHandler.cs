@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿﻿using AutoMapper;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
@@ -15,6 +15,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.CreateZone
         private readonly IMapper _mapper;
         private readonly IAsyncRepository<Zones> _asyncRepository;
 
+        
         public CreateZoneCommandHandler(IMapper mapper, IAsyncRepository<Zones> asyncRepository)
         {
             _mapper = mapper;
@@ -24,23 +25,23 @@ namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.CreateZone
 
         public async Task<Response<CreateZoneDto>> Handle(CreateZoneCommand request, CancellationToken cancellationToken)
         {
-           
-                Response<CreateZoneDto> createZoneCommandResponse = null;
+
+            Response<CreateZoneDto> createZoneCommandResponse = null;
 
 
-                var zone = new Zones()
-                {
-                    ZoneName = request.ZoneName,
-                    IsActive = true,
-                    CreatedBy = "SuperAdmin",
-                    CreatedDate = DateTime.Now
-                };
-                zone = await _asyncRepository.AddAsync(zone);
-                createZoneCommandResponse = new Response<CreateZoneDto>(_mapper.Map<CreateZoneDto>(zone), "Zone Created Successfully");
+            var zone = new Zones()
+            {
+                ZoneName = request.ZoneName,
+                IsActive = true,
+                CreatedBy = "SuperAdmin",
+                CreatedDate = DateTime.Now
+            };
+            zone = await _asyncRepository.AddAsync(zone);
+            createZoneCommandResponse = new Response<CreateZoneDto>(_mapper.Map<CreateZoneDto>(zone), "Zone Created Successfully");
 
 
-                return createZoneCommandResponse;
-           
+            return createZoneCommandResponse;
+
         }
     }
 }

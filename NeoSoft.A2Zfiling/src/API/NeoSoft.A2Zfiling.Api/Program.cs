@@ -1,3 +1,4 @@
+//--
 using Serilog;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -17,6 +18,8 @@ using Microsoft.AspNetCore.DataProtection;
 using NeoSoft.A2Zfiling.Auth;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver.Core.Configuration;
+using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
+using NeoSoft.A2Zfiling.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +28,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //SERILOG IMPLEMENTATION
 
+builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 IConfiguration configurationBuilder = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile(

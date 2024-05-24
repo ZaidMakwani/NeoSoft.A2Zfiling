@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.CreateZone
+namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.UpdateZone
 {
-    public class CreateZoneDto
+    public class UpdateZoneDto
     {
         public int ZoneId { get; set; }
 
