@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Responses;
-using NeoSoft.A2ZFiling.UI.Models;
+using NeoSoft.A2ZFiling.UI.ViewModels;
 using Newtonsoft.Json;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
