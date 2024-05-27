@@ -17,12 +17,17 @@ using Microsoft.AspNetCore.DataProtection;
 using NeoSoft.A2Zfiling.Auth;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver.Core.Configuration;
+using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
+using NeoSoft.A2Zfiling.Persistence.Repositories;
+using NeoSoft.A2ZFiling.UI.Interfaces;
+using NeoSoft.A2ZFiling.UI.services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(ConnectionString));
 
-
+builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<IIndustryService,IndustryService>();
 //SERILOG IMPLEMENTATION
 
 IConfiguration configurationBuilder = new ConfigurationBuilder()
@@ -78,6 +83,7 @@ services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo(@"bin\debug\configuration"));
 services.AddHealthcheckExtensionService(Configuration);
 
+
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
@@ -120,7 +126,7 @@ IApiVersionDescriptionProvider provider = app.Services.GetRequiredService<IApiVe
 app.UseSwaggerUI(
 options =>
 {
-                // build a swagger endpoint for each discovered API version  
+// build a swagger endpoint for each discovered API version  
     foreach (var description in provider.ApiVersionDescriptions)
     {
         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());

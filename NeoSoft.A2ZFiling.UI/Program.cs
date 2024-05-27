@@ -1,8 +1,11 @@
+using NeoSoft.A2ZFiling.UI.Interfaces;
+using NeoSoft.A2ZFiling.UI.services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<IIndustryService, IndustryService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

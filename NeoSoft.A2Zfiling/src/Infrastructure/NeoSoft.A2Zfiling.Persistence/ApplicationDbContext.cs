@@ -25,6 +25,8 @@ namespace NeoSoft.A2Zfiling.Persistence
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Industry> Industries { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
         private IDbContextTransaction _transaction;
 

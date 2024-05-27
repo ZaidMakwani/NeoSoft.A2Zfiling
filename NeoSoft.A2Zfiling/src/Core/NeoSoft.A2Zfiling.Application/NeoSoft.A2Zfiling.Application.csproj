@@ -28,4 +28,8 @@
     <ProjectReference Include="..\NeoSoft.A2Zfiling.Domain\NeoSoft.A2Zfiling.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\IndustriesFeature\Queries\" />
+  </ItemGroup>
+
 </Project>

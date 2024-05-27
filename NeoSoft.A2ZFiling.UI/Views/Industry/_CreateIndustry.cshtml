@@ -1,0 +1,69 @@
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.IndustryVM;
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+<!-- Create Modal -->
+@* modal-dialog-centered *@
+@*<div id="createModal" class="modal" tabindex="-1" role="dialog"> *@
+<div id="createModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Industry</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createIndustryForm" asp-action="Create" asp-controller="Industry" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="IndustryName">Industry Name:</label>
+                        <input asp-for="IndustryName" class="form-control" />
+                        <span asp-validation-for="IndustryName" class="text-danger" id="entityName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ShortName">Short Name:</label>
+                        <input asp-for="ShortName" class="form-control" />
+                        <span asp-validation-for="ShortName" class="text-danger" id="entityName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="IsActive" >IsActive:</label>
+                        <input asp-for="IsActive" type="checkbox" class="form-control" />
+                        <span asp-validation-for="IsActive" class="text-danger" id="entityName"></span>
+                    </div>                   
+
+                   @*  <div class="col-12">
+                        <div class="form-check form-switch">
+                            <input asp-for="IsActive" class="form-check-input" type="checkbox" id="isActiveCheckbox">
+                            <label asp-for="IsActive" class="form-check-label" for="isActiveCheckbox">IsActive</label>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                        </div>
+                    </div> *@
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEntity" data-save="modal">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
