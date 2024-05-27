@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.CreateCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.DeleteCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.UpdateCity;
+using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityById;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.DeleteZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList;
+using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneListWithEvent;
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
@@ -94,5 +96,23 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
                 throw ex;
             }
         }
+
+        [HttpGet("id", Name = "GetCityById")]
+        public async Task<ActionResult> GetCityById(int id)
+        {
+            try
+            {
+                _logger.LogInformation("GetCityById Initiated");
+                GetCityByIdCommand getCityById = new GetCityByIdCommand() { CityId = id };
+                var data = await _mediator.Send(getCityById);
+                _logger.LogInformation("GetCityById Completed");
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

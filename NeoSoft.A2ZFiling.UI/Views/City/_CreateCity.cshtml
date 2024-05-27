@@ -1,0 +1,49 @@
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.CityVM
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+<!-- Create Modal -->     @* modal-dialog-centered *@
+@* <div id="createModal" class="modal" tabindex="-1" role="dialog"> *@
+<div id="createModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create City</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createCityForm" asp-action="Create" asp-controller="City" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="CityName">City Name:</label>
+                        <input asp-for="CityName" class="form-control" />
+                        <span asp-validation-for="CityName" class="text-danger" id="entityName"></span>
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEntity" data-save="modal">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

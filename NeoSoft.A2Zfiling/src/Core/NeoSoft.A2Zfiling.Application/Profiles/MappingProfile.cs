@@ -2,6 +2,7 @@
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.CreateCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.DeleteCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.UpdateCity;
+using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityById;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.CreateZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.DeleteZone;
@@ -16,6 +17,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
     {
         public MappingProfile()
         {
+            CreateMap<Zones, CreateZoneDto>().ReverseMap();
             CreateMap<Zones, CreateZoneCommand>().ReverseMap();
             CreateMap<Zones, GetZoneListDto>().ReverseMap();
             CreateMap<Zones, DeleteZoneDto>().ReverseMap();
@@ -27,6 +29,8 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<City, UpdateCityDto>().ReverseMap();
             CreateMap<City, UpdateCityCommand>().ReverseMap();
             CreateMap<City, DeleteCityDto>().ReverseMap();
+            CreateMap<City, GetCityByIdDto>().ReverseMap();
+            CreateMap<City,GetCityByIdCommand>().ReverseMap();
         }
     }
 }

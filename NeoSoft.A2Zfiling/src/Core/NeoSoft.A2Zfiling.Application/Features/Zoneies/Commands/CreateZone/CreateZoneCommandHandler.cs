@@ -25,23 +25,30 @@ namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.CreateZone
 
         public async Task<Response<CreateZoneDto>> Handle(CreateZoneCommand request, CancellationToken cancellationToken)
         {
-
-            Response<CreateZoneDto> createZoneCommandResponse = null;
-
-
-            var zone = new Zones()
+            try
             {
-                ZoneName = request.ZoneName,
-                IsActive = true,
-                CreatedBy = "SuperAdmin",
-                CreatedDate = DateTime.Now
-            };
-            zone = await _asyncRepository.AddAsync(zone);
-            createZoneCommandResponse = new Response<CreateZoneDto>(_mapper.Map<CreateZoneDto>(zone), "Zone Created Successfully");
+
+                Response<CreateZoneDto> createZoneCommandResponse = null;
 
 
-            return createZoneCommandResponse;
+                var zone = new Zones()
+                {
+                    ZoneName = request.ZoneName,
+                    IsActive = true,
+                    CreatedBy = "SuperAdmin",
+                    CreatedDate = DateTime.Now
+                };
+                zone = await _asyncRepository.AddAsync(zone);
+                createZoneCommandResponse = new Response<CreateZoneDto>(_mapper.Map<CreateZoneDto>(zone), "Zone Created Successfully");
 
+
+                return createZoneCommandResponse;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

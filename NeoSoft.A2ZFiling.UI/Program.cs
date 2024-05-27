@@ -1,5 +1,12 @@
+using NeoSoft.A2Zfiling.Common.Helper.ApiHelper;
+using NeoSoft.A2ZFiling.UI.Interfaces;
+using NeoSoft.A2ZFiling.UI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
+builder.Services.AddScoped<IZoneService, ZoneService>();
+builder.Services.AddScoped<ICityService, CityService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

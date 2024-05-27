@@ -28,7 +28,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList
         public async Task<Response<IEnumerable<GetZoneListDto>>> Handle(GetListQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
-            var allZones = (await _asyncRepository.ListAllAsync())/*.Where(x => x.IsActive == true);*/;
+            var allZones = (await _asyncRepository.ListAllAsync()).Where(x => x.IsActive == true) ;
             
             var zones = _mapper.Map<IEnumerable<GetZoneListDto>>(allZones);
             
