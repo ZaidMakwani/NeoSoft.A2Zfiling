@@ -2,6 +2,8 @@
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using NeoSoft.A2ZFiling.UI.Interfaces;
+using NeoSoft.A2ZFiling.UI.Services;
+using NeoSoft.A2ZFiling.UI.ViewModels;
 using NeosoftA2Zfilings.Views.ViewModels;
 using Newtonsoft.Json;
 using System.Security.Policy;
@@ -25,44 +27,78 @@ namespace NeosoftA2Zfilings.Views.Controllers
         [HttpGet]
         public IActionResult Create()
         {  
-            return View();
+            return PartialView("_PartialLayoutCreate");
         }
         [HttpPost]
         public async Task<IActionResult> Create(RoleVM role) 
         {
             _logger.LogInformation("Create Role action is initiated");
-            var response= await _roleService.CreateRoleAsync(role);
-            if (response != null)
+            var isExist= _roleService.GetRolesAsync().Result.Where(x=>x.RoleName==role.RoleName);
+            
+            if(isExist.Any())
             {
-                return RedirectToAction("GetAllRoles");
+                return BadRequest("Role Already Exists!!!");
             }
             else
             {
+                var response = await _roleService.CreateRoleAsync(role);
 
-                return View(response);
+                if (response != null)
+                {
+                    return RedirectToAction("GetAllRoles");
+                }
+                else
+                {
+
+                    return View(response);
+                }
+            }
+            
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            try
+            {
+                var result = await _roleService.GetRoleByIdAsync(id);
+
+                return PartialView("_PartialLayoutEdit", result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
-
-        public IActionResult Edit()
+        [HttpPost]
+        public async Task<IActionResult> Edit(RoleVM role)
         {
-           
-            return View();
+            var IsExist= await _roleService.GetRoleByIdAsync(role.RoleId);
+            if(IsExist.IsActive)
+            {
+                role.IsActive = true;
+                var result = await _roleService.UpdateRoleAsync(role);
+                return Ok(result);
+            }
+            else 
+            {
+                return BadRequest("Role is Inactive!!");
+            }
+            
+
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllRoles() {
-
-            //Response<List<RoleVM>> zoneVMs = new Response<List<RoleVM>>();            //HttpResponseMessage response = _httpClient.GetAsync(_httpClient.BaseAddress + "/v1/Roles/GetAllRoles/all").Result;            //if (response.IsSuccessStatusCode)            //{            //    string data = response.Content.ReadAsStringAsync().Result;            //    zoneVMs = JsonConvert.DeserializeObject<Response<List<RoleVM>>>(data);
-
-
-            //}            //return View(zoneVMs.Data);
 
             var response= await _roleService.GetRolesAsync();
             
             return View(response);
 
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var response = await _roleService.DeleteRoleAsync(id);
+            return Ok();
+        }
 
-        
     }
 }

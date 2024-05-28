@@ -39,8 +39,8 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
                 return Ok(response);
             }
 
-        [HttpGet(Name = "GetMunicipalById")]
-        public async Task<ActionResult> GetMunicipalById(int id)
+        [HttpGet("{id}",Name = "GetMunicipalCorpById")]
+        public async Task<ActionResult> GetMunicipalCorpById(int id)
         {
             var getMunicipalId = new GetMunicipalDetailsQuery() { MunicipalId = id };
             return Ok(await _mediator.Send(getMunicipalId));

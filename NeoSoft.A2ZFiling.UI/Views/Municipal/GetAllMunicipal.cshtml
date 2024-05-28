@@ -1,5 +1,4 @@
-﻿@model IEnumerable<NeosoftA2Zfilings.Views.ViewModels.RoleVM>
-
+﻿ @model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.MunicipalVM>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +17,6 @@
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-
-
-
-
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -33,16 +28,17 @@
                             <div class="col-lg-10">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Roles</h3>
+                                        <h3 class="card-title">Municipal Corporations</h3>
                                         <div class="card-tools">
-                                           @*  <button type="button" class="btn btn-primary" id="createButton">
-                                                Create
+                                            @*  <button type="button" class="btn btn-primary" id="createButton">
+                                            Create
                                             </button> *@
-                                                
+
                                             <div id="placeholder"></div>
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
-                                            data-url="@Url.Action("Create","Role")"><i class="fas fa-plus"></i>    
-                                        </button>
+                                                    data-url="@Url.Action("Create", "Municipal")">
+                                                <i class="fas fa-plus"></i>   @*Create *@
+                                            </button>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
@@ -51,8 +47,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Role Name</th>
-                                                    <th>Status</th>
+                                                    <th>Municipal Name</th>
+                                                    @*  <th>Status</th> *@
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -61,31 +57,30 @@
                                                 {
                                                     <tr>
                                                         <td>
-                                                            @Html.DisplayFor(modelItem => item.RoleId)
+                                                            @Html.DisplayFor(modelItem => item.MunicipalId)
                                                         </td>
                                                         <td>
-                                                            @Html.DisplayFor(modelItem => item.RoleName)
+                                                            @Html.DisplayFor(modelItem => item.MunicipalName)
                                                         </td>
+                                                        @*  <td>
+                                                    @if (item)
+                                                    {
+                                                    <span class="text-success font-weight-bold">Active</span>
+                                                    }
+                                                    else
+                                                    {
+                                                    <span class="text-danger font-weight-bold">Inactive</span>
+                                                    }
+                                                    </td> *@
                                                         <td>
-                                                            @if (item.IsActive)
-                                                            {
-                                                                <span class="text-success font-weight-bold">Active</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="text-danger font-weight-bold">Inactive</span>
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
-                                                           
-                                                                    data-url="@Url.Action("Edit", "Role")" data-id="@item.RoleId">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
+                                                            <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                    data-url="@Url.Action("Edit", "Municipal")" data-id=@item.MunicipalId@*  asp-route-id="@item.MunicipalId *@>
+                                                                <i class="fas fa-edit"></i> @* @ Edit @ *@
+                                                            </a>
 
 
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.RoleId">
-                                                                <i class="fas fa-trash-alt"></i> 
+                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id=@item.MunicipalId asp-route-id="@item.MunicipalId">
+                                                                <i class="fas fa-trash-alt"></i> @* @ Delete @ *@
                                                             </button>
 
                                                         </td>
@@ -107,8 +102,6 @@
         </section>
 
 
-
-      
 
         <!-- Delete Modal -->
         <div id="myModal" class="modal" tabindex="-1" role="dialog">
@@ -132,11 +125,6 @@
         </div>
     </div>
 
- 
-    
-
-   
-
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -158,65 +146,59 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-
     <!-- Page specific script -->
     <script>
         // $(document).ready(function () {
-            $("#example2").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "paging": true,
-                "pageLength": 4,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
-            }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+        $("#example2").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "paging": true,
+            "pageLength": 4,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
-       
-            //-----------------------------------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------------------------
-
-
+        //-----------------------------------------------------------------------------------------------------------------------
 
         // // Function to show the delete modal
 
- 
+
         $(document).on('click', '.trigger-modal', function () {
-            var ZoneId = $(this).data("id");
+            
+            var MunicipalId = $(this).data("id");
             // Set data attribute of delete button inside modal for further reference
-            $('.delete-confirm').data('id', ZoneId);
+            $('.delete-confirm').data('id', MunicipalId);
             $('#myModal').modal('show');
         });
 
         // Event delegation for handling delete button click inside the modal
         $(document).on('click', '.delete-confirm', function () {
-            var RoleId = $(this).data("id");
-            var deleteUrl = '@Url.Action("Delete", "Role")' + '?id=' + RoleId;
+            
+            var MunicipalId = $(this).data("id");
+            var deleteUrl = '@Url.Action("Delete", "Municipal")' + '?id=' + MunicipalId;
 
             $.ajax({
                 url: deleteUrl,
                 type: 'GET',
                 success: function (result) {
-                    console.log('Role deleted successfully.');
-                    alert('Role deleted successfully');
+                    console.log('Municipal deleted successfully.');
+                    alert('Zone deleted successfully');
                     $('#myModal').modal('hide');
-
                 },
                 error: function (xhr, status, error) {
-                    console.error("Error deleting Role: ", error);
-                    alert("Error deleting role. Please try again.");
-
+                    console.error("Error deleting Municipal: ", error);
+                    alert("Error deleting Municipal. Please try again.");
                 }
             });
         });
 
-  
+
 
 
         //---------------------------------------------------------------------------------------------------------------------------
@@ -240,13 +222,12 @@
                     card.on('click', '[data-save="modal"]', function (event) {
                         var form = $(this).parents('.modal').find('form');
                         var actionUrl = form.attr('action');
-                        var url = '@Url.Action("Create", "Role")';
+                        var url = '@Url.Action("Create", "Municipal")';
                         var sendData = form.serialize();
 
                         $.post(url, sendData).done(function (data) {
-
                             card.find('.modal').modal('hide');
-       
+
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
                             console.log(errorMessage);
@@ -260,17 +241,20 @@
 
 
 
-       
+
         //----------------------------------------------------------------------------------------------------
-        //function to handle editzone in the modal
+        //function to handle edit in the modal
 
 
-     
+
 
         $(document).on('click', '.edit-button', function () {
-            
-            var RoleId = $(this).data("id");
-            var editUrl = '@Url.Action("Edit", "Role")' + '?id=' + RoleId;
+            debugger
+            var MunicipalId = $(this).data("id");
+            console.log(MunicipalId);
+
+           // var editUrl = '@Url.Action("Edit", "Municipal")' + '?id=' + MunicipalId;
+            var editUrl = '@Url.Action("Edit", "Municipal")' + '/' + MunicipalId;
 
             // AJAX request to fetch data for editing
             $.ajax({
@@ -283,17 +267,17 @@
                     $('#updateModal').modal('show');
                 },
                 error: function (xhr, status, error) {
-                    console.error("Error fetching Role data: ", error);
-                    alert("Error fetching Role data. Please try again.");
+                    console.error("Error fetching Municipal data: ", error);
+                    alert("Error fetching Municipal data. Please try again.");
                 }
             });
         });
 
-       
+
         // Function to update data after saving
         function updateData() {
-            var RoleId = $('#RoleId').val(); // Assuming you have a hidden input field with the ZoneId
-            var editUrl = '@Url.Action("Edit", "Role")' + '?id=' + RoleId;
+            var MunicipalId = $('#MunicipalId').val(); // Assuming you have a hidden input field with the Id
+            var editUrl = '@Url.Action("Edit", "Municipal")' + '?id=' + MunicipalId;
 
             // AJAX request to fetch updated data
             $.ajax({
@@ -303,42 +287,46 @@
                     // Replace the content in the placeholder div with the updated data
                     $('#placeholder').html(data);
                     // Close the modal or perform any other action as needed
-                    // alert('Zone Updated successfully');
-
                     $('#updateModal').modal('hide');
                 },
                 error: function (xhr, status, error) {
-                    console.error("Error fetching updated Zone data: ", error);
-                    alert("Error fetching updated Zone data. Please try again.");
+                    console.error("Error fetching updated Municipal data: ", error);
+                    alert("Error fetching updated Municipal data. Please try again.");
                 }
             });
         }
 
+
+
+
+
+
+
         $(document).on('click', '#saveButton', function () {
-            
+
             // Perform validation and submit data via AJAX
             $.ajax({
-                url: '@Url.Action("Edit", "Role")',
+                url: '@Url.Action("Edit", "Municipal")',
                 type: 'POST',
-                data: $('#updateRoleForm').serialize(),
+                data: $('#updateMunicipalForm').serialize(),
                 success: function (response) {
-                    console.log(response);
                     // Check if the response indicates success
-                    if (response) {
+                    if (response === "success") {
                         updateData(); // Call function to update data
-                        alert('Role Updated successfully');
                         $('#updateModal').modal('hide');
-                    } 
-                    else {
-                        alert("An error occurred while saving data. Please try again.");
                     }
+                    // else {
+                    //     alert("An error occurred while saving data. Please try again.");
+                    // }
                 },
-                   error: function (xhr, status, error) {
+
+
+                error: function (xhr, status, error) {
                     // Display more detailed error message from server response
                     var errorMessage = xhr.responseText;
                     if (errorMessage) {
-                        var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
-                        $('#updateModal .modal-body').prepend(errorHtml); // Prepend error message to modal body
+                        //var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
+                        //$('#updateModal .modal-body').prepend(errorHtml); // Prepend error message to modal body
                     } else {
                         alert("An error occurred while saving data. Please try again.");
                     }
@@ -346,20 +334,18 @@
             });
         });
 
-       
-
         $(document).on('click', '#closeButton, .close', function () {
             // Close the modal
             $('#updateModal').modal('hide');
         });
 
 
-      
 
 
 
 
-       
+
+
 
         // })
     </script>

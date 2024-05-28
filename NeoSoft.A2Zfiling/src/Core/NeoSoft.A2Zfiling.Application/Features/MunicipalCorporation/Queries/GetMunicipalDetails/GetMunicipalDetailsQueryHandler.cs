@@ -35,13 +35,13 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.Ge
             {
                 var id = request.MunicipalId;
                 var @municipal = await _municipalRepository.GetByIdAsync(id);
-                var municipalDetailDto = _mapper.Map<GetMunicipalDto>(municipal);
+                var municipalDetailDto = _mapper.Map<GetMunicipalDto>(@municipal);
 
-                var municipals = await _municipalRepository.GetByIdAsync(municipal.MunicipalId);
+                var municipals = await _municipalRepository.GetByIdAsync(@municipal.MunicipalId);
 
                 if (municipal == null)
                 {
-                    throw new NotFoundException(nameof(Role), municipal.MunicipalId);
+                    throw new NotFoundException(nameof(Role), @municipal.MunicipalId);
                 }
                 var response = new Response<GetMunicipalDto>(municipalDetailDto);
                 if (municipals.IsActive)

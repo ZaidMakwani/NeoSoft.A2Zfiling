@@ -7,7 +7,7 @@ namespace NeosoftA2Zfilings.Views.ViewModels
     {
         [Required(ErrorMessage = "RoleId is required")]
 
-        public string RoleId { get; set; }
+        public int RoleId { get; set; }
 
 
 
@@ -15,5 +15,7 @@ namespace NeosoftA2Zfilings.Views.ViewModels
         [Required(ErrorMessage = "Name is required")]
 
         public string RoleName { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

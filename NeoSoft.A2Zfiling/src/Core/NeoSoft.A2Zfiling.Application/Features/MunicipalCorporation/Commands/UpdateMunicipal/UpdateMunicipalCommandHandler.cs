@@ -27,22 +27,29 @@ namespace NeoSoft.A2Zfiling.Application.Features.Roles.Commands.UpdateMunicipal
 
         public async Task<Response<MunicipalDto>> Handle(UpdateMunicipalCommand request, CancellationToken cancellationToken)
         {
-            var municipalToUpdate = await _municipalRepository.GetByIdAsync(request.MunicipalId);
-            if (municipalToUpdate == null)
+            try
             {
+                var municipalToUpdate = await _municipalRepository.GetByIdAsync(request.MunicipalId);
+                if (municipalToUpdate == null)
+                {
 
-                throw new NotFoundException("Not Found", request.MunicipalId);
+                    throw new NotFoundException("Not Found", request.MunicipalId);
+                }
+
+                _mapper.Map(request, municipalToUpdate);
+
+
+                await _municipalRepository.UpdateAsync(municipalToUpdate);
+                var updateMunicipal = _mapper.Map<MunicipalDto>(municipalToUpdate);
+
+                return new Response<MunicipalDto>(updateMunicipal, "Municipal Updated Successfully");
             }
 
-            _mapper.Map(request, municipalToUpdate);
-            
-            
-            await _municipalRepository.UpdateAsync(municipalToUpdate);
-            var updateMunicipal = _mapper.Map<MunicipalDto>(municipalToUpdate);  
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-            return new Response<MunicipalDto>(updateMunicipal, "Municipal Updated Successfully");
         }
-
-       
     }
 }

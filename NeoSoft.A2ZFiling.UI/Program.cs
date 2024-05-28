@@ -10,6 +10,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IRoleService,RoleService>();
+builder.Services.AddScoped<IMunicipalService,MunicipalService>();
+
 
 var app = builder.Build();
 
