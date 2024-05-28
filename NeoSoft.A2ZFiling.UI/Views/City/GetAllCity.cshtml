@@ -191,6 +191,10 @@
 
                         $.post(url, sendData).done(function (data) {
                             card.find('.modal').modal('hide');
+                            card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "City Created Successfully." + '</div>');
+                            // card.find('.modal').modal('hide');
+
+
 
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
@@ -298,8 +302,11 @@
                     // Check if the response indicates success
                     if (response ) {
                         updateData(); // Call function to update data
-                        alert('City Updated successfully');
+                        // alert('City Updated successfully');
                         $('#updateModal').modal('hide');
+                        var successHtml = '<div class="alert alert-success" role="alert">' + "City Updated Successfully." + '</div>';
+                        $('#updateModal .modal-body').prepend(successHtml);
+                        // $('#updateModal').modal('hide');
                     }
                     else {
                         alert("An error occurred while saving data. Please try again.");

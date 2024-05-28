@@ -243,7 +243,7 @@
                         var sendData = form.serialize();
 
                         $.post(url, sendData).done(function (data) {
-
+                            card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "Zone Created Successful." + '</div>');
                             card.find('.modal').modal('hide');
        
                         }).fail(function (xhr, status, error) {
@@ -325,8 +325,11 @@
                     // Check if the response indicates success
                     if (response) {
                         updateData(); // Call function to update data
-                        alert('Zone Updated successfully');
                         $('#updateModal').modal('hide');
+                        var successfulhtml = '<div class="alert alert-success" role="alert">' + "Zone Updated Successfully" + '</div>';
+                        $('#updateModal .modal-body').prepend(successfulhtml);
+                        // alert('Zone Updated successfully');
+                        
                     } 
                     else {
                         alert("An error occurred while saving data. Please try again.");
