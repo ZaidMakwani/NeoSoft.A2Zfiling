@@ -1,7 +1,29 @@
+using DNTCaptcha.Core;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDNTCaptcha(option =>
+{
+    option.UseCookieStorageProvider().ShowThousandsSeparators(false);
+    option.WithEncryptionKey("Asdfqwe123sdfsdfdfdf1234");
+});
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddDNTCaptcha(options =>
+{
+    options.UseCookieStorageProvider()
+           .ShowThousandsSeparators(false)
+           .WithEncryptionKey("YourEncryptionKey") // Replace with your encryption key
+           .InputNames(new DNTCaptchaComponent
+           {
+               CaptchaHiddenInputName = "DNTCaptchaText",
+               CaptchaHiddenTokenName = "DNTCaptchaToken",
+               CaptchaInputName = "DNTCaptchaInputText"
+           });
+});
 
 var app = builder.Build();
 
