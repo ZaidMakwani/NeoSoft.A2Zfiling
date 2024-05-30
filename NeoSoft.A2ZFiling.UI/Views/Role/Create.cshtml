@@ -1,4 +1,4 @@
-﻿@model NeosoftA2Zfilings.Views.ViewModels.CreateRoleVM;
+﻿@model NeosoftA2Zfilings.Views.ViewModels.RoleVM;
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -35,23 +35,23 @@
             <div class="col-12 col-lg-10 col-xl-8">
                 <div class="row gy-5 justify-content-center">
                     <div class="col-12 col-lg-5 card p-3">
-                        <form asp-action="Index" asp-controller="Home" method="post" class="form">
+                        <form asp-action="Create" asp-controller="Role" method="post" class="form">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="row gy-3 overflow-hidden">
-                                <div class="col-12">
+                               @*  <div class="col-12">
                                     <div class="form-floating mb-3">
                                         <input asp-for="RoleId" type="text" class="form-control border-0 border-bottom rounded-0">
                                         <label asp-for="RoleId" class="form-label">Role Id</label>
                                         <span asp-validation-for="RoleId" class="text-danger"></span>
 
                                     </div>
-                                </div>
+                                </div> *@
 
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
-                                        <input asp-for="Name" type="text" class="form-control border-0 border-bottom rounded-0">
-                                        <label asp-for="Name" class="form-label">Name</label>
-                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                        <input asp-for="RoleName" type="text" class="form-control border-0 border-bottom rounded-0">
+                                        <label asp-for="RoleName" class="form-label">Name</label>
+                                        <span asp-validation-for="RoleName" class="text-danger"></span>
 
                                     </div>
                                 </div>

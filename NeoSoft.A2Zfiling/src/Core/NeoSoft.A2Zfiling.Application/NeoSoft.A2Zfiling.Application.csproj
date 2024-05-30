@@ -14,6 +14,13 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -26,6 +33,23 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NeoSoft.A2Zfiling.Domain\NeoSoft.A2Zfiling.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Contracts\Infrastructure\" />
+    <Folder Include="Features\Categories\Commands\CreateCategory\" />
+    <Folder Include="Features\Categories\Commands\StoredProcedure\" />
+    <Folder Include="Features\Categories\Queries\GetCategoriesListWithEvents\GetCategoriesList - Copy\" />
+    <Folder Include="Features\Categories\Queries\GetCategoriesList\" />
+    <Folder Include="Features\Events\Commands\CreateEvent\" />
+    <Folder Include="Features\Events\Commands\DeleteEvent\" />
+    <Folder Include="Features\Events\Commands\Transaction\" />
+    <Folder Include="Features\Events\Commands\UpdateEvent\" />
+    <Folder Include="Features\Events\Queries\GetEventDetail\" />
+    <Folder Include="Features\Events\Queries\GetEventsExport\" />
+    <Folder Include="Features\Events\Queries\GetEventsList\" />
+    <Folder Include="Features\Orders\Queries\GetOrdersForMonth\" />
+    <Folder Include="Profiles\" />
   </ItemGroup>
 
 </Project>
