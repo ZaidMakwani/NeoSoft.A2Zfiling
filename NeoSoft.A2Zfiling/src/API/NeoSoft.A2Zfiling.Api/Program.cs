@@ -19,8 +19,10 @@ using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver.Core.Configuration;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Persistence.Repositories;
-using NeoSoft.A2ZFiling.UI.Interfaces;
-using NeoSoft.A2ZFiling.UI.services;
+using NeoSoft.A2Zfiling.Auth.Models;
+using Microsoft.AspNetCore.Identity;
+using NeoSoft.A2Zfiling.Domain.Entities;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,9 +73,12 @@ services.AddCors(options =>
 });
 services.AddApplicationServices();
 
+//services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnectionString")));
+
 services.AddInfrastructureServices(Configuration);
-services.AddPersistenceServices(Configuration);
+
 services.AddAuthServices(Configuration);
+services.AddPersistenceServices(Configuration);
 services.AddSwaggerExtension();
 services.AddSwaggerVersionedApiExplorer();
 services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
@@ -87,6 +92,18 @@ services.AddHealthcheckExtensionService(Configuration);
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(
+    options =>
+    {
+        options.Password.RequiredUniqueChars = 0;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireLowercase = false;
+    })
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,0 +1,354 @@
+﻿ @model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.MunicipalVM>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminLTE 3 | DataTables</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <section class="content m-5 ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row justify-content-end">
+                            <div class="col-lg-10">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Municipal Corporations</h3>
+                                        <div class="card-tools">
+                                            @*  <button type="button" class="btn btn-primary" id="createButton">
+                                            Create
+                                            </button> *@
+
+                                            <div id="placeholder"></div>
+                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
+                                                    data-url="@Url.Action("Create", "Municipal")">
+                                                <i class="fas fa-plus"></i>   @*Create *@
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="example2" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Municipal Name</th>
+                                                    @*  <th>Status</th> *@
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.MunicipalId)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.MunicipalName)
+                                                        </td>
+                                                        @*  <td>
+                                                    @if (item)
+                                                    {
+                                                    <span class="text-success font-weight-bold">Active</span>
+                                                    }
+                                                    else
+                                                    {
+                                                    <span class="text-danger font-weight-bold">Inactive</span>
+                                                    }
+                                                    </td> *@
+                                                        <td>
+                                                            <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                    data-url="@Url.Action("Edit", "Municipal")" data-id=@item.MunicipalId@*  asp-route-id="@item.MunicipalId *@>
+                                                                <i class="fas fa-edit"></i> @* @ Edit @ *@
+                                                            </a>
+
+
+                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id=@item.MunicipalId asp-route-id="@item.MunicipalId">
+                                                                <i class="fas fa-trash-alt"></i> @* @ Delete @ *@
+                                                            </button>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
+
+
+        <!-- Delete Modal -->
+        <div id="myModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Deletion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this item?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger delete-confirm">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        // $(document).ready(function () {
+        $("#example2").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "paging": true,
+            "pageLength": 4,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+        //-----------------------------------------------------------------------------------------------------------------------
+
+        // // Function to show the delete modal
+
+
+        $(document).on('click', '.trigger-modal', function () {
+            
+            var MunicipalId = $(this).data("id");
+            // Set data attribute of delete button inside modal for further reference
+            $('.delete-confirm').data('id', MunicipalId);
+            $('#myModal').modal('show');
+        });
+
+        // Event delegation for handling delete button click inside the modal
+        $(document).on('click', '.delete-confirm', function () {
+            
+            var MunicipalId = $(this).data("id");
+            var deleteUrl = '@Url.Action("Delete", "Municipal")' + '?id=' + MunicipalId;
+
+            $.ajax({
+                url: deleteUrl,
+                type: 'GET',
+                success: function (result) {
+                    console.log('Municipal deleted successfully.');
+                    alert('Zone deleted successfully');
+                    $('#myModal').modal('hide');
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error deleting Municipal: ", error);
+                    alert("Error deleting Municipal. Please try again.");
+                }
+            });
+        });
+
+
+
+
+        //---------------------------------------------------------------------------------------------------------------------------
+
+        //function to handle create modal
+
+        $(function () {
+            var card = $('#placeholder');
+
+            $('button[data-toggle="ajax-modal"]').click(function (event) {
+                var url = $(this).data('url');
+                var decodeUrl = decodeURIComponent(url);
+                $.get(decodeUrl).done(function (data) {
+                    card.html(data);
+                    card.find('.modal').modal('show');
+
+                    // Unbind previously bound event handler
+                    card.off('click', '[data-save="modal"]');
+
+                    // Event delegation for dynamically loaded content
+                    card.on('click', '[data-save="modal"]', function (event) {
+                        var form = $(this).parents('.modal').find('form');
+                        var actionUrl = form.attr('action');
+                        var url = '@Url.Action("Create", "Municipal")';
+                        var sendData = form.serialize();
+
+                        $.post(url, sendData).done(function (data) {
+                            card.find('.modal').modal('hide');
+
+                        }).fail(function (xhr, status, error) {
+                            var errorMessage = xhr.responseText;
+                            console.log(errorMessage);
+                            // Update the modal content to display the error message
+                            card.find('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                        });
+                    });
+                });
+            });
+        });
+
+
+
+
+        //----------------------------------------------------------------------------------------------------
+        //function to handle edit in the modal
+
+
+
+
+        $(document).on('click', '.edit-button', function () {
+            debugger
+            var MunicipalId = $(this).data("id");
+            console.log(MunicipalId);
+
+           // var editUrl = '@Url.Action("Edit", "Municipal")' + '?id=' + MunicipalId;
+            var editUrl = '@Url.Action("Edit", "Municipal")' + '/' + MunicipalId;
+
+            // AJAX request to fetch data for editing
+            $.ajax({
+                url: editUrl,
+                type: 'GET',
+                success: function (data) {
+                    // Load the partial view into the placeholder div
+                    $('#placeholder').html(data);
+                    // Show the edit modal
+                    $('#updateModal').modal('show');
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching Municipal data: ", error);
+                    alert("Error fetching Municipal data. Please try again.");
+                }
+            });
+        });
+
+
+        // Function to update data after saving
+        function updateData() {
+            var MunicipalId = $('#MunicipalId').val(); // Assuming you have a hidden input field with the Id
+            var editUrl = '@Url.Action("Edit", "Municipal")' + '?id=' + MunicipalId;
+
+            // AJAX request to fetch updated data
+            $.ajax({
+                url: editUrl,
+                type: 'GET',
+                success: function (data) {
+                    // Replace the content in the placeholder div with the updated data
+                    $('#placeholder').html(data);
+                    // Close the modal or perform any other action as needed
+                    $('#updateModal').modal('hide');
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching updated Municipal data: ", error);
+                    alert("Error fetching updated Municipal data. Please try again.");
+                }
+            });
+        }
+
+
+
+
+
+
+
+        $(document).on('click', '#saveButton', function () {
+
+            // Perform validation and submit data via AJAX
+            $.ajax({
+                url: '@Url.Action("Edit", "Municipal")',
+                type: 'POST',
+                data: $('#updateMunicipalForm').serialize(),
+                success: function (response) {
+                    // Check if the response indicates success
+                    if (response === "success") {
+                        updateData(); // Call function to update data
+                        $('#updateModal').modal('hide');
+                    }
+                    // else {
+                    //     alert("An error occurred while saving data. Please try again.");
+                    // }
+                },
+
+
+                error: function (xhr, status, error) {
+                    // Display more detailed error message from server response
+                    var errorMessage = xhr.responseText;
+                    if (errorMessage) {
+                        //var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
+                        //$('#updateModal .modal-body').prepend(errorHtml); // Prepend error message to modal body
+                    } else {
+                        alert("An error occurred while saving data. Please try again.");
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', '#closeButton, .close', function () {
+            // Close the modal
+            $('#updateModal').modal('hide');
+        });
+
+
+
+
+
+
+
+
+
+        // })
+    </script>
+
+</body>
+</html>

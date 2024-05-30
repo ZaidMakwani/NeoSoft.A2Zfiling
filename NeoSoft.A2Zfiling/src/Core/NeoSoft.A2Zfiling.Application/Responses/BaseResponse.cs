@@ -8,7 +8,9 @@ namespace NeoSoft.A2Zfiling.Application.Responses
     {
         public Response()
         {
+            
         }
+
         public Response(T data, string message = null)
         {
             Succeeded = true;
@@ -31,6 +33,7 @@ namespace NeoSoft.A2Zfiling.Application.Responses
         public int TotalCount { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
+
 
         public PagedResponse(T data, int totalCount, int page, int pageSize)
         {
