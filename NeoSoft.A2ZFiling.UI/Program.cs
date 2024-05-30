@@ -16,7 +16,7 @@ builder.Services.AddDNTCaptcha(options =>
 {
     options.UseCookieStorageProvider()
            .ShowThousandsSeparators(false)
-           .WithEncryptionKey("YourEncryptionKey") // Replace with your encryption key
+           .WithEncryptionKey("AvbwgwgASDMSSSgg") // Replace with your encryption key
            .InputNames(new DNTCaptchaComponent
            {
                CaptchaHiddenInputName = "DNTCaptchaText",
