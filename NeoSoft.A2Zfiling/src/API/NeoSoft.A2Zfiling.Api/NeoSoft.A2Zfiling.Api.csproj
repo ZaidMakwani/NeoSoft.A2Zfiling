@@ -49,6 +49,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\NeoSoft.A2ZFiling.UI\NeoSoft.A2ZFiling.UI.csproj" />
     <ProjectReference Include="..\..\Core\NeoSoft.A2Zfiling.Application\NeoSoft.A2Zfiling.Application.csproj" />
 	  <ProjectReference Include="..\..\Infrastructure\NeoSoft.A2Zfiling.Auth\NeoSoft.A2Zfiling.Auth.csproj" />
     <ProjectReference Include="..\..\Infrastructure\NeoSoft.A2Zfiling.Infrastructure\NeoSoft.A2Zfiling.Infrastructure.csproj" />
