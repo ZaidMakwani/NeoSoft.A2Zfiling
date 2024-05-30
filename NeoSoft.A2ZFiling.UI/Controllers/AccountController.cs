@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DNTCaptcha.Core;
+using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
+using NeosoftA2Zfilings.Views.ViewModels;
 using Newtonsoft.Json;
 
 namespace NeosoftA2Zfilings.Views.Controllers
@@ -9,10 +11,12 @@ namespace NeosoftA2Zfilings.Views.Controllers
     {
         private readonly IRegisterService _registerService;
         private readonly ILogger<AccountController> _logger;
-        public AccountController(IRegisterService registerService, ILogger<AccountController> logger)
+        private readonly IDNTCaptchaValidatorService _captchaValidator;
+        public AccountController(IRegisterService registerService, ILogger<AccountController> logger, IDNTCaptchaValidatorService captchaValidator)
         {
             _registerService = registerService;
             _logger = logger;
+            _captchaValidator = captchaValidator;
         }
         public IActionResult Index()
         {
@@ -23,6 +27,26 @@ namespace NeosoftA2Zfilings.Views.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Login(LoginVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!_captchaValidator.HasRequestValidCaptchaEntry())
+                {
+                    TempData["captchaError"] = "Please enter valid security key";
+                    return View(model);
+                }
+
+                // Add your login logic here
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Registration()
         {

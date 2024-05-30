@@ -1,3 +1,4 @@
+using DNTCaptcha.Core;
 using NeoSoft.A2Zfiling.Common.Helper.ApiHelper;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
@@ -13,6 +14,19 @@ builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IMunicipalService,MunicipalService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 
+
+builder.Services.AddDNTCaptcha(options =>
+{
+    options.UseCookieStorageProvider()
+           .ShowThousandsSeparators(false)
+           .WithEncryptionKey("AvbwgwgASDMSSSgg") // Replace with your encryption key
+           .InputNames(new DNTCaptchaComponent
+           {
+               CaptchaHiddenInputName = "DNTCaptchaText",
+               CaptchaHiddenTokenName = "DNTCaptchaToken",
+               CaptchaInputName = "DNTCaptchaInputText"
+           });
+});
 
 
 var app = builder.Build();
