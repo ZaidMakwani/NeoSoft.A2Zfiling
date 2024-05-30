@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoSoft.A2ZFiling.UI", "Neo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoSoft.A2Zfiling.Common", "NeoSoft.A2Zfiling.Common\NeoSoft.A2Zfiling.Common.csproj", "{7A145F35-5842-4D22-937A-65652F4269AE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoSoft.A2Zfiling.Common", "NeoSoft.A2Zfiling.Common\NeoSoft.A2Zfiling.Common.csproj", "{4416A582-5693-47A1-A8DC-BFAF297D139A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{7A145F35-5842-4D22-937A-65652F4269AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A145F35-5842-4D22-937A-65652F4269AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A145F35-5842-4D22-937A-65652F4269AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4416A582-5693-47A1-A8DC-BFAF297D139A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4416A582-5693-47A1-A8DC-BFAF297D139A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4416A582-5693-47A1-A8DC-BFAF297D139A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4416A582-5693-47A1-A8DC-BFAF297D139A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +116,7 @@ Global
 		{93479B41-4B60-4939-8FFD-8D95ED90BE87} = {385B6B08-AFF5-4391-B6AF-EA422EC506E5}
 		{3DB29F0D-3622-4E3B-84E6-02FECD8DECE8} = {F6F44460-7001-4183-975C-F5C2197BF733}
 		{7A145F35-5842-4D22-937A-65652F4269AE} = {22BB1C43-F64D-489E-9B2E-5664A8635750}
+		{4416A582-5693-47A1-A8DC-BFAF297D139A} = {22BB1C43-F64D-489E-9B2E-5664A8635750}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {920EDF2B-79D6-48A5-AF80-5C4256675664}
