@@ -15,14 +15,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries
 
     public class GetCompaniesByIdQueryHandler :  IRequestHandler<GetCompaniesByIdQuery, Response<CompanyListVM>>
     {
-        private readonly ICategoryRepository _categoryRepository;
+        
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
         private readonly IAsyncRepository<Company> _companyRepsitory;
-        public GetCompaniesByIdQueryHandler(IMapper mapper, ICategoryRepository categoryRepository, ILogger<GetCompaniesListQueryHandler> logger, IAsyncRepository<Company> companyRepsitory)
+        public GetCompaniesByIdQueryHandler(IMapper mapper, ILogger<GetCompaniesListQueryHandler> logger, IAsyncRepository<Company> companyRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
+            
             _logger = logger;
             _companyRepsitory = companyRepsitory;
         }

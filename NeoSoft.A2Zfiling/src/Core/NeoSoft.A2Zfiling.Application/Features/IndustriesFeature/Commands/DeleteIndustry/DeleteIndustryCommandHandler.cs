@@ -17,14 +17,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.Dele
     public class DeleteIndustryCommandHandler : IRequestHandler<DeleteIndustryCommand, Response<DeleteIndustryDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
+        
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<Industry> _industryRepsitory;
 
-        public DeleteIndustryCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<Industry> industryRepsitory)
+        public DeleteIndustryCommandHandler(IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<Industry> industryRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
+            
             _messageRepository = messageRepository;
             _industryRepsitory = industryRepsitory;
         }

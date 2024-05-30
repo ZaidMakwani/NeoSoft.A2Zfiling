@@ -15,14 +15,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Queries.GetIn
 {
     public class GetIndustriesByIdQueryHandler : IRequestHandler<GetIndustriesByIdQuery, Response<IndustryListSingleVM>>
     {
-        private readonly ICategoryRepository _categoryRepository;
+       
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
         private readonly IAsyncRepository<Industry> _industryRepsitory;
-        public GetIndustriesByIdQueryHandler(IMapper mapper, ICategoryRepository categoryRepository, ILogger<GetCompaniesListQueryHandler> logger, IAsyncRepository<Industry> industryRepsitory)
+        public GetIndustriesByIdQueryHandler(IMapper mapper, ILogger<GetCompaniesListQueryHandler> logger, IAsyncRepository<Industry> industryRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
+           
             _logger = logger;
             _industryRepsitory = industryRepsitory;
         }

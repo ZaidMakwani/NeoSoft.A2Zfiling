@@ -16,14 +16,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.Updat
     public class UpdateCompanyCommandHandler :  IRequestHandler<UpdateCompanyCommand, Response<UpdateCompanyDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
+       
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<Company> _companyRepsitory;
 
-        public UpdateCompanyCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<Company> companyRepsitory)
+        public UpdateCompanyCommandHandler(IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<Company> companyRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
+           
             _messageRepository = messageRepository;
             _companyRepsitory = companyRepsitory;
         }

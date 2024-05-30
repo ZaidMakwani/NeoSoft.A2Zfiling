@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesList;
+
 //using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetIndustriesList;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
@@ -17,14 +17,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries
 
     public class GetCompaniesListQueryHandler : IRequestHandler<GetCompaniesListQuery, Response<IEnumerable<CompanyListVM>>>
     {
-        private readonly ICategoryRepository _categoryRepository;
+        
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
         private readonly IAsyncRepository<Company> _companyRepsitory;
-        public GetCompaniesListQueryHandler(IMapper mapper, ICategoryRepository categoryRepository, ILogger<GetCompaniesListQueryHandler> logger, IAsyncRepository<Company> companyRepsitory)
+        public GetCompaniesListQueryHandler(IMapper mapper, ILogger<GetCompaniesListQueryHandler> logger, IAsyncRepository<Company> companyRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
+          
             _logger = logger;
             _companyRepsitory = companyRepsitory;
         }

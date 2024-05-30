@@ -16,14 +16,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.Delet
     public class DeleteCompanyCommandHandler :  IRequestHandler<DeleteCompanyCommand, Response<DeleteCompanyDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
+       
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<Company> _companyRepsitory;
 
-        public DeleteCompanyCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<Company> companyRepsitory)
+        public DeleteCompanyCommandHandler(IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<Company> companyRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
+          
             _messageRepository = messageRepository;
             _companyRepsitory = companyRepsitory;
         }

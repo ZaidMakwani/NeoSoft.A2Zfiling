@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateCategory;
+
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using System;
@@ -15,14 +15,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.Upda
     public class UpdateIndustryCommandHandler :  IRequestHandler<UpdateIndustryCommand, Response<UpdateIndustryDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
+        
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<Industry> _industryRepsitory;
 
-        public UpdateIndustryCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<Industry> industryRepsitory)
+        public UpdateIndustryCommandHandler(IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<Industry> industryRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
+            
             _messageRepository = messageRepository;
             _industryRepsitory = industryRepsitory;
         }

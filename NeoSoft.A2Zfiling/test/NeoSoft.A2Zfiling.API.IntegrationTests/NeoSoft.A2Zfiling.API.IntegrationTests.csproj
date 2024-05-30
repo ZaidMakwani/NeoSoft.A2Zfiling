@@ -42,4 +42,8 @@
     <ProjectReference Include="..\..\src\Infrastructure\NeoSoft.A2Zfiling.Persistence\NeoSoft.A2Zfiling.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\v1\" />
+  </ItemGroup>
+
 </Project>

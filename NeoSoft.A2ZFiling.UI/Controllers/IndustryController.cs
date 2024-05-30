@@ -25,7 +25,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
 
             var response = _industryService.GetIndustryAsync();
-            ;
+            
 
             //Response<List<IndustryVM>> industryList = new Response<List<IndustryVM>>();
             //HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Industry/GetAllIndustries/all").Result;
