@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.CityVM>
+﻿@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.PermissionVM>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+
+
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -28,16 +32,15 @@
                             <div class="col-lg-10">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">City</h3>
+                                        <h3 class="card-title">Permission</h3>
                                         <div class="card-tools">
                                             @*  <button type="button" class="btn btn-primary" id="createButton">
                                             Create
                                             </button> *@
 
-
                                             <div id="placeholder"></div>
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
-                                                    data-url="@Url.Action("Create", "City")">
+                                                    data-url="@Url.Action("Create", "Permission")">
                                                 <i class="fas fa-plus"></i>   @* Create *@
                                             </button>
                                         </div>
@@ -48,7 +51,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>City Name</th>
+                                                    <th>Controller Name</th>
+                                                    <th>Action Name</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -58,10 +62,13 @@
                                                 {
                                                     <tr>
                                                         <td>
-                                                            @Html.DisplayFor(modelItem => item.CityId)
+                                                            @Html.DisplayFor(modelItem => item.PermissionId)
                                                         </td>
                                                         <td>
-                                                            @Html.DisplayFor(modelItem => item.CityName)
+                                                            @Html.DisplayFor(modelItem => item.ControllerName)
+                                                        </td>
+                                                         <td>
+                                                            @Html.DisplayFor(modelItem => item.ActionName)
                                                         </td>
                                                         <td>
                                                             @if (item.IsActive)
@@ -75,12 +82,12 @@
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
-                                                                    data-url="@Url.Action("EditCity", "City")" data-id="@item.CityId">
+                                                                    data-url="@Url.Action("Edit", "Permission")" data-id="@item.PermissionId">
                                                                 <i class="fas fa-edit"></i> @* Edit *@
                                                             </button>
 
 
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.CityId">
+                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.PermissionId">
                                                                 <i class="fas fa-trash-alt"></i> @* Delete *@
                                                             </button>
 
@@ -101,6 +108,8 @@
             </div>
             <!-- /.container-fluid -->
         </section>
+
+
 
 
 
@@ -126,6 +135,11 @@
         </div>
     </div>
 
+
+
+
+
+
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -147,6 +161,7 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+
     <!-- Page specific script -->
     <script>
         // $(document).ready(function () {
@@ -165,7 +180,49 @@
             "responsive": true
         }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
+
         //-----------------------------------------------------------------------------------------------------------------------
+
+        //----------------------------------------------------------------------------------------------------------------
+
+
+
+        // // Function to show the delete modal
+
+
+        $(document).on('click', '.trigger-modal', function () {
+            var PermissionId = $(this).data("id");
+            // Set data attribute of delete button inside modal for further reference
+            $('.delete-confirm').data('id', PermissionId);
+            $('#myModal').modal('show');
+        });
+
+        // Event delegation for handling delete button click inside the modal
+        $(document).on('click', '.delete-confirm', function () {
+            var PermissionId = $(this).data("id");
+            var deleteUrl = '@Url.Action("Delete", "Permission")' + '?id=' + PermissionId;
+
+            $.ajax({
+                url: deleteUrl,
+                type: 'GET',
+                success: function (result) {
+                    console.log('Permission deleted successfully.');
+                    alert('Permission deleted successfully');
+                    $('#myModal').modal('hide');
+
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error deleting Permission: ", error);
+                    alert("Error deleting Permission. Please try again.");
+
+                }
+            });
+        });
+
+
+
+
+        //---------------------------------------------------------------------------------------------------------------------------
 
         //function to handle create modal
 
@@ -186,23 +243,20 @@
                     card.on('click', '[data-save="modal"]', function (event) {
                         var form = $(this).parents('.modal').find('form');
                         var actionUrl = form.attr('action');
-                        var url = '@Url.Action("Create", "City")';
+                        var url = '@Url.Action("Create", "Permission")';
                         var sendData = form.serialize();
 
                         $.post(url, sendData).done(function (data) {
+                            card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "Permission Created Successful." + '</div>');
                             card.find('.modal').modal('hide');
-                            card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "City Created Successfully." + '</div>');
-                            // card.find('.modal').modal('hide');
-
-
 
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
                             console.log(errorMessage);
                             // Update the modal content to display the error message
                             // card.find('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                            // card.find('.modal-body').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
                             card.find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
-
                         });
                     });
                 });
@@ -210,46 +264,18 @@
         });
 
 
-        ///----------------------------------------------------------------------------------
 
 
-        // Function to show the delete modal
-
-
-        $(document).on('click', '.trigger-modal', function () {
-            var CityId = $(this).data("id");
-            // Set data attribute of delete button inside modal for further reference
-            $('.delete-confirm').data('id', CityId);
-            $('#myModal').modal('show');
-        });
-
-        // Event delegation for handling delete button click inside the modal
-        $(document).on('click', '.delete-confirm', function () {
-            var CityId = $(this).data("id");
-            var deleteUrl = '@Url.Action("DeleteCity", "City")' + '?id=' + CityId;
-
-            $.ajax({
-                url: deleteUrl,
-                type: 'GET',
-                success: function (result) {
-                    console.log('City deleted successfully.');
-                    // alert('Zone deleted successfully');
-                    $('#myModal').modal('hide');
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error deleting city: ", error);
-                    alert("Error deleting city. Please try again.");
-                }
-            });
-        });
-
-        //-------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------
         //function to handle editzone in the modal
 
 
+
+
         $(document).on('click', '.edit-button', function () {
-            var ZoneId = $(this).data("id");
-            var editUrl = '@Url.Action("EditCity", "City")' + '?id=' + ZoneId;
+
+            var PermissionId = $(this).data("id");
+            var editUrl = '@Url.Action("Edit", "Permission")' + '?id=' + PermissionId;
 
             // AJAX request to fetch data for editing
             $.ajax({
@@ -262,8 +288,8 @@
                     $('#updateModal').modal('show');
                 },
                 error: function (xhr, status, error) {
-                    console.error("Error fetching City data: ", error);
-                    alert("Error fetching City data. Please try again.");
+                    console.error("Error fetching Permission data: ", error);
+                    alert("Error fetching Permission data. Please try again.");
                 }
             });
         });
@@ -271,8 +297,8 @@
 
         // Function to update data after saving
         function updateData() {
-            var CityId = $('#CityId').val();
-            var editUrl = '@Url.Action("EditCity", "City")' + '?id=' + CityId;
+            var PermissionId = $('#PermissionId').val(); // Assuming you have a hidden input field with the ZoneId
+            var editUrl = '@Url.Action("Edit", "Permission")' + '?id=' + PermissionId;
 
             // AJAX request to fetch updated data
             $.ajax({
@@ -282,40 +308,39 @@
                     // Replace the content in the placeholder div with the updated data
                     $('#placeholder').html(data);
                     // Close the modal or perform any other action as needed
+                    // alert('Zone Updated successfully');
+
                     $('#updateModal').modal('hide');
                 },
                 error: function (xhr, status, error) {
-                    console.error("Error fetching updated City data: ", error);
-                    alert("Error fetching updated City data. Please try again.");
+                    console.error("Error fetching updated permission data: ", error);
+                    alert("Error fetching updated permission data. Please try again.");
                 }
             });
         }
-
-
 
         $(document).on('click', '#saveButton', function () {
 
             // Perform validation and submit data via AJAX
             $.ajax({
-                url: '@Url.Action("EditCity", "City")',
+                url: '@Url.Action("Edit", "Permission")',
                 type: 'POST',
-                data: $('#updateCityForm').serialize(),
+                data: $('#updatePermissionForm').serialize(),
                 success: function (response) {
+                    console.log(response);
                     // Check if the response indicates success
-                    if (response ) {
+                    if (response) {
                         updateData(); // Call function to update data
-                        // alert('City Updated successfully');
                         $('#updateModal').modal('hide');
-                        var successHtml = '<div class="alert alert-success" role="alert">' + "City Updated Successfully." + '</div>';
-                        $('#updateModal .modal-body').prepend(successHtml);
-                        // $('#updateModal').modal('hide');
+                        var successfulhtml = '<div class="alert alert-success" role="alert">' + "Permission Updated Successfully" + '</div>';
+                        $('#updateModal .modal-body').prepend(successfulhtml);
+                        // alert('Zone Updated successfully');
+
                     }
                     else {
                         alert("An error occurred while saving data. Please try again.");
                     }
                 },
-
-
                 error: function (xhr, status, error) {
                     // Display more detailed error message from server response
                     var errorMessage = xhr.responseText;
@@ -329,6 +354,8 @@
             });
         });
 
+
+
         $(document).on('click', '#closeButton, .close', function () {
             // Close the modal
             $('#updateModal').modal('hide');
@@ -336,6 +363,13 @@
 
 
 
+
+
+
+
+
+
+        // })
     </script>
 
 </body>

@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IZoneService, ZoneService>();
 builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IPermissionService,PermissionService>();
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()/*.AddRazorRuntimeCompilation()*/;
 
 var app = builder.Build();
 

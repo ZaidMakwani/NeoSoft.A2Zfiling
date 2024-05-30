@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoSoft.A2Zfiling.Auth", "N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoSoft.A2ZFiling.UI", "NeoSoft.A2ZFiling.UI\NeoSoft.A2ZFiling.UI.csproj", "{7BE1BB74-92FA-4095-82EE-2B3A9DC75DCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeoSoft.A2Zfiling.Common", "NeoSoft.A2Zfiling.Common\NeoSoft.A2Zfiling.Common.csproj", "{7A145F35-5842-4D22-937A-65652F4269AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoSoft.A2Zfiling.Common", "NeoSoft.A2Zfiling.Common\NeoSoft.A2Zfiling.Common.csproj", "{7A145F35-5842-4D22-937A-65652F4269AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

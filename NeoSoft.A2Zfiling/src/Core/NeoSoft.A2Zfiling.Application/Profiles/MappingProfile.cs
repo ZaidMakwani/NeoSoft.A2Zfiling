@@ -4,6 +4,11 @@ using NeoSoft.A2Zfiling.Application.Features.Cities.Command.DeleteCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.UpdateCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityById;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList;
+using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Command.CreatePermission;
+using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Command.DeletePermission;
+using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Command.UpdatePermisssion;
+using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Queries.GetPermissionById;
+using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Queries.GetPermissionList;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.CreateZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.DeleteZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.UpdateZone;
@@ -24,6 +29,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<Zones, UpdateZoneDto>().ReverseMap();
             CreateMap<Zones, UpdateZoneCommand>().ReverseMap();
             CreateMap<Zones, GetEventByIdDto>().ReverseMap();
+
             CreateMap<City, CreateCityDto>().ReverseMap();
             CreateMap<City, GetCityListDto>().ReverseMap();
             CreateMap<City, UpdateCityDto>().ReverseMap();
@@ -31,6 +37,14 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<City, DeleteCityDto>().ReverseMap();
             CreateMap<City, GetCityByIdDto>().ReverseMap();
             CreateMap<City,GetCityByIdCommand>().ReverseMap();
+
+            CreateMap<Permission, CreatePermissionDto>().ReverseMap();
+            CreateMap<Permission, CreatePermisssionCommand>().ReverseMap();
+            CreateMap<Permission,GetPermissionListDto>().ReverseMap();
+            CreateMap<Permission, GetPermissionByIdDto>().ReverseMap();
+            CreateMap<Permission,UpdatePermissionCommand>().ReverseMap();
+            CreateMap<Permission, UpdatePermissionDto>().ReverseMap();
+            CreateMap<Permission,DeletePermissionDto>().ReverseMap();
         }
     }
 }

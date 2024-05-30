@@ -27,6 +27,8 @@ namespace NeoSoft.A2Zfiling.Persistence
       
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Permission> Actions { get; set; }
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
