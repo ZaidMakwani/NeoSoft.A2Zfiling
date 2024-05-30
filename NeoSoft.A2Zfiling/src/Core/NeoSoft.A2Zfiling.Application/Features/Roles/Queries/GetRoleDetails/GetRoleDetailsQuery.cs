@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using NeoSoft.A2Zfiling.Application.Features.Events.Queries.GetEventDetail;
+
 using NeoSoft.A2Zfiling.Application.Features.Roles.Commands.UpdateRoles;
 using NeoSoft.A2Zfiling.Application.Responses;
 using System;

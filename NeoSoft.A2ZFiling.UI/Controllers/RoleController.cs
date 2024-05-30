@@ -42,7 +42,7 @@ namespace NeosoftA2Zfilings.Views.Controllers
             else
             {
                 var response = await _roleService.CreateRoleAsync(role);
-
+              
                 if (response != null)
                 {
                     return RedirectToAction("GetAllRoles");
@@ -91,6 +91,14 @@ namespace NeosoftA2Zfilings.Views.Controllers
 
             var response= await _roleService.GetRolesAsync();
             
+            return Ok(response);
+
+        }
+        public async Task<IActionResult> GetAllRole()
+        {
+
+            var response = await _roleService.GetAllRolesAsync();
+
             return View(response);
 
         }

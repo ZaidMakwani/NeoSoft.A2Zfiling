@@ -11,6 +11,8 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IMunicipalService,MunicipalService>();
+builder.Services.AddScoped<IRegisterService, RegisterService>();
+
 
 
 var app = builder.Build();

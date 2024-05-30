@@ -17,8 +17,11 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
+        [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
+        [StringLength(10, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 10 characters long.")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$",
+        ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Confirm Password is required")]
@@ -32,5 +35,8 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
 
         [Required(ErrorMessage = "Address is required")]
         public string Address { get; set; }
+
+        [Required(ErrorMessage ="Select valid option")]
+        public int RoleId { get; set; }
     }
 }

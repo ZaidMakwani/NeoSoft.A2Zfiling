@@ -1,12 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateCategory;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesList;
-using NeoSoft.A2Zfiling.Application.Features.Events.Commands.DeleteEvent;
 using NeoSoft.A2Zfiling.Application.Features.Events.Commands.DeleteRoles;
-using NeoSoft.A2Zfiling.Application.Features.Events.Commands.UpdateEvent;
-using NeoSoft.A2Zfiling.Application.Features.Events.Queries.GetEventDetail;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Commands.CreateRoles;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Commands.UpdateRoles;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRoleDetails;

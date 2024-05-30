@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRoleaDetails;
+using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Common.Helper.ApiHelper;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using NeoSoft.A2ZFiling.UI.Interfaces;
@@ -27,9 +28,18 @@ namespace NeoSoft.A2ZFiling.UI.Services
             _logger.LogInformation("GetAllRole Service initiated");
             var Roles = await _client.GetAllAsync("v1/Roles/GetAllRoles/all");
             
-            _logger.LogInformation("GetAllRole Service conpleted");
+            _logger.LogInformation("GetAllRole Service completed");
             return Roles.Data;
         }
+        public async Task<IEnumerable<RoleVM>> GetAllRolesAsync()
+        {
+            _logger.LogInformation("GetAllRole Service initiated");
+            var Roles = await _client.GetAllAsync("v1/Roles/GetAllRoles/all");
+
+            _logger.LogInformation("GetAllRole Service completed");
+            return Roles.Data;
+        }
+
         public async Task<RoleVM> CreateRoleAsync(RoleVM role)
         {
             _logger.LogInformation("CreateRole Service initiated");

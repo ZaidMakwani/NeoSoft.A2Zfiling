@@ -1,4 +1,4 @@
-﻿
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.RegisterVM;
 
 @{
     Layout = null;
@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>A2ZFiling| Registration Page (v2)</title>
+    <title>A2ZFiling| Registration </title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -20,8 +20,33 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition register-page">
-    <div class="register-box">
+<body class="hold-transition ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><b>A2ZFiling</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+               @*  <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li> *@
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /.navbar -->
+    <div class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 56px); margin-top: 56px;">
+        <div class="register-box" style="width: 450px;">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
                 <a href="../../index2.html" class="h1"><b>Registration</b></a>
@@ -29,55 +54,103 @@
             <div class="card-body">
                 <p class="login-box-msg">Register as a new member</p>
 
-                <form action="../../index.html" method="post">
+                <form asp-action="Registration" asp-controller="Account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="First name">
+                        <input type="text" asp-for="FirstName" class="form-control" placeholder="First name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
                     </div>
+                    
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Last name">
+                        <input type="text" asp-for="LastName" class="form-control" placeholder="Last name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+
                     </div>
+                    
+                    <span asp-validation-for="Username" class="text-danger"></span>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="text" asp-for="Username" class="form-control" placeholder="Username">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <input type="email" asp-for="Email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
+                    
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
                     <div class="input-group mb-3">
-                        <input type="tel" class="form-control" placeholder="Contact Number">
+                        <input type="tel" asp-for="ContactNumber" class="form-control" placeholder="Contact Number">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-mobile-alt"></span>
                             </div>
                         </div>
                     </div>
+                    
+                    <span asp-validation-for="Address" class="text-danger"></span>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="text" asp-for="Address" class="form-control" placeholder="Address">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas  fa-address-book"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <input type="password" asp-for="Password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password">
+                        <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Retype password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- New Dropdown Menu -->
+                    <span asp-validation-for="RoleId" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <select id="rolesDropdown" asp-for="RoleId" class="form-control">
+                            <option value="">--- Select ---</option>
+                        </select>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user-tag"></span>
+                            </div>
+                        </div>
+                    </div>
+                   
                     <a href="login.html" class="text-center">I already have a membership</a>
                     <div class="row">
                        
@@ -105,12 +178,55 @@
             <!-- /.form-box -->
         </div><!-- /.card -->
     </div>
-    <!-- /.register-box -->
+    </div>
+
     <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <!-- jQuery Validation -->
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <!-- jQuery Validation Unobtrusive -->
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchRoles();
+        });
+
+        function fetchRoles() {
+              var apiUrl = '@Url.Action("GetAllRoles", "Role")';
+              console.log(apiUrl);
+            fetch(apiUrl) // Replace with the actual API endpoint
+                 .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+                .then(data => {
+                    console.log(data);
+                    const rolesDropdown = document.getElementById('rolesDropdown');
+                   if (data && Array.isArray(data)) {
+                    data.forEach(role => {
+                        const option = document.createElement('option');
+                        option.value = role.roleId;
+                        option.textContent = role.roleName;
+                        rolesDropdown.appendChild(option);
+                    });
+                } else {
+                    console.log(typeof data);
+                    console.error('Error: Data is undefined or not an array');
+                }
+                })
+                .catch(error => {
+                    console.error('Error fetching roles:', error);
+                });
+        }
+    </script>
+
+
 </body>
+
 </html>

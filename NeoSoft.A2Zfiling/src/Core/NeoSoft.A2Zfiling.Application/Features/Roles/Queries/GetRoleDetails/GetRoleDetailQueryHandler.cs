@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.DataProtection;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Application.Exceptions;
-using NeoSoft.A2Zfiling.Application.Features.Events.Queries.GetEventDetail;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Commands.UpdateRoles;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
