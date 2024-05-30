@@ -20,12 +20,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()    
-       
+        public IActionResult Index()
+
         {
 
             var response = _industryService.GetIndustryAsync();
-;
+            ;
 
             //Response<List<IndustryVM>> industryList = new Response<List<IndustryVM>>();
             //HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Industry/GetAllIndustries/all").Result;
@@ -71,7 +71,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
 
         //-----------------------------------------------Update Industry------------------------------------------------
-        public IActionResult Update(int id)
+        public IActionResult Update(int id )
         {
             Response<IndustryVM> industry = new Response<IndustryVM>();
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + $"/Industry/GetIndustriesById?Id={id}").Result;
@@ -82,7 +82,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 industry = JsonConvert.DeserializeObject<Response<IndustryVM>>(data);
             }
 
-            return View(industry.Data);
+            return PartialView("_UpdateIndustry", industry.Data);
         }
 
         [HttpPost]
@@ -111,5 +111,27 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             return RedirectToActionPermanent("Index");
         }
 
+
+        //----------------------------------------------Register Member----------------------------------------
+
+        public IActionResult RegisterMember()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult RegisterMember(RegisterVM model)
+        {
+            string data = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/RegisterMember/Create/", content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

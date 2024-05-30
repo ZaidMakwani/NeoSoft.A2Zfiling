@@ -2,16 +2,16 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateCategory;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateIndustry;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.StoredProcedure;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesList;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetIndustriesList;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.CreateIndustry;
 using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.DeleteIndustry;
 using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.DeleteIndustry;
 using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.UpdateIndustry;
-using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Queries;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Queries.GetIndustryById;
 using System.Dynamic;
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
@@ -107,5 +107,8 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _logger.LogInformation("Deleting Industries Initiated");
             return Ok(response);
         }
+
+
+
     }
 }

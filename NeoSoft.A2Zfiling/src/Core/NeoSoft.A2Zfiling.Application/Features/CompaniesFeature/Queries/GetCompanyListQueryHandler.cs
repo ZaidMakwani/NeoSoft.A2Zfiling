@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesList;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetIndustriesList;
+//using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetIndustriesList;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using System;

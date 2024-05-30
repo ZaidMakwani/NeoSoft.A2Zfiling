@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.DeleteCompany
 {
 
-    public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand, Response<DeleteCompanyDto>>
+    public class DeleteCompanyCommandHandler :  IRequestHandler<DeleteCompanyCommand, Response<DeleteCompanyDto>>
     {
         private readonly IMapper _mapper;
         private readonly ICategoryRepository _categoryRepository;

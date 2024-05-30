@@ -1,18 +1,16 @@
-﻿using NeoSoft.A2Zfiling.Domain.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeoSoft.A2Zfiling.Domain.Entities
+namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Queries.GetIndustriesList
 {
-    public class Industry : AuditableEntity
+    public class IndustryListVM
     {
-        public int IndustryId { get; set; } 
+        public int IndustryId { get; set; }
         public string IndustryName { get; set; }
         public string ShortName { get; set; }
         public bool IsActive { get; set; }
-
     }
 }

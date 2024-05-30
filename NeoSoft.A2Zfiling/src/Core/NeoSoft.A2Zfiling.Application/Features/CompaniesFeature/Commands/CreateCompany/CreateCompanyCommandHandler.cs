@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands
+namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.CreateCompany
 {
 
     public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, Response<CreateCompanyDto>>
@@ -31,11 +31,11 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands
         public async Task<Response<CreateCompanyDto>> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
         {
             Response<CreateCompanyDto> createCompanyCommandResponse = null;
-           
-                var company = new Company() { CompanyName = request.CompanyName, ShortName = request.ShortName, IsActive = request.IsActive };
+
+            var company = new Company() { CompanyName = request.CompanyName, ShortName = request.ShortName, IsActive = request.IsActive };
             company = await _companyRepsitory.AddAsync(company);
             createCompanyCommandResponse = new Response<CreateCompanyDto>(_mapper.Map<CreateCompanyDto>(company), "success");
-            
+
 
             return createCompanyCommandResponse;
         }

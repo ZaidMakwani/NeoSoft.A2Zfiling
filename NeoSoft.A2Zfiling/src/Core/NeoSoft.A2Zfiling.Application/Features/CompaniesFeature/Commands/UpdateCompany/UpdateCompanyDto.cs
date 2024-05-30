@@ -10,5 +10,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.Updat
     {
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
+
+
     }
 }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.UpdateCompany
 {
 
-    public class UpdateCompanyCommandHandler : IRequestHandler<UpdateCompanyCommand, Response<UpdateCompanyDto>>
+    public class UpdateCompanyCommandHandler :  IRequestHandler<UpdateCompanyCommand, Response<UpdateCompanyDto>>
     {
         private readonly IMapper _mapper;
         private readonly ICategoryRepository _categoryRepository;

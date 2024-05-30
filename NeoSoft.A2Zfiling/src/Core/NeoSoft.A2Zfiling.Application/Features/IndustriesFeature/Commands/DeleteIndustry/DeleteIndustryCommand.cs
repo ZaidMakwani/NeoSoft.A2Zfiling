@@ -11,5 +11,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.Dele
     public class DeleteIndustryCommand : IRequest<Response<DeleteIndustryDto>>
     {
         public int IndustryId { get; set; }
+
     }
 }

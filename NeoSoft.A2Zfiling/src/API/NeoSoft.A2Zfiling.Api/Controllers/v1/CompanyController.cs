@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateIndustry;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetIndustriesList;
-using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands;
+using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.CreateCompany;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.DeleteCompany;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.UpdateCompany;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries;

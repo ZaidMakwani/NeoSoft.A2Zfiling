@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.DeleteCompany
 {
-    public class DeleteCompanyCommand : IRequest<Response<DeleteCompanyDto>>
+    public class DeleteCompanyCommand :  IRequest<Response<DeleteCompanyDto>>
     {
         public int CompanyId { get; set; }
     }

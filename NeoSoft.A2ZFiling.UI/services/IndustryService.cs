@@ -31,6 +31,15 @@ namespace NeoSoft.A2ZFiling.UI.services
             return response;
         }
 
+
+        //public async Task<RegisterVM> UpdateIndustryAsync(RegisterVM role)
+        //{
+        //    _logger.LogInformation("UpdateZone ZoneService Initiated");
+        //    var zones = await _apiClient.PutAsync("Zone/id", role);
+        //    _logger.LogInformation("UpdateZone ZoneService Completed");
+        //    return zones.Data;
+        //}
+
         //public async Task<ZoneVM> DeleteIndustryAsync(int id)
         //{
         //    _logger.LogInformation("Delete ZoneService Initiated");
@@ -94,12 +103,6 @@ namespace NeoSoft.A2ZFiling.UI.services
         //    return zone;
         //}
 
-        //public async Task<ZoneVM> UpdateIndustryAsync(ZoneVM role)
-        //{
-        //    _logger.LogInformation("UpdateZone ZoneService Initiated");
-        //    var zones = await _apiClient.PutAsync("Zone/id", role);
-        //    _logger.LogInformation("UpdateZone ZoneService Completed");
-        //    return zones.Data;
-        //}
+        
     }
 }

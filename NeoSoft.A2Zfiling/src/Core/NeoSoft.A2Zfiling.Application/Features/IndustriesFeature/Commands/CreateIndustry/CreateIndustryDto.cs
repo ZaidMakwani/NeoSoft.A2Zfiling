@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.UpdateIndustry
+namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.CreateIndustry
 {
-    public class UpdateIndustryDto
+    public class CreateIndustryDto
     {
         public int IndustryId { get; set; }
         public string IndustryName { get; set; }
-
+        public bool IsActive { get; set; }
     }
 }

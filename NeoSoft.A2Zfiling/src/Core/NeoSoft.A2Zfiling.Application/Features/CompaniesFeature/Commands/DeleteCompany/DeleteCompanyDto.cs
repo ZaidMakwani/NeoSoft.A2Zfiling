@@ -11,5 +11,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.Delet
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }
         public bool IsActive { get; set; }
+
+
     }
 }

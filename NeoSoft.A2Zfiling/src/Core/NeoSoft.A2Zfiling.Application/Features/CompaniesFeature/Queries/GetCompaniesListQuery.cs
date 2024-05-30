@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetIndustriesList;
+//using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetIndustriesList;
 using NeoSoft.A2Zfiling.Application.Responses;
 using System;
 using System.Collections.Generic;
@@ -11,5 +11,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries
 {
     public class GetCompaniesListQuery : IRequest<Response<IEnumerable<CompanyListVM>>>
     {
+
     }
 }

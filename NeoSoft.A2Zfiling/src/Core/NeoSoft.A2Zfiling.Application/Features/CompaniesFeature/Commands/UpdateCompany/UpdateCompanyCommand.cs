@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.UpdateCompany
 {
-    public class UpdateCompanyCommand : IRequest<Response<UpdateCompanyDto>>
+    public class UpdateCompanyCommand :  IRequest<Response<UpdateCompanyDto>>
     {
         public int CompanyId { get; set; }
         public string CompanyName { get; set; }

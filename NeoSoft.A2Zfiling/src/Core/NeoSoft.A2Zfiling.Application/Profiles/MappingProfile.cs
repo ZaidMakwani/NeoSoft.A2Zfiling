@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateCategory;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateIndustry;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.StoredProcedure;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesList;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetIndustriesList;
-using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands;
+using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.CreateCompany;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.DeleteCompany;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.UpdateCompany;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries;
@@ -15,8 +13,11 @@ using NeoSoft.A2Zfiling.Application.Features.Events.Commands.UpdateEvent;
 using NeoSoft.A2Zfiling.Application.Features.Events.Queries.GetEventDetail;
 using NeoSoft.A2Zfiling.Application.Features.Events.Queries.GetEventsExport;
 using NeoSoft.A2Zfiling.Application.Features.Events.Queries.GetEventsList;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.CreateIndustry;
 using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.DeleteIndustry;
 using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.UpdateIndustry;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Queries.GetIndustriesList;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Queries.GetIndustryById;
 using NeoSoft.A2Zfiling.Application.Features.Orders.GetOrdersForMonth;
 using NeoSoft.A2Zfiling.Domain.Entities;
 
@@ -44,6 +45,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<Order, OrdersForMonthDto>().ReverseMap();
             CreateMap<Industry, CreateIndustryDto>().ReverseMap();
             CreateMap<Industry, IndustryListVM>().ReverseMap();
+            CreateMap<Industry, IndustryListSingleVM>().ReverseMap();
             CreateMap<Industry, UpdateIndustryDto>().ReverseMap();
             CreateMap<Industry, UpdateIndustryCommand>().ReverseMap();
             CreateMap<Industry, DeleteIndustryDto>().ReverseMap();

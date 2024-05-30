@@ -11,5 +11,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries
     public class GetCompaniesByIdQuery : IRequest<Response<CompanyListVM>>
     {
         public int CompanyId { get; set; }
+
     }
 }

@@ -6,6 +6,7 @@ namespace NeoSoft.A2ZFiling.UI.Interfaces
     {
         IEnumerable<IndustryVM> GetIndustryAsync();
         HttpResponseMessage CreateIndustryAsync(IndustryVM role);
+
         //Task<IndustryVM> UpdateIndustryAsync(IndustryVM role);
 
         //Task<IndustryVM> DeleteIndustryAsync(int id);

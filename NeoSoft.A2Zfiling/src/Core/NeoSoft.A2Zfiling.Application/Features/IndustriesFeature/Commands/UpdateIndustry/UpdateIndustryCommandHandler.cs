@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.UpdateIndustry
 {
-    public class UpdateIndustryCommandHandler : IRequestHandler<UpdateIndustryCommand, Response<UpdateIndustryDto>>
+    public class UpdateIndustryCommandHandler :  IRequestHandler<UpdateIndustryCommand, Response<UpdateIndustryDto>>
     {
         private readonly IMapper _mapper;
         private readonly ICategoryRepository _categoryRepository;

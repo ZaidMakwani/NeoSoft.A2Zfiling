@@ -2,7 +2,7 @@
 using MediatR;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Application.Exceptions;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateIndustry;
+//using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateIndustry;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using System;

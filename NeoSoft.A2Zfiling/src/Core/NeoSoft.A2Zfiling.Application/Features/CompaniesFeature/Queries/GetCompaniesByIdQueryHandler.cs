@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries
 {
 
-    public class GetCompaniesByIdQueryHandler : IRequestHandler<GetCompaniesByIdQuery, Response<CompanyListVM>>
+    public class GetCompaniesByIdQueryHandler :  IRequestHandler<GetCompaniesByIdQuery, Response<CompanyListVM>>
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;

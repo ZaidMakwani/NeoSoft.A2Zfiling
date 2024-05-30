@@ -54,10 +54,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
 
 
-
+         
         //-----------------------------------------------Update Company------------------------------------------------
         public IActionResult Update(int id)
-        {   
+ {   
             Response<CompanyVM> company = new Response<CompanyVM>();
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + $"/Company/GetCompaniesById?Id={id}").Result;
 
@@ -67,7 +67,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 company = JsonConvert.DeserializeObject<Response<CompanyVM>>(data);
             }
 
-            return View(company.Data);
+            return PartialView("_UpdateCompany",company.Data);
         }
 
         [HttpPost]
@@ -79,14 +79,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return Ok(response);
             }
 
             return View();
         }
 
         //-----------------------------------------------Delete Company------------------------------------------------
-        
+       
         public IActionResult Delete(int id)
         {
             Response<CompanyVM> company = new Response<CompanyVM>();

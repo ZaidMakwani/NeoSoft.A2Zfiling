@@ -12,5 +12,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries
         public string CompanyName { get; set; }
         public string ShortName { get; set; }
         public bool IsActive { get; set; }
+
     }
 }
