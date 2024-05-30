@@ -52,10 +52,10 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Role Id</th>
-                                                    @* <th>Role Name</th>
+                                                    @* <th>Role Name</th> *@
                                                     <th>Controller Name</th>
-                                                    <th>Action Name</th> *@
-                                                    <th>Permission Id</th>
+                                                    <th>Action Name</th>
+                                                  @*   <th>Permission Id</th> *@
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -69,16 +69,16 @@
                                                         <td>
                                                             @Html.DisplayFor(modelItem => item.RoleId)
                                                         </td>
-                                                         @*  <td>
+                                                          <td>
                                                             @Html.DisplayFor(modelItem => item.ControllerName)
                                                         </td>
                                                         <td>
                                                             @Html.DisplayFor(modelItem => item.ActionName)
-                                                        </td> *@
-
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.PermissionId)
                                                         </td>
+
+                                                       @*  <td>
+                                                            @Html.DisplayFor(modelItem => item.PermissionId)
+                                                        </td> *@
                                                         <td>
                                                             @if (item.IsActive)
                                                             {

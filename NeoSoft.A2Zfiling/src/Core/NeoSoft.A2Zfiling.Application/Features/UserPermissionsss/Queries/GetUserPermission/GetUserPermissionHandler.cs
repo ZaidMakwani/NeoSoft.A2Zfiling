@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//
 namespace NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Queries.GetUserPermission
 {
     public class GetUserPermissionHandler : IRequestHandler<GetUserPermissionCommand, Response<IEnumerable<GetUserPermissionDto>>>
@@ -18,12 +18,17 @@ namespace NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Queries.GetUs
         private readonly ILogger<GetUserPermissionHandler> _logger;
         private readonly IAsyncRepository<UserPermission> _asyncRepository;
         private readonly IMapper _mapper;
+        private readonly IAsyncRepository<Permission> _asyncRepositoryFactory;
+        
 
-        public GetUserPermissionHandler(ILogger<GetUserPermissionHandler> logger, IAsyncRepository<UserPermission> asyncRepository, IMapper mapper)
+        public GetUserPermissionHandler(ILogger<GetUserPermissionHandler> logger,
+            IAsyncRepository<UserPermission> asyncRepository, IMapper mapper, 
+            IAsyncRepository<Permission> asyncRepositoryFactory)
         {
             _asyncRepository = asyncRepository;
             _mapper = mapper;
             _logger = logger;
+            _asyncRepositoryFactory = asyncRepositoryFactory;
         }
         public async Task<Response<IEnumerable<GetUserPermissionDto>>> Handle(GetUserPermissionCommand request, CancellationToken cancellationToken)
         {
@@ -31,14 +36,22 @@ namespace NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Queries.GetUs
             {
                 _logger.LogInformation("Get All User Permission Handler Initiated");
 
-                var allpermission = (await _asyncRepository.ListAllAsync()).Where(x => x.IsActive == true);
+                var allPermissions = (await _asyncRepository.ListAllAsync()).Where(x => x.IsActive==true);
 
-
-                var permisssion = _mapper.Map<IEnumerable<GetUserPermissionDto>>(allpermission);
+                var getUserPermissionDtos = allPermissions.Select(x => new GetUserPermissionDto
+                {
+                    UserPermissionId = x.UserPermissionId,
+                    RoleId = x.RoleId,
+                    //RoleName = _asyncRepository.GetByIdAsync(x.RoleId)?.Result?.RoleName,
+                    PermissionId = x.PermissionId,
+                    ControllerName = _asyncRepositoryFactory.GetByIdAsync(x.PermissionId)?.Result?.ControllerName,
+                    ActionName = _asyncRepositoryFactory.GetByIdAsync(x.PermissionId)?.Result?.ActionName,
+                    IsActive = x.IsActive
+                }).ToList();
 
                 _logger.LogInformation("Get ALl User Permission Handler Completed");
+                return new Response<IEnumerable<GetUserPermissionDto>>(getUserPermissionDtos, "Data Fetched Successfully");
 
-                return new Response<IEnumerable<GetUserPermissionDto>>(permisssion, "Data Fetched Successfully");
             }
             catch (Exception ex)
             {
