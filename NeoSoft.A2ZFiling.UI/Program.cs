@@ -8,6 +8,7 @@ builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IZoneService, ZoneService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IPermissionService,PermissionService>();
+builder.Services.AddScoped<IUserPermission,UserPermissionService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews()/*.AddRazorRuntimeCompilation()*/;
 

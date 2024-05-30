@@ -9,6 +9,11 @@ using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Command.DeletePermiss
 using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Command.UpdatePermisssion;
 using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Queries.GetPermissionById;
 using NeoSoft.A2Zfiling.Application.Features.Permissionsss.Queries.GetPermissionList;
+using NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Command.CreateUserPermission;
+using NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Command.DeleteUserPermission;
+using NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Command.UpdateUserPermission;
+using NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Queries.GetUserPermission;
+using NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Queries.GetUserPermissionById;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.CreateZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.DeleteZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.UpdateZone;
@@ -45,6 +50,15 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<Permission,UpdatePermissionCommand>().ReverseMap();
             CreateMap<Permission, UpdatePermissionDto>().ReverseMap();
             CreateMap<Permission,DeletePermissionDto>().ReverseMap();
+
+
+            CreateMap<UserPermission,CreateUserPermissionDto>().ReverseMap();
+            CreateMap<UserPermission,GetUserPermissionDto>().ReverseMap();
+            CreateMap<UserPermission, GetUserPermissionByIdDto>().ReverseMap();
+            CreateMap<UserPermission,GetUserPermissionCommand>().ReverseMap();
+            CreateMap<UserPermission,DeleteUserPermissionDto>().ReverseMap();
+            CreateMap<UserPermission, UpdateUserPermissionCommand>().ReverseMap();
+            CreateMap<UserPermission,UpdateUserPermissionDto>().ReverseMap();
         }
     }
 }

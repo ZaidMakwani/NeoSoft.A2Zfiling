@@ -20,14 +20,16 @@ namespace NeoSoft.A2Zfiling.Persistence
         {
         }
 
-        public DbSet<Zones> Zones { get; set; }
+        public DbSet<Zones> Zone { get; set; }
 
-        public DbSet<City> cities { get; set; }
+        public DbSet<City> City { get; set; }
         public DbSet<Roles> Roles { get; set; }
       
         public DbSet<Message> Messages { get; set; }
 
-        public DbSet<Permission> Actions { get; set; }
+        public DbSet<Permission> Permission { get; set; }
+
+        public DbSet<UserPermission> User { get; set; }
 
         private IDbContextTransaction _transaction;
 
