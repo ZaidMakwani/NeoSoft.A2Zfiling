@@ -34,7 +34,7 @@ using System.Security.Principal;
 
 namespace NeoSoft.A2Zfiling.Application.Profiles
 {
-    public class MappingProfile: Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
@@ -52,39 +52,40 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<City, UpdateCityCommand>().ReverseMap();
             CreateMap<City, DeleteCityDto>().ReverseMap();
             CreateMap<City, GetCityByIdDto>().ReverseMap();
-            CreateMap<City,GetCityByIdCommand>().ReverseMap();
+            CreateMap<City, GetCityByIdCommand>().ReverseMap();
 
             CreateMap<Permission, CreatePermissionDto>().ReverseMap();
             CreateMap<Permission, CreatePermisssionCommand>().ReverseMap();
-            CreateMap<Permission,GetPermissionListDto>().ReverseMap();
+            CreateMap<Permission, GetPermissionListDto>().ReverseMap();
             CreateMap<Permission, GetPermissionByIdDto>().ReverseMap();
-            CreateMap<Permission,UpdatePermissionCommand>().ReverseMap();
+            CreateMap<Permission, UpdatePermissionCommand>().ReverseMap();
             CreateMap<Permission, UpdatePermissionDto>().ReverseMap();
-            CreateMap<Permission,DeletePermissionDto>().ReverseMap();
-        {
+            CreateMap<Permission, DeletePermissionDto>().ReverseMap();
+            {
 
-           CreateMap<AppUser, RegisterDTO>();
+                CreateMap<AppUser, RegisterDTO>();
 
-          
-            CreateMap<Role, CreateRolesDto>();
-            CreateMap<Role,RolesDto>();
-            CreateMap<Role,RolesListVM>();
-            CreateMap<Role,UpdateRolesCommand>().ReverseMap();
-            CreateMap<Role, GetRoleDto>();
 
-            CreateMap<MunicipalCorp, CreateMunicipalDto>();
-            CreateMap<MunicipalCorp, MunicipalListVM>();
-            CreateMap<MunicipalCorp, UpdateMunicipalCommand>().ReverseMap();
-            CreateMap<MunicipalCorp, MunicipalDto>();
-            CreateMap<MunicipalCorp, GetMunicipalDto>();
+                CreateMap<Role, CreateRolesDto>();
+                CreateMap<Role, RolesDto>();
+                CreateMap<Role, RolesListVM>();
+                CreateMap<Role, UpdateRolesCommand>().ReverseMap();
+                CreateMap<Role, GetRoleDto>();
 
-            CreateMap<UserPermission,CreateUserPermissionDto>().ReverseMap();
-            CreateMap<UserPermission,GetUserPermissionDto>().ReverseMap();
-            CreateMap<UserPermission, GetUserPermissionByIdDto>().ReverseMap();
-            CreateMap<UserPermission,GetUserPermissionCommand>().ReverseMap();
-            CreateMap<UserPermission,DeleteUserPermissionDto>().ReverseMap();
-            CreateMap<UserPermission, UpdateUserPermissionCommand>().ReverseMap();
-            CreateMap<UserPermission,UpdateUserPermissionDto>().ReverseMap();
+                CreateMap<MunicipalCorp, CreateMunicipalDto>();
+                CreateMap<MunicipalCorp, MunicipalListVM>();
+                CreateMap<MunicipalCorp, UpdateMunicipalCommand>().ReverseMap();
+                CreateMap<MunicipalCorp, MunicipalDto>();
+                CreateMap<MunicipalCorp, GetMunicipalDto>();
+
+                CreateMap<UserPermission, CreateUserPermissionDto>().ReverseMap();
+                CreateMap<UserPermission, GetUserPermissionDto>().ReverseMap();
+                CreateMap<UserPermission, GetUserPermissionByIdDto>().ReverseMap();
+                CreateMap<UserPermission, GetUserPermissionCommand>().ReverseMap();
+                CreateMap<UserPermission, DeleteUserPermissionDto>().ReverseMap();
+                CreateMap<UserPermission, UpdateUserPermissionCommand>().ReverseMap();
+                CreateMap<UserPermission, UpdateUserPermissionDto>().ReverseMap();
+            }
         }
     }
 }
