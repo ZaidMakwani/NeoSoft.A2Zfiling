@@ -42,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="FileExport\" />
     <Folder Include="Mail\" />
     <Folder Include="Mocks\" />
   </ItemGroup>

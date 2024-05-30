@@ -42,12 +42,4 @@
     <ProjectReference Include="..\..\src\Core\NeoSoft.A2Zfiling.Application\NeoSoft.A2Zfiling.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Categories\Commands\" />
-    <Folder Include="Categories\Queries\" />
-    <Folder Include="Events\Commands\" />
-    <Folder Include="Events\Queries\" />
-    <Folder Include="Orders\Queries\" />
-  </ItemGroup>
-
 </Project>

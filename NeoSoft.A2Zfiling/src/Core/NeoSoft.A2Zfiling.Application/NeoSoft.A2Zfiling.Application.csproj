@@ -37,18 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Contracts\Infrastructure\" />
-    <Folder Include="Features\Categories\Commands\CreateCategory\" />
-    <Folder Include="Features\Categories\Commands\StoredProcedure\" />
-    <Folder Include="Features\Categories\Queries\GetCategoriesListWithEvents\GetCategoriesList - Copy\" />
-    <Folder Include="Features\Categories\Queries\GetCategoriesList\" />
-    <Folder Include="Features\Events\Commands\CreateEvent\" />
-    <Folder Include="Features\Events\Commands\DeleteEvent\" />
-    <Folder Include="Features\Events\Commands\Transaction\" />
-    <Folder Include="Features\Events\Commands\UpdateEvent\" />
-    <Folder Include="Features\Events\Queries\GetEventDetail\" />
-    <Folder Include="Features\Events\Queries\GetEventsExport\" />
-    <Folder Include="Features\Events\Queries\GetEventsList\" />
-    <Folder Include="Features\Orders\Queries\GetOrdersForMonth\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
 
