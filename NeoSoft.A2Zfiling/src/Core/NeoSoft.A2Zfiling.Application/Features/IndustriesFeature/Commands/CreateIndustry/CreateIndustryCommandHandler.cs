@@ -33,19 +33,11 @@ namespace NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.Crea
         {
             Response<CreateIndustryDto> createIndustryCommandResponse = null;
 
-            var validator = new CreateIndustryCommandValidator(_messageRepository);
-            var validationResult = await validator.ValidateAsync(request);
-
-            if (validationResult.Errors.Count > 0)
-            {
-                throw new ValidationException(validationResult);
-            }
-            else
-            {
+           
                 var industry = new Industry() { IndustryName = request.IndustryName, ShortName = request.ShortName, IsActive = request.IsActive };
                 industry = await _industryRepsitory.AddAsync(industry);
                 createIndustryCommandResponse = new Response<CreateIndustryDto>(_mapper.Map<CreateIndustryDto>(industry), "success");
-            }
+            
 
             return createIndustryCommandResponse;
         }

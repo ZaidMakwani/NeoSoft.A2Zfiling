@@ -29,7 +29,7 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(ConnectionString));
 
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IIndustryService,IndustryService>();
+
 //SERILOG IMPLEMENTATION
 
 IConfiguration configurationBuilder = new ConfigurationBuilder()

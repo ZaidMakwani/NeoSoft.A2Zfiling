@@ -1,5 +1,6 @@
 using NeoSoft.A2Zfiling.Common.Helper.ApiHelper;
 using NeoSoft.A2ZFiling.UI.Interfaces;
+
 using NeoSoft.A2ZFiling.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IIndustryService, IndustryService>();
-var app = builder.Build();
+
 
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));

@@ -3,7 +3,7 @@ using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using Newtonsoft.Json;
 
-namespace NeoSoft.A2ZFiling.UI.services
+namespace NeoSoft.A2ZFiling.UI.Services
 {
     public class IndustryService : IIndustryService
     {

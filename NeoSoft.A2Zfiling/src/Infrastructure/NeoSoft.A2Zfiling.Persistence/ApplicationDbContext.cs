@@ -21,9 +21,7 @@ namespace NeoSoft.A2Zfiling.Persistence
         {
         }
       
-        public DbSet<Role> Role { get; set; }
-
-       
+        public DbSet<Role> Roles { get; set; }       
         public DbSet<Message> Messages { get; set; }
         public DbSet<MunicipalCorp> MunicipalCorporations { get; set; }
         public DbSet<Industry> Industries { get; set; }
