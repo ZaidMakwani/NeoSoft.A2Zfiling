@@ -20,12 +20,21 @@ namespace NeoSoft.A2Zfiling.Persistence
            : base(options)
         {
         }
+
+        public DbSet<Zones> Zone { get; set; }
+
+        public DbSet<City> City { get; set; }
+      
       
         public DbSet<Role> Roles { get; set; }       
         public DbSet<Message> Messages { get; set; }
         public DbSet<MunicipalCorp> MunicipalCorporations { get; set; }
         public DbSet<Industry> Industries { get; set; }
         public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Permission> Permission { get; set; }
+
+        public DbSet<UserPermission> User { get; set; }
 
         private IDbContextTransaction _transaction;
 

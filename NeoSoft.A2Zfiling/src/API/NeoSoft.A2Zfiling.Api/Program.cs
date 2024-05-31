@@ -1,3 +1,4 @@
+//--
 using Serilog;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +33,7 @@ builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>))
 
 //SERILOG IMPLEMENTATION
 
+builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 IConfiguration configurationBuilder = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile(
