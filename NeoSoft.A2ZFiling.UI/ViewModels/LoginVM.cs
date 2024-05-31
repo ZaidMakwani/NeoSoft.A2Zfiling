@@ -19,5 +19,7 @@ namespace NeosoftA2Zfilings.Views.ViewModels
         [MinLength(3, ErrorMessage = "Minimum password length is 3 characters.")]
         [PasswordPropertyText]
         public string Password { get; set; }
+
+
     }
 }
