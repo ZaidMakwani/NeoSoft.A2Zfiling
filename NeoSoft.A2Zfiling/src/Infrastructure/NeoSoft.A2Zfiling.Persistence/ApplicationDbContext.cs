@@ -21,9 +21,9 @@ namespace NeoSoft.A2Zfiling.Persistence
         {
         }
 
-        public DbSet<Zones> Zone { get; set; }
+        public DbSet<Zones> Zones { get; set; }
 
-        public DbSet<City> City { get; set; }
+        public DbSet<City> Cities { get; set; }
       
       
         public DbSet<Role> Roles { get; set; }       
