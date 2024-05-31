@@ -2,6 +2,8 @@
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
+
 
 namespace NeoSoft.A2Zfiling.Application
 {
@@ -11,6 +13,7 @@ namespace NeoSoft.A2Zfiling.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            
 
             return services;
         }

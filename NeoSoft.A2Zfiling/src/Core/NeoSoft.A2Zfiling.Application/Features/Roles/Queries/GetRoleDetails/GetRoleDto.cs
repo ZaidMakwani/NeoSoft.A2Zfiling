@@ -1,21 +1,16 @@
-﻿using NeoSoft.A2Zfiling.Domain.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NeoSoft.A2Zfiling.Domain.Entities
+namespace NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRoleaDetails
 {
-    public class Roles:AuditableEntity
+    public class GetRoleDto
     {
-        [Key]
         public int RoleId { get; set; }
 
         public string RoleName { get; set; }
-
         public bool IsActive { get; set; }
-
     }
 }

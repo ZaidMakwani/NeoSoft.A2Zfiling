@@ -9,34 +9,50 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace NeoSoft.A2Zfiling.Persistence
 {
     [ExcludeFromCodeCoverage]
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
            : base(options)
         {
         }
+
+        public DbSet<Zones> Zones { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+      
+      
+        public DbSet<Role> Roles { get; set; }       
         public DbSet<Login> logins { get; set; }
         public DbSet<PinCode> Pincodes { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<MunicipalCorp> MunicipalCorporations { get; set; }
+        public DbSet<Industry> Industries { get; set; }
+        public DbSet<Company> Companies { get; set; }
+
+        public DbSet<Permission> Permission { get; set; }
+
+        public DbSet<UserPermission> User { get; set; }
 
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
             //seed data, added through migrations
-            var concertGuid = Guid.Parse("{B0788D2F-8003-43C1-92A4-EDC76A7C5DDE}");
-            var musicalGuid = Guid.Parse("{6313179F-7837-473A-A4D5-A5571B43E6A6}");
-            var playGuid = Guid.Parse("{BF3F3002-7E53-441E-8B76-F6280BE284AA}");
-            var conferenceGuid = Guid.Parse("{FE98F549-E790-4E9F-AA16-18C2292A2EE9}");
+            //var concertguid = guid.parse("{b0788d2f-8003-43c1-92a4-edc76a7c5dde}");
+            //var musicalguid = guid.parse("{6313179f-7837-473a-a4d5-a5571b43e6a6}");
+            //var playguid = guid.parse("{bf3f3002-7e53-441e-8b76-f6280be284aa}");
+            //var conferenceguid = guid.parse("{fe98f549-e790-4e9f-aa16-18c2292a2ee9}");
 
 
             modelBuilder.Entity<Roles>().HasData(new Roles { RoleId=1,RoleName="End User",IsActive=true });

@@ -1,10 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>2bcbe398-75fd-4c3f-b73f-393dd83f743a</UserSecretsId>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NeoSoft.A2Zfiling.Common\NeoSoft.A2Zfiling.Common.csproj" />
+    <ProjectReference Include="..\NeoSoft.A2Zfiling\src\Core\NeoSoft.A2Zfiling.Application\NeoSoft.A2Zfiling.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NeoSoft.A2Zfiling.Common\NeoSoft.A2Zfiling.Common.csproj" />
+    <ProjectReference Include="..\NeoSoft.A2Zfiling\src\Core\NeoSoft.A2Zfiling.Application\NeoSoft.A2Zfiling.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NeoSoft.A2Zfiling\src\Core\NeoSoft.A2Zfiling.Application\NeoSoft.A2Zfiling.Application.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DNTCaptcha.Core" Version="5.2.4" />

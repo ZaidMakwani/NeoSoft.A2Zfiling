@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/registrations/registration-12/assets/css/registration-12.css">
+
+
+
     
    
 </head>
@@ -206,6 +209,32 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                @* <i class="far fa-circle nav-icon"></i> *@
+                                <a class="nav-link" asp-action="GetAllRole" asp-controller="Role">Roles</a>                                    
+                                    @* <p>Roles</p> *@
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="GetAllZone" asp-controller="Zone">Zones</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="GetAllCity" asp-controller="City">City</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="GetAllPermission" asp-controller="Permission">Permission</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="GetAll" asp-controller="UserPermission">User Permission</a>
+                            </li>
+
+
+                          
+                            <li class="nav-item">
+                                <a asp-action="GetAllMunicipal" asp-controller="Municipal" class="nav-link ">
+                                   
+                                    <p>Municipal Corporations</p>
                                 @* @ <i class="far fa-circle nav-icon"></i> @ *@
                                 <a class="nav-link" asp-action="Tables" asp-controller="Home">Roles</a>                                    
                                     @* @ <p>Roles</p> @ *@
@@ -230,6 +259,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a asp-action="Index" asp-controller="Company" class="nav-link ">
+
+                                    <p>Company</p>
+                                </a>
+                            </li>
+                           @*  <li class="nav-item">
                                 <a href="#" class="nav-link">
                                  
                                     <p>Dashboard v3</p>
@@ -275,7 +310,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="~/dist/js/pages/dashboard2.js"></script>
+    <script src="dist/js/pages/dashboard2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
