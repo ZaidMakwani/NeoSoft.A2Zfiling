@@ -15,14 +15,13 @@ namespace NeoSoft.A2Zfiling.Application.Features.Pincodes.Commands.UpdatePinCode
     public class UpdatePinCodeCommandHandler : IRequestHandler<UpdatePinCodeCommand, Response<UpdatePinCodeDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
+
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<PinCode> _pincodeRepsitory;
 
-        public UpdatePinCodeCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<PinCode> pinRepsitory)
+        public UpdatePinCodeCommandHandler(IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<PinCode> pinRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
             _messageRepository = messageRepository;
             _pincodeRepsitory = pinRepsitory;
         }

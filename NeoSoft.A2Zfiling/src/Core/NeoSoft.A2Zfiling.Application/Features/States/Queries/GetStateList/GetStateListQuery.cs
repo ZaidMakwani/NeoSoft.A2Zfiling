@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesList;
 using NeoSoft.A2Zfiling.Application.Responses;
 using System;
 using System.Collections.Generic;

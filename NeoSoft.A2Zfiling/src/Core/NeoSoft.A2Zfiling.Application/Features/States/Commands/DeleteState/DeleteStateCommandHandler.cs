@@ -14,14 +14,13 @@ namespace NeoSoft.A2Zfiling.Application.Features.States.Commands.DeleteState
     public class DeleteStateCommandHandler : IRequestHandler<DeleteStateCommand, Response<DeleteStateDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
+
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<State> _stateRepsitory;
 
-        public DeleteStateCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<State> stateRepsitory)
+        public DeleteStateCommandHandler(IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<State> stateRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
             _messageRepository = messageRepository;
             _stateRepsitory = stateRepsitory;
         }

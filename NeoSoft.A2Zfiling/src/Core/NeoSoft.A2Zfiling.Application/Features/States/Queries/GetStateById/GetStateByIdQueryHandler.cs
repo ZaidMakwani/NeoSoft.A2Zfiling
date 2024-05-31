@@ -17,14 +17,12 @@ namespace NeoSoft.A2Zfiling.Application.Features.States.Queries.GetStateById
 {
     public class GetStateByIdQueryHandler : IRequestHandler<GetStateByIdQuery, Response<StateVM>>
     {
-        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
         private readonly IAsyncRepository<State> _stateRepsitory;
-        public GetStateByIdQueryHandler(IMapper mapper, ICategoryRepository categoryRepository, ILogger<GetStateListQueryHandler> logger, IAsyncRepository<State> stateRepsitory)
+        public GetStateByIdQueryHandler(IMapper mapper, ILogger<GetStateListQueryHandler> logger, IAsyncRepository<State> stateRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
             _logger = logger;
             _stateRepsitory = stateRepsitory;
         }

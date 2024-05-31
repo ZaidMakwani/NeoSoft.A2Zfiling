@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateCategory;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoriesList;
 //using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetStateList;
 using NeoSoft.A2Zfiling.Application.Features.Pincodes.Queries.GetPinCode;
 using NeoSoft.A2Zfiling.Application.Features.States.Commands.CreateState;

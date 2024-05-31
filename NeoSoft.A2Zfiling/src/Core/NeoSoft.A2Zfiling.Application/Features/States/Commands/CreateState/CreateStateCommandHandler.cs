@@ -14,14 +14,12 @@ using NeoSoft.A2Zfiling.Application.Features.States.Commands.CreateState;
 public class CreateStateCommandHandler : IRequestHandler<CreateStateCommand, Response<CreateStateDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<State> _stateRepsitory;
 
-        public CreateStateCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<State> stateRepsitory)
+        public CreateStateCommandHandler(IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<State> stateRepsitory)
         {
-            _mapper = mapper;
-            _categoryRepository = categoryRepository;
+        _mapper = mapper;
             _messageRepository = messageRepository;
         _stateRepsitory = stateRepsitory;
         }

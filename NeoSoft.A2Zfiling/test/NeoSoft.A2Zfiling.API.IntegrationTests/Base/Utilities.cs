@@ -13,27 +13,6 @@ namespace NeoSoft.A2Zfiling.API.IntegrationTests.Base
             var playGuid = Guid.Parse("{BF3F3002-7E53-441E-8B76-F6280BE284AA}");
             var conferenceGuid = Guid.Parse("{FE98F549-E790-4E9F-AA16-18C2292A2EE9}");
 
-            context.Categories.Add(new Category
-            {
-                CategoryId = concertGuid,
-                Name = "Concerts"
-            });
-            context.Categories.Add(new Category
-            {
-                CategoryId = musicalGuid,
-                Name = "Musicals"
-            });
-            context.Categories.Add(new Category
-            {
-                CategoryId = playGuid,
-                Name = "Plays"
-            });
-            context.Categories.Add(new Category
-            {
-                CategoryId = conferenceGuid,
-                Name = "Conferences"
-            });
-
             context.SaveChanges();
         }
     }

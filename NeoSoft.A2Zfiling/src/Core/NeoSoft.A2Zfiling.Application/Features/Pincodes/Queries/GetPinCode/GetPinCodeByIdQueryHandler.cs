@@ -17,14 +17,13 @@ namespace NeoSoft.A2Zfiling.Application.Features.Pincodes.Queries.GetPinCode
     
     public class GetPinCodeByIdQueryHandler : IRequestHandler<GetPinCodeByIdQuery, Response<PinCodeVM>>
     {
-        private readonly ICategoryRepository _categoryRepository;
+
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
         private readonly IAsyncRepository<PinCode> _pinCodeRepsitory;
-        public GetPinCodeByIdQueryHandler(IMapper mapper, ICategoryRepository categoryRepository, ILogger<GetPinCodeListQueryHandler> logger, IAsyncRepository<PinCode> pinCodeRepsitory)
+        public GetPinCodeByIdQueryHandler(IMapper mapper, ILogger<GetPinCodeListQueryHandler> logger, IAsyncRepository<PinCode> pinCodeRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
             _logger = logger;
             _pinCodeRepsitory = pinCodeRepsitory;
         }

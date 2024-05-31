@@ -1,6 +1,6 @@
 ﻿using NeoSoft.A2Zfiling.Application.Responses;
 using MediatR;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateDocument;
+//using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateDocument;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateState;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreatePinCodeCommand

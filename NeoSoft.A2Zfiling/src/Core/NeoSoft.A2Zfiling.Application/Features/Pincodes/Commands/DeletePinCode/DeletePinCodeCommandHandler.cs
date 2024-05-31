@@ -15,14 +15,12 @@ namespace NeoSoft.A2Zfiling.Application.Features.Pincodes.Commands.DeletePinCode
     public class DeletePinCodeCommandHandler : IRequestHandler<DeletePinCodeCommand, Response<DeletePinCodeDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<PinCode> _picodeRepsitory;
 
-        public DeletePinCodeCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<PinCode> stateRepsitory)
+        public DeletePinCodeCommandHandler(IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<PinCode> stateRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
             _messageRepository = messageRepository;
             _picodeRepsitory = stateRepsitory;
         }

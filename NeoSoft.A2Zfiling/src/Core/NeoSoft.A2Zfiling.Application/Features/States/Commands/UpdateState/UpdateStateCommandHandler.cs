@@ -14,14 +14,13 @@ namespace NeoSoft.A2Zfiling.Application.Features.States.Commands.UpdateState
     public class UpdateStateCommandHandler : IRequestHandler<UpdateStateCommand, Response<UpdateStateDto>>
     {
         private readonly IMapper _mapper;
-        private readonly ICategoryRepository _categoryRepository;
+
         private readonly IMessageRepository _messageRepository;
         private readonly IAsyncRepository<State> _stateRepsitory;
 
-        public UpdateStateCommandHandler(IMapper mapper, ICategoryRepository categoryRepository, IMessageRepository messageRepository, IAsyncRepository<State> stateRepsitory)
+        public UpdateStateCommandHandler(IMapper mapper,IMessageRepository messageRepository, IAsyncRepository<State> stateRepsitory)
         {
             _mapper = mapper;
-            _categoryRepository = categoryRepository;
             _messageRepository = messageRepository;
             _stateRepsitory = stateRepsitory;
         }
