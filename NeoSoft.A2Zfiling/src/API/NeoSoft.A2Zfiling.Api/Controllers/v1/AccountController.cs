@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreatePinCodeCommand;
 using NeoSoft.A2Zfiling.Application.Features.Login;
 using NeoSoft.A2Zfiling.Persistence;
+using LoginCommand = NeoSoft.A2Zfiling.Application.Features.Login.Command.LoginCommand;
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
@@ -18,7 +19,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
     {
 
         private readonly IMediator _mediator;
-        private readonly ILogger _logger;
+        
         private readonly ILogger<AccountController> _logger;
 
         
@@ -27,17 +28,17 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _mediator = mediator;
             _logger = logger;
         }
-        [HttpPost(Name = "RegisterAsync")]
+        [HttpPost]
         public async Task<ActionResult> RegisterAsync([FromBody] RegisterCommand registerCommand)
         {
             _logger.LogInformation("Register Member Initiated");
             var response = await _mediator.Send(registerCommand);
             _logger.LogInformation("Register Member Completed");
-            var response = await _mediator.Send(loginCommand);
+            
             return Ok(response);
 
         }
-        [HttpPost(Name = "Login")]
+        [HttpPost]
         public async Task<ActionResult> Login([FromBody] LoginCommand loginCommand)
         {
 

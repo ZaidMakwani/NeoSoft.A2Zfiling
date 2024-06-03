@@ -13,21 +13,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         Uri baseAddres = new Uri("https://localhost:5000/api");
         private readonly HttpClient _client;
         private readonly IDNTCaptchaValidatorService _captchaValidator;
-
-        public AccountController(IDNTCaptchaValidatorService captchaValidator)
-        {
-            _client = new HttpClient();
-            _client.BaseAddress = baseAddres;
-
-            _captchaValidator = captchaValidator;
-
-        }
-
-        public IActionResult Login()
         private readonly IRegisterService _registerService;
         private readonly ILoginService _loginService;
         private readonly ILogger<AccountController> _logger;
-        private readonly IDNTCaptchaValidatorService _captchaValidator;
+        
         public AccountController(IRegisterService registerService, ILogger<AccountController> logger,
             IDNTCaptchaValidatorService captchaValidator,ILoginService loginService)
         {

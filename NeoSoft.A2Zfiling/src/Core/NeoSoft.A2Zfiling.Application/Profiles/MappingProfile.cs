@@ -88,7 +88,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<Permission, UpdatePermissionCommand>().ReverseMap();
             CreateMap<Permission, UpdatePermissionDto>().ReverseMap();
             CreateMap<Permission, DeletePermissionDto>().ReverseMap();
-            {
+            
 
 
 
@@ -109,7 +109,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
 
                 CreateMap<AppUser, RegisterDTO>();
 
-        {          
+                  
 
             CreateMap<Document, CreateDocumentDto>().ReverseMap();
 
@@ -161,7 +161,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
                 CreateMap<UserPermission, DeleteUserPermissionDto>().ReverseMap();
                 CreateMap<UserPermission, UpdateUserPermissionCommand>().ReverseMap();
                 CreateMap<UserPermission, UpdateUserPermissionDto>().ReverseMap();
-            }
+            
         }
     }
 }
