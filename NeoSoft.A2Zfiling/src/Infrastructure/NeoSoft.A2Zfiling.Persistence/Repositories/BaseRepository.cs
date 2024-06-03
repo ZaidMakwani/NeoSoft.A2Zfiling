@@ -24,11 +24,13 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
+        
+
         public virtual async Task<T> GetByIdAsync(Guid id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-        
+
         public async Task<IReadOnlyList<T>> ListAllAsync()
         {
             _logger.LogInformation("ListAllAsync Initiated");

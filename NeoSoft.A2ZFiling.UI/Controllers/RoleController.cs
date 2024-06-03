@@ -1,19 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NeoSoft.A2Zfiling.Application.Responses;
-using NeoSoft.A2Zfiling.Domain.Entities;
 using NeoSoft.A2ZFiling.UI.Interfaces;
-using NeoSoft.A2ZFiling.UI.Services;
-using NeoSoft.A2ZFiling.UI.ViewModels;
 using NeosoftA2Zfilings.Views.ViewModels;
-using Newtonsoft.Json;
-using System.Security.Policy;
 
-namespace NeosoftA2Zfilings.Views.Controllers
+namespace NeoSoft.A2ZFiling.UI.Controllers
 {
     public class RoleController : Controller
     {
-        
-        Uri baseAddress =new Uri("https://localhost:5000/api");
+
+        Uri baseAddress = new Uri("https://localhost:5000/api");
         private readonly HttpClient _httpClient;
         private readonly ILogger<RoleController> _logger;
         private readonly IRoleService _roleService;
@@ -26,23 +20,23 @@ namespace NeosoftA2Zfilings.Views.Controllers
         }
         [HttpGet]
         public IActionResult Create()
-        {  
+        {
             return PartialView("_PartialLayoutCreate");
         }
         [HttpPost]
-        public async Task<IActionResult> Create(RoleVM role) 
+        public async Task<IActionResult> Create(RoleVM role)
         {
             _logger.LogInformation("Create Role action is initiated");
-            var isExist= _roleService.GetRolesAsync().Result.Where(x=>x.RoleName==role.RoleName);
-            
-            if(isExist.Any())
+            var isExist = _roleService.GetRolesAsync().Result.Where(x => x.RoleName == role.RoleName);
+
+            if (isExist.Any())
             {
                 return BadRequest("Role Already Exists!!!");
             }
             else
             {
                 var response = await _roleService.CreateRoleAsync(role);
-              
+
                 if (response != null)
                 {
                     return RedirectToAction("GetAllRoles");
@@ -53,7 +47,7 @@ namespace NeosoftA2Zfilings.Views.Controllers
                     return View(response);
                 }
             }
-            
+
         }
         public async Task<IActionResult> Edit(int id)
         {
@@ -71,26 +65,27 @@ namespace NeosoftA2Zfilings.Views.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(RoleVM role)
         {
-            var IsExist= await _roleService.GetRoleByIdAsync(role.RoleId);
-            if(IsExist.IsActive)
+            var IsExist = await _roleService.GetRoleByIdAsync(role.RoleId);
+            if (IsExist.IsActive)
             {
                 role.IsActive = true;
                 var result = await _roleService.UpdateRoleAsync(role);
                 return Ok(result);
             }
-            else 
+            else
             {
                 return BadRequest("Role is Inactive!!");
             }
-            
+
 
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllRoles() {
+        public async Task<IActionResult> GetAllRoles()
+        {
 
-            var response= await _roleService.GetRolesAsync();
-            
+            var response = await _roleService.GetRolesAsync();
+
             return Ok(response);
 
         }

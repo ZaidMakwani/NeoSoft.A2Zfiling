@@ -30,19 +30,11 @@ namespace NeoSoft.A2Zfiling.Application.Features.Roles.Commands.CreateRoles
         {
             Response<CreateRolesDto> createRolesCommandResponse = null;
 
-            var validator = new CreateRolesCommandValidator(_messageRepository);
-            var validationResult = await validator.ValidateAsync(request);
-
-            if (validationResult.Errors.Count > 0)
-            {
-                throw new ValidationException(validationResult);
-            }
-            else
-            {
+           
                 var roles = new Role() { RoleName = request.RoleName,IsActive=true,CreatedDate=DateTime.Now };
                 roles = await _aysncRepository.AddAsync(roles);
                 createRolesCommandResponse = new Response<CreateRolesDto>(_mapper.Map<CreateRolesDto>(roles), "success");
-            }
+            
 
             return createRolesCommandResponse;
         }

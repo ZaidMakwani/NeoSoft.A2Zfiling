@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.Extensions.Logging;
 using NeoSoft.A2Zfiling.Common.Helper.ApiHelper;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
-using NeosoftA2Zfilings.Views.ViewModels;
 
 namespace NeoSoft.A2ZFiling.UI.Services
 {

@@ -1,3 +1,4 @@
+//--
 using Serilog;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -19,18 +20,25 @@ using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver.Core.Configuration;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Persistence.Repositories;
+using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
+using NeoSoft.A2Zfiling.Persistence.Repositories;
 using NeoSoft.A2Zfiling.Auth.Models;
 using Microsoft.AspNetCore.Identity;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(ConnectionString));
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
+
 //SERILOG IMPLEMENTATION
 
+builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 IConfiguration configurationBuilder = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile(
@@ -72,7 +80,36 @@ services.AddCors(options =>
 });
 services.AddApplicationServices();
 
+
+// Adding Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+// Adding Jwt Bearer
+.AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ClockSkew = TimeSpan.Zero,
+
+        ValidAudience = Configuration["JWT:ValidAudience"],
+        ValidIssuer = Configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+    };
+});
 //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnectionString")));
+services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 services.AddInfrastructureServices(Configuration);
 
@@ -86,6 +123,7 @@ services.AddControllers();
 services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo(@"bin\debug\configuration"));
 services.AddHealthcheckExtensionService(Configuration);
+
 
 builder.Services.AddSwaggerGen();
 
@@ -141,7 +179,7 @@ IApiVersionDescriptionProvider provider = app.Services.GetRequiredService<IApiVe
 app.UseSwaggerUI(
 options =>
 {
-                // build a swagger endpoint for each discovered API version  
+// build a swagger endpoint for each discovered API version  
     foreach (var description in provider.ApiVersionDescriptions)
     {
         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
