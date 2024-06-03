@@ -15,7 +15,6 @@ namespace NeoSoft.A2Zfiling.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
-           
             services.AddTransient<IEmailService, EmailService>();
             services.Configure<CacheConfiguration>(configuration.GetSection("CacheConfiguration"));
             services.AddMemoryCache();

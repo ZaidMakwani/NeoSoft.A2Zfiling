@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Domain.Entities
 {
+
     public class Role:AuditableEntity
+
     {
         [Key]
         public int RoleId { get; set; }

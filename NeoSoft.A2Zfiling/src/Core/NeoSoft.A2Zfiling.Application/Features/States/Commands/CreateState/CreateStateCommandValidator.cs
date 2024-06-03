@@ -1,23 +1,17 @@
 ﻿using FluentValidation;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
-
 using NeoSoft.A2Zfiling.Application.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NeoSoft.A2Zfiling.Application.Features.Roles.Commands.CreateRoles
+namespace NeoSoft.A2Zfiling.Application.Features.States.Commands.CreateState
 {
-    public class CreateRolesCommandValidator : AbstractValidator<CreateRolesCommand>
+    public class CreateStateCommandValidator : AbstractValidator<CreateStateCommand>
     {
         private readonly IMessageRepository _messageRepository;
-        public CreateRolesCommandValidator(IMessageRepository messageRepository)
+        public CreateStateCommandValidator(IMessageRepository messageRepository)
         {
             _messageRepository = messageRepository;
 
-            RuleFor(p => p.RoleName)
+            RuleFor(p => p.StateName)
                 .NotEmpty().WithMessage(GetMessage("1", ApplicationConstants.LANG_ENG))
                 .NotNull()
                 .MaximumLength(10).WithMessage(GetMessage("2", ApplicationConstants.LANG_ENG));
