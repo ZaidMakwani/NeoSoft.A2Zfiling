@@ -32,7 +32,7 @@ namespace NeoSoft.A2Zfiling.Api.Middleware
                 _logger.LogError(ex, "", null);
                 await ConvertException(context, ex);
             }
-        }
+            }
 
         private Task ConvertException(HttpContext context, Exception exception)
         {

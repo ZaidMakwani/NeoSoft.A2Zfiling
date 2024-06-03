@@ -1,13 +1,29 @@
 ﻿using DNTCaptcha.Core;
 using Microsoft.AspNetCore.Mvc;
+using NeosoftA2Zfilings.Views.ViewModels;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using NeosoftA2Zfilings.Views.ViewModels;
 
-namespace NeosoftA2Zfilings.Views.Controllers
+namespace NeoSoft.A2ZFiling.UI.Controllers
 {
     public class AccountController : Controller
     {
+
+        Uri baseAddres = new Uri("https://localhost:5000/api");
+        private readonly HttpClient _client;
+        private readonly IDNTCaptchaValidatorService _captchaValidator;
+
+        public AccountController(IDNTCaptchaValidatorService captchaValidator)
+        {
+            _client = new HttpClient();
+            _client.BaseAddress = baseAddres;
+
+            _captchaValidator = captchaValidator;
+
+        }
+
+        public IActionResult Login()
         private readonly IRegisterService _registerService;
         private readonly ILoginService _loginService;
         private readonly ILogger<AccountController> _logger;
@@ -22,7 +38,7 @@ namespace NeosoftA2Zfilings.Views.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View();  
         }
 
         public IActionResult Login()
@@ -64,8 +80,8 @@ namespace NeosoftA2Zfilings.Views.Controllers
             //string data = JsonConvert.SerializeObject(model);
             //StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             _logger.LogInformation("Registration is initiated");
-           var response = await _registerService.RegisterAsync(model);
-            if (response!=null)
+            var response = await _registerService.RegisterAsync(model);
+            if (response != null)
             {
                 return RedirectToAction("Index");
             }
@@ -73,7 +89,7 @@ namespace NeosoftA2Zfilings.Views.Controllers
             {
                 return View(model);
             }
-            
+
         }
     }
 }

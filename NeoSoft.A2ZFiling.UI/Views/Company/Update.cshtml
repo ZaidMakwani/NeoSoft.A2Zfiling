@@ -1,0 +1,71 @@
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.CompanyVM;
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="py-3 py-md-5 py-xl-8">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-5">
+                    <h2 class="display-5 fw-bold text-center">Update Company</h2>
+
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <div class="row gy-5 justify-content-center">
+                    <div class="col-12 col-lg-5 card p-3">
+                        <form asp-action="Update" asp-controller="Company" method="post" class="form">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row gy-3 overflow-hidden">
+
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="CompanyId" type="hidden" class="form-control border-0 border-bottom rounded-0">
+                                        <label asp-for="CompanyId" class="form-label">Id</label>
+                                        <span asp-validation-for="CompanyId" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="CompanyName" type="text" class="form-control border-0 border-bottom rounded-0">
+                                        <label asp-for="CompanyName" class="form-label">Name</label>
+                                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="ShortName" type="text" class="form-control border-0 border-bottom rounded-0">
+                                        <label asp-for="ShortName" class="form-label">Short Name</label>
+                                        <span asp-validation-for="ShortName" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-switch">
+                                        <input asp-for="IsActive" class="form-check-input" type="checkbox" id="isActiveCheckbox">
+                                        <label asp-for="IsActive" class="form-check-label" for="isActiveCheckbox">IsActive</label>
+                                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button class="btn btn-lg btn-dark rounded-0 fs-6" type="submit">Update</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Common.Helper.ApiHelper
 {
-    public class ApiClient<T> : IApiClient<T> {
+    public class ApiClient<T>:IApiClient<T>
+    {
         private HttpClient _httpClient;
         private readonly IConfiguration _configuration;
 

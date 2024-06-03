@@ -13,9 +13,8 @@ namespace NeoSoft.A2Zfiling.Persistence
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("ApplicationConnectionString")));
-            //services.AddDbContext<IdentityDbContext>(options =>
-            //options.UseSqlServer(configuration.GetConnectionString("IdentityConnectionString")));
-            services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));            
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+        
             services.AddScoped<IMessageRepository, MessageRepository>();
 
             return services;
