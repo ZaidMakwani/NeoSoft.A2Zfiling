@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NeoSoft.A2Zfiling.Application.Features.Login.Command;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Commands.CreateMunicipal;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.GetMunicipalDetails;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.GetMunicipalList;
@@ -20,7 +21,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
         {
 
            CreateMap<AppUser, RegisterDTO>();
-
+            CreateMap<AppUser, LoginDto>();
           
             CreateMap<Role, CreateRolesDto>();
             CreateMap<Role,RolesDto>();

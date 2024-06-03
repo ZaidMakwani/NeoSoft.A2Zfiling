@@ -3,20 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using NeosoftA2Zfilings.Views.ViewModels;
-using Newtonsoft.Json;
 
 namespace NeosoftA2Zfilings.Views.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IRegisterService _registerService;
+        private readonly ILoginService _loginService;
         private readonly ILogger<AccountController> _logger;
         private readonly IDNTCaptchaValidatorService _captchaValidator;
-        public AccountController(IRegisterService registerService, ILogger<AccountController> logger, IDNTCaptchaValidatorService captchaValidator)
+        public AccountController(IRegisterService registerService, ILogger<AccountController> logger,
+            IDNTCaptchaValidatorService captchaValidator,ILoginService loginService)
         {
             _registerService = registerService;
             _logger = logger;
             _captchaValidator = captchaValidator;
+            _loginService = loginService;
         }
         public IActionResult Index()
         {
@@ -29,7 +31,7 @@ namespace NeosoftA2Zfilings.Views.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginVM model)
+        public async Task<IActionResult> Login(LoginVM model)
         {
             if (ModelState.IsValid)
             {
@@ -39,7 +41,11 @@ namespace NeosoftA2Zfilings.Views.Controllers
                     return View(model);
                 }
 
-                // Add your login logic here
+                _logger.LogInformation("Login is initiated");
+                model.Expiration=DateTime.Now;
+                model.RefreshToken = " ";
+                model.Token = " ";
+                var response= await _loginService.LoginAsync(model);
 
                 return RedirectToAction("Index", "Home");
             }

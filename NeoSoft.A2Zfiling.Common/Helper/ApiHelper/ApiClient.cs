@@ -44,7 +44,7 @@ namespace NeoSoft.A2Zfiling.Common.Helper.ApiHelper
             HttpResponseMessage responseMessage = await _httpClient.GetAsync(apiUrl);
             return await ValidateResponse(responseMessage);
         }
-
+         
 
         public async Task<Response<T>> PostAsync<TEntity>(string apiUrl, TEntity entity)
         {

@@ -13,6 +13,7 @@ builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IMunicipalService,MunicipalService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 
 
 builder.Services.AddDNTCaptcha(options =>
