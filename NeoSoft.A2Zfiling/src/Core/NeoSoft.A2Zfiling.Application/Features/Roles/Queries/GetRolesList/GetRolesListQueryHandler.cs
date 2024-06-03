@@ -27,7 +27,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRolesList
         public async Task<Response<IEnumerable<RolesListVM>>> Handle(GetRolesListQuery request, CancellationToken cancellationToken)
         {
             
-            var allRoles = (await _roleRepository.ListAllAsync());
+            var allRoles = (await _roleRepository.ListAllAsync()).Where(x=>x.IsActive==true);
             var roles = _mapper.Map<IEnumerable<RolesListVM>>(allRoles);
            
             return new Response<IEnumerable<RolesListVM>>(roles, "success");

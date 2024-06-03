@@ -13,9 +13,10 @@ using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneListWithEven
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
+    
     [Route("api/[controller]")]
-
     [ApiController]
+
     public class CityController : ControllerBase
     {
         private readonly IMediator _mediator;

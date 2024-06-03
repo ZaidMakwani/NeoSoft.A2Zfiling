@@ -19,16 +19,18 @@ namespace NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Queries.GetUs
         private readonly IAsyncRepository<UserPermission> _asyncRepository;
         private readonly IMapper _mapper;
         private readonly IAsyncRepository<Permission> _asyncRepositoryFactory;
+        private readonly IAsyncRepository<Role> _asyncRoles;
         
 
         public GetUserPermissionHandler(ILogger<GetUserPermissionHandler> logger,
             IAsyncRepository<UserPermission> asyncRepository, IMapper mapper, 
-            IAsyncRepository<Permission> asyncRepositoryFactory)
+            IAsyncRepository<Permission> asyncRepositoryFactory, IAsyncRepository<Role> asyncRoles)
         {
             _asyncRepository = asyncRepository;
             _mapper = mapper;
             _logger = logger;
             _asyncRepositoryFactory = asyncRepositoryFactory;
+            _asyncRoles = asyncRoles;
         }
         public async Task<Response<IEnumerable<GetUserPermissionDto>>> Handle(GetUserPermissionCommand request, CancellationToken cancellationToken)
         {
@@ -42,7 +44,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.UserPermissionsss.Queries.GetUs
                 {
                     UserPermissionId = x.UserPermissionId,
                     RoleId = x.RoleId,
-                    //RoleName = _asyncRepository.GetByIdAsync(x.RoleId)?.Result?.RoleName,
+                    RoleName = _asyncRoles.GetByIdAsync(x.RoleId)?.Result?.RoleName,
                     PermissionId = x.PermissionId,
                     ControllerName = _asyncRepositoryFactory.GetByIdAsync(x.PermissionId)?.Result?.ControllerName,
                     ActionName = _asyncRepositoryFactory.GetByIdAsync(x.PermissionId)?.Result?.ActionName,

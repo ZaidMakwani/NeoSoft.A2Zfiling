@@ -20,6 +20,7 @@ builder.Services.AddScoped<IRegisterService, RegisterService>();
 
 
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

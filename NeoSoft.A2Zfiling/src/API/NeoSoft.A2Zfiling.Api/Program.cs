@@ -162,6 +162,9 @@ app.UseCors("Open");
 //        appBuilder.UsePermissionMiddleware();
 //    });
 //}
+app.UseAuthentication();
+app.UseAuthorization();
+//app.UsePermissionMiddleware();
 app.MapControllers();
 
 //adding endpoint of health check for the health check ui in UI format
