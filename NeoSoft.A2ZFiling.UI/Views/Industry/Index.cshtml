@@ -270,6 +270,7 @@
                         $.post(url, sendData).done(function (data) {
 
                             card.find('.modal').modal('hide');
+                            location.reload();
 
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
@@ -357,6 +358,7 @@
                         updateData(); // Call function to update data
                         alert('Industry Updated successfully');
                         $('#updateModal').modal('hide');
+                        location.reload();
                     }
                     else {
                         alert("An error occurred while saving data. Please try again.");

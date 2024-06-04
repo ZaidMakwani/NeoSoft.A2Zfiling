@@ -53,12 +53,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
             {
                 //return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
                 var user = _userManager.CreateAsync(new AppUser() { FirstName = request.FirstName, LastName = request.LastName, Address = request.Address,
-                    Email = request.Email, PhoneNumber = request.ContactNumber, UserName = request.UserName }, request.Password).GetAwaiter().GetResult();
+                    Email = request.Email, PhoneNumber = request.ContactNumber, UserName = request.UserName,
+                    RefreshTokenExpiryTime = DateTime.Now
+                }, request.Password).GetAwaiter().GetResult();
                 if (user.Succeeded)
                 {
                     var Appuser = _appUserRepository.ListAllAsync().Result.FirstOrDefault(x => x.Email == request.Email);
                     AppUser user1 = new AppUser() {FirstName=request.FirstName,LastName=request.LastName,UserName=request.UserName,Address=request.Address,
-                    Email=request.Email,PhoneNumber=request.ContactNumber,};
+                    Email=request.Email,PhoneNumber=request.ContactNumber,RefreshTokenExpiryTime=DateTime.Now};
                     if (!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
                     {
                         _roleManager.CreateAsync(new IdentityRole(roleName)).GetAwaiter().GetResult();

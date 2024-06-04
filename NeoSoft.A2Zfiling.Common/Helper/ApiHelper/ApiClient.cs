@@ -54,26 +54,26 @@ namespace NeoSoft.A2Zfiling.Common.Helper.ApiHelper
             return await ValidateResponse(responseMessage);
         }
         // For Account
-        public async Task<T?> PostAuthAsync<TEntity>(string apiUrl, TEntity entity)
-        {
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(entity), System.Text.Encoding.UTF8, "application/json");
-            try
-            {
+        //public async Task<T?> PostAuthAsync<TEntity>(string apiUrl, TEntity entity)
+        //{
+        //    StringContent stringContent = new StringContent(JsonConvert.SerializeObject(entity), System.Text.Encoding.UTF8, "application/json");
+        //    try
+        //    {
 
-                HttpResponseMessage responseMessage = await _httpClient.PostAsync(apiUrl, stringContent);
-                if (responseMessage.IsSuccessStatusCode)
-                    return JsonConvert.DeserializeObject<T>(await responseMessage.Content.ReadAsStringAsync());
+        //        HttpResponseMessage responseMessage = await _httpClient.PostAsync(apiUrl, stringContent);
+        //        if (responseMessage.IsSuccessStatusCode)
+        //            return JsonConvert.DeserializeObject<T>(await responseMessage.Content.ReadAsStringAsync());
 
 
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine(ex.Message);
-                throw new AuthenticationException($"{ex.Message}");
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.Error.WriteLine(ex.Message);
+        //        throw new AuthenticationException($"{ex.Message}");
+        //    }
 
-            return default;
-        }
+        //    return default;
+        //}
 
         public async Task<Response<T>> PutAsync<TEntity>(string apiUrl, TEntity entity)
         {

@@ -35,7 +35,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEntity" data-save="modal">Save</button>
+                <button type="button" class="btn btn-primary" id="saveEntity" data-save="modal" onclick="reloadPage()">Save</button>
 
             </div>
         </div>
@@ -46,4 +46,9 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        function reloadPage() {
+            window.location.reload()
+        }
+    </script>
 }
