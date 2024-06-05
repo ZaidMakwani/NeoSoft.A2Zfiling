@@ -40,13 +40,13 @@
                         <span asp-validation-for="IsActive" class="text-danger" id="entityName"></span>
                     </div>   *@                 
 
-                   @*  <div class="col-12">
+                    <div class="col-12">
                         <div class="form-check form-switch">
                             <input asp-for="IsActive" class="form-check-input" type="checkbox" id="isActiveCheckbox">
                             <label asp-for="IsActive" class="form-check-label" for="isActiveCheckbox">IsActive</label>
                             <span asp-validation-for="IsActive" class="text-danger"></span>
                         </div>
-                    </div> *@
+                    </div>
 
                 </form>
 
@@ -66,4 +66,32 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        $(document).ready(function () {
+            $('#saveEntity').click(function (e) {
+                e.preventDefault();
+                var form = $('#createIndustryForm');
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            $('#createModal').modal('hide');
+                            location.reload();
+                        } else {
+                            // Handle validation errors and display them
+                            // This assumes that response contains the validation summary
+                            $('#createModal .modal-body').html(response);
+                        }
+                    },
+                    error: function (response) {
+                        // Handle errors (optional)
+                        console.log('Error:', response);
+                    }
+                });
+            });
+        });
+    </script>
 }

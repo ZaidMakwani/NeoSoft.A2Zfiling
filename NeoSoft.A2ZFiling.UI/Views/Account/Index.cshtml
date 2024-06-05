@@ -1,5 +1,200 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
+    ViewData["Title"] = "Index";
+    Layout = null;
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2Z-LandingPage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+            header .logo img {
+                height: 39px;
+                margin-right: 10px;
+            }
+
+            header nav ul {
+                list-style: none;
+                display: flex;
+            }
+
+                header nav ul li {
+                    margin-right: 20px;
+                }
+
+                    header nav ul li a {
+                        text-decoration: none;
+                        color: #333;
+                        font-weight: bold;
+                    }
+
+            header .auth-buttons .btn {
+                margin-left: 10px;
+                padding: 10px 20px;
+                border: none;
+                background: #f0c040;
+                color: #fff;
+                cursor: pointer;
+                font-weight: bold;
+                text-decoration: none; 
+                display: inline-block; 
+            }
+
+                header .auth-buttons .btn:hover {
+                    background: #e0b030;
+                }
+
+        .hero {
+            background: #00aaff;
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+            .hero h1 {
+                font-size: 3em;
+                margin-bottom: 20px;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+                margin-bottom: 30px;
+            }
+
+            .hero input {
+                padding: 10px;
+                width: 80%;
+                max-width: 500px;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .hero pre {
+                font-size: 1.2em; 
+                margin-bottom: 30px;
+                white-space: pre-wrap; 
+                padding: 10px;
+                font-weight: bold;
+                
+/                 background-color: rgba(255, 255, 255, 0.1); 
+             }
+
+        .services {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 50px 20px;
+            background: #f9f9f9;
+            gap: 20px; 
+        }
+
+        .service {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1 1 20%; 
+            min-width: 250px;
+            max-width: 300px; 
+        }
+
+            .service img {
+                height: 80px;
+                margin-bottom: 20px;
+            }
+
+            .service h2 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+
+            .service .btn {
+                padding: 10px 20px;
+                border: none;
+                background: #00aaff;
+                color: #fff;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+                .service .btn:hover {
+                    background: #0088cc;
+                }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="~/dist/img/Logo_landindimages2.png" alt="Aparajitha">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Business Setup</a></li>
+                <li><a href="#">IP Registrations</a></li>
+                <li><a href="#">Taxation</a></li>
+                <li><a href="#">Registrations</a></li>
+                <li><a href="#">Licenses</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a asp-controller="Account" asp-action="Login" class="btn">SBN</a>
+            <a asp-controller="Account" asp-action="Login" class="btn">Login</a>      
+            <a asp-controller="Account" asp-action="Login" class="btn">Partner With Us</a>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>A2Zfilings</h1>
+            <pre >An extremely delivery oriented engine that promises delivery by
+             the committed TAT for all your licenses making
+         compliance simple and affordable</pre>
+            <input type="text" placeholder="Search ">
+        </section>
+        <section class="services">
+            <div class="service">
+                <img src="~/dist/img/GST-registration-2.png" alt="GST Registration">
+                <h2>GST Registration</h2>
+                <button class="btn">Let's Proceed</button>
+            </div>
+            <div class="service">
+                <img src="~/dist/img/CompanyLandingimg2.jpg" alt="Company Registration">
+                <h2>Company Registration</h2>
+                <button class="btn">Let's Proceed</button>
+            </div>
+            <div class="service">
+                <img src="~/dist/img/FSSAI Registration2 land.png" alt="FSSAI Registration">
+                <h2>FSSAI Registration</h2>
+                <button class="btn">Let's Proceed</button>
+            </div>
+            <div class="service">
+                <img src="~/dist/img/Business Setup2 landing.png" alt="Business Setup">
+                <h2>Business Setup</h2>
+                <button class="btn">Let's Proceed</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

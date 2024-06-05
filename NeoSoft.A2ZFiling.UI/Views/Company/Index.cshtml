@@ -213,6 +213,7 @@
             // Perform delete operation here
             // For demonstration purpose, let's log a message
             console.log('Item deleted');
+            location.reload();
 
             // Close the modal
             closeModal();
@@ -249,6 +250,7 @@
                         $.post(url, sendData).done(function (data) {
 
                             card.find('.modal').modal('hide');
+                            location.reload();
 
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
@@ -331,8 +333,9 @@
                     // Check if the response indicates success
                     if (response) {
                         updateData(); // Call function to update data
-                        alert('Zone Updated successfully');
+                        alert('Company Updated successfully');
                         $('#updateModal').modal('hide');
+                        location.reload();
                     }
                     else {
                         alert("An error occurred while saving data. Please try again.");

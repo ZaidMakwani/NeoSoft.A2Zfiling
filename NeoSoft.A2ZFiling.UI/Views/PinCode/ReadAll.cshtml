@@ -77,16 +77,16 @@
                                                             }
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                            <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
                                                            
                                                                     data-url="@Url.Action("Update", "PinCode")" data-id="@item.PinCodeId">
                                                                 <i class="fas fa-edit"></i> 
-                                                            </button>
+                                                            </a>
 
 
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.PinCodeId">
+                                                            <a class="btn btn-danger btn-sm trigger-modal" data-id="@item.PinCodeId">
                                                                 <i class="fas fa-trash-alt"></i> 
-                                                            </button>
+                                                            </a>
 
                                                         </td>
                                                     </tr>
@@ -206,6 +206,7 @@
                     console.log('PinCode deleted successfully.');
                     alert('PinCode deleted successfully');
                     $('#myModal').modal('hide');
+                    location.reload();
 
                 },
                 error: function (xhr, status, error) {
@@ -330,6 +331,7 @@
                         var successfulhtml = '<div class="alert alert-success" role="alert">' + "PinCode Updated Successfully" + '</div>';
                         $('#updateModal .modal-body').prepend(successfulhtml);
                         // alert('PinCode Updated successfully');
+                        location.reload();
                         
                     } 
                     else {
