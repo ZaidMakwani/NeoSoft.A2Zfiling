@@ -17,7 +17,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
     {
 
         private readonly IMediator _mediator;
-        private readonly ILogger _logger;
+  
         private readonly ILogger<AccountController> _logger;
 
         
@@ -30,18 +30,20 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
         }
 
 
-    
 
-        
-        [HttpPost(Name = "Login")]
-        public async Task<ActionResult> Login([FromBody] LoginCommand loginCommand)
-        [HttpPost(Name ="RegisterAsync")]
-        public async Task<ActionResult> RegisterAsync([FromBody] RegisterCommand registerCommand)
+
+
+        [HttpPost]
+        public async Task<ActionResult> Login([FromBody] LoginCommand loginCommand) {
+            var response = await _mediator.Send(loginCommand);
+            return Ok(response);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Register([FromBody] RegisterCommand registerCommand)
         {
             _logger.LogInformation("Register Member Initiated");
             var response = await _mediator.Send(registerCommand);
             _logger.LogInformation("Register Member Completed");
-            var response = await _mediator.Send(loginCommand);
             return Ok(response);
           
         }

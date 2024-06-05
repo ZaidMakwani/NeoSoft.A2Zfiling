@@ -92,66 +92,67 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
 
 
 
-            CreateMap<Industry, CreateIndustryDto>().ReverseMap();
-            CreateMap<Industry, IndustryListVM>().ReverseMap();
-            CreateMap<Industry, IndustryListSingleVM>().ReverseMap();
-            CreateMap<Industry, UpdateIndustryDto>().ReverseMap();
-            CreateMap<Industry, UpdateIndustryCommand>().ReverseMap();
-            CreateMap<Industry, DeleteIndustryDto>().ReverseMap();
+                CreateMap<Industry, CreateIndustryDto>().ReverseMap();
+                CreateMap<Industry, IndustryListVM>().ReverseMap();
+                CreateMap<Industry, IndustryListSingleVM>().ReverseMap();
+                CreateMap<Industry, UpdateIndustryDto>().ReverseMap();
+                CreateMap<Industry, UpdateIndustryCommand>().ReverseMap();
+                CreateMap<Industry, DeleteIndustryDto>().ReverseMap();
 
-            CreateMap<Company, CreateCompanyDto>().ReverseMap();
-            CreateMap<Company, CompanyListVM>().ReverseMap();
-            CreateMap<Company, UpdateCompanyDto>().ReverseMap();
-            CreateMap<Company, UpdateCompanyCommand>().ReverseMap();
-            CreateMap<Company, DeleteCompanyDto>().ReverseMap();
-            
+                CreateMap<Company, CreateCompanyDto>().ReverseMap();
+                CreateMap<Company, CompanyListVM>().ReverseMap();
+                CreateMap<Company, UpdateCompanyDto>().ReverseMap();
+                CreateMap<Company, UpdateCompanyCommand>().ReverseMap();
+                CreateMap<Company, DeleteCompanyDto>().ReverseMap();
+
 
                 CreateMap<AppUser, RegisterDTO>();
 
-        {          
+                {
 
-            CreateMap<Document, CreateDocumentDto>().ReverseMap();
+                    CreateMap<Document, CreateDocumentDto>().ReverseMap();
 
-            CreateMap<State, CreateStateDto>().ReverseMap();
-            CreateMap<State, StateListVm>().ReverseMap();
-            CreateMap<State, DeleteStateDto>().ReverseMap();
+                    CreateMap<State, CreateStateDto>().ReverseMap();
+                    CreateMap<State, StateListVm>().ReverseMap();
+                    CreateMap<State, DeleteStateDto>().ReverseMap();
 
-            CreateMap<State, UpdateStateDto>().ReverseMap();
-            CreateMap<State, UpdateStateCommand>().ReverseMap();
-            CreateMap<State, StateVM>().ReverseMap();
-
-
-
-            CreateMap<PinCode, CreatePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, PinCodeListVm>().ReverseMap();
-            CreateMap<PinCode, DeletePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, UpdatePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, UpdatePinCodeCommand>().ReverseMap();
-            CreateMap<PinCode, PinCodeVM>().ReverseMap();
-            CreateMap<Login, LoginDto>().ReverseMap();
+                    CreateMap<State, UpdateStateDto>().ReverseMap();
+                    CreateMap<State, UpdateStateCommand>().ReverseMap();
+                    CreateMap<State, StateVM>().ReverseMap();
 
 
 
+                    CreateMap<PinCode, CreatePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, PinCodeListVm>().ReverseMap();
+                    CreateMap<PinCode, DeletePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, UpdatePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, UpdatePinCodeCommand>().ReverseMap();
+                    CreateMap<PinCode, PinCodeVM>().ReverseMap();
+                    CreateMap<Login, LoginDto>().ReverseMap();
 
-                CreateMap<Role, CreateRolesDto>();
-                CreateMap<Role, RolesDto>();
-                CreateMap<Role, RolesListVM>();
-                CreateMap<Role, UpdateRolesCommand>().ReverseMap();
-                CreateMap<Role, GetRoleDto>();
 
-                CreateMap<MunicipalCorp, CreateMunicipalDto>();
-                CreateMap<MunicipalCorp, MunicipalListVM>();
-                CreateMap<MunicipalCorp, UpdateMunicipalCommand>().ReverseMap();
-                CreateMap<MunicipalCorp, MunicipalDto>();
-                CreateMap<MunicipalCorp, GetMunicipalDto>();
 
-                CreateMap<UserPermission, CreateUserPermissionDto>().ReverseMap();
-                CreateMap<UserPermission, GetUserPermissionDto>().ReverseMap();
-                CreateMap<UserPermission, GetUserPermissionByIdDto>().ReverseMap();
-                CreateMap<UserPermission, GetUserPermissionCommand>().ReverseMap();
-                CreateMap<UserPermission, DeleteUserPermissionDto>().ReverseMap();
-                CreateMap<UserPermission, UpdateUserPermissionCommand>().ReverseMap();
-                CreateMap<UserPermission, UpdateUserPermissionDto>().ReverseMap();
+
+                    CreateMap<Role, CreateRolesDto>();
+                    CreateMap<Role, RolesDto>();
+                    CreateMap<Role, RolesListVM>();
+                    CreateMap<Role, UpdateRolesCommand>().ReverseMap();
+                    CreateMap<Role, GetRoleDto>();
+
+                    CreateMap<MunicipalCorp, CreateMunicipalDto>();
+                    CreateMap<MunicipalCorp, MunicipalListVM>();
+                    CreateMap<MunicipalCorp, UpdateMunicipalCommand>().ReverseMap();
+                    CreateMap<MunicipalCorp, MunicipalDto>();
+                    CreateMap<MunicipalCorp, GetMunicipalDto>();
+
+                    CreateMap<UserPermission, CreateUserPermissionDto>().ReverseMap();
+                    CreateMap<UserPermission, GetUserPermissionDto>().ReverseMap();
+                    CreateMap<UserPermission, GetUserPermissionByIdDto>().ReverseMap();
+                    CreateMap<UserPermission, GetUserPermissionCommand>().ReverseMap();
+                    CreateMap<UserPermission, DeleteUserPermissionDto>().ReverseMap();
+                    CreateMap<UserPermission, UpdateUserPermissionCommand>().ReverseMap();
+                    CreateMap<UserPermission, UpdateUserPermissionDto>().ReverseMap();
+                }
             }
         }
     }

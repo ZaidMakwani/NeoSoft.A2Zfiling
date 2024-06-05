@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.StateVM>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,10 +18,6 @@
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-
-
-
-
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -34,17 +31,13 @@
                                     <div class="card-header">
                                         <h3 class="card-title">States</h3>
                                         <div class="card-tools">
-                                           @*  <button type="button" class="btn btn-primary" id="createButton">
-                                                Create
-                                            </button> *@
-                                                
                                             <div id="placeholder"></div>
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
-                                            data-url="@Url.Action("Create","State")"><i class="fas fa-plus"></i>   
-                                        </button>
+                                                    data-url="@Url.Action("Create", "State")">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                    <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example2" class="table table-bordered table-hover">
                                             <thead>
@@ -76,38 +69,26 @@
                                                             }
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
-                                                           
-                                                                    data-url="@Url.Action("Update", "State")" data-id="@item.StateId">
-                                                                <i class="fas fa-edit"></i> 
-                                                            </button>
-
-
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.StateId">
-                                                                <i class="fas fa-trash-alt"></i> 
-                                                            </button>
-
+                                                            <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                               data-url="@Url.Action("Update", "State")" data-id="@item.StateId">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                            <a class="btn btn-danger btn-sm trigger-modal" data-id="@item.StateId">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 }
                                             </tbody>
                                         </table>
                                     </div>
-                                    <!-- /.card-body -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
         </section>
-
-
-
-      
 
         <!-- Delete Modal -->
         <div id="myModal" class="modal" tabindex="-1" role="dialog">
@@ -130,11 +111,6 @@
             </div>
         </div>
     </div>
-
- 
-    
-
-   
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -160,40 +136,26 @@
 
     <!-- Page specific script -->
     <script>
-        // $(document).ready(function () {
-            $("#example2").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "paging": true,
-                "pageLength": 4,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
-            }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+        $("#example2").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "paging": true,
+            "pageLength": 4,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
-       
-            //-----------------------------------------------------------------------------------------------------------------------
-
-//----------------------------------------------------------------------------------------------------------------
-
-
-
-        // // Function to show the delete modal
-
- 
         $(document).on('click', '.trigger-modal', function () {
             var StateId = $(this).data("id");
-            // Set data attribute of delete button inside modal for further reference
             $('.delete-confirm').data('id', StateId);
             $('#myModal').modal('show');
         });
 
-        // Event delegation for handling delete button click inside the modal
         $(document).on('click', '.delete-confirm', function () {
             var StateId = $(this).data("id");
             var deleteUrl = '@Url.Action("Delete", "State")' + '?id=' + StateId;
@@ -205,22 +167,14 @@
                     console.log('State deleted successfully.');
                     alert('State deleted successfully');
                     $('#myModal').modal('hide');
-
+                    location.reload(); // Add this line to refresh the page after deletion
                 },
                 error: function (xhr, status, error) {
                     console.error("Error deleting State: ", error);
                     alert("Error deleting State. Please try again.");
-
                 }
             });
         });
-
-  
-
-
-        //---------------------------------------------------------------------------------------------------------------------------
-
-        //function to handle create modal
 
         $(function () {
             var card = $('#placeholder');
@@ -232,10 +186,8 @@
                     card.html(data);
                     card.find('.modal').modal('show');
 
-                    // Unbind previously bound event handler
                     card.off('click', '[data-save="modal"]');
 
-                    // Event delegation for dynamically loaded content
                     card.on('click', '[data-save="modal"]', function (event) {
                         var form = $(this).parents('.modal').find('form');
                         var actionUrl = form.attr('action');
@@ -245,11 +197,10 @@
                         $.post(url, sendData).done(function (data) {
                             card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "State Created Successful." + '</div>');
                             card.find('.modal').modal('hide');
-       
+                            location.reload(); // Add this line to refresh the page after creation
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
                             console.log(errorMessage);
-                            // Update the modal content to display the error message
                             card.find('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
                         });
                     });
@@ -257,28 +208,15 @@
             });
         });
 
-
-
-       
-        //----------------------------------------------------------------------------------------------------
-        //function to handle editState in the modal
-
-
-     
-
         $(document).on('click', '.edit-button', function () {
-            
             var StateId = $(this).data("id");
             var editUrl = '@Url.Action("Update", "State")' + '?id=' + StateId;
 
-            // AJAX request to fetch data for editing
             $.ajax({
                 url: editUrl,
                 type: 'GET',
                 success: function (data) {
-                    // Load the partial view into the placeholder div
                     $('#placeholder').html(data);
-                    // Show the edit modal
                     $('#updateModal').modal('show');
                 },
                 error: function (xhr, status, error) {
@@ -288,22 +226,15 @@
             });
         });
 
-       
-        // Function to update data after saving
         function updateData() {
-            var StateId = $('#StateId').val(); // Assuming you have a hidden input field with the StateId
+            var StateId = $('#StateId').val();
             var editUrl = '@Url.Action("Update", "State")' + '?id=' + StateId;
 
-            // AJAX request to fetch updated data
             $.ajax({
                 url: editUrl,
                 type: 'GET',
                 success: function (data) {
-                    // Replace the content in the placeholder div with the updated data
                     $('#placeholder').html(data);
-                    // Close the modal or perform any other action as needed
-                    // alert('State Updated successfully');
-
                     $('#updateModal').modal('hide');
                 },
                 error: function (xhr, status, error) {
@@ -314,33 +245,27 @@
         }
 
         $(document).on('click', '#saveButton', function () {
-            
-            // Perform validation and submit data via AJAX
             $.ajax({
                 url: '@Url.Action("Update", "State")',
                 type: 'POST',
                 data: $('#updateStateForm').serialize(),
                 success: function (response) {
                     console.log(response);
-                    // Check if the response indicates success
                     if (response) {
-                        updateData(); // Call function to update data
+                        updateData();
                         $('#updateModal').modal('hide');
                         var successfulhtml = '<div class="alert alert-success" role="alert">' + "State Updated Successfully" + '</div>';
                         $('#updateModal .modal-body').prepend(successfulhtml);
-                        // alert('State Updated successfully');
-                        
-                    } 
-                    else {
+                        location.reload(); // Add this line to refresh the page after updating
+                    } else {
                         alert("An error occurred while saving data. Please try again.");
                     }
                 },
-                   error: function (xhr, status, error) {
-                    // Display more detailed error message from server response
+                error: function (xhr, status, error) {
                     var errorMessage = xhr.responseText;
                     if (errorMessage) {
                         var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
-                        $('#updateModal .modal-body').prepend(errorHtml); // Prepend error message to modal body
+                        $('#updateModal .modal-body').prepend(errorHtml);
                     } else {
                         alert("An error occurred while saving data. Please try again.");
                     }
@@ -348,23 +273,9 @@
             });
         });
 
-       
-
         $(document).on('click', '#closeButton, .close', function () {
-            // Close the modal
             $('#updateModal').modal('hide');
         });
-
-
-      
-
-
-
-
-       
-
-        // })
     </script>
-
 </body>
 </html>
