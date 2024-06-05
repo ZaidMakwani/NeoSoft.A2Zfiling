@@ -7,40 +7,42 @@
 		<UserSecretsId>b9b54472-3666-45f4-9350-02029cba4895</UserSecretsId>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" Version="6.0.1-rc2.4" />
-		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.1-rc2.7" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.1-rc2.4" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.1-rc2.4" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="6.0.1-rc2.4" />
-		<PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="6.0.1-rc2.2" />
-		<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.1" />
-		<PackageReference Include="MediatR" Version="9.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
-		<PackageReference Include="Serilog" Version="2.11.0-dev-01377" />
-		<PackageReference Include="Serilog.AspNetCore" Version="4.1.1-dev-00241" />
-		<PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
-		<PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
-		<PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" Version="6.0.1-rc2.4" />
+    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.1-rc2.7" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.1-rc2.4" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.1-rc2.4" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="6.0.1-rc2.4" />
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="6.0.1-rc2.2" />
+    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.1" />
+    <PackageReference Include="DNTCaptcha.Core" Version="5.2.4" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
+    <PackageReference Include="Serilog" Version="2.11.0-dev-01377" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.1-dev-00241" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" />
+  </ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="Extensions\" />

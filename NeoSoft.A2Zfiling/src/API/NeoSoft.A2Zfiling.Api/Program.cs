@@ -26,13 +26,15 @@ using NeoSoft.A2Zfiling.Auth.Models;
 using Microsoft.AspNetCore.Identity;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(ConnectionString));
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
-builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 
 //SERILOG IMPLEMENTATION
 
@@ -78,7 +80,37 @@ services.AddCors(options =>
 });
 services.AddApplicationServices();
 
-//services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnectionString")));
+
+// Adding Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+// Adding Jwt Bearer
+.AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ClockSkew = TimeSpan.Zero,
+
+        ValidAudience = Configuration["JWT:ValidAudience"],
+        ValidIssuer = Configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+    };
+});
+services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnectionString")));
+services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 services.AddInfrastructureServices(Configuration);
 

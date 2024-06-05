@@ -14,7 +14,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.States.Commands.CreateState
             RuleFor(p => p.StateName)
                 .NotEmpty().WithMessage(GetMessage("1", ApplicationConstants.LANG_ENG))
                 .NotNull()
-                .MaximumLength(150).WithMessage(GetMessage("2", ApplicationConstants.LANG_ENG));
+                .MaximumLength(20).WithMessage(GetMessage("2", ApplicationConstants.LANG_ENG));
         }
 
         private string GetMessage(string Code, string Lang)

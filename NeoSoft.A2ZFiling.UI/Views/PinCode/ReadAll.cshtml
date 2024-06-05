@@ -84,9 +84,9 @@
                                                             </a>
 
 
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.PinCodeId">
+                                                            <a class="btn btn-danger btn-sm trigger-modal" data-id="@item.PinCodeId">
                                                                 <i class="fas fa-trash-alt"></i> 
-                                                            </button>
+                                                            </a>
 
                                                         </td>
                                                     </tr>
@@ -207,6 +207,7 @@
                     alert('PinCode deleted successfully');
                     location.reload();
                     $('#myModal').modal('hide');
+                    location.reload();
 
                 },
                 error: function (xhr, status, error) {

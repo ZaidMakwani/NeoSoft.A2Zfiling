@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NeosoftA2Zfilings.Views.ViewModels;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
+using NeosoftA2Zfilings.Views.ViewModels;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
@@ -13,22 +14,16 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         private readonly HttpClient _client;
         private readonly IDNTCaptchaValidatorService _captchaValidator;
         private readonly IRegisterService _registerService;
+        private readonly ILoginService _loginService;
         private readonly ILogger<AccountController> _logger;
-
-        public AccountController(IDNTCaptchaValidatorService captchaValidator, IRegisterService registerService, ILogger<AccountController> logger)
+        
+        public AccountController(IRegisterService registerService, ILogger<AccountController> logger,
+            IDNTCaptchaValidatorService captchaValidator,ILoginService loginService)
         {
-            _client = new HttpClient();
-            _client.BaseAddress = baseAddres;
-
-            _captchaValidator = captchaValidator;
             _registerService = registerService;
             _logger = logger;
-
-        }
-
-        public IActionResult Index()
-        {
-            return View();  
+            _captchaValidator = captchaValidator;
+            _loginService = loginService;
         }
         [HttpGet]
         public IActionResult Login()
@@ -36,25 +31,34 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
-        public IActionResult Login(LoginVM model)
+        public async Task<IActionResult> Login(LoginVM model)
         {
             if (ModelState.IsValid)
             {
                 if (!_captchaValidator.HasRequestValidCaptchaEntry())
-                {  
+                {
                     TempData["captchaError"] = "Please enter valid security key";
                     return View(model);
                 }
 
-                // Add your login logic here
+                _logger.LogInformation("Login is initiated");
+                model.Expiration=DateTime.Now;
+                model.RefreshToken = " ";
+                model.Token = " ";
+                var response= await _loginService.LoginAsync(model);
 
                 return RedirectToAction("Index", "Home");
             }
 
             return View();
         }
+
         [HttpGet]
         public IActionResult Registration()
         {

@@ -1,3 +1,4 @@
+using DNTCaptcha.Core;
 using NeoSoft.A2Zfiling.Common.Helper.ApiHelper;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 
@@ -22,6 +23,7 @@ builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IMunicipalService,MunicipalService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 
 
 builder.Services.AddDNTCaptcha(option =>
@@ -45,6 +47,7 @@ builder.Services.AddDNTCaptcha(options =>
            });
 });
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -64,6 +67,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Index}/{id?}");
 
 app.Run();

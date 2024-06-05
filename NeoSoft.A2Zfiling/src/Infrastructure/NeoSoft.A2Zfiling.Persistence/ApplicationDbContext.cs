@@ -22,12 +22,8 @@ namespace NeoSoft.A2Zfiling.Persistence
         }
 
         public DbSet<Zones> Zones { get; set; }
-
         public DbSet<City> Cities { get; set; }
-      
-      
-        public DbSet<Role> Role { get; set; }       
-        public DbSet<Login> logins { get; set; }
+        public DbSet<Role> Role { get; set; }               
         public DbSet<PinCode> Pincodes { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Document> Documents { get; set; }
@@ -35,7 +31,6 @@ namespace NeoSoft.A2Zfiling.Persistence
         public DbSet<MunicipalCorp> MunicipalCorporations { get; set; }
         public DbSet<Industry> Industries { get; set; }
         public DbSet<Company> Companies { get; set; }
-
         public DbSet<Permission> Permission { get; set; }
 
         public DbSet<UserPermission> User { get; set; }
@@ -52,8 +47,6 @@ namespace NeoSoft.A2Zfiling.Persistence
             //var musicalguid = guid.parse("{6313179f-7837-473a-a4d5-a5571b43e6a6}");
             //var playguid = guid.parse("{bf3f3002-7e53-441e-8b76-f6280be284aa}");
             //var conferenceguid = guid.parse("{fe98f549-e790-4e9f-aa16-18c2292a2ee9}");
-
-
 
 
             modelBuilder.Entity<Message>()

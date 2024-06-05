@@ -24,7 +24,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-       
+        
 
         public virtual async Task<T> GetByIdAsync(Guid id)
         {
