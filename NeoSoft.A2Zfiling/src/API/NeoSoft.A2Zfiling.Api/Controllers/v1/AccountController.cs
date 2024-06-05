@@ -11,7 +11,7 @@ using LoginCommand = NeoSoft.A2Zfiling.Application.Features.Login.Command.LoginC
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
-    [Route("api/[controller]/[action]")]
+    
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
