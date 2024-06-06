@@ -41,7 +41,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
         }
 
-       
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -50,9 +50,9 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 var permissions = await _permissionService.GetPermissionAsync();
 
-                var role =await _roleService.GetRolesAsync();
+                var role = await _roleService.GetRolesAsync();
                 var mappedPermissions = permissions
-                    .GroupBy(p => p.ControllerName) 
+                    .GroupBy(p => p.ControllerName)
                     .Select(group => new UserPermissionVM
                     {
                         ControllerName = group.Key,
@@ -60,11 +60,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                         {
                             PermissionId = p.PermissionId,
                             ActionName = p.ActionName,
-                            ControllerName=p.ControllerName,
+                            ControllerName = p.ControllerName,
                             IsActive = p.IsActive,
                         }).ToList(),
-                        RoleId = role.FirstOrDefault().RoleId, 
-                        RoleName = role.FirstOrDefault()?.RoleName 
+                        RoleId = role.FirstOrDefault().RoleId,
+                        RoleName = role.FirstOrDefault()?.RoleName
                     }).ToList();
                 return View(mappedPermissions);
             }
@@ -76,9 +76,9 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
 
 
-             [HttpPost]
-            public async Task<IActionResult> Create(UserPermissionVM model)
-            {
+        [HttpPost]
+        public async Task<IActionResult> Create(UserPermissionVM model)
+        {
             try
             {
                 _logger.LogInformation("Create  User Permission Action Initiated");
@@ -104,18 +104,18 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                         return BadRequest("Failed to create user permission");
                     }
                 }
-              
-                        _logger.LogInformation("Create User Permission Action Completed");
-                        return RedirectToAction("GetAll", "UserPermission");
-                    
-                
+
+                _logger.LogInformation("Create User Permission Action Completed");
+                return RedirectToAction("GetAll", "UserPermission");
+
+
             }
             catch (Exception ex)
             {
                 _logger.LogError("An error occurred while creating user permission");
                 return StatusCode(500, $"Error: {ex.Message}");
             }
-            }
+        }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
@@ -135,11 +135,49 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(int roleId)
         {
-            return View();
+            try
+            {
+                _logger.LogInformation("Edit User Permission Action Initiated");
+                // Fetch user permissions based on roleId
+                var allUserPermission = await _userPermission.GetUserPermissionAsync();
+                var userPermission = allUserPermission.Where(x => x.RoleId == roleId).ToList();
+
+                // Fetch all permissions
+                var allPermission = await _permissionService.GetPermissionAsync();
+
+                // Fetch role information
+                var role = await _roleService.GetRoleByIdAsync(roleId);
+
+                // Map permissions to view model
+                var mappedPermissions = allPermission
+                        .GroupBy(p => p.ControllerName)
+                        .Select(group => new UserPermissionVM
+                        {
+                            ControllerName = group.Key,
+                            Actions = group.Select(p => new PermissionVM
+                            {
+                                PermissionId = p.PermissionId,
+                                ActionName = p.ActionName,
+                                ControllerName = p.ControllerName,
+                                IsActive = userPermission.Any(x => x.PermissionId == p.PermissionId),
+                            }).ToList(),
+                            RoleId = role.RoleId, 
+                            RoleName = role?.RoleName
+                        }).ToList();
+
+                _logger.LogInformation("Edit User Permission Action Completed");
+                return View(mappedPermissions);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while editing user permission.");
+                return StatusCode(500, "An error occurred while editing user permission.");
+            }
         }
 
-        }
     }
+}
+
 

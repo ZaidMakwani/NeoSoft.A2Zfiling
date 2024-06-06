@@ -45,7 +45,7 @@
                                             </button> *@
 
                                             <a href="@Url.Action("Create", "UserPermission")" class="btn btn-primary">
-                                                <i class="fas fa-plus"></i> Create
+                                                <i class="fas fa-plus"></i> @* Create *@
                                             </a>
 
                                         </div>
@@ -99,10 +99,18 @@
                                                             }
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
-                                                                    data-url="@Url.Action("EditZone", "Zone")" data-id="@item.UserPermissionId">
-                                                                <i class="fas fa-edit"></i> @* Edit *@
-                                                            </button>
+                                                           @*  <button class="btn btn-primary btn-sm edit-button" 
+                                                                    data-url="@Url.Action("Edit", "UserPermission")" data-id="@item.RoleId">
+                                                                <i class="fas fa-edit"></i>  Edit  
+                                                            </button> *@
+
+@*                                                             <a href="@Url.Action("Edit", "UserPermission", new { roleId = item.RoleId })" class="btn btn-primary btn-sm">
+                                                                <i class="fas fa-edit"></i> Edit
+                                                            </a> *@
+
+
+                                                            
+
 
 
                                                             <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.UserPermissionId" data-url="@Url.Action("Delete", "UserPermission")">

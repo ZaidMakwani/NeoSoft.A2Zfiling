@@ -11,7 +11,7 @@ using LoginCommand = NeoSoft.A2Zfiling.Application.Features.Login.Command.LoginC
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
-    [Route("api/[controller]/[action]")]
+    //[Route("api/[controller]/[action]")]
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
@@ -29,13 +29,20 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _logger = logger;
         }
         [HttpPost]
-        public async Task<ActionResult> RegisterAsync([FromBody] RegisterCommand registerCommand)
+        public async Task<ActionResult> Register([FromBody] RegisterCommand registerCommand)
         {
-            _logger.LogInformation("Register Member Initiated");
-            var response = await _mediator.Send(registerCommand);
-            _logger.LogInformation("Register Member Completed");
-            
-            return Ok(response);
+            try
+            {
+                _logger.LogInformation("Register Member Initiated");
+                var response = await _mediator.Send(registerCommand);
+                _logger.LogInformation("Register Member Completed");
+
+                return Ok(response);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
 
         }
         [HttpPost]
@@ -44,6 +51,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 
             _logger.LogInformation("Login Initiated");
             var response = await _mediator.Send(loginCommand);
+
             _logger.LogInformation("Login Completed");
             return Ok(response);
         }

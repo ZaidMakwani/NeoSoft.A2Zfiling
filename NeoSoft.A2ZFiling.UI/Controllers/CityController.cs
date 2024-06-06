@@ -1,20 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
+using NeoSoft.A2Zfiling.Domain.Entities;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
-
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class CityController : Controller
     {
         private readonly ILogger<CityController> _logger;
         private readonly ICityService _cityService;
+        private readonly IAsyncRepository<Permission> _permissionRepository;
+        private readonly IAsyncRepository<UserPermission> _userPermissionRepository;
+
+
 
         public CityController(ILogger<CityController> logger, ICityService cityService)
         {
             _logger = logger;
              _cityService = cityService;
         }
+        
         [HttpGet]
         public async Task<IActionResult> GetAllCity()
         {

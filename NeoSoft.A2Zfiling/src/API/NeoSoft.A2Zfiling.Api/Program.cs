@@ -20,8 +20,6 @@ using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver.Core.Configuration;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Persistence.Repositories;
-using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
-using NeoSoft.A2Zfiling.Persistence.Repositories;
 using NeoSoft.A2Zfiling.Auth.Models;
 using Microsoft.AspNetCore.Identity;
 using NeoSoft.A2Zfiling.Domain.Entities;
@@ -34,11 +32,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(ConnectionString));
 builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+//builder.Services.AddScoped(typeof(IAsyncRepository<Token>), typeof(BaseRepository<Token>));
+//builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 
 //SERILOG IMPLEMENTATION
 
-builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
+//builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
 IConfiguration configurationBuilder = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile(
@@ -57,6 +57,7 @@ new LoggerConfiguration()
 builder.Host.UseSerilog((ctx, lc) => lc
         .WriteTo.Console()
         .ReadFrom.Configuration(ctx.Configuration));
+
 
 
 // Add services to the container.
@@ -107,13 +108,14 @@ builder.Services.AddAuthentication(options =>
     };
 });
 //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnectionString")));
-services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+//services.AddIdentity<ApplicationUser, IdentityRole>()
+//    .AddEntityFrameworkStores<ApplicationDbContext>()
+//    .AddDefaultTokenProviders();
 
 services.AddInfrastructureServices(Configuration);
 
-services.AddAuthServices(Configuration);
+//services.AddAuthServices(Configuration);
+
 services.AddPersistenceServices(Configuration);
 services.AddSwaggerExtension();
 services.AddSwaggerVersionedApiExplorer();
@@ -123,6 +125,7 @@ services.AddControllers();
 services.AddDataProtection()
     .PersistKeysToFileSystem(new DirectoryInfo(@"bin\debug\configuration"));
 services.AddHealthcheckExtensionService(Configuration);
+
 
 
 builder.Services.AddSwaggerGen();
@@ -143,6 +146,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 var app = builder.Build();
 
 
@@ -165,7 +169,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
 app.UseHttpsRedirection();
 
 //app.UseAuthentication();
@@ -190,7 +193,7 @@ app.UseCustomExceptionHandler();
 
 app.UseCors("Open");
 
-//app.UseAuthorization();
+app.UseAuthorization();
 //if (app.Environment.EnvironmentName != "Test")
 //{
 //    app.UseWhen(context => context.Request.Path.StartsWithSegments("/api"), appBuilder =>
@@ -198,9 +201,11 @@ app.UseCors("Open");
 //        appBuilder.UsePermissionMiddleware();
 //    });
 //}
-app.UseAuthentication();
-app.UseAuthorization();
+
 //app.UsePermissionMiddleware();
+
+
+
 app.MapControllers();
 
 //adding endpoint of health check for the health check ui in UI format

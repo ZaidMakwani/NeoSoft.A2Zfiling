@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Application.Features.Register.Command;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -27,13 +29,23 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
+        private readonly IAsyncRepository<Token> _tokenRepository;
+        private readonly IRoleRepository _roleAsyncRepository;
+        private readonly IAsyncRepository<UserPermission> _userPermissionRepository;
+        private readonly IAsyncRepository<Permission> _permissionRepository;
 
-        public LoginCommandHandler(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration,IMapper mapper)
+
+        public LoginCommandHandler(IAsyncRepository<Permission> permissionRepository,IAsyncRepository<UserPermission> userPermissionRepository,IRoleRepository roleAsyncRepository, IAsyncRepository<Role> roleRepository, IAsyncRepository<Token> tokenRepository , UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration,IMapper mapper)
         {
             _userManager=userManager;
             _roleManager=roleManager;
             _configuration=configuration;
             _mapper=mapper;
+            _tokenRepository = tokenRepository;
+            _roleRepository=roleRepository;
+            _roleAsyncRepository = roleAsyncRepository;
+            _userPermissionRepository = userPermissionRepository;
+            _permissionRepository=permissionRepository;
         }
 
         public async Task<Response<LoginDto>> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -44,20 +56,74 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
+                var roleString = userRoles.FirstOrDefault();
+
+                var roleCurrent = _roleAsyncRepository.GetRoleIdAsync(roleString);
+
+
+
+                var userPermissions = await _userPermissionRepository.ListAllAsync();
+                var rolePermissions = userPermissions.Where(x => x.RoleId.ToString() == roleCurrent.Result.RoleId.ToString()).Select(x => x.PermissionId);
+                var permissions =( await _permissionRepository.ListAllAsync()).Where(p => rolePermissions.Contains(p.PermissionId));
+                var permissionEntityList = permissions.Select(p => (p.ControllerName, p.ActionName)).ToList();
+
+
+                string permissionsJson = JsonConvert.SerializeObject(permissions);
+                //var permissions = await _permissionRepository.ListAllAsync();
+                //var filteredPermissions = permissions.Where(x => rolePermissions.Contains(x.PermissionId) && x.ControllerName == controller && x.ActionName == yourAction);
+
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim("roleid",roleCurrent.Result.RoleId.ToString()),
+                    new Claim("permissions",permissionsJson)
                 };
-
+                   
                 foreach (var userRole in userRoles)
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
+                //foreach (var (controllerName, actionName) in permissionEntityList)
+                //{
+                //    token.Payload[controllerName] = actionName;
+                //    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                //}
+
                 var token = CreateToken(authClaims);
                 var refreshToken = GenerateRefreshToken();
                 _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
+
+                //user.Token = token.ToString();
+                var tokenEntity = new Token
+                {
+                    TokenId = token.Id,
+                    TokenName = token.ToString(),
+                };
+
+                var tokenList = await _tokenRepository.ListAllAsync();
+
+                if (tokenList == null || !tokenList.Any())
+                {
+                    // If the token list is null or empty, you might want to add the token instead of updating
+                    await _tokenRepository.AddAsync(tokenEntity);
+                }
+                else
+                {
+                    // Assume you want to update the first token in the list
+                    var tokenToUpdate = tokenList.FirstOrDefault();
+
+                    if (tokenToUpdate != null)
+                    {
+                        // Update the token
+                       // tokenToUpdate.PropertyToUpdate = newValue;
+                        await _tokenRepository.UpdateAsync(tokenToUpdate);
+                    }
+                }
+
+
+
 
                 user.RefreshToken = refreshToken;
                 user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
@@ -67,6 +133,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
                 //var token = GetToken(authClaims);
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
                 var expirationString = token.ValidTo;
+
                 var loginDto = _mapper.Map<LoginDto>(user);
                 loginDto.Token = tokenString;
                 loginDto.Expiration = expirationString;
@@ -76,7 +143,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
                 return loginCommandResponse;
             }
             return new Response<LoginDto>( "Invalid Credentials!!!");
-
+            
         }
         private JwtSecurityToken CreateToken(List<Claim> authClaims)
         {
@@ -90,9 +157,10 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
-
             return token;
         }
+
+
         private static string GenerateRefreshToken()
         {
             var randomNumber = new byte[64];

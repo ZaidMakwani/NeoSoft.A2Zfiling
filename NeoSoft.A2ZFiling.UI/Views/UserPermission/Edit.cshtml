@@ -2,32 +2,30 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
+    var selectedRoleId = Model.First().RoleId;
+    }
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h2>Create User Permission</h2>
+            <h2>Edit User Permission</h2>
 
-            <form id="createUserPermissionForm" asp-action="Edit" asp-controller="UserPermission" method="post">
+            <form id="editUserPermissionForm" asp-action="Edit" asp-controller="UserPermission" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
                     <label>Role:</label>
                     <select id="rolesDropdown" name="RoleId" class="form-control">
-
-                        <option value="">--- Select Role ---</option>
+                       @*  <option value="">--- Select Role ---</option> *@
                         @foreach (var permission in Model)
                         {
-                            <option value="@permission.RoleId">@permission.RoleName</option>
+                            <option value="@permission.RoleId" selected="@(permission.RoleId ==selectedRoleId)">
+                                @permission.RoleName
+                            </option>
                         }
                     </select>
-                    @Html.ValidationMessageFor(m => m.FirstOrDefault().RoleId, "", new { @class = "text-danger" })
+
+                    @Html.ValidationMessageFor(m => m.First().RoleId, "", new { @class = "text-danger" })
                 </div>
-
-
-
-
 
                 <div class="form-group">
                     @foreach (var permission in Model)
@@ -44,7 +42,7 @@
                                             <input class="form-check-input" type="checkbox"
                                                    id="@action.PermissionId" name="SelectedPermissions"
                                                    value="@action.PermissionId"
-                                            @(Model.First().SelectedPermissions != null && Model.First().SelectedPermissions.Contains(action.PermissionId) ? "checked" : "") />
+                                                   checked="@(action.IsActive)" />
                                             <label class="form-check-label" for="@action.PermissionId" style="margin-right: 10px;">
                                                 @action.ActionName
                                             </label>
@@ -54,37 +52,28 @@
                             </div>
                         </div>
                     }
-                    @Html.ValidationMessageFor(m => m.FirstOrDefault().SelectedPermissions, "", new { @class = "text-danger" })
-
+                    @Html.ValidationMessageFor(m => m.First().SelectedPermissions, "", new { @class = "text-danger" })
                 </div>
-
-
-
-
-
-
-
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="submit" class="btn btn-secondary">Cancel</button>
+                    <a href="@Url.Action("GetAll", "UserPermission")" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
             populateRolesDropdown();
+        });
 
-        }
-        )
         // Function to fetch roles and populate dropdown
         function populateRolesDropdown() {
+            
             $.ajax({
                 url: '@Url.Action("GetAllRoles", "Role")',
                 type: 'GET',
