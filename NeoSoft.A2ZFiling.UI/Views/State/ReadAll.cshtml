@@ -205,6 +205,7 @@
                     console.log('State deleted successfully.');
                     alert('State deleted successfully');
                     $('#myModal').modal('hide');
+                    location.reload();
 
                 },
                 error: function (xhr, status, error) {
@@ -280,6 +281,7 @@
                     $('#placeholder').html(data);
                     // Show the edit modal
                     $('#updateModal').modal('show');
+                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error("Error fetching State data: ", error);
@@ -329,6 +331,7 @@
                         var successfulhtml = '<div class="alert alert-success" role="alert">' + "State Updated Successfully" + '</div>';
                         $('#updateModal .modal-body').prepend(successfulhtml);
                         // alert('State Updated successfully');
+                        location.reload();
                         
                     } 
                     else {
