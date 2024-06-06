@@ -107,7 +107,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<Company, DeleteCompanyDto>().ReverseMap();
             
 
-                CreateMap<AppUser, RegisterDTO>();
+                CreateMap<AppUser, RegisterDTO>().ReverseMap();
 
                   
 

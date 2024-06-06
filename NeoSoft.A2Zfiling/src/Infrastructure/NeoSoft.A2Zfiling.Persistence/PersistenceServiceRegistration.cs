@@ -4,6 +4,8 @@ using NeoSoft.A2Zfiling.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NeoSoft.A2Zfiling.Application.Contracts.Infrastructure;
+using NeoSoft.A2Zfiling.Infrastructure.Cache;
 
 namespace NeoSoft.A2Zfiling.Persistence
 {
@@ -14,8 +16,10 @@ namespace NeoSoft.A2Zfiling.Persistence
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("ApplicationConnectionString")));
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
-        
+            services.AddScoped<ICacheService, MemoryCacheService>(); 
+
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             return services;
         }

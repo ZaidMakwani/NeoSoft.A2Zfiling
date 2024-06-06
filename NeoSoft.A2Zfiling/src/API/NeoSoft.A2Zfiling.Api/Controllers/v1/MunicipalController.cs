@@ -8,6 +8,7 @@ using NeoSoft.A2Zfiling.Application.Features.Roles.Commands.UpdateMunicipal;
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
+
     [ApiController]
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]

@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NeoSoft.A2Zfiling\src\Core\NeoSoft.A2Zfiling.Application\NeoSoft.A2Zfiling.Application.csproj" />
+    <ProjectReference Include="..\NeoSoft.A2Zfiling\src\Infrastructure\NeoSoft.A2Zfiling.Persistence\NeoSoft.A2Zfiling.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

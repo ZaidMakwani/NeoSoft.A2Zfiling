@@ -15,5 +15,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
         public string? Token { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? Expiration {  get; set; }
+
     }
 }

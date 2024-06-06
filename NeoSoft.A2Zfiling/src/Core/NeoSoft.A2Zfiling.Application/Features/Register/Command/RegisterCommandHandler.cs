@@ -24,7 +24,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
         private readonly UserManager<AppUser> _userManager;
         private readonly IAsyncRepository<Role> _roleRepository;
         private readonly RoleManager<IdentityRole> _roleManager;
-       
+
 
         public RegisterCommandHandler(RoleManager<IdentityRole> roleManager, IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<AppUser> appUserRepository, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IAsyncRepository<Role> roleRepository)
         {
@@ -35,8 +35,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
             this._userManager = userManager;
             _signInManager = signInManager;
             _roleRepository = roleRepository;
-            _roleManager= roleManager;
-           
+            _roleManager = roleManager;
+
         }
 
         public async Task<Response<RegisterDTO>> Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -80,7 +80,9 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
                 }
             }
 
-            return registerMemberCommandResponse;
+                return registerMemberCommandResponse;
+            
+           
         }
     }
 }
