@@ -20,7 +20,7 @@ namespace NeoSoft.A2Zfiling.Persistence
            : base(options)
         {
         }
-
+        public DbSet<Token> Tokens { get; set; }
         public DbSet<Zones> Zones { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Role> Role { get; set; }               

@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Cache\" />
     <Folder Include="FileExport\" />
   </ItemGroup>
 

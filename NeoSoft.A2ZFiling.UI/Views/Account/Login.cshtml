@@ -95,7 +95,7 @@
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form asp-action="Login" asp-controller="Account" method="post" class="form">
+                <form asp-action="Login" asp-controller="Account" method="post" class="form" id="loginForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="input-group mb-3">
@@ -170,6 +170,43 @@
     <script src="~/dist/js/adminlte.min.js"></script>
 </body>
 </html>
+
+
+
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#loginForm").submit(function (event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            var formData = $(this).serialize(); // Serialize the form data
+
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: formData,
+                success: function (response) {
+                    if (response.token) {
+                        // Store the token in local storage
+                        localStorage.setItem('authToken', response.token);
+
+                        // Redirect to home page or any other page
+                        window.location.href = "/Home/Index";
+                    } else {
+                        // Handle error if token is not present in the response
+                        alert("Login failed. Please try again.");
+                    }
+                },
+                error: function () {
+                    // Handle error
+                    alert("An error occurred. Please try again.");
+                }
+            });
+        });
+    });
+</script>
+ *@
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

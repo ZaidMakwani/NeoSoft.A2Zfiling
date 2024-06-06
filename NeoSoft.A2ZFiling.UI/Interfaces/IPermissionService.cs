@@ -1,4 +1,5 @@
 ﻿using NeoSoft.A2ZFiling.UI.ViewModels;
+using System.Security.Claims;
 
 namespace NeoSoft.A2ZFiling.UI.Interfaces
 {
@@ -12,5 +13,10 @@ namespace NeoSoft.A2ZFiling.UI.Interfaces
         Task<PermissionVM> UpdatePermissionAsync(PermissionVM role);
 
         Task<PermissionVM> DeletePermissionAsync(int id);
+
+       
     }
-}
+
+   
+    }
+
