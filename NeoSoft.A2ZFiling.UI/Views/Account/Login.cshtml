@@ -1,104 +1,214 @@
-﻿@model NeosoftA2Zfilings.Views.ViewModels.LoginVM;
+﻿   @model NeosoftA2Zfilings.Views.ViewModels.LoginVM
 
 @{
     ViewData["Title"] = "Login";
-    Layout = "_LayoutLogin";
+    Layout = null;
 }
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A2ZFiling | Login</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
     <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/registrations/registration-12/assets/css/registration-12.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .btn-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+            .btn-custom:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+                color: #fff;
+            }
+
+            .btn-custom:focus,
+            .btn-custom:active {
+                background-color: #004085;
+                border-color: #004085;
+                box-shadow: none;
+                color: #fff;
+            }
+
+        .login-box {
+            width: 360px;
+            margin: 7% auto;
+        }
+
+        .icheck-primary input[type="checkbox"] {
+            transform: scale(0.8);
+            / Scale down the checkbox / margin-right: 5px;
+            / Add some space between the checkbox and the label / width: 10px;
+            height: 10px;
+        }
+
+        .icheck-primary label {
+            font-size: 18px;
+            / Adjust the label size if necessary /
+        }
+    </style>
 </head>
-
-
-<!-- Registration 12 - Bootstrap Brain Component -->
-<body>
-   
-   
-
-<section class="py-3 py-md-5 py-xl-8">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="mb-5">
-                    <h2 class="display-5 fw-bold text-center">Login</h2>
-                   
-                </div>
-            </div>
+<body class="hold-transition">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><b>A2ZFiling</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                @*  <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+                </li> *@
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="Registration" asp-controller="Account">Register</a>
+                </li>
+            </ul>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10 col-xl-8">
-                <div class="row gy-5 justify-content-center">
-                    <div class="col-12 col-lg-5 card p-3">
-                            <form asp-action="Index" asp-controller="Home" method="post" class="form">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="row gy-3 overflow-hidden">
-                                <div class="col-12">
-                                    <div class="form-floating mb-3">
-                                        <input asp-for="Username" type="text" class="form-control border-0 border-bottom rounded-0">
-                                        <label asp-for="Username" class="form-label">Username</label>
-                                        <span asp-validation-for="Username" class="text-danger"></span>
+    </nav>
+    <!-- /.navbar -->
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a href="~index2.html" class="h1"><b>Login</b></a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
 
-                                    </div>
-                                </div>
-                             
-                                <div class="col-12">
-                                    <div class="form-floating mb-3">
-                                        <input asp-for="Password" type="password" class="form-control border-0 border-bottom rounded-0">
-                                        <label asp-for="Password" class="form-label">Password</label>
-                                        <span asp-validation-for="Username" class="text-danger"></span>
+                <form asp-action="Login" asp-controller="Account" method="post" class="form" id="loginForm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" name="iAgree" id="iAgree">
-                                        <label class="form-check-label text-secondary" for="iAgree">
-                                            I agree to the <a href="#!" class="link-primary text-decoration-none">terms and conditions</a>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="d-grid">
-                                        <button class="btn btn-lg btn-dark rounded-0 fs-6" type="submit">Login</button>
-                                    </div>
-                                </div>
+                    <div class="input-group mb-3">
+                        <input asp-for="Username" class="form-control" placeholder="Username" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center gap-3 flex-lg-column">
-                        @* <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>
-                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>
-                      <div></div> *@
-                        <div class="bg-dark h-100 d-none d-lg-block" style="width: 1px; --bs-bg-opacity: .1;"></div>
-                        <div class="bg-dark w-100 d-lg-none" style="height: 1px; --bs-bg-opacity: .1;"></div>
-                    </div>
-                    <div class="col-12 col-lg-5 d-flex align-items-center">
-                        <div class="d-flex gap-3 flex-column w-100 ">
-                            <div>
-                              <p class="text-secondary">
-                                        Navigating the complex world of license applications
-                                        and renewals can be a daunting task. LicensePro is your ultimate solution,
-                                        designed to streamline and simplify the entire license filing process.
-                                       
-                              </p>
-
-                            </div>
-                           
                         </div>
                     </div>
-                </div>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+
+                    <div class="input-group mb-3">
+                        <input type="password" asp-for="Password" class="form-control" placeholder="Password" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <dnt-captcha asp-captcha-generator-max="999999"
+                                         asp-captcha-generator-min="111111"
+                                         asp-captcha-generator-language="English"
+                                         asp-captcha-generator-display-mode="ShowDigits"
+                                         asp-fore-color="#333333"
+                                         asp-back-color="#ccc"
+                                         asp-font-name="Tahoma"
+                                         asp-font-size="20"
+                                         asp-use-relative-urls="true"
+                                         asp-placeholder="Enter Captcha"
+                                         asp-text-box-class="form-control"
+                                         asp-text-box-template="<span class='input-group-prepend'><span class='form-group-text'></span></span>{0}"
+                                         asp-validation-message-class="text-danger"
+                                         asp-use-noise="false" />
+                            @if (TempData["captchaError"] != null)
+                            {
+                                <span class="text-danger">@TempData["captchaError"]</span>
+                            }
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-custom btn-block m-2">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+
+                <p class="mb-1">
+                    <a href="forgot-password.html">I forgot my password</a>
+                </p>
             </div>
+            <!-- /.card-body -->
         </div>
+        <!-- /.card -->
     </div>
-</section>
-    
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/dist/js/adminlte.min.js"></script>
 </body>
+</html>
+
+
+
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#loginForm").submit(function (event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            var formData = $(this).serialize(); // Serialize the form data
+
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: formData,
+                success: function (response) {
+                    if (response.token) {
+                        // Store the token in local storage
+                        localStorage.setItem('authToken', response.token);
+
+                        // Redirect to home page or any other page
+                        window.location.href = "/Home/Index";
+                    } else {
+                        // Handle error if token is not present in the response
+                        alert("Login failed. Please try again.");
+                    }
+                },
+                error: function () {
+                    // Handle error
+                    alert("An error occurred. Please try again.");
+                }
+            });
+        });
+    });
+</script>
+ *@
 
 @section Scripts {
     @{
-
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }

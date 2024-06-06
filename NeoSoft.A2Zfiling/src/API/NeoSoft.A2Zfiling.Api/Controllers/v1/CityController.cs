@@ -10,12 +10,12 @@ using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.DeleteZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneListWithEvent;
-
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
     [Route("api/[controller]")]
-
     [ApiController]
+   
+
     public class CityController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -27,7 +27,6 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _mediator = mediator;
 
         }
-
         [HttpGet("all", Name = "GetAllCity")]
         public async Task<ActionResult> GetAllCity()
         {

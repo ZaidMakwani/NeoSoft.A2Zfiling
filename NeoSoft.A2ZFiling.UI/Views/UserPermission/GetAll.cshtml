@@ -39,10 +39,15 @@
                                             </button> *@
 
                                             <div id="placeholder"></div>
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
-                                                    data-url="@Url.Action("Create", "Zone")">
-                                                <i class="fas fa-plus"></i>   @* Create *@
-                                            </button>
+                                           @*  <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
+                                                    data-url="@Url.Action("Create", "UserPermission")">
+                                                <i class="fas fa-plus"></i>   
+                                            </button> *@
+
+                                            <a href="@Url.Action("Create", "UserPermission")" class="btn btn-primary">
+                                                <i class="fas fa-plus"></i> @* Create *@
+                                            </a>
+
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
@@ -52,10 +57,11 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Role Id</th>
-                                                    @* <th>Role Name</th> *@
+                                                    <th>Role Name</th>
+                                                      <th>Permission Id</th>
                                                     <th>Controller Name</th>
                                                     <th>Action Name</th>
-                                                  @*   <th>Permission Id</th> *@
+                                                  <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -69,6 +75,12 @@
                                                         <td>
                                                             @Html.DisplayFor(modelItem => item.RoleId)
                                                         </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.RoleName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.PermissionId)
+                                                        </td>
                                                           <td>
                                                             @Html.DisplayFor(modelItem => item.ControllerName)
                                                         </td>
@@ -76,9 +88,6 @@
                                                             @Html.DisplayFor(modelItem => item.ActionName)
                                                         </td>
 
-                                                       @*  <td>
-                                                            @Html.DisplayFor(modelItem => item.PermissionId)
-                                                        </td> *@
                                                         <td>
                                                             @if (item.IsActive)
                                                             {
@@ -90,13 +99,21 @@
                                                             }
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
-                                                                    data-url="@Url.Action("EditZone", "Zone")" data-id="@item.UserPermissionId">
-                                                                <i class="fas fa-edit"></i> @* Edit *@
-                                                            </button>
+                                                           @*  <button class="btn btn-primary btn-sm edit-button" 
+                                                                    data-url="@Url.Action("Edit", "UserPermission")" data-id="@item.RoleId">
+                                                                <i class="fas fa-edit"></i>  Edit  
+                                                            </button> *@
+
+@*                                                             <a href="@Url.Action("Edit", "UserPermission", new { roleId = item.RoleId })" class="btn btn-primary btn-sm">
+                                                                <i class="fas fa-edit"></i> Edit
+                                                            </a> *@
 
 
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.UserPermissionId">
+                                                            
+
+
+
+                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.UserPermissionId" data-url="@Url.Action("Delete", "UserPermission")">
                                                                 <i class="fas fa-trash-alt"></i> @* Delete *@
                                                             </button>
 
@@ -191,6 +208,9 @@
 
 
         //-----------------------------------------------------------------------------------------------------------------------
+       
+
+
 
         //----------------------------------------------------------------------------------------------------------------
 
@@ -200,29 +220,29 @@
 
 
         $(document).on('click', '.trigger-modal', function () {
-            var ZoneId = $(this).data("id");
+            var UserId = $(this).data("id");
             // Set data attribute of delete button inside modal for further reference
-            $('.delete-confirm').data('id', ZoneId);
+            $('.delete-confirm').data('id', UserId);
             $('#myModal').modal('show');
         });
 
         // Event delegation for handling delete button click inside the modal
         $(document).on('click', '.delete-confirm', function () {
-            var ZoneId = $(this).data("id");
-            var deleteUrl = '@Url.Action("DeleteZone", "Zone")' + '?id=' + ZoneId;
+            var UserId = $(this).data("id");
+            var deleteUrl = '@Url.Action("Delete", "UserPermission")' + '?id=' + UserId;
 
             $.ajax({
                 url: deleteUrl,
                 type: 'GET',
                 success: function (result) {
-                    console.log('Zone deleted successfully.');
-                    alert('Zone deleted successfully');
+                    console.log('User Permission deleted successfully.');
+                    alert('User Permission  deleted successfully');
                     $('#myModal').modal('hide');
 
                 },
                 error: function (xhr, status, error) {
-                    console.error("Error deleting Zone: ", error);
-                    alert("Error deleting zone. Please try again.");
+                    console.error("Error deleting User Permission : ", error);
+                    alert("Error deleting User Permission . Please try again.");
 
                 }
             });
@@ -233,150 +253,11 @@
 
         //---------------------------------------------------------------------------------------------------------------------------
 
-        //function to handle create modal
-
-        $(function () {
-            var card = $('#placeholder');
-
-            $('button[data-toggle="ajax-modal"]').click(function (event) {
-                var url = $(this).data('url');
-                var decodeUrl = decodeURIComponent(url);
-                $.get(decodeUrl).done(function (data) {
-                    card.html(data);
-                    card.find('.modal').modal('show');
-
-                    // Unbind previously bound event handler
-                    card.off('click', '[data-save="modal"]');
-
-                    // Event delegation for dynamically loaded content
-                    card.on('click', '[data-save="modal"]', function (event) {
-                        var form = $(this).parents('.modal').find('form');
-                        var actionUrl = form.attr('action');
-                        var url = '@Url.Action("Create", "Zone")';
-                        var sendData = form.serialize();
-
-                        $.post(url, sendData).done(function (data) {
-                            card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "Zone Created Successful." + '</div>');
-                            card.find('.modal').modal('hide');
-
-                        }).fail(function (xhr, status, error) {
-                            var errorMessage = xhr.responseText;
-                            console.log(errorMessage);
-                            // Update the modal content to display the error message
-                            // card.find('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
-                            card.find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
-
-                        });
-                    });
-                });
-            });
-        });
+        
 
 
 
-
-        //----------------------------------------------------------------------------------------------------
-        //function to handle editzone in the modal
-
-
-
-
-        $(document).on('click', '.edit-button', function () {
-
-            var ZoneId = $(this).data("id");
-            var editUrl = '@Url.Action("EditZone", "Zone")' + '?id=' + ZoneId;
-
-            // AJAX request to fetch data for editing
-            $.ajax({
-                url: editUrl,
-                type: 'GET',
-                success: function (data) {
-                    // Load the partial view into the placeholder div
-                    $('#placeholder').html(data);
-                    // Show the edit modal
-                    $('#updateModal').modal('show');
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error fetching Zone data: ", error);
-                    alert("Error fetching Zone data. Please try again.");
-                }
-            });
-        });
-
-
-        // Function to update data after saving
-        function updateData() {
-            var ZoneId = $('#ZoneId').val(); // Assuming you have a hidden input field with the ZoneId
-            var editUrl = '@Url.Action("EditZone", "Zone")' + '?id=' + ZoneId;
-
-            // AJAX request to fetch updated data
-            $.ajax({
-                url: editUrl,
-                type: 'GET',
-                success: function (data) {
-                    // Replace the content in the placeholder div with the updated data
-                    $('#placeholder').html(data);
-                    // Close the modal or perform any other action as needed
-                    // alert('Zone Updated successfully');
-
-                    $('#updateModal').modal('hide');
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error fetching updated Zone data: ", error);
-                    alert("Error fetching updated Zone data. Please try again.");
-                }
-            });
-        }
-
-        $(document).on('click', '#saveButton', function () {
-
-            // Perform validation and submit data via AJAX
-            $.ajax({
-                url: '@Url.Action("EditZone", "Zone")',
-                type: 'POST',
-                data: $('#updateZoneForm').serialize(),
-                success: function (response) {
-                    console.log(response);
-                    // Check if the response indicates success
-                    if (response) {
-                        updateData(); // Call function to update data
-                        $('#updateModal').modal('hide');
-                        var successfulhtml = '<div class="alert alert-success" role="alert">' + "Zone Updated Successfully" + '</div>';
-                        $('#updateModal .modal-body').prepend(successfulhtml);
-                        // alert('Zone Updated successfully');
-
-                    }
-                    else {
-                        alert("An error occurred while saving data. Please try again.");
-                    }
-                },
-                error: function (xhr, status, error) {
-                    // Display more detailed error message from server response
-                    var errorMessage = xhr.responseText;
-                    if (errorMessage) {
-                        var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
-                        $('#updateModal .modal-body').prepend(errorHtml); // Prepend error message to modal body
-                    } else {
-                        alert("An error occurred while saving data. Please try again.");
-                    }
-                }
-            });
-        });
-
-
-
-        $(document).on('click', '#closeButton, .close', function () {
-            // Close the modal
-            $('#updateModal').modal('hide');
-        });
-
-
-
-
-
-
-
-
+       
 
         // })
     </script>

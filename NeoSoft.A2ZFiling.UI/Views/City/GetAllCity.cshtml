@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
+    <meta http-equiv="refresh" content="600">
     <div class="wrapper">
         <section class="content m-5 ">
             <div class="container-fluid">
@@ -193,7 +194,7 @@
                             card.find('.modal').modal('hide');
                             card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "City Created Successfully." + '</div>');
                             // card.find('.modal').modal('hide');
-
+                            location.reload();
 
 
                         }).fail(function (xhr, status, error) {
@@ -235,6 +236,7 @@
                     console.log('City deleted successfully.');
                     // alert('Zone deleted successfully');
                     $('#myModal').modal('hide');
+                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error("Error deleting city: ", error);
@@ -244,7 +246,7 @@
         });
 
         //-------------------------------------------------------------------------------------------------
-        //function to handle editzone in the modal
+        //function to handle editcity in the modal
 
 
         $(document).on('click', '.edit-button', function () {
@@ -260,6 +262,7 @@
                     $('#placeholder').html(data);
                     // Show the edit modal
                     $('#updateModal').modal('show');
+                    
                 },
                 error: function (xhr, status, error) {
                     console.error("Error fetching City data: ", error);
@@ -283,6 +286,7 @@
                     $('#placeholder').html(data);
                     // Close the modal or perform any other action as needed
                     $('#updateModal').modal('hide');
+                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error("Error fetching updated City data: ", error);
@@ -308,6 +312,7 @@
                         $('#updateModal').modal('hide');
                         var successHtml = '<div class="alert alert-success" role="alert">' + "City Updated Successfully." + '</div>';
                         $('#updateModal .modal-body').prepend(successHtml);
+                        location.reload();
                         // $('#updateModal').modal('hide');
                     }
                     else {

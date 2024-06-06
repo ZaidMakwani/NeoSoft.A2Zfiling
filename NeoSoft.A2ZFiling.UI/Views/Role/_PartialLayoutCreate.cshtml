@@ -2,10 +2,10 @@
 
 @{
     ViewData["Title"] = "Create";
-   
+
 }
 
-<!-- Create Modal -->     @*  modal-dialog-centered 
+<!-- Create Modal -->     @*  modal-dialog-centered
 @ <div id="createModal" class="modal" tabindex="-1" role="dialog"> @ *@
 <div id="createModal" class="modal fade">
     <div class="modal-dialog" role="document">
@@ -20,22 +20,22 @@
                 <form id="createZoneForm" asp-action="Create" asp-controller="Role" method="post">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                  
-                <div class="form-group">
-                    <label asp-for="RoleName">Role Name:</label>
-                    <input asp-for="RoleName" class="form-control" />
-                    <span asp-validation-for="RoleName" class="text-danger" id="entityName"></span>
-                </div>
 
-                  
+                    <div class="form-group">
+                        <label asp-for="RoleName">Role Name:</label>
+                        <input asp-for="RoleName" class="form-control" />
+                        <span asp-validation-for="RoleName" class="text-danger" id="entityName"></span>
+                    </div>
+
+
                 </form>
- 
+
 
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEntity" data-save="modal" >Save</button>
+                <button type="button" class="btn btn-primary" id="saveEntity" data-save="modal" onclick="reloadPage()">Save</button>
 
             </div>
         </div>
@@ -46,4 +46,9 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        function reloadPage() {
+            window.location.reload()
+        }
+    </script>
 }

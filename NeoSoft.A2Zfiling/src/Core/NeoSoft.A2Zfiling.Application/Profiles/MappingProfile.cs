@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NeoSoft.A2Zfiling.Application.Features.Login.Command;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.CreateCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.DeleteCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.UpdateCity;
@@ -19,6 +20,12 @@ using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.DeleteZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.UpdateZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneListWithEvent;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.CreateIndustry;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.DeleteIndustry;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Commands.UpdateIndustry;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Queries.GetIndustriesList;
+using NeoSoft.A2Zfiling.Application.Features.IndustriesFeature.Queries.GetIndustryById;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Commands.CreateMunicipal;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.GetMunicipalDetails;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.GetMunicipalList;
@@ -28,8 +35,28 @@ using NeoSoft.A2Zfiling.Application.Features.Roles.Commands.UpdateMunicipal;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Commands.UpdateRoles;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRoleaDetails;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRolesList;
+
+using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreateState;
+
+using NeoSoft.A2Zfiling.Application.Features.Documents.CreateDocument;
+
+using NeoSoft.A2Zfiling.Application.Features.Login;
+
+using NeoSoft.A2Zfiling.Application.Features.Pincodes.Commands.DeletePinCode;
+using NeoSoft.A2Zfiling.Application.Features.Pincodes.Commands.UpdatePinCode;
+using NeoSoft.A2Zfiling.Application.Features.Pincodes.Queries.GetPicodeList;
+using NeoSoft.A2Zfiling.Application.Features.Pincodes.Queries.GetPinCode;
+using NeoSoft.A2Zfiling.Application.Features.States.Commands.CreateState;
+using NeoSoft.A2Zfiling.Application.Features.States.Commands.DeleteState;
+using NeoSoft.A2Zfiling.Application.Features.States.Commands.UpdateState;
+using NeoSoft.A2Zfiling.Application.Features.States.Queries.GetStateById;
+using NeoSoft.A2Zfiling.Application.Features.States.Queries.GetStateList;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using System.Security.Principal;
+using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.CreateCompany;
+using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries;
+using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.UpdateCompany;
+using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.DeleteCompany;
 
 
 namespace NeoSoft.A2Zfiling.Application.Profiles
@@ -61,9 +88,50 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<Permission, UpdatePermissionCommand>().ReverseMap();
             CreateMap<Permission, UpdatePermissionDto>().ReverseMap();
             CreateMap<Permission, DeletePermissionDto>().ReverseMap();
-            {
+            
 
-                CreateMap<AppUser, RegisterDTO>();
+
+
+
+            CreateMap<Industry, CreateIndustryDto>().ReverseMap();
+            CreateMap<Industry, IndustryListVM>().ReverseMap();
+            CreateMap<Industry, IndustryListSingleVM>().ReverseMap();
+            CreateMap<Industry, UpdateIndustryDto>().ReverseMap();
+            CreateMap<Industry, UpdateIndustryCommand>().ReverseMap();
+            CreateMap<Industry, DeleteIndustryDto>().ReverseMap();
+
+            CreateMap<Company, CreateCompanyDto>().ReverseMap();
+            CreateMap<Company, CompanyListVM>().ReverseMap();
+            CreateMap<Company, UpdateCompanyDto>().ReverseMap();
+            CreateMap<Company, UpdateCompanyCommand>().ReverseMap();
+            CreateMap<Company, DeleteCompanyDto>().ReverseMap();
+            
+
+                CreateMap<AppUser, RegisterDTO>().ReverseMap();
+
+                  
+
+            CreateMap<Document, CreateDocumentDto>().ReverseMap();
+
+            CreateMap<State, CreateStateDto>().ReverseMap();
+            CreateMap<State, StateListVm>().ReverseMap();
+            CreateMap<State, DeleteStateDto>().ReverseMap();
+
+            CreateMap<State, UpdateStateDto>().ReverseMap();
+            CreateMap<State, UpdateStateCommand>().ReverseMap();
+            CreateMap<State, StateVM>().ReverseMap();
+
+
+
+            CreateMap<PinCode, CreatePinCodeDto>().ReverseMap();
+            CreateMap<PinCode, PinCodeListVm>().ReverseMap();
+            CreateMap<PinCode, DeletePinCodeDto>().ReverseMap();
+            CreateMap<PinCode, UpdatePinCodeDto>().ReverseMap();
+            CreateMap<PinCode, UpdatePinCodeCommand>().ReverseMap();
+            CreateMap<PinCode, PinCodeVM>().ReverseMap();
+            CreateMap<Login, LoginDto>().ReverseMap();
+
+
 
 
                 CreateMap<Role, CreateRolesDto>();
@@ -71,6 +139,14 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
                 CreateMap<Role, RolesListVM>();
                 CreateMap<Role, UpdateRolesCommand>().ReverseMap();
                 CreateMap<Role, GetRoleDto>();
+           CreateMap<AppUser, RegisterDTO>();
+            CreateMap<AppUser, LoginDto>();
+          
+            CreateMap<Role, CreateRolesDto>();
+            CreateMap<Role,RolesDto>();
+            CreateMap<Role,RolesListVM>();
+            CreateMap<Role,UpdateRolesCommand>().ReverseMap();
+            CreateMap<Role, GetRoleDto>();
 
                 CreateMap<MunicipalCorp, CreateMunicipalDto>();
                 CreateMap<MunicipalCorp, MunicipalListVM>();
@@ -85,7 +161,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
                 CreateMap<UserPermission, DeleteUserPermissionDto>().ReverseMap();
                 CreateMap<UserPermission, UpdateUserPermissionCommand>().ReverseMap();
                 CreateMap<UserPermission, UpdateUserPermissionDto>().ReverseMap();
-            }
+            
         }
     }
 }

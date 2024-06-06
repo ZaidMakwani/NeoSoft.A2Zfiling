@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,9 +13,9 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
    
     <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
@@ -228,15 +230,53 @@
                             </li>
 
 
-                           @*  <li class="nav-item">
-                                <a href="#" class="nav-link active">
+                          
                             <li class="nav-item">
-                                <a asp-action="GetAllMunicipal" asp-controller="Municipal" class="nav-link active">
+                                <a asp-action="GetAllMunicipal" asp-controller="Municipal" class="nav-link ">
                                    
-                                    <p>Municipal Corporations</p>
+                                    <p>Municipal Corporations</p></a>
+                               
+                            </li>
+                             <li class="nav-item">
+                                @* @ <i class="far fa-circle nav-icon"></i> @ *@
+                                <a class="nav-link" asp-action="ReadAll" asp-controller="PinCode">PinCodes</a>                                    
+                                    @* @ <p>Roles</p> @ *@
                                 </a>
                             </li>
-                            @* <li class="nav-item">
+                            <li class="nav-item">
+                                @* @ <i class="far fa-circle nav-icon"></i> @ *@
+                                <a class="nav-link" asp-action="ReadAll" asp-controller="State">States</a>
+                                @* @ <p>Roles</p> @ *@
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                @* @ <i class="far fa-circle nav-icon"></i> @ *@
+                                <a class="nav-link" asp-action="Index" asp-controller="Company">Company</a>
+                                @* @ <p>Roles</p> @ *@
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                @* @ <i class="far fa-circle nav-icon"></i> @ *@
+                                <a class="nav-link" asp-action="Index" asp-controller="Industry">Industry</a>
+                                @* @ <p>Roles</p> @ *@
+                                </a>
+                            </li>
+                           @*  <li class="nav-item">
+                                <a href="#" class="nav-link active">
+                                   
+                                    <p>Dashboard v2</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Index" asp-controller="Company" class="nav-link ">
+
+                                    <p>Company</p>
+                                <a asp-action="GetAllMunicipal" asp-controller="Municipal" class="nav-link ">
+                                   
+                                    Municipal Corporations
+                                </a>
+                            </li>
+                           @*  <li class="nav-item">
                                 <a href="#" class="nav-link">
                                  
                                     <p>Dashboard v3</p>
@@ -262,25 +302,25 @@
     <script src="~/js/site.js" asp-append-version="true"></script> *@
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- overlayScrollbars -->
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.js"></script>
+    <script src="~/dist/js/adminlte.js"></script>
 
     <!-- PAGE PLUGINS -->
     <!-- jQuery Mapael -->
-    <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="plugins/raphael/raphael.min.js"></script>
-    <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
-    <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+    <script src="~/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="~/plugins/raphael/raphael.min.js"></script>
+    <script src="~/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+    <script src="~/plugins/jquery-mapael/maps/usa_states.min.js"></script>
     <!-- ChartJS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
+    <script src="~/plugins/chart.js/Chart.min.js"></script>
 
     <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
+    <script src="~/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="dist/js/pages/dashboard2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

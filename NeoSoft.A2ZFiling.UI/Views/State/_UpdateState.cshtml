@@ -1,0 +1,54 @@
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.StateVM
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = null;
+}
+
+
+<div id="updateModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update State</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="updateStateForm" asp-action="EditState" asp-controller="State" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+@*                         @ <label asp-for="StateId">State Id:</label> @
+ *@                        <input asp-for="StateId" class="form-control" hidden/>
+@*                         @ <span asp-validation-for="StateId" class="text-danger" id="entityName"></span> @
+ *@                    </div>
+                    <div class="form-group">
+                        <label asp-for="StateName">State Name:</label>
+                        <input asp-for="StateName" class="form-control" />
+                        <span asp-validation-for="StateName" class="text-danger" id="entityName"></span>
+                    </div>
+                    <input type="hidden" asp-for="IsActive" />
+
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeButton" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveButton" data-save="modal">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -35,14 +35,15 @@
                                     <div class="card-header">
                                         <h3 class="card-title">Roles</h3>
                                         <div class="card-tools">
-                                           @*  <button type="button" class="btn btn-primary" id="createButton">
-                                                Create
+                                            @*  <button type="button" class="btn btn-primary" id="createButton">
+                                            Create
                                             </button> *@
-                                                
+
                                             <div id="placeholder"></div>
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
-                                            data-url="@Url.Action("Create","Role")"><i class="fas fa-plus"></i>    
-                                        </button>
+                                                    data-url="@Url.Action("Create", "Role")">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
@@ -77,17 +78,29 @@
                                                             }
                                                         </td>
                                                         <td>
+                                                            @if(item.IsActive){
                                                             <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
-                                                           
                                                                     data-url="@Url.Action("Edit", "Role")" data-id="@item.RoleId">
                                                                 <i class="fas fa-edit"></i>
                                                             </button>
 
 
                                                             <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.RoleId">
-                                                                <i class="fas fa-trash-alt"></i> 
-                                                            </button>
+                                                                <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                        data-url="@Url.Action("Edit", "Role")" data-id="@item.RoleId" disabled>
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
 
+
+                                                                <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.RoleId" disabled>
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </button>
+                                                            }
                                                         </td>
                                                     </tr>
                                                 }
@@ -108,7 +121,7 @@
 
 
 
-      
+
 
         <!-- Delete Modal -->
         <div id="myModal" class="modal" tabindex="-1" role="dialog">
@@ -132,10 +145,10 @@
         </div>
     </div>
 
- 
-    
 
-   
+
+
+
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -162,31 +175,31 @@
     <!-- Page specific script -->
     <script>
         // $(document).ready(function () {
-            $("#example2").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "paging": true,
-                "pageLength": 4,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
-            }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+        $("#example2").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "paging": true,
+            "pageLength": 4,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
-       
-            //-----------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------------------
+
+        //----------------------------------------------------------------------------------------------------------------
 
 
 
         // // Function to show the delete modal
 
- 
+
         $(document).on('click', '.trigger-modal', function () {
             var ZoneId = $(this).data("id");
             // Set data attribute of delete button inside modal for further reference
@@ -206,6 +219,7 @@
                     console.log('Role deleted successfully.');
                     alert('Role deleted successfully');
                     $('#myModal').modal('hide');
+                    location.reload();
 
                 },
                 error: function (xhr, status, error) {
@@ -216,7 +230,7 @@
             });
         });
 
-  
+
 
 
         //---------------------------------------------------------------------------------------------------------------------------
@@ -246,7 +260,8 @@
                         $.post(url, sendData).done(function (data) {
 
                             card.find('.modal').modal('hide');
-       
+                            location.reload();
+
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
                             console.log(errorMessage);
@@ -260,15 +275,15 @@
 
 
 
-       
+
         //----------------------------------------------------------------------------------------------------
         //function to handle editzone in the modal
 
 
-     
+
 
         $(document).on('click', '.edit-button', function () {
-            
+
             var RoleId = $(this).data("id");
             var editUrl = '@Url.Action("Edit", "Role")' + '?id=' + RoleId;
 
@@ -289,7 +304,7 @@
             });
         });
 
-       
+
         // Function to update data after saving
         function updateData() {
             var RoleId = $('#RoleId').val(); // Assuming you have a hidden input field with the ZoneId
@@ -306,6 +321,7 @@
                     // alert('Zone Updated successfully');
 
                     $('#updateModal').modal('hide');
+
                 },
                 error: function (xhr, status, error) {
                     console.error("Error fetching updated Zone data: ", error);
@@ -315,7 +331,7 @@
         }
 
         $(document).on('click', '#saveButton', function () {
-            
+
             // Perform validation and submit data via AJAX
             $.ajax({
                 url: '@Url.Action("Edit", "Role")',
@@ -328,12 +344,13 @@
                         updateData(); // Call function to update data
                         alert('Role Updated successfully');
                         $('#updateModal').modal('hide');
-                    } 
+                        location.reload();
+                    }
                     else {
                         alert("An error occurred while saving data. Please try again.");
                     }
                 },
-                   error: function (xhr, status, error) {
+                error: function (xhr, status, error) {
                     // Display more detailed error message from server response
                     var errorMessage = xhr.responseText;
                     if (errorMessage) {
@@ -346,7 +363,7 @@
             });
         });
 
-       
+
 
         $(document).on('click', '#closeButton, .close', function () {
             // Close the modal
@@ -354,12 +371,12 @@
         });
 
 
-      
 
 
 
 
-       
+
+
 
         // })
     </script>

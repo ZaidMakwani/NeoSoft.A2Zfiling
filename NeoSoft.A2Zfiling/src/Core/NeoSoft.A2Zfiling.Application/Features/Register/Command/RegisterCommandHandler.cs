@@ -24,7 +24,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
         private readonly UserManager<AppUser> _userManager;
         private readonly IAsyncRepository<Role> _roleRepository;
         private readonly RoleManager<IdentityRole> _roleManager;
-       
+
 
         public RegisterCommandHandler(RoleManager<IdentityRole> roleManager, IMapper mapper, IMessageRepository messageRepository, IAsyncRepository<AppUser> appUserRepository, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IAsyncRepository<Role> roleRepository)
         {
@@ -35,8 +35,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
             this._userManager = userManager;
             _signInManager = signInManager;
             _roleRepository = roleRepository;
-            _roleManager= roleManager;
-           
+            _roleManager = roleManager;
+
         }
 
         public async Task<Response<RegisterDTO>> Handle(RegisterCommand request, CancellationToken cancellationToken)
@@ -53,12 +53,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
             {
                 //return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
                 var user = _userManager.CreateAsync(new AppUser() { FirstName = request.FirstName, LastName = request.LastName, Address = request.Address,
-                    Email = request.Email, PhoneNumber = request.ContactNumber, UserName = request.UserName }, request.Password).GetAwaiter().GetResult();
+                    Email = request.Email, PhoneNumber = request.ContactNumber, UserName = request.UserName,
+                    RefreshTokenExpiryTime = DateTime.Now
+                }, request.Password).GetAwaiter().GetResult();
                 if (user.Succeeded)
                 {
                     var Appuser = _appUserRepository.ListAllAsync().Result.FirstOrDefault(x => x.Email == request.Email);
                     AppUser user1 = new AppUser() {FirstName=request.FirstName,LastName=request.LastName,UserName=request.UserName,Address=request.Address,
-                    Email=request.Email,PhoneNumber=request.ContactNumber,};
+                    Email=request.Email,PhoneNumber=request.ContactNumber,RefreshTokenExpiryTime=DateTime.Now};
                     if (!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
                     {
                         _roleManager.CreateAsync(new IdentityRole(roleName)).GetAwaiter().GetResult();
@@ -78,7 +80,9 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
                 }
             }
 
-            return registerMemberCommandResponse;
+                return registerMemberCommandResponse;
+            
+           
         }
     }
 }
