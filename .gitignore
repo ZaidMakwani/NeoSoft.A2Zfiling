@@ -361,10 +361,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/NeoSoft.A2Zfiling/src/Infrastructure/NeoSoft.A2Zfiling.Persistence/Migrations/MSSQL
-/NeoSoft.A2ZFiling.UI/NeoSoft.A2ZFiling.UI.csproj
-/NeoSoft.A2Zfiling.sln
-/NeoSoft.A2Zfiling/src/Infrastructure/NeoSoft.A2Zfiling.Persistence/NeoSoft.A2Zfiling.Persistence.csproj
-/NeoSoft.A2Zfiling/src/Infrastructure/NeoSoft.A2Zfiling.Infrastructure/NeoSoft.A2Zfiling.Infrastructure.csproj
-/NeoSoft.A2Zfiling/src/API/NeoSoft.A2Zfiling.Api/NeoSoft.A2Zfiling.Api.csproj
-/Helpers/Helpers.csproj
