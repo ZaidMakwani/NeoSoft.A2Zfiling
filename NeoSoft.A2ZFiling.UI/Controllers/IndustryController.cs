@@ -25,18 +25,6 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
 
             var response = _industryService.GetIndustryAsync();
-            
-
-            //Response<List<IndustryVM>> industryList = new Response<List<IndustryVM>>();
-            //HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Industry/GetAllIndustries/all").Result;
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    string data = response.Content.ReadAsStringAsync().Result;
-            //    industryList = JsonConvert.DeserializeObject<Response<List<IndustryVM>>>(data);
-            //}
-
-            //return View(industryList.Data);
 
             return View(response);
         }
@@ -61,11 +49,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                //return RedirectToAction("Index");
+               // return PartialView("_GetAllIndustry");
                 return Ok();
             }
 
-            return View();
+             return PartialView("_GetAllIndustry");
         }
 
 
@@ -94,7 +82,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return Ok(response);
             }
 
             return View();
@@ -108,30 +96,16 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             Response<IndustryVM> industry = new Response<IndustryVM>();
             HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Industry/Delete?Id={id}").Result;
-            return RedirectToActionPermanent("Index");
+            return Ok();
         }
 
-
-        //----------------------------------------------Register Member----------------------------------------
-
-        public IActionResult RegisterMember()
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            return View();
+            var response = _industryService.GetIndustryAsync();
+            return PartialView("_GetAllIndustry",response);
+            //return View(response);
         }
 
-
-        [HttpPost]
-        public IActionResult RegisterMember(RegisterVM model)
-        {
-            string data = JsonConvert.SerializeObject(model);
-            StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/RegisterMember/Create/", content).Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
     }
 }
