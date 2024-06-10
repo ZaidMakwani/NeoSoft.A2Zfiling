@@ -79,6 +79,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
                 throw ex;
             }
         }
+
         [HttpDelete("id", Name = "DeleteCity")]
         public async Task<ActionResult> DeleteCity(int id)
         {

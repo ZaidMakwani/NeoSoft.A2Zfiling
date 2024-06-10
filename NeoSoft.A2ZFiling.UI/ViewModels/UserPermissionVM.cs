@@ -12,6 +12,7 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
         [Required(ErrorMessage = "Role is required")]
         public int RoleId { get; set; }
 
+        [Required(ErrorMessage = "Role is required")]
         public string RoleName { get; set; }
 
 

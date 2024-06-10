@@ -20,6 +20,10 @@ namespace NeoSoft.A2Zfiling.Persistence
            : base(options)
         {
         }
+
+        public DbSet<License> Licenses { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<LicenseType> LicenseTypes { get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<Zones> Zones { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -39,6 +43,7 @@ namespace NeoSoft.A2Zfiling.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
