@@ -7,7 +7,10 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
         public int CompanyId { get; set; }
         [Required(ErrorMessage ="Company Name is required")]        
         public string CompanyName { get; set;}
+        [Required]
         public string ShortName { get; set;}
+
+        //[Required]
         public bool IsActive { get; set; }
     }
 }

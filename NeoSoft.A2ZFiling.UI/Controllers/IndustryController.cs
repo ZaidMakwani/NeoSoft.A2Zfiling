@@ -41,11 +41,21 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         [HttpPost]
         public IActionResult Create(IndustryVM model)
         {
+            if (string.IsNullOrEmpty(model.IndustryName))
+            {
+                return BadRequest("Please enter a valid Industry name.");
+            }
+
+            if (string.IsNullOrEmpty(model.ShortName))
+            {
+                return BadRequest("Please enter a valid Short name.");
+            }
+            if( (model.ShortName.Any(char.IsDigit)) || (model.IndustryName.Any(char.IsDigit)))
+            {
+                return BadRequest(" Name cannot contain numbers.");
+            }
             var response = _industryService.CreateIndustryAsync(model);
 
-            //string data = JsonConvert.SerializeObject(model);
-            //StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
-            //HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/Industry/Create", content).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -53,7 +63,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return Ok();
             }
 
-             return PartialView("_GetAllIndustry");
+            return BadRequest("Failed to create Industry");
         }
 
 
@@ -79,6 +89,20 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/Industry/Update/", content).Result;
+
+            if (string.IsNullOrEmpty(model.IndustryName))
+            {
+                return BadRequest("Please enter a valid Industry name.");
+            }
+
+            if (string.IsNullOrEmpty(model.ShortName))
+            {
+                return BadRequest("Please enter a valid Short name.");
+            }
+            if ((model.ShortName.Any(char.IsDigit)) || (model.IndustryName.Any(char.IsDigit)))
+            {
+                return BadRequest(" Name cannot contain numbers.");
+            }
 
             if (response.IsSuccessStatusCode)
             {

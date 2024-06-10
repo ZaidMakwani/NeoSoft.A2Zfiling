@@ -7,9 +7,10 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h2>Create User Permission</h2>
+            <h2>Add User Permission</h2>
 
             <form id="createUserPermissionForm" asp-action="Create" asp-controller="UserPermission" method="post">
+                <div class="error-message-container"></div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
@@ -22,7 +23,7 @@
                             <option value="@permission.RoleId">@permission.RoleName</option>
                         }
                     </select>
-                    @Html.ValidationMessageFor(m => m.FirstOrDefault().RoleId, "", new { @class = "text-danger" })
+                   
                 </div>
 
 
@@ -57,7 +58,6 @@
                     @Html.ValidationMessageFor(m => m.FirstOrDefault().SelectedPermissions, "", new { @class = "text-danger" })
 
                 </div>
-
 
 
 

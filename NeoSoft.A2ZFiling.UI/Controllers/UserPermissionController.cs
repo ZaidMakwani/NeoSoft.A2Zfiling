@@ -82,12 +82,16 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             try
             {
                 _logger.LogInformation("Create  User Permission Action Initiated");
-
-                //if (model.SelectedPermissions == null || !model.SelectedPermissions.Any())
-                //{
-                //    _logger.LogError("No permissions selected");
-                //    return BadRequest("No permissions selected");
-                //}
+                if (model.RoleId==null || model.RoleId==0)
+                {
+                    _logger.LogError("No Role selected");
+                    return BadRequest("No Role selected");
+                }
+                if (model.SelectedPermissions == null || !model.SelectedPermissions.Any())
+                {
+                    _logger.LogError("No permissions selected");
+                    return BadRequest("No permissions selected");
+                }
 
                 foreach (var permissionId in model.SelectedPermissions)
                 {
@@ -140,7 +144,16 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             try
             {
                 _logger.LogInformation("Edit User Permission Action Initiated");
-                // Fetch user permissions based on roleId
+
+
+                var rolesId = await _roleService.GetRoleByIdAsync(roleId);
+
+                // Check if role is null
+                if (rolesId == null)
+                {
+                    return NotFound("Role not found");
+                }
+
                 var allUserPermission = await _userPermission.GetUserPermissionAsync();
                 var userPermission = allUserPermission.Where(x => x.RoleId == roleId).ToList();
 
@@ -169,6 +182,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
                 _logger.LogInformation("Edit User Permission Action Completed");
                 return View(mappedPermissions);
+                
+
             }
             catch (Exception ex)
             {
@@ -176,6 +191,61 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return StatusCode(500, "An error occurred while editing user permission.");
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserPermissionVM model)
+        {
+            try
+            {
+                _logger.LogInformation("Edit User Permission Action Initiated");
+                if (model == null)
+                {
+                    _logger.LogError("Edit User Permission: Model is null");
+                    return BadRequest("Model is null");
+                }
+                if (model.RoleId == null || model.RoleId == 0)
+                {
+                    _logger.LogError("No Role selected");
+                    return BadRequest("No Role selected");
+                }
+                if (model.SelectedPermissions == null || !model.SelectedPermissions.Any())
+                {
+                    _logger.LogError("No permissions selected");
+                    return BadRequest("No permissions selected");
+                }
+                _logger.LogInformation($"Role ID: {model.RoleId}");
+                foreach (var permission in model.Actions)
+                {
+                    _logger.LogInformation($"Permission ID: {permission.PermissionId}, IsActive: {permission.IsActive}");
+                }
+
+                foreach (var permission in model.Actions)
+                {
+                    var userPermission = new UserPermissionVM
+                    {
+                        RoleId = model.RoleId,
+                        PermissionId = permission.PermissionId,
+                        IsActive = permission.IsActive
+                    };
+
+                    var response = await _userPermission.UpdateUserPermissionAsync(userPermission);
+                    if (response == null)
+                    {
+                        _logger.LogError("Failed to update user permission");
+                        return BadRequest("Failed to update user permission");
+                    }
+                }
+
+                _logger.LogInformation("Edit User Permission Action Completed");
+                return RedirectToAction("GetAll", "UserPermission");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while editing user permission.");
+                return StatusCode(500, "An error occurred while editing user permission.");
+            }
+        }
+
 
     }
 }

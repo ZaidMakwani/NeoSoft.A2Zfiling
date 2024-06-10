@@ -10,25 +10,26 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Industry</h5>
+                <h5 class="modal-title">Add Industry Type</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <div class="error-message-container"></div>
                 <form id="createIndustryForm" asp-action="Create" asp-controller="Industry" method="post">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group">
                         <label asp-for="IndustryName">Industry Name:</label>
-                        <input asp-for="IndustryName" class="form-control" />
+                        <input asp-for="IndustryName" class="form-control" placeholder="Industry Type"/>
                         <span asp-validation-for="IndustryName" class="text-danger" id="entityName"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="ShortName">Short Name:</label>
-                        <input asp-for="ShortName" class="form-control" />
+                        <input asp-for="ShortName" class="form-control" placeholder="Industry Short Name"/>
                         <span asp-validation-for="ShortName" class="text-danger" id="entityName"></span>
                     </div>
 

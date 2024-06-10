@@ -15,11 +15,11 @@ namespace NeoSoft.A2Zfiling.Application.Features.LicenseTypes.Command.DeleteLice
 {
     public class DeleteLicenseTypeHandler : IRequestHandler<DeleteLicenseTypeCommand, Response<DeleteLicenseTypeDto>>
     {
-        private readonly ILogger<DeleteLicenseTypeDto> _logger;
+        private readonly ILogger<DeleteLicenseTypeHandler> _logger;
         private readonly IMapper _mapper;
         private readonly IAsyncRepository<LicenseType> _asyncRepository;
 
-        public DeleteLicenseTypeHandler(ILogger<DeleteLicenseTypeDto> logger, IMapper mapper, IAsyncRepository<LicenseType> asyncRepository)
+        public DeleteLicenseTypeHandler(ILogger<DeleteLicenseTypeHandler> logger, IMapper mapper, IAsyncRepository<LicenseType> asyncRepository)
         {
             _asyncRepository = asyncRepository;
             _logger = logger;
