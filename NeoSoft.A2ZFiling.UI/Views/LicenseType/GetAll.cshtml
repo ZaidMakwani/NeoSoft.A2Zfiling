@@ -72,19 +72,39 @@
                                     </li>
                                 </ul>
                                
+
+
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="table1" role="tabpanel" aria-labelledby="table1-tab">
                                         <div class="card">
-                                           <div id="placeholder"></div>
+                                           <div id="placeholder"></div> 
+                             
                                             <div class="card-header">
-                                             
-                                                <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
-                                                        data-url="@Url.Action("Create", "LicenseType")">
-                                                    <i class="fas fa-plus"></i>    
-                                                </button>
-                                            </div>
-                                           
+                                                <div class="float-right">
+                                                    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "LicenseType")">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+
+                                                    <div class="navbar-search-block">
+                                                        <form class="form-inline">
+                                                            <div class="input-group input-group-sm">
+                                                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-navbar" type="submit">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </button>
+                                                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+
+          
                                             <div class="card-body">
                                                 <table id="example1" class="table table-bordered table-striped">
                                                     <thead>
@@ -139,6 +159,7 @@
                                             
                                         </div>
                                     </div>
+                                    </div>
 
 
                                     <div class="tab-pane fade " id="table2" role="tabpanel" aria-labelledby="table2-tab">
@@ -159,12 +180,12 @@
 
 
 
-
+                                    
                                     
 
 
 
-                                </div>
+                                @* </div> *@
 
                             </div>
                         </div>
@@ -203,11 +224,14 @@
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- DataTables Buttons extension -->
     <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script src="../../plugins/jszip/jszip.min.js"></script>
@@ -216,10 +240,6 @@
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
-
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -228,23 +248,26 @@
  
 
     <script>
-    $(function () {
+
+        console.log("Before DataTable initialization");
+
         $("#example1").DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-            "paging": true, // Ensure paging is enabled
+            "paging": true,
             "pageLength": 4,
-            "searching": false,
+            "lengthChange": false,
+            "searching": true,
             "ordering": true,
             "info": true,
+            "autoWidth": false,
             "responsive": true
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        })/* .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); */
+        $('#example1').DataTable().buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-       
-        
 
+        console.log("After DataTable initialization");
 
 
         //function to handle create modal

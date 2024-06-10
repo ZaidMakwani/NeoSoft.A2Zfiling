@@ -21,7 +21,6 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
         [HttpGet]
         public IActionResult Index()
-
         {
 
             var response = _industryService.GetIndustryAsync();

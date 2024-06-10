@@ -82,7 +82,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             try
             {
                 _logger.LogInformation("Create  User Permission Action Initiated");
-                if (model.RoleId==null || model.RoleId==0)
+                if (model.RoleId == null || model.RoleId == 0)
                 {
                     _logger.LogError("No Role selected");
                     return BadRequest("No Role selected");
@@ -147,8 +147,6 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
 
                 var rolesId = await _roleService.GetRoleByIdAsync(roleId);
-
-                // Check if role is null
                 if (rolesId == null)
                 {
                     return NotFound("Role not found");
@@ -156,14 +154,9 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
                 var allUserPermission = await _userPermission.GetUserPermissionAsync();
                 var userPermission = allUserPermission.Where(x => x.RoleId == roleId).ToList();
-
-                // Fetch all permissions
                 var allPermission = await _permissionService.GetPermissionAsync();
-
-                // Fetch role information
                 var role = await _roleService.GetRoleByIdAsync(roleId);
 
-                // Map permissions to view model
                 var mappedPermissions = allPermission
                         .GroupBy(p => p.ControllerName)
                         .Select(group => new UserPermissionVM
@@ -176,13 +169,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                                 ControllerName = p.ControllerName,
                                 IsActive = userPermission.Any(x => x.PermissionId == p.PermissionId),
                             }).ToList(),
-                            RoleId = role.RoleId, 
+                            RoleId = role.RoleId,
                             RoleName = role?.RoleName
+
                         }).ToList();
 
                 _logger.LogInformation("Edit User Permission Action Completed");
                 return View(mappedPermissions);
-                
+
 
             }
             catch (Exception ex)
@@ -198,6 +192,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             try
             {
                 _logger.LogInformation("Edit User Permission Action Initiated");
+
                 if (model == null)
                 {
                     _logger.LogError("Edit User Permission: Model is null");
@@ -213,30 +208,61 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                     _logger.LogError("No permissions selected");
                     return BadRequest("No permissions selected");
                 }
-                _logger.LogInformation($"Role ID: {model.RoleId}");
-                foreach (var permission in model.Actions)
-                {
-                    _logger.LogInformation($"Permission ID: {permission.PermissionId}, IsActive: {permission.IsActive}");
-                }
 
-                foreach (var permission in model.Actions)
-                {
-                    var userPermission = new UserPermissionVM
-                    {
-                        RoleId = model.RoleId,
-                        PermissionId = permission.PermissionId,
-                        IsActive = permission.IsActive
-                    };
+                // Retrieve existing permissions for the role
+                var allPermissions = await _userPermission.GetUserPermissionAsync();
 
-                    var response = await _userPermission.UpdateUserPermissionAsync(userPermission);
-                    if (response == null)
+                foreach (var permission in model.SelectedPermissions)
+                {
+                    // Check if the permission already exists
+                    var existingPermission = allPermissions.FirstOrDefault(x => x.RoleId == model.RoleId && x.PermissionId == permission);
+
+                    if (existingPermission != null)
                     {
-                        _logger.LogError("Failed to update user permission");
-                        return BadRequest("Failed to update user permission");
+                        // Update existing permission
+                        existingPermission.IsActive = true;
+                        var response = await _userPermission.UpdateUserPermissionAsync(existingPermission);
+                        if (response == null)
+                        {
+                            _logger.LogError("Failed to update user permission");
+                            return BadRequest("Failed to update user permission");
+                        }
+                    }
+                    else
+                    {
+                        // Create new permission
+                        var newPermission = new UserPermissionVM
+                        {
+                            RoleId = model.RoleId,
+                            PermissionId = permission,
+                            IsActive = true
+                        };
+                        var response = await _userPermission.CreateUserPermissionAsync(newPermission);
+                        if (response == null)
+                        {
+                            _logger.LogError("Failed to create user permission");
+                            return BadRequest("Failed to create user permission");
+                        }
                     }
                 }
 
-                _logger.LogInformation("Edit User Permission Action Completed");
+                // Check for unchecked permissions
+                foreach (var permission in allPermissions)
+                {
+                    if (!model.SelectedPermissions.Contains(permission.PermissionId))
+                    {
+                        // Permission is unchecked, update its status to inactive
+                        permission.IsActive = false;
+                        var response = await _userPermission.UpdateUserPermissionAsync(permission);
+                        if (response == null)
+                        {
+                            _logger.LogError("Failed to update user permission");
+                            return BadRequest("Failed to update user permission");
+                        }
+                    }
+                }
+
+                _logger.LogInformation("Update User Permission Action Completed");
                 return RedirectToAction("GetAll", "UserPermission");
             }
             catch (Exception ex)
@@ -245,6 +271,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return StatusCode(500, "An error occurred while editing user permission.");
             }
         }
+
 
 
     }
