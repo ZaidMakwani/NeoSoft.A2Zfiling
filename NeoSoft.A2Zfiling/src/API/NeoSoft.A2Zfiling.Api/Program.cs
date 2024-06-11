@@ -27,6 +27,7 @@ using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +81,12 @@ services.AddCors(options =>
         });
 });
 services.AddApplicationServices();
+
+//services.AddControllers()
+//            .AddJsonOptions(options =>
+//            {
+//                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+//            });
 
 
 // Adding Authentication
