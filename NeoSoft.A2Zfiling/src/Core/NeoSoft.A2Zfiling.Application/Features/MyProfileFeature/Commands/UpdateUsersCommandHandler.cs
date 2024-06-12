@@ -48,7 +48,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands
             user.Address = request.Address;
             user.LastName = request.LastName;  
             user.FirstName = request.FirstName;
-            //user.PhoneNumber = request.ContactNumber;
+            user.PhoneNumber = request.ContactNumber.ToString();
+            user.ContactNumber = request.ContactNumber;
 
             // Attempt to update the user
             var result = await _userManager.UpdateAsync(user);

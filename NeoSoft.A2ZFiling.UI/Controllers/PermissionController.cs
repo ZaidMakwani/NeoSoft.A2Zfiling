@@ -3,6 +3,7 @@ using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using System.Security;
+using System.Security.Claims;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
@@ -24,12 +25,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 _logger.LogInformation("GetAll Permission Action Initiated");
 
-               var response = await _permission.GetPermissionAsync(); 
+                var response = await _permission.GetPermissionAsync();
                 _logger.LogInformation("GetAll Permission Action Completed");
                 return View(response);
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError("An error occurred whike getting all permission");
                 return StatusCode(500, ex.Message);
@@ -57,18 +58,46 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("Please enter a valid action name");
                 }
-                if ((model.ControllerName.Any(char.IsDigit)) || (model.ActionName.Any(char.IsDigit)) )
+                if ((model.ControllerName.Any(char.IsDigit)) || (model.ActionName.Any(char.IsDigit)))
                 {
                     return BadRequest("Name cannot contain number");
                 }
-                var existingAction = (await _permission.GetPermissionAsync()).Where(x=>x.ActionName.ToLower()==model.ActionName.ToLower() && x.ControllerName.ToLower()==model.ControllerName.ToLower()).FirstOrDefault();
+
+
+                //getting token and sending user information inside permissionVM
+
+                var token = HttpContext.Session.GetString("Token");
+
+                if (string.IsNullOrEmpty(token))
+                {
+                    // Token not found in session
+                    return BadRequest();
+                }
+
+
+                // Token found in session
+                // Perform other operations with the token as needed
+
+                ClaimsPrincipal claimsPrincipal = JwtDecoder.DecodeJwtToken(token);
+
+                foreach (var claim in claimsPrincipal.Claims)
+                {
+                    Console.WriteLine($"{claim.Type}: {claim.Value}");
+                }
+
+
+                var userClaim = claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "userId");
+                var userId = userClaim.Value;
+
+
+                var existingAction = (await _permission.GetPermissionAsync()).Where(x => x.ActionName.ToLower() == model.ActionName.ToLower() && x.ControllerName.ToLower() == model.ControllerName.ToLower()).FirstOrDefault();
                 if (existingAction != null)
                 {
                     return BadRequest(" Permission name already exist");
                 }
-               
 
-                var response = await _permission.CreatePermissionAsync(model);
+
+                var response = await _permission.CreatePermissionAsync(model, token);
                 if (response == null)
                 {
                     _logger.LogError("Failed to create permission");
@@ -80,7 +109,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                     return Ok(response);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError("An error occurred while creating permission");
                 return StatusCode(500, $"Error: {ex.Message}");
