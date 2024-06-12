@@ -38,12 +38,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             return View();
         }
 
-        public IActionResult Login()
+
+        public IActionResult Index()
         {
             return View();
         }
 
-    
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)

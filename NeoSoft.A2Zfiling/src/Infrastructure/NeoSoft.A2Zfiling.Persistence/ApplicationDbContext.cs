@@ -47,7 +47,38 @@ namespace NeoSoft.A2Zfiling.Persistence
             //var musicalguid = guid.parse("{6313179f-7837-473a-a4d5-a5571b43e6a6}");
             //var playguid = guid.parse("{bf3f3002-7e53-441e-8b76-f6280be284aa}");
             //var conferenceguid = guid.parse("{fe98f549-e790-4e9f-aa16-18c2292a2ee9}");
+            modelBuilder.Entity<Zones>().HasKey(z => z.ZoneId);
+            modelBuilder.Entity<State>().HasKey(s => s.StateId);
+            modelBuilder.Entity<City>().HasKey(c => c.CityId);
+            modelBuilder.Entity<Domain.Entities.MunicipalCorp>().HasKey(mc => mc.MunicipalId);
 
+            // Configure relationships
+            modelBuilder.Entity<City>()
+             .HasOne(c => c.State)
+             .WithMany(s => s.Cities)
+             .HasForeignKey(c => c.StateId)
+             .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<City>()
+                .HasOne(c => c.Zones)
+                .WithMany(z => z.Cities)
+                .HasForeignKey(c => c.ZoneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Configure MunicipalCorp relationships
+            modelBuilder.Entity<MunicipalCorp>()
+                .HasOne(m => m.Zones)
+                .WithMany(z => z.MunicipalCorps)
+                .HasForeignKey(m => m.ZoneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MunicipalCorp>()
+                .HasOne(m => m.City)
+                .WithMany(c => c.MunicipalCorps)
+                .HasForeignKey(m => m.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Message>()
                 .Property(s => s.Type)

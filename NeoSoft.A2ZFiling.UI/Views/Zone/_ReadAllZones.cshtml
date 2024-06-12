@@ -1,4 +1,8 @@
-﻿ @model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.MunicipalVM>
+﻿@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.ZoneVM>
+
+@{
+    Layout = "_Layout";
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,9 +21,12 @@
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+
+
+
 </head>
 <body class="hold-transition sidebar-mini">
-    <meta http-equiv="refresh" content="600">
     <div class="wrapper">
         <section class="content m-5 ">
             <div class="container-fluid">
@@ -29,16 +36,15 @@
                             <div class="col-lg-10">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Municipal</h3>
+                                        <h3 class="card-title">Zones</h3>
                                         <div class="card-tools">
                                             @*  <button type="button" class="btn btn-primary" id="createButton">
                                             Create
                                             </button> *@
 
-
                                             <div id="placeholder"></div>
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
-                                                    data-url="@Url.Action("Create", "Municipal")">
+                                                    data-url="@Url.Action("Create", "Zone")">
                                                 <i class="fas fa-plus"></i>   @* Create *@
                                             </button>
                                         </div>
@@ -49,63 +55,50 @@
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
-                                                    <th>Municipal Corporation</th>
-                                                    <th>Pin Code</th>
-                                                    <th>Cities</th>
-
-                                                    @* <th>States</th> *@
-                                                    <th>Zones</th>
+                                                    <th>Zone Name</th>
                                                     <th>Status</th>
-
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var item in Model)
+                                                @if (Model != null)
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.MunicipalId)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.MunicipalName)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Pincode)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.City.CityName)
-                                                        </td>
-                                                       @*  <td>
-                                                            @Html.DisplayFor(modelItem => item.State.StateName)
-                                                        </td> *@
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Zones.ZoneName)
-                                                        </td>
-                                                        <td>
-                                                            @if (item.IsActive)
-                                                            {
-                                                                <span class="text-success font-weight-bold">Active</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="text-danger font-weight-bold">Inactive</span>
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
-                                                                    data-url="@Url.Action("Edit", "Municipal")" data-id="@item.MunicipalId">
-                                                                <i class="fas fa-edit"></i> @* Edit *@
-                                                            </button>
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ZoneId)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ZoneName)
+                                                            </td>
+                                                            <td>
+                                                                @if (item.IsActive)
+                                                                {
+                                                                    <span class="text-success font-weight-bold">Active</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="text-danger font-weight-bold">Inactive</span>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                        data-url="@Url.Action("EditZone", "Zone")" data-id="@item.ZoneId">
+                                                                    <i class="fas fa-edit"></i> @* Edit *@
+                                                                </button>
 
 
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.MunicipalId">
-                                                                <i class="fas fa-trash-alt"></i> @* Delete *@
-                                                            </button>
+                                                                <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.ZoneId">
+                                                                    <i class="fas fa-trash-alt"></i> @* Delete *@
+                                                                </button>
 
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
+                                                    }
                                                 }
+
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -120,6 +113,8 @@
             </div>
             <!-- /.container-fluid -->
         </section>
+
+
 
 
 
@@ -145,6 +140,11 @@
         </div>
     </div>
 
+
+
+
+
+
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -166,6 +166,7 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+
     <!-- Page specific script -->
     <script>
         // $(document).ready(function () {
@@ -184,7 +185,49 @@
             "responsive": true
         }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
+
         //-----------------------------------------------------------------------------------------------------------------------
+
+        //----------------------------------------------------------------------------------------------------------------
+
+
+
+        // // Function to show the delete modal
+
+
+        $(document).on('click', '.trigger-modal', function () {
+            var ZoneId = $(this).data("id");
+            // Set data attribute of delete button inside modal for further reference
+            $('.delete-confirm').data('id', ZoneId);
+            $('#myModal').modal('show');
+        });
+
+        // Event delegation for handling delete button click inside the modal
+        $(document).on('click', '.delete-confirm', function () {
+            var ZoneId = $(this).data("id");
+            var deleteUrl = '@Url.Action("DeleteZone", "Zone")' + '?id=' + ZoneId;
+
+            $.ajax({
+                url: deleteUrl,
+                type: 'GET',
+                success: function (result) {
+                    console.log('Zone deleted successfully.');
+                    alert('Zone deleted successfully');
+                    $('#myModal').modal('hide');
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error deleting Zone: ", error);
+                    alert("Error deleting zone. Please try again.");
+
+                }
+            });
+        });
+
+
+
+
+        //---------------------------------------------------------------------------------------------------------------------------
 
         //function to handle create modal
 
@@ -205,15 +248,13 @@
                     card.on('click', '[data-save="modal"]', function (event) {
                         var form = $(this).parents('.modal').find('form');
                         var actionUrl = form.attr('action');
-                        var url = '@Url.Action("Create", "Municipal")';
+                        var url = '@Url.Action("Create", "Zone")';
                         var sendData = form.serialize();
 
                         $.post(url, sendData).done(function (data) {
+                            card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "Zone Created Successful." + '</div>');
                             card.find('.modal').modal('hide');
-                            card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "Municipal Created Successfully." + '</div>');
-                            // card.find('.modal').modal('hide');
                             location.reload();
-
 
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
@@ -229,47 +270,18 @@
         });
 
 
-        ///----------------------------------------------------------------------------------
 
 
-        // Function to show the delete modal
+        //----------------------------------------------------------------------------------------------------
+        //function to handle editzone in the modal
 
 
-        $(document).on('click', '.trigger-modal', function () {
-            var MunicipalId = $(this).data("id");
-            // Set data attribute of delete button inside modal for further reference
-            $('.delete-confirm').data('id', MunicipalId);
-            $('#myModal').modal('show');
-        });
-
-        // Event delegation for handling delete button click inside the modal
-        $(document).on('click', '.delete-confirm', function () {
-            var MunicipalId = $(this).data("id");
-            var deleteUrl = '@Url.Action("DeleteMunicipal", "Municipal")' + '?id=' + MunicipalId;
-
-            $.ajax({
-                url: deleteUrl,
-                type: 'GET',
-                success: function (result) {
-                    console.log('Municipal deleted successfully.');
-                    // alert('Zone deleted successfully');
-                    $('#myModal').modal('hide');
-                    location.reload();
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error deleting Municipal: ", error);
-                    alert("Error deleting Municipal. Please try again.");
-                }
-            });
-        });
-
-        //-------------------------------------------------------------------------------------------------
-        //function to handle editMunicipal in the modal
 
 
         $(document).on('click', '.edit-button', function () {
+
             var ZoneId = $(this).data("id");
-            var editUrl = '@Url.Action("EditMunicipal", "Municipal")' + '?id=' + ZoneId;
+            var editUrl = '@Url.Action("EditZone", "Zone")' + '?id=' + ZoneId;
 
             // AJAX request to fetch data for editing
             $.ajax({
@@ -280,11 +292,10 @@
                     $('#placeholder').html(data);
                     // Show the edit modal
                     $('#updateModal').modal('show');
-
                 },
                 error: function (xhr, status, error) {
-                    console.error("Error fetching Municipal data: ", error);
-                    alert("Error fetching Municipal data. Please try again.");
+                    console.error("Error fetching Zone data: ", error);
+                    alert("Error fetching Zone data. Please try again.");
                 }
             });
         });
@@ -292,8 +303,8 @@
 
         // Function to update data after saving
         function updateData() {
-            var MunicipalId = $('#MunicipalId').val();
-            var editUrl = '@Url.Action("EditMunicipal", "Municipal")' + '?id=' + MunicipalId;
+            var ZoneId = $('#ZoneId').val(); // Assuming you have a hidden input field with the ZoneId
+            var editUrl = '@Url.Action("EditZone", "Zone")' + '?id=' + ZoneId;
 
             // AJAX request to fetch updated data
             $.ajax({
@@ -303,42 +314,40 @@
                     // Replace the content in the placeholder div with the updated data
                     $('#placeholder').html(data);
                     // Close the modal or perform any other action as needed
+                    // alert('Zone Updated successfully');
+
                     $('#updateModal').modal('hide');
-                    location.reload();
                 },
                 error: function (xhr, status, error) {
-                    console.error("Error fetching updated Municipal data: ", error);
-                    alert("Error fetching updated Municipal data. Please try again.");
+                    console.error("Error fetching updated Zone data: ", error);
+                    alert("Error fetching updated Zone data. Please try again.");
                 }
             });
         }
-
-
 
         $(document).on('click', '#saveButton', function () {
 
             // Perform validation and submit data via AJAX
             $.ajax({
-                url: '@Url.Action("EditMunicipal", "Municipal")',
+                url: '@Url.Action("EditZone", "Zone")',
                 type: 'POST',
-                data: $('#updateMunicipalForm').serialize(),
+                data: $('#updateZoneForm').serialize(),
                 success: function (response) {
+                    console.log(response);
                     // Check if the response indicates success
                     if (response) {
                         updateData(); // Call function to update data
-                        // alert('Municipal Updated successfully');
                         $('#updateModal').modal('hide');
-                        var successHtml = '<div class="alert alert-success" role="alert">' + "Municipal Updated Successfully." + '</div>';
-                        $('#updateModal .modal-body').prepend(successHtml);
+                        var successfulhtml = '<div class="alert alert-success" role="alert">' + "Zone Updated Successfully" + '</div>';
+                        $('#updateModal .modal-body').prepend(successfulhtml);
+                        // alert('Zone Updated successfully');
                         location.reload();
-                        // $('#updateModal').modal('hide');
+
                     }
                     else {
                         alert("An error occurred while saving data. Please try again.");
                     }
                 },
-
-
                 error: function (xhr, status, error) {
                     // Display more detailed error message from server response
                     var errorMessage = xhr.responseText;
@@ -352,6 +361,8 @@
             });
         });
 
+
+
         $(document).on('click', '#closeButton, .close', function () {
             // Close the modal
             $('#updateModal').modal('hide');
@@ -359,7 +370,18 @@
 
 
 
+
+
+
+
+
+
+        // })
     </script>
 
 </body>
-</html>
+</html>@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

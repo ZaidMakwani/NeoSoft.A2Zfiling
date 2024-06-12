@@ -79,7 +79,7 @@
                                                         </td>
                                                         <td>
                                                             @if(item.IsActive){
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                            <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
                                                                     data-url="@Url.Action("Edit", "Role")" data-id="@item.RoleId">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
@@ -87,7 +87,7 @@
 
                                                             <a class="btn btn-danger btn-sm trigger-modal" data-id="@item.RoleId">
                                                                 <i class="fas fa-trash-alt"></i>
-                                                                </button>
+                                                                </a>
                                                             }
                                                             else
                                                             {

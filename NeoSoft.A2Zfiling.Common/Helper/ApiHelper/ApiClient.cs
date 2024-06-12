@@ -35,7 +35,7 @@ namespace NeoSoft.A2Zfiling.Common.Helper.ApiHelper
         {
             HttpResponseMessage responseMessage = await _httpClient.GetAsync(apiUrl);
 
-            if (!responseMessage.IsSuccessStatusCode)
+                if (!responseMessage.IsSuccessStatusCode)
                 await RaiseException(responseMessage);
             return JsonConvert.DeserializeObject<Response<IEnumerable<T>>>(await responseMessage.Content.ReadAsStringAsync());
         }

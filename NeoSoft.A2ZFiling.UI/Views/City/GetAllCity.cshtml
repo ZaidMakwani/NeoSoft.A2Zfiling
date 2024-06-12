@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
+</head>x
 <body class="hold-transition sidebar-mini">
     <meta http-equiv="refresh" content="600">
     <div class="wrapper">
@@ -50,7 +50,10 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>City Name</th>
+                                                    <th>State Name</th>
+                                                    <th>Zone Name</th>
                                                     <th>Status</th>
+
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -63,6 +66,12 @@
                                                         </td>
                                                         <td>
                                                             @Html.DisplayFor(modelItem => item.CityName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.State.StateName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Zones.ZoneName)
                                                         </td>
                                                         <td>
                                                             @if (item.IsActive)
@@ -223,7 +232,7 @@
             $('.delete-confirm').data('id', CityId);
             $('#myModal').modal('show');
         });
-
+        
         // Event delegation for handling delete button click inside the modal
         $(document).on('click', '.delete-confirm', function () {
             var CityId = $(this).data("id");

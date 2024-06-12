@@ -12,5 +12,12 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Commands.C
     public class CreateMunicipalCommand : IRequest<Response<CreateMunicipalDto>>
     {
         public string MunicipalName { get; set; }
+        public string Pincode { get; set; }
+
+        public bool IsActive { get; set; }
+        public int StateId { get; set; }
+        public int? CityId { get; set; }
+
+        public int ZoneId { get; set; }
     }
 }

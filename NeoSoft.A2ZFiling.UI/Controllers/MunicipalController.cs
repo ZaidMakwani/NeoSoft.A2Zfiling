@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
@@ -13,18 +14,34 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         private readonly HttpClient _httpClient;
         private readonly ILogger<MunicipalController> _logger;
         private readonly IMunicipalService _municipalService;
+        private readonly IStateService _stateService;
+        private readonly IZoneService _zoneService;
+        private readonly ICityService _cityService;
 
-        public MunicipalController(ILogger<MunicipalController> logger, IMunicipalService municipalService)
+
+        public MunicipalController(ILogger<MunicipalController> logger, IMunicipalService municipalService, IStateService stateService, IZoneService zoneService, ICityService cityService)
         {
             _httpClient = new HttpClient();
             _logger = logger;
             _municipalService = municipalService;
-
+            _stateService = stateService;
+            _zoneService = zoneService;
+            _cityService = cityService;
         }
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return PartialView("_PartialLayoutMunicipalCreate");
+            var states = await _stateService.GetStateAsync();
+            ViewBag.lstState = new SelectList(states, "StateId", "StateName");
+            var zones = await _zoneService.GetZoneAsync();
+            ViewBag.lstZone = new SelectList(zones, "ZoneId", "ZoneName");
+
+
+
+            var cities = await _cityService.GetCityAsync();
+            ViewBag.lstCity = new SelectList(cities, "CityId", "CityName");
+
+            return PartialView("_PartialLayoutMunicipalCreate", new MunicipalVM());
         }
         [HttpPost]
         public async Task<IActionResult> Create(MunicipalVM municipal)

@@ -34,7 +34,10 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Commands.C
            
                 var Municipal = new MunicipalCorp() { 
                     MunicipalName = request.MunicipalName,
-                    IsActive = true
+                    IsActive = true,
+                    CityId = (int)request.CityId,
+                    ZoneId = request.ZoneId,
+                    Pincode = request.Pincode,
                 };
                 Municipal = await _aysncRepository.AddAsync(Municipal);
             var Mapper = _mapper.Map<CreateMunicipalDto>(Municipal);

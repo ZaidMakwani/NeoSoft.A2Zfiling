@@ -17,19 +17,36 @@ namespace NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList
         private readonly IAsyncRepository<City> _asyncRepository;
         private readonly ILogger<GetCityListHanlder> _logger;
         private readonly IMapper _mapper;
+        private readonly IAsyncRepository<State> _stateRepository;
 
-        public GetCityListHanlder(IAsyncRepository<City> asyncRepository, ILogger<GetCityListHanlder> logger, IMapper mapper)
+        public GetCityListHanlder(IAsyncRepository<City> asyncRepository, ILogger<GetCityListHanlder> logger, IMapper mapper, IAsyncRepository<State> stateRepository)
         {
             _asyncRepository = asyncRepository;
             _logger = logger;
             _mapper = mapper;
+            _stateRepository = stateRepository;
         }
         public async Task<Response<IEnumerable<GetCityListDto>>> Handle(GetCityListCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 _logger.LogInformation("Handler Initiated");
-                var allcities = (await _asyncRepository.ListAllAsync()).Where(x => x.IsActive == true);
+                var allcities = (await _asyncRepository.ListAllAsync("State","Zones")).Where(x => x.IsActive == true);
+
+                var licenseList = allcities.Select(x => new GetCityListDto
+                {
+                    CityId = x.CityId,
+                    CityName = x.CityName,
+                  
+                    IsActive = x.IsActive,
+                    ZoneId = x.ZoneId,
+                   
+                    StateId = x.StateId,
+
+
+
+                }).ToList();
+
 
                 var cities = _mapper.Map<IEnumerable<GetCityListDto>>(allcities);
                 _logger.LogInformation("Handler Completed");
@@ -40,5 +57,9 @@ namespace NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList
                 throw ex;
             }
         }
+
+
+
+
     }
 }

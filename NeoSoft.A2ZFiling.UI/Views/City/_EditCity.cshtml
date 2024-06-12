@@ -1,49 +1,45 @@
 ﻿@model NeoSoft.A2ZFiling.UI.ViewModels.CityVM
 
-@{
-    ViewData["Title"] = "Update";
-
-}
-
-<!-- Create Modal -->     @* modal-dialog-centered *@
-@* <div id="createModal" class="modal" tabindex="-1" role="dialog"> *@
-<div id="updateModal" class="modal fade">
+<div id="cityModal" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Update City</h5>
+                <h5 class="modal-title">@((Model.CityId == 0 ? "Create City" : "Update City"))</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="error-message-container"></div>
-                <form id="updateCityForm" asp-action="EditCity" asp-controller="City" method="post">
+                <form id="cityForm" asp-action="@(Model.CityId == 0 ? "Create" : "EditCity")" asp-controller="City" method="post">
+                    <input asp-for="CityId" type="hidden" />
 
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                    <div class="form-group">
-                        @* <label asp-for="ZoneId">Zone Id:</label> *@
-                        <input asp-for="CityId" class="form-control" hidden />
-                        @* <span asp-validation-for="ZoneId" class="text-danger" id="entityName"></span> *@
-                    </div>
                     <div class="form-group">
                         <label asp-for="CityName">City Name:</label>
                         <input asp-for="CityName" class="form-control" />
-                        <span asp-validation-for="CityName" class="text-danger" id="entityName"></span>
+                        <span asp-validation-for="CityName" class="text-danger"></span>
                     </div>
-                    <input type="hidden" asp-for="IsActive" />
 
+                    <div class="form-group">
+                        <label asp-for="StateId">State:</label>
+                        @Html.DropDownListFor(model => model.StateId, ViewBag.lstState as SelectList, "-- Select State --", new { @class = "form-control" })
+                        <span asp-validation-for="StateId" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-group">
+                        <label asp-for="ZoneId">Zone:</label>
+                        @Html.DropDownListFor(model => model.ZoneId, ViewBag.lstZone as SelectList, "-- Select Zone --", new { @class = "form-control" })
+                        <span asp-validation-for="ZoneId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input asp-for="IsActive" class="form-check-input" />
+                        <label asp-for="IsActive" class="form-check-label">Is Active</label>
+                    </div>
                 </form>
-
-
             </div>
-
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="closeButton" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton" data-save="modal">Save</button>
-
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
             </div>
         </div>
     </div>
@@ -53,4 +49,43 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        $(document).ready(function () {
+            var placeholder = $('#placeholder');
+
+            $('button[data-toggle="ajax-modal"]').click(function (event) {
+                var url = $(this).data('url');
+                $.get(url).done(function (data) {
+                    placeholder.html(data);
+                    placeholder.find('.modal').modal('show');
+
+                    placeholder.off('click', '#saveButton');
+
+                    placeholder.on('click', '#saveButton', function (event) {
+                        var form = placeholder.find('form');
+                        var actionUrl = form.attr('action');
+                        var sendData = form.serialize();
+
+                        $.post(actionUrl, sendData).done(function (data) {
+                            if (data.success) {
+                                placeholder.find('.modal').modal('hide');
+                                location.reload();
+                            } else {
+                                var errorHtml = '<div class="alert alert-danger" role="alert">Error saving City. Please try again.</div>';
+                                placeholder.find('.modal-body').prepend(errorHtml);
+                            }
+                        }).fail(function (xhr, status, error) {
+                            var errorMessage = xhr.responseText;
+                            var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
+                            placeholder.find('.modal-body').prepend(errorHtml);
+                        });
+                    });
+                }).fail(function (xhr, status, error) {
+                    var errorMessage = xhr.responseText;
+                    var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
+                    placeholder.find('.modal-body').prepend(errorHtml);
+                });
+            });
+        });
+    </script>
 }

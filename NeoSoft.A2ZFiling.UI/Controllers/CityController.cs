@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using NeoSoft.A2ZFiling.UI.Filter;
@@ -7,22 +8,27 @@ using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class CityController : Controller
     {
         private readonly ILogger<CityController> _logger;
         private readonly ICityService _cityService;
         private readonly IAsyncRepository<Permission> _permissionRepository;
         private readonly IAsyncRepository<UserPermission> _userPermissionRepository;
+        private readonly IStateService _stateService;
+        private readonly IZoneService _zoneService;
 
 
 
-        public CityController(ILogger<CityController> logger, ICityService cityService)
+
+        public CityController(ILogger<CityController> logger, ICityService cityService, IStateService stateService, IZoneService zoneService)
         {
             _logger = logger;
-             _cityService = cityService;
+            _cityService = cityService;
+            _stateService = stateService;
+            _zoneService = zoneService;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetAllCity()
         {
@@ -31,6 +37,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 _logger.LogInformation("City Action Initiated");
                 var response = await _cityService.GetCityAsync();
                 _logger.LogInformation("City Action Completed");
+
+
+
+
+
                 return View(response);
             }
             catch (Exception ex)
@@ -40,12 +51,17 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
         }
 
-
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            //return View();
-            return PartialView("_CreateCity");
+            var states = await _stateService.GetStateAsync();
+            ViewBag.lstState = new SelectList(states, "StateId", "StateName");
+            var zones = await _zoneService.GetZoneAsync();
+            ViewBag.lstZone = new SelectList(zones, "ZoneId", "ZoneName");
+
+
+
+            return PartialView("_CreateCity", new CityVM());
         }
 
         [HttpPost]
@@ -105,73 +121,117 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
 
 
+        //[HttpGet]
+        //public async Task<IActionResult> EditCity(int id)
+        //{
+        //    try
+        //    {
+        //        _logger.LogInformation("Get EditZone Initiated");
+
+        //        var getById = await _cityService.GetByIdAsync(id);
+
+        //        if (getById != null)
+        //        {
+        //            _logger.LogInformation("Get EditZone Completed");
+        //            return PartialView("_EditCity", getById);
+        //        }
+        //        else
+        //        {
+        //            _logger.LogError("The Zone is not found");
+        //            return NotFound();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "An error occurred while retrieving zone details.");
+        //        return StatusCode(500, "An error occurred while retrieving zone details.");
+        //    }
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> EditCity(CityVM model)
+        //{
+        //    try
+        //    {
+        //        _logger.LogInformation("Edit City Action Initiated");
+
+        //        if (string.IsNullOrEmpty(model.CityName))
+        //        {
+        //            return BadRequest("Please enter a valid city name.");
+        //        }
+        //        if (model.CityName.Any(char.IsDigit))
+        //        {
+        //            return BadRequest("City Name cannot contain numbers.");
+        //        }
+        //        var existingCity = (await _cityService.GetCityAsync()).Where(x => x.CityName.ToLower() == model.CityName.ToLower()).FirstOrDefault();
+        //        if (existingCity != null)
+        //        {
+        //            return BadRequest("City with this name already exists.");
+        //        }
+        //        var response = await _cityService.UpdateCityAsync(model);
+        //        if (response == null)
+        //        {
+        //            _logger.LogError("Failed to edit city: Response was null.");
+        //            return BadRequest("Failed to edit city.");
+        //        }
+        //        else
+        //        {
+        //            _logger.LogInformation("Edit City Action Completed");
+        //            // Instead of returning Ok(), return a JSON object
+        //            //return Json(new { success = true });
+        //            return Ok(response);
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "An error occurred while editing city.");
+        //        return StatusCode(500, "An error occurred while editing city.");
+        //    }
+        //}
+
+
         [HttpGet]
         public async Task<IActionResult> EditCity(int id)
         {
-            try
-            {
-                _logger.LogInformation("Get EditZone Initiated");
+            var city = await _cityService.GetByIdAsync(id);
+            if (city == null) return NotFound();
 
-                var getById = await _cityService.GetByIdAsync(id);
-
-                if (getById != null)
-                {
-                    _logger.LogInformation("Get EditZone Completed");
-                    return PartialView("_EditCity", getById);
-                }
-                else
-                {
-                    _logger.LogError("The Zone is not found");
-                    return NotFound();
-                }
-            }
-            catch (Exception ex)
+            var model = new CityVM
             {
-                _logger.LogError(ex, "An error occurred while retrieving zone details.");
-                return StatusCode(500, "An error occurred while retrieving zone details.");
-            }
+                CityId = city.CityId,
+                CityName = city.CityName,
+                StateId = city.StateId,
+                ZoneId = city.ZoneId,
+                IsActive = city.IsActive,
+            };
+
+            ViewBag.lstState = new SelectList(await _stateService.GetStateAsync(), "StateId", "StateName");
+            ViewBag.lstZone = new SelectList(await _zoneService.GetZoneAsync(), "ZoneId", "ZoneName");
+            return PartialView("_EditCity", model);
         }
 
+        // POST: City/Edit
         [HttpPost]
         public async Task<IActionResult> EditCity(CityVM model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                _logger.LogInformation("Edit City Action Initiated");
+                var city = await _cityService.GetByIdAsync(model.CityId);
+                if (city == null) return NotFound();
 
-                if (string.IsNullOrEmpty(model.CityName))
-                {
-                    return BadRequest("Please enter a valid city name.");
-                }
-                if (model.CityName.Any(char.IsDigit))
-                {
-                    return BadRequest("City Name cannot contain numbers.");
-                }
-                var existingCity = (await _cityService.GetCityAsync()).Where(x => x.CityName.ToLower() == model.CityName.ToLower()).FirstOrDefault();
-                if (existingCity != null)
-                {
-                    return BadRequest("City with this name already exists.");
-                }
-                var response = await _cityService.UpdateCityAsync(model);
-                if (response == null)
-                {
-                    _logger.LogError("Failed to edit city: Response was null.");
-                    return BadRequest("Failed to edit city.");
-                }
-                else
-                {
-                    _logger.LogInformation("Edit City Action Completed");
-                    // Instead of returning Ok(), return a JSON object
-                    //return Json(new { success = true });
-                    return Ok(response);
+                city.CityName = model.CityName;
+                city.StateId = model.StateId;
+                city.ZoneId = model.ZoneId;
+                city.IsActive = model.IsActive;
 
-                }
+                await _cityService.UpdateCityAsync(city);
+                return Json(new { success = true });
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while editing city.");
-                return StatusCode(500, "An error occurred while editing city.");
-            }
+
+            ViewBag.lstState = new SelectList(await _stateService.GetStateAsync(), "StateId", "StateName");
+            ViewBag.lstZone = new SelectList(await _zoneService.GetZoneAsync(), "ZoneId", "ZoneName");
+            return PartialView("CityForm", model);
         }
     }
 }
