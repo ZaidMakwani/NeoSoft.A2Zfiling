@@ -21,6 +21,8 @@ namespace NeoSoft.A2Zfiling.Persistence
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
 
+         
+
             return services;
         }
     }

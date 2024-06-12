@@ -1,0 +1,326 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.CategoryVM>
+
+<div class="card">
+    <div id="categoryPlaceholder"></div>
+   @*  <div class="card-header">
+
+        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
+                data-url="@Url.Action("Create", "Category")">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div> *@
+
+    <div class="card-header">
+        <div class="float-right">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "Category")">
+                <i class="fas fa-plus"></i>
+            </button>
+
+            <div class="navbar-search-block">
+                <form class="form-inline">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+
+    <div class="card-body">
+        <table id="example4" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Short Names</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShortName)
+                        </td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <span class="text-success font-weight-bold">Active</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger font-weight-bold">Inactive</span>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm editCategory-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                    data-url="@Url.Action("Update", "Category")" data-id="@item.CategoryId">
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+
+                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.CategoryId">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<!-- Delete Modal -->
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete-category">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<!-- jQuery -->
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ *@
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- DataTables Buttons extension -->
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/jszip/jszip.min.js"></script>
+<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<script>
+
+    console.log("Before DataTable initialization");
+
+    $("#example4").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "paging": true,
+        "pageLength": 4,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true
+    })/* .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); */
+    $('#example4').DataTable().buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
+
+
+    console.log("After DataTable initialization");
+
+
+    //function to handle create modal
+
+    $(function () {
+        var card = $('#categoryPlaceholder');
+
+        $('button[data-toggle="ajax-modal"]').click(function (event) {
+            var url = $(this).data('url');
+            var decodeUrl = decodeURIComponent(url);
+            $.get(decodeUrl).done(function (data) {
+                card.html(data);
+                card.find('.modal').modal('show');
+
+                // Unbind previously bound event handler
+                card.off('click', '[data-save="categoryModal"]');
+
+                // Event delegation for dynamically loaded content
+                card.on('click', '[data-save="categoryModal"]', function (event) {
+                    var form = $(this).parents('.modal').find('form');
+                    var actionUrl = form.attr('action');
+                    var url = '@Url.Action("Create", "Category")';
+                    var sendData = form.serialize();
+
+                    $.post(url, sendData).done(function (data) {
+                        card.find('.modal').modal('hide');
+                        card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "Category Created Successfully." + '</div>');
+
+                        $('#table4-tab').tab('show');
+                        // location.reload();
+                        $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
+                            console.log('Category data reloaded.');
+                        });
+
+
+                    }).fail(function (xhr, status, error) {
+                        var errorMessage = xhr.responseText;
+                        console.log(errorMessage);
+                        // Update the modal content to display the error message
+                        // card.find('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                        card.find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+
+                    });
+                });
+            });
+        });
+    });
+
+
+    // Function to show the delete modal
+
+
+    $(document).on('click', '.trigger-modal', function () {
+        var CategoryId = $(this).data("id");
+        // Set data attribute of delete button inside modal for further reference
+        $('.delete-category').data('id', CategoryId);
+        $('#myModal').modal('show');
+    });
+
+    // Event delegation for handling delete button click inside the modal
+    $(document).on('click', '.delete-category', function () {
+        var CategoryId = $(this).data("id");
+        var deleteUrl = '@Url.Action("Delete", "Category")' + '?id=' + CategoryId;
+
+        $.ajax({
+            url: deleteUrl,
+            type: 'GET',
+            success: function (result) {
+                console.log('Category deleted successfully.');
+                // alert('Zone deleted successfully');
+                $('#myModal').modal('hide');
+                $('#table4-tab').tab('show');
+                // location.reload();
+                $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
+                    console.log('Category data reloaded.');
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error deleting category: ", error);
+                alert("Error deleting category. Please try again.");
+            }
+        });
+    });
+
+
+
+
+    //function to handle editcategory in the modal
+
+
+
+    $(document).on('click', '.editCategory-button', function () {
+        var CategoryId = $(this).data("id");
+        var editUrl = '@Url.Action("Update", "Category")' + '?id=' + CategoryId;
+
+        // AJAX request to fetch data for editing
+        $.ajax({
+            url: editUrl,
+            type: 'GET',
+            success: function (data) {
+                // Load the partial view into the placeholder div
+                $('#categoryPlaceholder').html(data);
+                // Show the edit modal
+                $('#updateModal').modal('show');
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching Company data: ", error);
+                alert("Error fetching Company data. Please try again.");
+            }
+        });
+    });
+
+
+    // Function to update data after saving
+    function updateData() {
+        var CategoryId = $('#CategoryId').val(); // Assuming you have a hidden input field with the IndustryId
+        var editUrl = '@Url.Action("Update", "Category")' + '?id=' + CategoryId;
+
+        // AJAX request to fetch updated data
+        $.ajax({
+            url: editUrl,
+            type: 'GET',
+            success: function (data) {
+                // Replace the content in the placeholder div with the updated data
+                $('#categoryPlaceholder').html(data);
+                // Close the modal
+                $('#updateModal').modal('hide');
+
+                $('#table4-tab').tab('show');
+
+                $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
+                    console.log('Category data reloaded.');
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching updated Category data: ", error);
+                alert("Error fetching updated Category data. Please try again.");
+            }
+        });
+    }
+
+    $(document).on('click', '#categorySaveButton', function () {
+        // Perform validation and submit data via AJAX
+        $.ajax({
+            url: '@Url.Action("Update", "Category")',
+            type: 'POST',
+            data: $('#updateCategoryForm').serialize(),
+            success: function (response) {
+                console.log(response);
+                // Check if the response indicates success
+                if (response) {
+                    updateData(); // Call function to update data
+                    $('#categoryPlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Category Updated Successfully.</div>');
+                } else {
+                    alert("An error occurred while saving data. Please try again.");
+                }
+            },
+            error: function (xhr, status, error) {
+                // Display more detailed error message from server response
+                var errorMessage = xhr.responseText;
+                $('#categoryPlaceholder').find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+            }
+        });
+    });
+
+    $(document).on('click', '#closeButton, .close', function () {
+        // Close the modal
+        $('#updateModal').modal('hide');
+    });
+
+</script>

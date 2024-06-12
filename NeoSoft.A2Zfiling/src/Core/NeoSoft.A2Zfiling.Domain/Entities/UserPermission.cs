@@ -12,7 +12,8 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
     {
         public int UserPermissionId { get; set; }
 
-        [ForeignKey("Roles")]
+        //[ForeignKey("Roles")]
+        [ForeignKey("Role")]
         public int RoleId { get; set; }
 
         [ForeignKey("Permission")]

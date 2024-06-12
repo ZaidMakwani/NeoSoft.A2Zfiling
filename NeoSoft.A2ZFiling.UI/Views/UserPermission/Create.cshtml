@@ -7,9 +7,10 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h2>Create User Permission</h2>
+            <h2>Add User Permission</h2>
 
             <form id="createUserPermissionForm" asp-action="Create" asp-controller="UserPermission" method="post">
+                <div class="error-message-container"></div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
@@ -22,7 +23,7 @@
                             <option value="@permission.RoleId">@permission.RoleName</option>
                         }
                     </select>
-                    @Html.ValidationMessageFor(m => m.FirstOrDefault().RoleId, "", new { @class = "text-danger" })
+                   
                 </div>
 
 
@@ -64,10 +65,9 @@
 
 
 
-
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="submit" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-secondary" asp-action="GetAll" asp-controller="UserPermission">Cancel</button>
                 </div>
             </form>
         </div>
@@ -76,7 +76,9 @@
 
 
 @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function () {
             populateRolesDropdown();
