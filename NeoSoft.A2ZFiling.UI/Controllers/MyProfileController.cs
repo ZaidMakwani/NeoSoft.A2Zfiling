@@ -115,13 +115,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
         [HttpPost]
         public async Task<IActionResult> UpdateUser(AppUserVM model)
-         {
-
-            if (ModelState.IsValid) 
-            {
-                return View(model);
-            }
-
+        {
             var token = HttpContext.Session.GetString("Token");
 
             if (string.IsNullOrEmpty(token))
