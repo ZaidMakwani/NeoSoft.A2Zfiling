@@ -13,5 +13,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.Permissionsss.Command.CreatePer
         public string ControllerName { get; set; }
 
         public string ActionName { get; set; }
+        public string Token { get; set; }
     }
 }

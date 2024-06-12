@@ -60,7 +60,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
 
                 var roleCurrent = _roleAsyncRepository.GetRoleIdAsync(roleString);
 
-
+                var userId = user.Id;
 
                 var userPermissions = await _userPermissionRepository.ListAllAsync();
                 var rolePermissions = userPermissions.Where(x => x.RoleId.ToString() == roleCurrent.Result.RoleId.ToString()).Select(x => x.PermissionId);
@@ -77,7 +77,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim("roleid",roleCurrent.Result.RoleId.ToString()),
-                    new Claim("permissions",permissionsJson)
+                    new Claim("permissions",permissionsJson),
+                    new Claim("userId",userId),
                 };
                    
                 foreach (var userRole in userRoles)
