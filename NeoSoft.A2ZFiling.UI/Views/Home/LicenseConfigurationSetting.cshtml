@@ -1,0 +1,265 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+
+@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.LicenseTypeVM>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminLTE 3 | DataTables</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+
+
+    <style>
+        .nav-tabs .nav-item .nav-link {
+            color: black;
+        }
+
+            .nav-tabs .nav-item .nav-link.active {
+                font-weight: bold;
+            }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <section class="content m-5 ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row justify-content-end">
+                            <div class="col-lg-10">
+                                <!-- Nav tabs -->
+                                <div class="card-header">
+                                    <h3 class="card-title">License Configuration Setting</h3>
+                                </div>
+
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="table1-tab" data-toggle="tab" href="#table1" role="tab" aria-controls="table1" aria-selected="true">License Types</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table2-tab" data-toggle="tab" href="#table2" role="tab" aria-controls="table2" aria-selected="true">Industry Types</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table3-tab" data-toggle="tab" href="#table3" role="tab" aria-controls="table3" aria-selected="true">Company Types</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table4-tab" data-toggle="tab" href="#table4" role="tab" aria-controls="table4" aria-selected="true">Categories </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table5-tab" data-toggle="tab" href="#table5" role="tab" aria-controls="table5" aria-selected="true">Licenses </a>
+                                    </li>
+                                </ul>
+
+
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="table1" role="tabpanel" aria-labelledby="table1-tab">
+                                         <div class="card">
+                                            <div id="placeholder"></div>
+
+                                            <div class="card-header">
+                                                <div class="float-right">
+                                                    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "LicenseType")">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+
+                                                    <div class="navbar-search-block">
+                                                        <form class="form-inline">
+                                                            <div class="input-group input-group-sm">
+                                                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-navbar" type="submit">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </button>
+                                                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="card-body">
+                                                    <table id="example1" class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr.No</th>
+                                                                <th>Name</th>
+                                                                <th>Description</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.LicenseTypeId)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.LicenseName)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Description)
+                                                                    </td>
+                                                                    <td>
+                                                                        @if (item.IsActive)
+                                                                        {
+                                                                            <span class="text-success font-weight-bold">Active</span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span class="text-danger font-weight-bold">Inactive</span>
+                                                                        }
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                                data-url="@Url.Action("Edit", "LicenseType")" data-id="@item.LicenseTypeId">
+                                                                            <i class="fas fa-edit"></i>
+                                                                        </button>
+
+
+                                                                        <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.LicenseTypeId">
+                                                                            <i class="fas fa-trash-alt"></i>
+                                                                        </button>
+
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div> 
+                                    </div>
+
+                                   @*  <div class="tab-pane fade " id="table1" role="tabpanel" aria-labelledby="table1-tab">
+                                        <div id="licenseTypeDataPlaceholder"></div>
+                                       
+                                    </div> *@
+
+                                    <div class="tab-pane fade " id="table2" role="tabpanel" aria-labelledby="table2-tab">
+                                        <div id="industryDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table3" role="tabpanel" aria-labelledby="table3-tab">
+                                        <div id="companyDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table4" role="tabpanel" aria-labelledby="table4-tab">
+                                        <div id="categoryDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table5" role="tabpanel" aria-labelledby="table5-tab">
+                                        <div id="licenseDataPlaceholder"></div>
+                                   </div>
+
+
+
+
+
+
+
+
+                                    @* </div> *@
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+                </div>
+                   </section>
+
+                </div>
+                <!-- Delete Modal -->
+                <div id="myModal" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Confirm Deletion</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete this item?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger delete-confirm">Delete</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+   
+
+    @* </section> *@
+    @* </div> *@
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- DataTables Buttons extension -->
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <script src="~/js/script.js"></script>
+
+
+
+   
+</body>
+</html>
