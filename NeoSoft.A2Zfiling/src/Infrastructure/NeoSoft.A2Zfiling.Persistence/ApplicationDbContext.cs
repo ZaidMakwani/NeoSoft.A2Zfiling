@@ -21,6 +21,8 @@ namespace NeoSoft.A2Zfiling.Persistence
         {
         }
 
+        public DbSet<SubStatus> SubStatuses { get; set; }
+        public DbSet<Status> Statuses { get; set; }
         public DbSet<License> Licenses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<LicenseType> LicenseTypes { get; set; }

@@ -72,6 +72,16 @@ using NeoSoft.A2Zfiling.Application.Features.Licenses.Queries.LicenseList;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Queries.LicenseListByid;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.DeleteLicense;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.UpdateLicense;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Command.CreateStatus;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Queries.StatusList;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Queries.StatusListById;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Command.UpdateStatus;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Command.DeleteStatus;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.CreateSubStatus;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Queries.SubStatusList;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Queries.SubStatusListById;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.UpdateSubStatus;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.DeleteSubStatus;
 
 
 namespace NeoSoft.A2Zfiling.Application.Profiles
@@ -193,6 +203,20 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<License,DeleteLicenseDto>().ReverseMap();
             CreateMap<License,UpdateLicenseCommand>().ReverseMap();
             CreateMap<License,UpdateLicenseDto>().ReverseMap();
+
+            CreateMap<Status,CreateStatusDto>().ReverseMap();
+            CreateMap<Status,StatusListDto>().ReverseMap();
+            CreateMap<Status,StatusListByIdDto>().ReverseMap();
+            CreateMap<Status, UpdateStatusCommand>().ReverseMap();
+            CreateMap<Status, UpdateStatusDto>().ReverseMap();
+            CreateMap<Status,DeleteStatusDto>().ReverseMap();
+
+            CreateMap<SubStatus,CreateSubStatusDto>().ReverseMap();
+            CreateMap<SubStatus,SubStatusListDto>().ReverseMap();
+            CreateMap<SubStatus, SubStatusListByIdDto>().ReverseMap();
+            CreateMap<SubStatus,UpdateSubStatusDto>().ReverseMap();
+            CreateMap<SubStatus,UpdateSubStatusCommand>().ReverseMap();
+            CreateMap<SubStatus,DeleteSubStatusDto>().ReverseMap();
         }
     }
 }

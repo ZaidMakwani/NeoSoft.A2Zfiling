@@ -83,7 +83,7 @@
                                 <span class="text-danger font-weight-bold">Inactive</span>
                             }
                         </td>
-                        <td>
+                  @*       <td>
                                 <div class="btn-group">
                             <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
                                     data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId">
@@ -94,8 +94,39 @@
                             <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.LicenseId">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
-                            </div>
-                        </td>
+                          </div>
+                        </td> *@
+
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                                data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+
+                                        <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.LicenseId">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                                data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId" disabled>
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+
+                                        <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.LicenseId" disabled>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                }
+                            </td>
+
+
                     </tr>
                 }
             </tbody>
