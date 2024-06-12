@@ -17,13 +17,12 @@ namespace NeoSoft.A2ZFiling.UI.Services
             _logger = logger;
         }
 
-        [HttpPost("UserId")]
-        public async Task<PermissionVM> CreatePermissionAsync(PermissionVM role, string token)
+        public async Task<PermissionVM> CreatePermissionAsync(PermissionVM role)
         {
             try
             {
                 _logger.LogInformation("CreatePermission Service Initiated");
-                var permission = await _apiClient.PostAsync("Permission/token?token={token}", role);
+                var permission = await _apiClient.PostAsync("Permission/",role);
                 _logger.LogInformation("CreatePermission Service Initiated");
                 return permission.Data;
             }
