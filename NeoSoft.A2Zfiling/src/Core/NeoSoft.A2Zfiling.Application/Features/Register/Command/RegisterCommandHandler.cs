@@ -54,7 +54,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
                 //return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
                 var user = _userManager.CreateAsync(new AppUser() { FirstName = request.FirstName, LastName = request.LastName, Address = request.Address,
                     Email = request.Email, PhoneNumber = request.ContactNumber, UserName = request.UserName,
-                    RefreshTokenExpiryTime = DateTime.Now
+                    RefreshTokenExpiryTime = DateTime.Now, PasswordCurr = request.Password
                 }, request.Password).GetAwaiter().GetResult();
                 if (user.Succeeded)
                 {
