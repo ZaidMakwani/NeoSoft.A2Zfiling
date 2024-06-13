@@ -275,12 +275,12 @@
             success: function (data) {
                 $('#companyPlaceholder').html(data);
 
-                $('#updateCompanyModal').modal('hide');
-                $('#table3-tab').tab('show');
+                // $('#updateCompanyModal').modal('hide');
+                // $('#table3-tab').tab('show');
 
-                $('#companyDataPlaceholder').load('/Company/GetAll', function () {
-                    console.log('Company data reloaded.');
-                });
+                // $('#companyDataPlaceholder').load('/Company/GetAll', function () {
+                //     console.log('Company data reloaded.');
+                // });
 
             },
             error: function (xhr, status, error) {
@@ -305,7 +305,11 @@
                     updateData(); // Call function to update data
                     // alert('City Updated successfully');
                     $('#companyPlaceholder').find('.error-message-container').prepend('<div class="alert alert-success" role="alert">' + "Company Updated Successfully" + '</div>');
-
+                    $('#updateCompanyModal').modal('hide');
+                    $('#table3-tab').tab('show');
+                    $('#companyDataPlaceholder').load('/Company/GetAll', function () {
+                        console.log('Company data reloaded.');
+                    });
                    } else {
                     //alert("An error occurred while saving data. Please try again.");
                 

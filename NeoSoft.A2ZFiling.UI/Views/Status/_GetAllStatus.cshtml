@@ -260,13 +260,13 @@
                 // Replace the content in the placeholder div with the updated data
                 $('#statusPlaceholder').html(data);
                 // Close the modal
-                $('#updateStatusModal').modal('hide');
+                // $('#updateStatusModal').modal('hide');
 
-                $('#table6-tab').tab('show');
+                // $('#table6-tab').tab('show');
 
-                $('#statusDataPlaceholder').load('/Status/GetAll', function () {
-                    console.log('Status data reloaded.');
-                });
+                // $('#statusDataPlaceholder').load('/Status/GetAll', function () {
+                //     console.log('Status data reloaded.');
+                // });
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching updated Staus data: ", error);
@@ -287,6 +287,14 @@
                 if (response) {
                     updateData(); // Call function to update data
                     $('#statusPlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Status Updated Successfully.</div>');
+                    $('#updateStatusModal').modal('hide');
+
+                    $('#table6-tab').tab('show');
+
+                    $('#statusDataPlaceholder').load('/Status/GetAll', function () {
+                        console.log('Status data reloaded.');
+                    });
+                
                 } else {
                     alert("An error occurred while saving data. Please try again.");
                 }

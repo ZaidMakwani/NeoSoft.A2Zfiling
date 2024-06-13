@@ -114,8 +114,8 @@
 </div>
 
 <!-- jQuery -->
-@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- *@
+
+
 <!-- DataTables -->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -284,17 +284,17 @@
                 $('#Industryplaceholder').html(data);
                 // Close the modal
                 $('#updateIndustryModal').modal('hide');
-                $('#table2-tab').tab('show');
-                // Reload industry data after creating a new industry
-                $('#industryDataPlaceholder').load('/Industry/GetAll'
-                    , function () {
-                        console.log('Industry data reloaded.');
-                    }
-                );
+                // $('#table2-tab').tab('show');
+                // // Reload industry data after creating a new industry
+                // $('#industryDataPlaceholder').load('/Industry/GetAll'
+                //     , function () {
+                //         console.log('Industry data reloaded.');
+                //     }
+                // );
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching updated Industry data: ", error);
-                alert("Error fetching updated Industry data. Please try again.");
+                //alert("Error fetching updated Industry data. Please try again.");
             }
         });
     }
@@ -311,8 +311,17 @@
                 if (response) {
                     updateData(); // Call function to update data
                     $('#Industryplaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Industry Updated Successfully.</div>');
+                    $('#updateIndustryModal').modal('hide');
+                    $('#table2-tab').tab('show');
+                    // Reload industry data after creating a new industry
+                    $('#industryDataPlaceholder').load('/Industry/GetAll'
+                        , function () {
+                            console.log('Industry data reloaded.');
+                        }
+                    );
                 } else {
-                    alert("An error occurred while saving data. Please try again.");
+                    console.log("An error occurred while saving data. Please try again.");
+                    //alert("An error occurred while saving data. Please try again.");
                 }
             },
             error: function (xhr, status, error) {

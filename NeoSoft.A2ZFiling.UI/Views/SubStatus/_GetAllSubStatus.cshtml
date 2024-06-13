@@ -185,9 +185,9 @@
 
                 $.post(url, sendData).done(function (data) {
                     $('#subStatusPlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Sub Status Created Successfully.</div>');
+                    
                     $('#subStatusPlaceholder').find('.modal').modal('hide');
                     $('#table7-tab').tab('show');
-                    // Reload industry data after creating a new industry
                     $('#subStatusDataPlaceholder').load('/SubStatus/GetAll'
                         , function () {
                             console.log('License data reloaded.');
@@ -246,7 +246,6 @@
                 // Close the modal
                 $('#updateSubStatusModal').modal('hide');
                 $('#table7-tab').tab('show');
-                // Reload the "get all industry" page after saving changes
                 $('#subStatusDataPlaceholder').load('/SubStatus/GetAll', function () {
                     console.log('SubStatus data reloaded.');
                 });
@@ -269,6 +268,11 @@
                 if (response) {
                     updateData(); // Call function to update data
                     $('#subStatusPlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">SubStatus Updated Successfully.</div>');
+                    $('#updateSubStatusModal').modal('hide');
+                    $('#table7-tab').tab('show');
+                    $('#subStatusDataPlaceholder').load('/SubStatus/GetAll', function () {
+                        console.log('SubStatus data reloaded.');
+                    });
                 } else {
                     alert("An error occurred while saving data. Please try again.");
                 }

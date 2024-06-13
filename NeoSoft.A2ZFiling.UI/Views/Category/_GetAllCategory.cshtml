@@ -280,13 +280,13 @@
                 // Replace the content in the placeholder div with the updated data
                 $('#categoryPlaceholder').html(data);
                 // Close the modal
-                $('#updateCategoryModal').modal('hide');
+                // $('#updateCategoryModal').modal('hide');
 
-                $('#table4-tab').tab('show');
+                // $('#table4-tab').tab('show');
 
-                $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
-                    console.log('Category data reloaded.');
-                });
+                // $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
+                //     console.log('Category data reloaded.');
+                // });
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching updated Category data: ", error);
@@ -307,6 +307,14 @@
                 if (response) {
                     updateData(); // Call function to update data
                     $('#categoryPlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Category Updated Successfully.</div>');
+                    $('#updateCategoryModal').modal('hide');
+
+                    $('#table4-tab').tab('show');
+
+                    $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
+                        console.log('Category data reloaded.');
+                    });
+                
                 } else {
                     alert("An error occurred while saving data. Please try again.");
                 }
