@@ -85,7 +85,7 @@
                                             <i class="fas fa-edit"></i>
                                         </button>
 
-                                        <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.StatusId">
+                                        <button class="btn btn-danger btn-sm triggerStatus-modal" data-id="@item.StatusId">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
@@ -98,7 +98,7 @@
                                             <i class="fas fa-edit"></i>
                                         </button>
 
-                                        <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.StatusId" disabled>
+                                        <button class="btn btn-danger btn-sm triggerStatus-modal" data-id="@item.StatusId" disabled>
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
@@ -115,7 +115,7 @@
 </div>
 
 <!-- Delete Modal -->
-<div id="myModal" class="modal" tabindex="-1" role="dialog">
+<div id="myStatusModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -185,7 +185,8 @@
             var decodeUrl = decodeURIComponent(url);
             $.get(decodeUrl).done(function (data) {
                 card.html(data);
-                card.find('.modal').modal('show');
+                $('#createStatusModal').modal('show');
+                // card.find('.modal').modal('show');
 
                 // Unbind previously bound event handler
                 card.off('click', '[data-save="statusModal"]');
@@ -236,7 +237,7 @@
                 // Load the partial view into the placeholder div
                 $('#statusPlaceholder').html(data);
                 // Show the edit modal
-                $('#updateModal').modal('show');
+                $('#updateStatusModal').modal('show');
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching Status data: ", error);
@@ -259,7 +260,7 @@
                 // Replace the content in the placeholder div with the updated data
                 $('#statusPlaceholder').html(data);
                 // Close the modal
-                $('#updateModal').modal('hide');
+                $('#updateStatusModal').modal('hide');
 
                 $('#table6-tab').tab('show');
 
@@ -298,21 +299,21 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
-        // Close the modal
-        $('#updateModal').modal('hide');
-    });
+    // $(document).on('click', '#closeButton, .close', function () {
+    //     // Close the modal
+    //     $('#updateStatusModal').modal('hide');
+    // });
 
 
 
     // Function to show the delete modal
 
 
-    $(document).on('click', '.trigger-modal', function () {
+    $(document).on('click', '.triggerStatus-modal', function () {
         var StatusId = $(this).data("id");
         // Set data attribute of delete button inside modal for further reference
         $('.delete-status').data('id', StatusId);
-        $('#myModal').modal('show');
+        $('#myStatusModal').modal('show');
     });
 
     // Event delegation for handling delete button click inside the modal
@@ -326,7 +327,7 @@
             success: function (result) {
                 console.log('Status deleted successfully.');
                 // alert('Zone deleted successfully');
-                $('#myModal').modal('hide');
+                $('#myStatusModal').modal('hide');
                 $('#table6-tab').tab('show');
                 // location.reload();
                 $('#statusDataPlaceholder').load('/Status/GetAll', function () {
