@@ -18,7 +18,7 @@
 
     <div class="card-header">
         <div class="float-right">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "Industry")">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createIndustryModal" data-url="@Url.Action("Create", "Industry")">
                 <i class="fas fa-plus"></i>
             </button>
 
@@ -56,8 +56,15 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        @* <input type="hidden" class="industry-id" value="@item.IndustryId" /> *@
+@*                         <input type="hidden" class="industry-id" value="@item.IndustryId" />
+ *@
                         <td>@Html.DisplayFor(modelItem => item.IndustryId)</td>
+                       
+ 
+          
+
+
+
                         <td>@Html.DisplayFor(modelItem => item.IndustryName)</td>
                         <td>@Html.DisplayFor(modelItem => item.ShortName)</td>
                         <td>
@@ -67,9 +74,9 @@
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <button id="triggerModalButton" class="btn btn-danger btn-sm trigger-modal" data-id="@item.IndustryId">
+                            <a id="triggerModalButton" class="btn btn-danger btn-sm triggerIndustry-modal" data-id="@item.IndustryId">
                                 <i class="fas fa-trash-alt"></i>@* Delete  *@
-                            </button>
+                            </a>
 
                         </td>
 
@@ -86,7 +93,7 @@
   </div>
 
 
-<div id="myModal" class="modal" tabindex="-1" role="dialog">
+<div id="myIndustryModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -100,15 +107,15 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger delete-item">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- jQuery -->
-@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- *@
+
+
 <!-- DataTables -->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -128,7 +135,7 @@
 <script>
 
     console.log("Before DataTable initialization");
-
+    // var startIndex = 1;
     $("#example2").DataTable({
         "responsive": true,
         "lengthChange": false,
@@ -141,19 +148,27 @@
         "ordering": true,
         "info": true,
         "autoWidth": false,
-        "responsive": true
+        "responsive": true,
+        // "rowCallback": function (row, data, index) {
+        //     var table = $('#example2').DataTable();
+        //     var serialNumber = startIndex + index;
+        //     table.cell($('td:first', row)).data(serialNumber);
+        // }
+
+   
     })/* .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); */
     $('#example2').DataTable().buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
 
     console.log("After DataTable initialization");
 
+    //function to delete data 
 
-    $(document).on('click', '.trigger-modal', function () {
+    $(document).on('click', '.triggerIndustry-modal', function () {
         var IndustryId = $(this).data("id");
         // Set data attribute of delete button inside modal for further reference
         $('.delete-item').data('id', IndustryId);
-        $('#myModal').modal('show');
+        $('#myIndustryModal').modal('show');
     });
 
     // Event delegation for handling delete button click inside the modal
@@ -167,7 +182,7 @@
             success: function (result) {
                 console.log('Industry deleted successfully.');
                 //alert('Zone deleted successfully');
-                $('#myModal').modal('hide');
+                $('#myIndustryModal').modal('hide');
                 $('#table2-tab').tab('show');
                 // location.reload();
                 $('#industryDataPlaceholder').load('/Industry/GetAll', function () {
@@ -181,7 +196,8 @@
         });
     });
 
-   
+
+
     //function to handle create modal
 
     $('button[data-toggle="ajax-modal"]').click(function (event) {
@@ -190,13 +206,13 @@
         var decodeUrl = decodeURIComponent(url);
         $.get(decodeUrl).done(function (data) {
             $('#Industryplaceholder').html(data);
-            $('#createModal').modal('show');
+            $('#createIndustryModal').modal('show');
 
             // Unbind previously bound event handler
-            $('#Industryplaceholder').off('click', '[data-save="modal"]');
+            $('#Industryplaceholder').off('click', /* '[data-save="modal"]' */'#saveIndustryEntity');
 
             // Event delegation for dynamically loaded content
-            $('#Industryplaceholder').on('click', '[data-save="modal"]', function (event) {
+            $('#Industryplaceholder').on('click', /* '[data-save="modal"]' */ '#saveIndustryEntity', function (event) {
                 var form = $(this).parents('.modal').find('form');
                 var actionUrl = form.attr('action');
                 var url = '@Url.Action("Create", "Industry")';
@@ -244,7 +260,7 @@
                 // Load the partial view into the placeholder div
                 $('#Industryplaceholder').html(data);
                 // Show the edit modal
-                $('#updateModal').modal('show');
+                $('#updateIndustryModal').modal('show');
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching Industry data: ", error);
@@ -267,21 +283,23 @@
                 // Replace the content in the placeholder div with the updated data
                 $('#Industryplaceholder').html(data);
                 // Close the modal
-                $('#updateModal').modal('hide');
-                $('#table2-tab').tab('show');
-                // Reload the "get all industry" page after saving changes
-                $('#industryDataPlaceholder').load('/Industry/GetAll', function () {
-                    console.log('Industry data reloaded.');
-                });
+                $('#updateIndustryModal').modal('hide');
+                // $('#table2-tab').tab('show');
+                // // Reload industry data after creating a new industry
+                // $('#industryDataPlaceholder').load('/Industry/GetAll'
+                //     , function () {
+                //         console.log('Industry data reloaded.');
+                //     }
+                // );
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching updated Industry data: ", error);
-                alert("Error fetching updated Industry data. Please try again.");
+                //alert("Error fetching updated Industry data. Please try again.");
             }
         });
     }
 
-    $(document).on('click', '#saveButton', function () {
+    $(document).on('click', '#saveIndustryButton', function () {
         // Perform validation and submit data via AJAX
         $.ajax({
             url: '@Url.Action("Update", "Industry")',
@@ -293,8 +311,17 @@
                 if (response) {
                     updateData(); // Call function to update data
                     $('#Industryplaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Industry Updated Successfully.</div>');
+                    $('#updateIndustryModal').modal('hide');
+                    $('#table2-tab').tab('show');
+                    // Reload industry data after creating a new industry
+                    $('#industryDataPlaceholder').load('/Industry/GetAll'
+                        , function () {
+                            console.log('Industry data reloaded.');
+                        }
+                    );
                 } else {
-                    alert("An error occurred while saving data. Please try again.");
+                    console.log("An error occurred while saving data. Please try again.");
+                    //alert("An error occurred while saving data. Please try again.");
                 }
             },
             error: function (xhr, status, error) {
@@ -305,10 +332,10 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
-        // Close the modal
-        $('#updateModal').modal('hide');
-    });
+    // $(document).on('click', '#closeButton, .close', function () {
+    //     // Close the modal
+    //     $('#updateIndustryModal').modal('hide');
+    // });
 
 
 </script>

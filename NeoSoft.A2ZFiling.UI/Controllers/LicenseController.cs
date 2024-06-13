@@ -78,6 +78,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("Please select a ShortList .");
                 }
+                var existingLicense = (await _licenseService.GetLicenseAsync()).Where(x => x.LicenseName.ToLower() == model.LicenseName.ToLower() || x.ShortName.ToLower()==model.ShortName.ToLower()).FirstOrDefault();
+                if (existingLicense != null)
+                {
+                    return BadRequest("License with this name already exists.");
+                }
                 var response = await _licenseService.CreateLicenseAsync(model);
                 if (response == null)
                 {
