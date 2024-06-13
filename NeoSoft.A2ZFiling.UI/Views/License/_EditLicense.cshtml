@@ -9,11 +9,13 @@
 @{
     ViewData["Title"] = "Update";
 
+    var selectedCategoryId = Model.CategoryId;
+
 }
 
 <!-- Create Modal -->
 
-<div id="updateModal" class="modal fade">
+<div id="updateLicenseModal" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -51,7 +53,12 @@
                             <option value="">Choose Category</option>
                             @foreach (var category in ViewBag.Categories as SelectList)
                             {
-                                <option value="@category.Value" selected="@category.Value == Model.CategoryId.ToString()">
+                               
+                                @* <option value="@category.Value" selected="@category.Value == Model.CategoryId.ToString()">
+                                    @category.Text
+                                </option> *@
+
+                                <option value="@category.Value">
                                     @category.Text
                                 </option>
                             }
@@ -88,7 +95,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="closeButton" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="licenseSaveButton" data-save="modal">Save</button>
+                <button type="button" class="btn btn-primary" id="licenseSaveButton" data-save="modal" data-dismiss="modal">Save</button>
 
             </div>
         </div>

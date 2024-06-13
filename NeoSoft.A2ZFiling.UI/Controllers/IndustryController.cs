@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2ZFiling.UI.Interfaces;
+using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using Newtonsoft.Json;
 
@@ -38,7 +39,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(IndustryVM model)
+        public async Task<IActionResult> CreateAsync(IndustryVM model)
         {
             if (string.IsNullOrEmpty(model.IndustryName))
             {
@@ -52,6 +53,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             if( (model.ShortName.Any(char.IsDigit)) || (model.IndustryName.Any(char.IsDigit)))
             {
                 return BadRequest(" Name cannot contain numbers.");
+            }
+            var existingIndustry = ( _industryService.GetIndustryAsync()).Where(x => x.IndustryName.ToLower() == model.IndustryName.ToLower() || x.ShortName.ToLower() == model.ShortName.ToLower()).FirstOrDefault();
+            if (existingIndustry != null)
+            {
+                return BadRequest("Industry with this name already exists.");
             }
             var response = _industryService.CreateIndustryAsync(model);
 

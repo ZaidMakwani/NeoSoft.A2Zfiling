@@ -13,5 +13,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             return View();
         }
+
+        public IActionResult LicenseConfigurationSetting()
+        {
+            return View();
+        }
     }
 }

@@ -19,7 +19,7 @@
 
     <div class="card-header">
         <div class="float-right">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "License")">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createLicenseModal" data-url="@Url.Action("Create", "License")">
                 <i class="fas fa-plus"></i>
             </button>
 
@@ -83,7 +83,7 @@
                                 <span class="text-danger font-weight-bold">Inactive</span>
                             }
                         </td>
-                        <td>
+                  @*       <td>
                                 <div class="btn-group">
                             <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
                                     data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId">
@@ -94,8 +94,39 @@
                             <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.LicenseId">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
-                            </div>
-                        </td>
+                          </div>
+                        </td> *@
+
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                                data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+
+                                        <button class="btn btn-danger btn-sm triggerLicense-modal" data-id="@item.LicenseId">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                                data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId" disabled>
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+
+                                        <button class="btn btn-danger btn-sm triggerLicense-modal" data-id="@item.LicenseId" disabled>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                }
+                            </td>
+
+
                     </tr>
                 }
             </tbody>
@@ -104,7 +135,7 @@
     </div>
     </div>
 
-<div id="myModal" class="modal" tabindex="-1" role="dialog">
+<div id="myLicenseModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -173,13 +204,13 @@
         var decodeUrl = decodeURIComponent(url);
         $.get(decodeUrl).done(function (data) {
             $('#licensePlaceholder').html(data);
-            $('#createModal').modal('show');
+            $('#createLicenseModal').modal('show');
 
             // Unbind previously bound event handler
-            $('#licensePlaceholder').off('click', '[data-save="licenseModal"]');
+            $('#licensePlaceholder').off('click', /* '[data-save="modal"]' */'#saveLicenseEntity');
 
             // Event delegation for dynamically loaded content
-            $('#licensePlaceholder').on('click', '[data-save="licenseModal"]', function (event) {
+            $('#licensePlaceholder').on('click', /* '[data-save="modal"]' */ '#saveLicenseEntity', function (event) {
                 var form = $(this).parents('.modal').find('form');
                 var actionUrl = form.attr('action');
                 var url = '@Url.Action("Create", "License")';
@@ -206,13 +237,15 @@
         });
     });
 
+
+
     //fucntion to handle delete modal
 
-    $(document).on('click', '.trigger-modal', function () {
+    $(document).on('click', '.triggerLicense-modal', function () {
         var LicenseId = $(this).data("id");
         // Set data attribute of delete button inside modal for further reference
         $('.delete-license').data('id', LicenseId);
-        $('#myModal').modal('show');
+        $('#myLicenseModal').modal('show');
     });
 
     // Event delegation for handling delete button click inside the modal
@@ -226,7 +259,7 @@
             success: function (result) {
                 console.log('License deleted successfully.');
                 //alert('Zone deleted successfully');
-                $('#myModal').modal('hide');
+                $('#myLicenseModal').modal('hide');
                 $('#table5-tab').tab('show');
                 // location.reload();
                 $('#licenseDataPlaceholder').load('/License/GetAll', function () {
@@ -256,7 +289,7 @@
                 // Load the partial view into the placeholder div
                 $('#licensePlaceholder').html(data);
                 // Show the edit modal
-                $('#updateModal').modal('show');
+                $('#updateLicenseModal').modal('show');
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching License data: ", error);
@@ -279,12 +312,11 @@
                 // Replace the content in the placeholder div with the updated data
                 $('#licensePlaceholder').html(data);
                 // Close the modal
-                $('#updateModal').modal('hide');
-                $('#table5-tab').tab('show');
-                // Reload the "get all industry" page after saving changes
-                $('#licenseDataPlaceholder').load('/License/GetAll', function () {
-                    console.log('License data reloaded.');
-                });
+                // $('#updateLicenseModal').modal('hide');
+                // $('#table5-tab').tab('show');
+                // $('#licenseDataPlaceholder').load('/License/GetAll', function () {
+                //     console.log('License data reloaded.');
+                // });
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching updated License data: ", error);
@@ -304,6 +336,12 @@
                 if (response) {
                     updateData(); // Call function to update data
                     $('#licensePlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">License Updated Successfully.</div>');
+                    $('#updateLicenseModal').modal('hide');
+                    $('#table5-tab').tab('show');
+                    $('#licenseDataPlaceholder').load('/License/GetAll', function () {
+                        console.log('License data reloaded.');
+                    });
+                
                 } else {
                     alert("An error occurred while saving data. Please try again.");
                 }
@@ -318,7 +356,7 @@
 
     $(document).on('click', '#closeButton, .close', function () {
         // Close the modal
-        $('#updateModal').modal('hide');
+        $('#updateLicenseModal').modal('hide');
     });
 
 
