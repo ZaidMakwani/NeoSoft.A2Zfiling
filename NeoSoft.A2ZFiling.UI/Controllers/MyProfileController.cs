@@ -43,6 +43,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
                 var response = await _myProfileService.GetAccountDetailsAsync(userId);
 
+                var model = new CombinedViewModel
+                {
+                    AppUser = response,
+                    Password = new PasswordVM()
+                };
+
                 return View(response);
             }
         }
@@ -117,10 +123,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         public async Task<IActionResult> UpdateUser(AppUserVM model)
          {
 
-            if (ModelState.IsValid) 
-            {
-                return View(model);
-            }
+            //if (!ModelState.IsValid) 
+            //{
+            //    return View(model);
+            //}
 
             var token = HttpContext.Session.GetString("Token");
 

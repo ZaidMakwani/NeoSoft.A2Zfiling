@@ -54,7 +54,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
                 //return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
                 var user = _userManager.CreateAsync(new AppUser() { FirstName = request.FirstName, LastName = request.LastName, Address = request.Address,
                     Email = request.Email, PhoneNumber = request.ContactNumber, UserName = request.UserName,
-                    RefreshTokenExpiryTime = DateTime.Now, PasswordCurr = request.Password
+                    RefreshTokenExpiryTime = DateTime.Now, PasswordCurr = request.Password, ContactNumber = request.ContactNumber,
+                    ProfileImagePath= request.ProfileImagePath,
                 }, request.Password).GetAwaiter().GetResult();
                 if (user.Succeeded)
                 {
@@ -73,7 +74,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
                         
                         registerMemberCommandResponse = new Response<RegisterDTO>(_mapper.Map<RegisterDTO>(user1), "success");
                     }
-                }
+                } 
                 else
                 {
                     registerMemberCommandResponse = new Response<RegisterDTO>("Invalid inputs!!");

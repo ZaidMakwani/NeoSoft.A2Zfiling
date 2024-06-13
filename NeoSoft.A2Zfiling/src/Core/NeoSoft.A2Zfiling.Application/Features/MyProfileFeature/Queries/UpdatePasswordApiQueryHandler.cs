@@ -35,9 +35,9 @@ namespace NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries
 
             var user = await _userManager.FindByIdAsync(request.UserId);
 
-            user.PasswordCurr = request.ConfirmPassword;
-
             var result = await _userManager.ChangePasswordAsync(user, user.PasswordCurr, request.ConfirmPassword);
+
+            user.PasswordCurr = request.ConfirmPassword;
 
             _userManager.UpdateAsync(user);
 

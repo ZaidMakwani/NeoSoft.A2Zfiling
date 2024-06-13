@@ -15,5 +15,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries
         public string Email{ get; set; }
         public long ContactNumber { get; set; }  
         public string PasswordCurr { get; set; }
+        public string? ProfileImagePath { get; set; }
     }
 }

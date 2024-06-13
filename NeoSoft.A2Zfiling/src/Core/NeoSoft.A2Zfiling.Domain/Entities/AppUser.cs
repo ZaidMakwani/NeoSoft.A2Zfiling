@@ -11,7 +11,8 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public string PasswordCurr {  get; set; }
-        public long ContactNumber { get; set; }
+        public string ContactNumber { get; set; }
+        public string? ProfileImagePath { get; set; }
         //public string? Token { get; set; }
     }
 }
