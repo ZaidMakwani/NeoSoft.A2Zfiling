@@ -250,9 +250,23 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                                <form asp-action="UpdateUser" asp-controller="MyProfile" method="post" class="row gy-3 gy-xxl-4" >
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                   
+                                <form asp-action="UpdateUser" asp-controller="MyProfile" method="post" class="row gy-3 gy-xxl-4">
+                                    @* <div class="col-12">
+                                        <div class="row gy-2">
+                                            <label class="col-12 form-label m-0">Profile Image</label>
+                                            <div class="col-12">
+                                                <img src="./assets/img/profile-img-1.jpg" class="img-fluid" alt="Luna John">
+                                            </div>
+                                            <div class="col-12">
+                                                <a href="#!" class="d-inline-block bg-primary link-light lh-1 p-2 rounded">
+                                                    <i class="bi bi-upload"></i>
+                                                </a>
+                                                <a href="#!" class="d-inline-block bg-danger link-light lh-1 p-2 rounded">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div> *@
                                     <div class="col-12 col-md-6">
                                         <label asp-for="@Model.FirstName" class="form-label">First Name</label>
                                         <input asp-for="@Model.FirstName" type="text" class="form-control" id="inputFirstName" value="@Model.FirstName">
@@ -268,7 +282,10 @@
                                         <input asp-for="@Model.UserName" type="text" class="form-control" id="inputEducation" value="@Model.UserName">
                                         <span asp-validation-for="@Model.UserName" class="text-danger"></span>
                                     </div>
-                                  
+                                   @*  <div class="col-12 col-md-6">
+                                        <label for="inputSkills" class="form-label">Skills</label>
+                                        <input type="text" class="form-control" id="inputSkills" value="HTML, SCSS, Javascript, React, Vue, Angular, UI, UX">
+                                    </div>
                                     <div class="col-12 col-md-6">
                                         <label asp-for="@Model.ContactNumber" class="form-label">Phone</label>
                                         <input asp-for="@Model.ContactNumber" type="number" class="form-control" id="inputPhone" value="@Model.ContactNumber">
@@ -284,7 +301,10 @@
                                         <input asp-for="@Model.Address" type="text" class="form-control" id="inputAddress" value="@Model.Address">
                                         <span asp-validation-for="@Model.Address" class="text-danger"></span>
                                     </div>
-                                   
+                                    <div class="col-12">
+                                        <label for="inputAbout" class="form-label">About</label>
+                                        <textarea class="form-control" id="inputAbout">Ethan Leo is a seasoned and results-driven Project Manager who brings experience and expertise to project management. With a proven track record of successfully delivering complex projects on time and within budget, Ethan Leo is the go-to professional for organizations seeking efficient and effective project leadership.</textarea>
+                                    </div> *@
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary">Save Changes</button>
                                     </div>
@@ -330,7 +350,6 @@
                             </div> *@
                             <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
                                 <form asp-controller="MyProfile" asp-action="ComparePassword" method="post">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <div class="row gy-3 gy-xxl-4">
                                         <div class="col-12">
                                             <label for="CurrentPassword" class="form-label">Current Password</label>
@@ -375,10 +394,3 @@
 
 
 <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<!-- jQuery Validation Unobtrusive -->
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-
-@section Scripts {
-    <partial name="_ValIdationScriptsPartial" />
-}
