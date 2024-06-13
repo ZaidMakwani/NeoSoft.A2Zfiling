@@ -1,0 +1,71 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model NeoSoft.A2ZFiling.UI.ViewModels.SubStatusVM
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+<!-- Create Modal -->     @* modal-dialog-centered *@
+@* <div id="createModal" class="modal" tabindex="-1" role="dialog"> *@
+<div id="createSubStatusModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Sub Statuses</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="error-message-container"></div>
+                <form id="createSubStatusForm" asp-action="Create" asp-controller="SubStatus" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="SubStatusName">Enter Sub Status Name:</label>
+                        <input asp-for="SubStatusName" class="form-control" placeholder="Sub Status Name" />
+                        <span asp-validation-for="SubStatusName" class="text-danger" id="entityName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="StatusId">Select Main Status:</label>
+                        <select id="StatusId" name="StatusId" class="form-control" asp-for="StatusId">
+                            <option value="">Select Main Status</option>
+                            @foreach (var substatus in ViewBag.SubStatuses as SelectList)
+                            {
+                                <option value="@substatus.Value">@substatus.Text</option>
+                            }
+                        </select>
+
+                        <span asp-validation-for="SubStatusId" class="text-danger" id="entityName"></span>
+                    </div>
+
+
+
+
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEntity" data-save="subStatusModal" data-dismiss="modal">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
