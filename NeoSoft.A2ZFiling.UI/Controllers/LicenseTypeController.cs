@@ -25,6 +25,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 var response = await _licenseType.GetLicenseTypeAsync();
                 _logger.LogInformation("License Type Action Completed");
                 return View(response);
+               // return PartialView("_GetAllLicenseType", response);
             }
             catch (Exception ex)
             {

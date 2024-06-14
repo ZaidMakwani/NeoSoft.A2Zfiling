@@ -13,7 +13,7 @@
 
 <!-- Create Modal -->     @* modal-dialog-centered *@
 @* <div id="createModal" class="modal" tabindex="-1" role="dialog"> *@
-<div id="createModal" class="modal fade">
+<div id="createCategoryModal" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,8 +47,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveEntity" data-save="categoryModal">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeCategoryEntity">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEntity" data-save="categoryModal" data-dismiss="modal">Save</button>
 
             </div>
         </div>
@@ -60,3 +60,10 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+@* <script>
+    $('#saveEntity').on('click', function () {
+        $('.modal').hide();
+    })
+</script>
+ *@

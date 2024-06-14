@@ -1,4 +1,19 @@
 ﻿
+//$('#table1-tab').on('click', function () {
+//    console.log("table-1 tab")
+//    $.ajax({
+//        url: '/LicenseType/GetAll',
+//        type: 'GET',
+//        success: function (data) {
+//            $('#licenseTypeDataPlaceholder').html(data);
+//        },
+//        error: function (xhr, status, error) {
+//            console.error("Error fetching license type data: ", error);
+//            alert("Error fetching license type data. Please try again.");
+//        }
+//    });
+//});
+
 
 $('#table2-tab').on('click', function () {
     console.log("table-2 tab")
@@ -58,6 +73,36 @@ $('#table5-tab').on('click', function () {
         error: function (xhr, status, error) {
             console.error("Error fetching license data: ", error);
             alert("Error fetching license data. Please try again.");
+        }
+    });
+});
+
+$('#table6-tab').on('click', function () {
+    console.log("table-6 tab")
+    $.ajax({
+        url: '/Status/GetAll',
+        type: 'GET',
+        success: function (data) {
+            $('#statusDataPlaceholder').html(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching status data: ", error);
+            alert("Error fetching status data. Please try again.");
+        }
+    });
+});
+
+$('#table7-tab').on('click', function () {
+    console.log("table-7 tab")
+    $.ajax({
+        url: '/SubStatus/GetAll',
+        type: 'GET',
+        success: function (data) {
+            $('#subStatusDataPlaceholder').html(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching sub status data: ", error);
+            alert("Error fetching sub status data. Please try again.");
         }
     });
 });

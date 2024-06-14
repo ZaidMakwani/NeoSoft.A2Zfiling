@@ -17,7 +17,7 @@
 
     <div class="card-header">
         <div class="float-right">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "Company")">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createCompanyModal" data-url="@Url.Action("Create", "Company")">
                 <i class="fas fa-plus"></i>
             </button>
 
@@ -75,13 +75,13 @@
                             }
                         </td>
                         <td>
-                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                            <button class="btn btn-primary btn-sm editCompany-button" data-toggle="ajax-modal" data-target="#updateModal"
                                     data-url="@Url.Action("Update", "Company")" data-id="@item.CompanyId">
                                 <i class="fas fa-edit"></i>
                             </button>
 
 
-                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.CompanyId">
+                                <button  class="btn btn-danger btn-sm triggerCompany-modal" data-id="@item.CompanyId">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
 
@@ -95,7 +95,7 @@
     </div>
    
 <!-- Delete Modal -->
-<div id="myModal" class="modal" tabindex="-1" role="dialog">
+<div id="myCompanyModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -109,7 +109,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger delete-company">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -158,11 +158,11 @@
 
         //function to handle delete
 
-    $(document).on('click', '.trigger-modal', function () {
+    $(document).on('click', '.triggerCompany-modal', function () {
         var CompanyId = $(this).data("id");
         // Set data attribute of delete button inside modal for further reference
         $('.delete-company').data('id', CompanyId);
-        $('#myModal').modal('show');
+        $('#myCompanyModal').modal('show');
     });
 
     // Event delegation for handling delete button click inside the modal
@@ -176,7 +176,7 @@
             success: function (result) {
                 console.log('Company deleted successfully.');
                 alert('Company deleted successfully');
-                $('#myModal').modal('hide');
+                $('#myCompanyModal').modal('hide');
                 $('#table3-tab').tab('show');
                 $('#companyDataPlaceholder').load('/Company/GetAll', function () {
                     console.log('Industry data reloaded.');
@@ -189,6 +189,9 @@
         });
     });
 
+ 
+ 
+
     //----------------------------------------------------------------------------------------------------
     //function to handle create
 
@@ -198,13 +201,13 @@
         var decodeUrl = decodeURIComponent(url);
         $.get(decodeUrl).done(function (data) {
             $('#companyPlaceholder').html(data);
-            $('#createModal').modal('show');
+            $('#createCompanyModal').modal('show');
 
             // Unbind previously bound event handler
-            $('#companyPlaceholder').off('click', '[data-save="companyModal"]');
+            $('#companyPlaceholder').off('click', '#saveCompanyEntity');
 
             // Event delegation for dynamically loaded content
-            $('#companyPlaceholder').on('click', '[data-save="companyModal"]', function (event) {
+            $('#companyPlaceholder').on('click', '#saveCompanyEntity', function (event) {
                 var form = $(this).parents('.modal').find('form');
                 var actionUrl = form.attr('action');
                 var url = '@Url.Action("Create", "Company")';
@@ -231,13 +234,16 @@
         });
     });
 
-
+    $(document).on('click', '#closeCompanyEntity, .close', function () {
+        // Close the modal
+        $('#createCompanyModal').modal('hide');
+    });
     //----------------------------------------------------------------------------------------------------
 
     //function to handle edit company in the modal
 
 
-    $(document).on('click', '.edit-button', function () {
+    $(document).on('click', '.editCompany-button', function () {
         var CompanyId = $(this).data("id");
         var editUrl = '@Url.Action("Update", "Company")' + '?id=' + CompanyId;
 
@@ -249,7 +255,7 @@
                 // Load the partial view into the placeholder div
                 $('#companyPlaceholder').html(data);
                 // Show the edit modal
-                $('#updateModal').modal('show');
+                $('#updateCompanyModal').modal('show');
 
             },
             error: function (xhr, status, error) {
@@ -272,17 +278,17 @@
             success: function (data) {
                 $('#companyPlaceholder').html(data);
 
-                $('#updateModal').modal('hide');
-                $('#table3-tab').tab('show');
+                // $('#updateCompanyModal').modal('hide');
+                // $('#table3-tab').tab('show');
 
-                $('#companyDataPlaceholder').load('/Company/GetAll', function () {
-                    console.log('Company data reloaded.');
-                });
+                // $('#companyDataPlaceholder').load('/Company/GetAll', function () {
+                //     console.log('Company data reloaded.');
+                // });
 
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching updated company  data: ", error);
-                alert("Error fetching updated company  data. Please try again.");
+                //alert("Error fetching updated company  data. Please try again.");
             }
         });
     }
@@ -302,9 +308,13 @@
                     updateData(); // Call function to update data
                     // alert('City Updated successfully');
                     $('#companyPlaceholder').find('.error-message-container').prepend('<div class="alert alert-success" role="alert">' + "Company Updated Successfully" + '</div>');
-
+                    $('#updateCompanyModal').modal('hide');
+                    $('#table3-tab').tab('show');
+                    $('#companyDataPlaceholder').load('/Company/GetAll', function () {
+                        console.log('Company data reloaded.');
+                    });
                    } else {
-                    alert("An error occurred while saving data. Please try again.");
+                    //alert("An error occurred while saving data. Please try again.");
                 
 
                 }
@@ -325,9 +335,9 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
+    $(document).on('click', '#closeCompanyButton, .close', function () {
         // Close the modal
-        $('#updateModal').modal('hide');
+        $('#updateCompanyModal').modal('hide');
     
 
     });

@@ -7,7 +7,7 @@
 
 <!-- Create Modal -->    
 
-<div id="updateModal" class="modal fade">
+<div id="updateIndustryModal" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,16 +47,18 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="closeButton" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton" data-save="modal">Save</button>
+                <button type="button" class="btn btn-secondary" id="closeIndustryButton" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveIndustryButton" data-save="modal" data-dismiss="modal">Save</button>
 
             </div>
         </div>
     </div>
 </div>
 
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+

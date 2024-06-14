@@ -61,7 +61,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest(" Name cannot contain numbers.");
                 }
-                var existingCategory = (await _categoryService.GetCategoryAsync()).Where(x => x.CategoryName.ToLower() == model.CategoryName.ToLower()).FirstOrDefault();
+                var existingCategory = (await _categoryService.GetCategoryAsync()).Where(x => x.CategoryName.ToLower() == model.CategoryName.ToLower() || x.ShortName.ToLower()==model.ShortName.ToLower()).FirstOrDefault();
                 if (existingCategory != null)
                 {
                     return BadRequest("Category with this name already exists.");
@@ -80,8 +80,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while creating license type.");
-                return StatusCode(500, "An error occurred while creating license type.");
+                _logger.LogError(ex, "An error occurred while creating category .");
+                return StatusCode(500, "An error occurred while creating category .");
             }
 
         }
@@ -92,15 +92,15 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             try
             {
-                _logger.LogInformation("Delete City Action Initiated");
+                _logger.LogInformation("Delete Category Action Initiated");
                 var response = await _categoryService.DeleteCategoryAsync(id);
-                _logger.LogInformation("Delete City Action Completed");
+                _logger.LogInformation("Delete Category Action Completed");
                 return Ok();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while creating city.");
-                return StatusCode(500, "An error occurred while creating city.");
+                _logger.LogError(ex, "An error occurred while creating category.");
+                return StatusCode(500, "An error occurred while creating category.");
             }
         }
 
@@ -128,8 +128,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while retrieving zone details.");
-                return StatusCode(500, "An error occurred while retrieving zone details.");
+                _logger.LogError(ex, "An error occurred while retrieving category details.");
+                return StatusCode(500, "An error occurred while retrieving category details.");
             }
         }
 
@@ -153,11 +153,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest(" Name cannot contain numbers.");
                 }
-                var existingCategory = (await _categoryService.GetCategoryAsync()).Where(x => x.CategoryName.ToLower() == model.CategoryName.ToLower()).FirstOrDefault();
-                if (existingCategory != null)
-                {
-                    return BadRequest("Category with this name already exists.");
-                }
+                //var existingCategory = (await _categoryService.GetCategoryAsync()).Where(x => x.CategoryName.ToLower() == model.CategoryName.ToLower()).FirstOrDefault();
+                //if (existingCategory != null)
+                //{
+                //    return BadRequest("Category with this name already exists.");
+                //}
                 var response = await _categoryService.UpdateCategoryAsync(model);
                 if (response == null)
                 {
