@@ -1,12 +1,9 @@
-﻿
- 
- @model NeoSoft.A2ZFiling.UI.ViewModels.CityVM
-
-<div id="createModal1" class="modal fade">
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.MunicipalVM;
+<div id="createModal3" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create City</h5>
+                <h5 class="modal-title">Create Municipal</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,25 +14,43 @@
                     States count: @(ViewBag.lstState != null ? (ViewBag.lstState as SelectList).Count().ToString() : "No States")
                 </div>
                 <div>
-                    Zone count: @(ViewBag.lstZone != null ? (ViewBag.lstZone as SelectList).Count().ToString() : "No Zones")
+                    City count: @(ViewBag.lstCity != null ? (ViewBag.lstCity as SelectList).Count().ToString() : "No City")
+                </div>
+                <div>
+                    States count: @(ViewBag.lstZone != null ? (ViewBag.lstZone as SelectList).Count().ToString() : "No Zones")
                 </div>
 
-                <form id="createCityForm" asp-action="Create" asp-controller="City" method="post">
+                <form id="createMunicipalForm" asp-action="Create" asp-controller="Municipal" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="CityName">City Name:</label>
-                        <input type="text" asp-for="CityName" class="form-control" />
-                        <span asp-validation-for="CityName" class="text-danger" id="entityName"></span>
+                        <label asp-for="MunicipalName">Municipal Name:</label>
+                        <input type="text" asp-for="MunicipalName" class="form-control" />
+                        <span asp-validation-for="MunicipalName" class="text-danger" id="entityName"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="StateId">State:</label>
-                        @Html.DropDownList("StateID", ViewBag.lstState as SelectList, "-- Select State --", new { @class = "form-control" })
-                        <span asp-validation-for="StateId" class="text-danger"></span>
+                        <label asp-for="Pincode">PinCode:</label>
+                        <input type="tel" asp-for="Pincode" class="form-control" />
+                        <span asp-validation-for="Pincode" class="text-danger" id="entityName"></span>
+                    </div>
+                    @*  <div class="form-group">
+                    <label asp-for="StateId">State:</label>
+                    @Html.DropDownList("StateID", ViewBag.lstState as SelectList, "-- Select State --", new { @class = "form-control" })
+                    <span asp-validation-for="StateId" class="text-danger"></span>
+                    </div> *@
+                    <div class="form-group">
+                        <label asp-for="CityId">City:</label>
+                        @Html.DropDownList("CityId", ViewBag.lstCity as SelectList, "-- Select City --", new { @class = "form-control" })
+                        <span asp-validation-for="CityId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="ZoneId">Zone:</label>
-                        @Html.DropDownList("ZoneId", ViewBag.lstZone as SelectList, "-- Select State --", new { @class = "form-control" })
+                        @Html.DropDownList("ZoneId", ViewBag.lstZone as SelectList, "-- Select Zone --", new { @class = "form-control" })
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StateId">State:</label>
+                        @Html.DropDownList("StateId", ViewBag.lstState as SelectList, "-- Select State --", new { @class = "form-control" })
+                        <span asp-validation-for="StateId" class="text-danger"></span>
                     </div>
                     <div class="form-group form-check">
                         <input asp-for="IsActive" class="form-check-input" />
@@ -57,7 +72,7 @@
     }
     <script>
         $(function () {
-            var card = $('#placeholder1');
+            var card = $('#placeholder2');
 
             $('button[data-toggle="ajax-modal"]').click(function (event) {
                 var url = $(this).data('url');
@@ -77,7 +92,7 @@
                                 card.find('.modal').modal('hide');
                                 location.reload();
                             } else {
-                                var errorHtml = '<div class="alert alert-danger" role="alert">' + "Error creating City. Please try again." + '</div>';
+                                var errorHtml = '<div class="alert alert-danger" role="alert">' + "Error creating Municipal. Please try again." + '</div>';
                                 card.find('.modal-body').prepend(errorHtml);
                             }
                         }).fail(function (xhr, status, error) {

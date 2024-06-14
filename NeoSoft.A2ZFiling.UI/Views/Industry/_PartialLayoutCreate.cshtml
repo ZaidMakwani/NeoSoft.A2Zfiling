@@ -1,33 +1,30 @@
-﻿@model NeoSoft.A2ZFiling.UI.ViewModels.ZoneVM
-
-
+﻿@model NeosoftA2Zfilings.Views.ViewModels.RoleVM;
 
 @{
     ViewData["Title"] = "Create";
    
 }
 
-<!-- Create Modal -->     @* modal-dialog-centered *@
-@* <div id="createModal" class="modal" tabindex="-1" role="dialog"> *@
-<div id="createModal1" class="modal fade">
+<!-- Create Modal -->     @*  modal-dialog-centered 
+@ <div id="createModal" class="modal" tabindex="-1" role="dialog"> @ *@
+<div id="createModal" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Zone</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title">Create Role</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-labels="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="error-message-container"></div>
-                <form id="createZoneForm" asp-action="Create" asp-controller="Zone" method="post">
+                <form id="createZoneForm" asp-action="Create" asp-controller="Role" method="post">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                   
                 <div class="form-group">
-                    <label asp-for="ZoneName">Zone Name:</label>
-                    <input asp-for="ZoneName" class="form-control" />
-                    <span asp-validation-for="ZoneName" class="text-danger" id="entityName"></span>
+                    <label asp-for="RoleName">Role Name:</label>
+                    <input asp-for="RoleName" class="form-control" />
+                    <span asp-validation-for="RoleName" class="text-danger" id="entityName"></span>
                 </div>
 
                   

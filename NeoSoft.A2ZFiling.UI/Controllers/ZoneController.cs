@@ -23,7 +23,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 var response = await _zoneService.GetZoneAsync();
                 _logger.LogInformation("Zone Action Completed");
                // return View(response);
-                return PartialView("_ReadAllZones",response);
+                return PartialView("_ReadAllZones", response);
             }
             catch (Exception ex)
             {

@@ -1,5 +1,5 @@
 ﻿@model NeoSoft.A2ZFiling.UI.ViewModels.MunicipalVM;
-<div id="createModal" class="modal fade">
+<div id="createModal3" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -44,8 +44,13 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="ZoneId">Zone:</label>
-                        @Html.DropDownList("ZoneId", ViewBag.lstZone as SelectList, "-- Select State --", new { @class = "form-control" })
+                        @Html.DropDownList("ZoneId", ViewBag.lstZone as SelectList, "-- Select Zone --", new { @class = "form-control" })
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StateId">State:</label>
+                        @Html.DropDownList("StateId", ViewBag.lstState as SelectList, "-- Select State --", new { @class = "form-control" })
+                        <span asp-validation-for="StateId" class="text-danger"></span>
                     </div>
                     <div class="form-group form-check">
                         <input asp-for="IsActive" class="form-check-input" />
@@ -67,7 +72,7 @@
     }
     <script>
         $(function () {
-            var card = $('#placeholder');
+            var card = $('#placeholder2');
 
             $('button[data-toggle="ajax-modal"]').click(function (event) {
                 var url = $(this).data('url');

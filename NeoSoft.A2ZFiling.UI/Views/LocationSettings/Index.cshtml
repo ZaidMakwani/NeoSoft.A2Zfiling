@@ -1,11 +1,31 @@
 ﻿@model NeoSoft.A2ZFiling.UI.ViewModels.LocationSViewModel;
+
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminLTE 3 | DataTables</title>
 
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+   
+
+</head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <section class="content m-5 ">
@@ -16,61 +36,40 @@
                             <div class="col-lg-10">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-
                                     <li class="nav-item">
-                                        <a class="nav-link" id="table1-tab" data-toggle="tab" href="#table1" role="tab" aria-controls="table1" aria-selected="true">Municipal corporation</a>
-
+                                        <a class="nav-link show active" id="table1-tab" data-toggle="tab" href="#table1" role="tab" aria-controls="table1" aria-selected="true">Table 1</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="table2-tab" data-toggle="tab" href="#table2" role="tab" aria-controls="table2" aria-selected="false">Zones/Regions</a>
+                                        <a class="nav-link" id="table2-tab" data-toggle="tab" href="#table2" role="tab" aria-controls="table2" aria-selected="true">Table 2</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="table3-tab" data-toggle="tab" href="#table3" role="tab" aria-controls="table3" aria-selected="false">Cities</a>
+                                        <a class="nav-link" id="table3-tab" data-toggle="tab" href="#table3" role="tab" aria-controls="table3" aria-selected="true">Table 3</a>
                                     </li>
                                 </ul>
 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="table1" role="tabpanel" aria-labelledby="table1-tab">
-                                        <div class="card">
 
-                                           
-                                            <!-- /.card-header -->
-                                            @* <div class="card-body"> *@
                                                 @{
-                                                    Html.RenderPartial("_Municipal",Model.Municipalities);
+                                                    Html.RenderPartial("_Municipal", Model.Municipalities);
                                                 }
-
-                                                  
-                                            @* </div> *@
-                                            <!-- /.card-body -->
                                         </div>
-                                    </div>
                                     <div class="tab-pane fade" id="table2" role="tabpanel" aria-labelledby="table2-tab">
-                                        <div class="card">
-                                       
-                                            @* <div class="card-body" mr-5> *@
-
+                                        
                                                 @{
-                                                    Html.RenderPartial("_Zones",Model.Zones);
+                                                    Html.RenderPartial("_Zones", Model.Zones);
                                                 }
-
-                                                @* </div> *@
-                                        </div>
-                                       
-                                    </div>
-                                    <div class="tab-pane fade " id="table3" role="tabpanel" aria-labelledby="table3-tab">
-                                        <div class="card">
                                          
-                                            <!-- /.card-header -->
-                                            @* <div class="card-body"> *@
+                                    </div>
+                                    <div class="tab-pane fade" id="table3" role="tabpanel" aria-labelledby="table3-tab">
+                                        
+                                           
                                                 @{
                                                     Html.RenderPartial("_Cities", Model.Cities);
                                                 }
-                                            @* </div> *@
-                                            <!-- /.card-body -->
-                                        </div>
-                                    </div>
+                                   @*   
+                                    </div> *@
                                 </div>
 
                             </div>
@@ -80,11 +79,12 @@
                 </div>
                 <!-- /.row -->
             </div>
+            </div>
             <!-- /.container-fluid -->
         </section>
     </div>
     <!-- jQuery -->
-   @*  <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables  & Plugins -->
@@ -102,63 +102,27 @@
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
- *@
-  @*   <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true, "lengthChange": true, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-            $("#example2").DataTable({
-                "responsive": true, "lengthChange": true, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
-        });
-    </script> *@
-
-
-
-
-
-
-    @* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- *@
-<!-- DataTables -->
-<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-
-<!-- DataTables Buttons extension -->
-<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-@*  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- *@
     <script>
+        $(document).ready(function () {
+            var tables = {};
 
-        console.log("Before DataTable initialization");
+            // Initialize DataTables only when the corresponding tab is shown
+            $('#myTab a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var target = $(e.target).attr("href"); // activated tab
+                var tableId = target.substring(1);
 
-        $("#example6").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-           
-            "paging": true,
-            "pageLength": 4,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true
-        }) / .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); 
-        </script>
+                if (!tables[tableId]) {
+                    tables[tableId] = $(target + ' table').DataTable({
+                        "responsive": true, "lengthChange": true, "autoWidth": false,
+                        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                    }).buttons().container().appendTo(target + ' .col-md-6:eq(0)');
+                }
+            });
 
-
+            // Initialize the first table by default
+            $('#table1-tab').trigger('shown.bs.tab');
+        });
+    </script>
 </body>
 </html>

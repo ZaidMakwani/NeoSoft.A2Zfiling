@@ -6,7 +6,7 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
     {
         public int MunicipalId { get; set; }
         public string MunicipalName { get; set; }
-        public string Pincode { get; set; }
+        public string? Pincode { get; set; }
         public bool IsActive { get; set; }
 
 

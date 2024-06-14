@@ -1,6 +1,6 @@
 ﻿@model NeoSoft.A2ZFiling.UI.ViewModels.CityVM
 
-<div id="cityModal" class="modal fade">
+<div id="updateModal2" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -51,39 +51,39 @@
     }
     <script>
         $(document).ready(function () {
-            var placeholder = $('#placeholder');
+            var placeholder1 = $('#placeholder1');
 
             $('button[data-toggle="ajax-modal"]').click(function (event) {
                 var url = $(this).data('url');
                 $.get(url).done(function (data) {
-                    placeholder.html(data);
-                    placeholder.find('.modal').modal('show');
+                    placeholder1.html(data);
+                    placeholder1.find('.modal').modal('show');
 
-                    placeholder.off('click', '#saveButton');
+                    placeholder1.off('click', '#saveButton');
 
-                    placeholder.on('click', '#saveButton', function (event) {
-                        var form = placeholder.find('form');
+                    placeholder1.on('click', '#saveButton', function (event) {
+                        var form = placeholder1.find('form');
                         var actionUrl = form.attr('action');
                         var sendData = form.serialize();
 
                         $.post(actionUrl, sendData).done(function (data) {
                             if (data.success) {
-                                placeholder.find('.modal').modal('hide');
+                                placeholder1.find('.modal').modal('hide');
                                 location.reload();
                             } else {
                                 var errorHtml = '<div class="alert alert-danger" role="alert">Error saving City. Please try again.</div>';
-                                placeholder.find('.modal-body').prepend(errorHtml);
+                                placeholder1.find('.modal-body').prepend(errorHtml);
                             }
                         }).fail(function (xhr, status, error) {
                             var errorMessage = xhr.responseText;
                             var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
-                            placeholder.find('.modal-body').prepend(errorHtml);
+                            placeholder1.find('.modal-body').prepend(errorHtml);
                         });
                     });
                 }).fail(function (xhr, status, error) {
                     var errorMessage = xhr.responseText;
                     var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
-                    placeholder.find('.modal-body').prepend(errorHtml);
+                    placeholder1.find('.modal-body').prepend(errorHtml);
                 });
             });
         });

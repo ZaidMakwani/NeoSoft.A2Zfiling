@@ -31,9 +31,14 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<T>> ListAllAsync(string include1 = "", string include2 = "")
+        public async Task<IReadOnlyList<T>> ListAllAsync(string include1 = "", string include2 = "", string include3="")
         {
-            if (string.IsNullOrWhiteSpace(include1) && string.IsNullOrWhiteSpace(include2))
+            if (!string.IsNullOrWhiteSpace(include1) && !string.IsNullOrWhiteSpace(include2) && !string.IsNullOrWhiteSpace(include3))
+            {
+                _logger.LogInformation("ListAllAsync Initiated");
+                return await _dbContext.Set<T>().Include(include1).Include(include2).Include(include3).ToListAsync();
+            }
+            else if (string.IsNullOrWhiteSpace(include1) && string.IsNullOrWhiteSpace(include2))
                 {
                 _logger.LogInformation("ListAllAsync Initiated");
                 return await _dbContext.Set<T>().ToListAsync();

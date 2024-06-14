@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using NeoSoft.A2Zfiling.Application.Responses;
 using Newtonsoft.Json;
@@ -77,9 +78,16 @@ namespace NeoSoft.A2Zfiling.Common.Helper.ApiHelper
 
         public async Task<Response<T>> PutAsync<TEntity>(string apiUrl, TEntity entity)
         {
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(entity), System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage responseMessage = await _httpClient.PutAsync(apiUrl, stringContent);
-            return await ValidateResponse(responseMessage);
+            try
+            {
+                StringContent stringContent = new StringContent(JsonConvert.SerializeObject(entity), System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage responseMessage = await _httpClient.PutAsync(apiUrl, stringContent);
+                return await ValidateResponse(responseMessage);
+            }
+            catch(Exception ex) 
+            {
+                return null;
+            }
         }
 
         public async Task<string> DeleteAsync(string apiUrl)

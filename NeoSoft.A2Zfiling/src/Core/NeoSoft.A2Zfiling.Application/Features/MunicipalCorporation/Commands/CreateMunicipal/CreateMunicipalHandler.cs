@@ -37,6 +37,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Commands.C
                     IsActive = true,
                     CityId = (int)request.CityId,
                     ZoneId = request.ZoneId,
+                    StateId= request.StateId,
                     Pincode = request.Pincode,
                 };
                 Municipal = await _aysncRepository.AddAsync(Municipal);

@@ -8,7 +8,7 @@ namespace NeoSoft.A2Zfiling.Application.Contracts.Persistence
     {
         Task<T> GetByIdAsync(int id);
         Task<T> GetByIdAsync(Guid id);
-        Task<IReadOnlyList<T>> ListAllAsync(string include1 = "",string include2= "");
+        Task<IReadOnlyList<T>> ListAllAsync(string include1 = "",string include2= "",string include3="");
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);

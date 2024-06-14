@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.CityVM>
 
+    @* @{
+        Layout = "_Layout";
+    } *@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +21,7 @@
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>x
+</head>
 <body class="hold-transition sidebar-mini">
     <meta http-equiv="refresh" content="600">
     <div class="wrapper">
@@ -57,99 +61,99 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        </div>
                                     </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example2" class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>City Name</th>
-                                                    <th>State Name</th>
-                                                    <th>Zone Name</th>
-                                                    <th>Status</th>
-
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var item in Model)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.CityId)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.CityName)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.State.StateName)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Zones.ZoneName)
-                                                        </td>
-                                                        <td>
-                                                            @if (item.IsActive)
-                                                            {
-                                                                <span class="text-success font-weight-bold">Active</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="text-danger font-weight-bold">Inactive</span>
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal2"
-                                                                    data-url="@Url.Action("EditCity", "City")" data-id="@item.CityId">
-                                                                <i class="fas fa-edit"></i> @* Edit *@
-                                                            </a>
-
-
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.CityId">
-                                                                <i class="fas fa-trash-alt"></i> @* Delete *@
-                                                            </button>
-
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.card-body -->
                                 </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>City Name</th>
+                                                <th>State Name</th>
+                                                <th>Zone Name</th>
+                                                <th>Status</th>
+
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CityId)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CityName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.State.StateName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Zones.ZoneName)
+                                                    </td>
+                                                    <td>
+                                                        @if (item.IsActive)
+                                                        {
+                                                            <span class="text-success font-weight-bold">Active</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="text-danger font-weight-bold">Inactive</span>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal2"
+                                                           data-url="@Url.Action("EditCity", "City")" data-id="@item.CityId">
+                                                            <i class="fas fa-edit"></i> @* Edit *@
+                                                        </a>
+
+
+                                                        <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.CityId">
+                                                            <i class="fas fa-trash-alt"></i> @* Delete *@
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
                             </div>
                         </div>
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
+                <!-- /.col -->
             </div>
-            <!-- /.container-fluid -->
-        </section>
+            <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+    </section>
 
 
 
-        <!-- Delete Modal -->
-        <div id="myModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Deletion</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete this item?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger delete-confirm">Delete</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+    <!-- Delete Modal -->
+    <div id="myModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger delete-confirm">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- jQuery -->
@@ -248,7 +252,7 @@
             $('.delete-confirm').data('id', CityId);
             $('#myModal').modal('show');
         });
-        
+
         // Event delegation for handling delete button click inside the modal
         $(document).on('click', '.delete-confirm', function () {
             var CityId = $(this).data("id");
@@ -278,7 +282,7 @@
             debugger
             var CityId = $(this).data("id");
             var editUrl = '@Url.Action("EditCity", "City")' + '?id=' + CityId;
-            
+
             // AJAX request to fetch data for editing
             $.ajax({
                 url: editUrl,
@@ -288,7 +292,7 @@
                     $('#placeholder1').html(data);
                     // Show the edit modal
                     $('#updateModal2').modal('show');
-                    
+
                 },
                 error: function (xhr, status, error) {
                     console.error("Error fetching City data: ", error);
@@ -332,7 +336,7 @@
                 data: $('#cityForm').serialize(),
                 success: function (response) {
                     // Check if the response indicates success
-                    if (response ) {
+                    if (response) {
                         updateData(); // Call function to update data
                         // alert('City Updated successfully');
                         $('#updateModal2').modal('hide');

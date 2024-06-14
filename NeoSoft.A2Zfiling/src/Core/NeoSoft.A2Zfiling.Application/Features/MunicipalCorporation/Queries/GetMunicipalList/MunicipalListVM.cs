@@ -17,5 +17,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.Ge
         public virtual City City { get; set; }
         public int ZoneId { get; set; }
         public virtual Zones Zones { get; set; }
+        public int StateId { get; set; }
+        public virtual State State { get; set; }
     }
 }

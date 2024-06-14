@@ -13,6 +13,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Commands.C
         public string PinCode { get; set; }
         public int StateId { get; set; }
         public string StateName { get; set; }
+        public int CityId { get; set; }
+        public string CityName { get; set; }
         public int ZoneId { get; set; }
         public string ZoneName { get; set; }
 

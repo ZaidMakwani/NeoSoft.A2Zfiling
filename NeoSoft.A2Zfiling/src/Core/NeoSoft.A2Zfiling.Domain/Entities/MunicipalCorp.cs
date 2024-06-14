@@ -20,6 +20,9 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
         public int ZoneId { get; set; }
         [JsonIgnore]
         public virtual Zones Zones { get; set; }
+        public int StateId { get; set; }
+        [JsonIgnore]
+        public virtual State State { get; set; }
         public int CityId { get; set; }
         [JsonIgnore]
         public virtual City City { get; set; }

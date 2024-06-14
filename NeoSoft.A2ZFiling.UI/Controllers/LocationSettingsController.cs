@@ -33,8 +33,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 Cities = cities
             };
 
-            //ViewBag.TableOne = municipalities;
-            //ViewBag.TableTwo = zones;
+            ViewBag.TableOne = municipalities;
+            ViewBag.TableTwo = zones;
             //ViewBag.TableThree = cities;
 
 
