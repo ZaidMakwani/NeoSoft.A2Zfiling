@@ -234,7 +234,10 @@
         });
     });
 
-
+    $(document).on('click', '#closeCompanyEntity, .close', function () {
+        // Close the modal
+        $('#createCompanyModal').modal('hide');
+    });
     //----------------------------------------------------------------------------------------------------
 
     //function to handle edit company in the modal
@@ -332,7 +335,7 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
+    $(document).on('click', '#closeCompanyButton, .close', function () {
         // Close the modal
         $('#updateCompanyModal').modal('hide');
     

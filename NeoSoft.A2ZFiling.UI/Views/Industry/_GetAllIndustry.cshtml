@@ -238,7 +238,10 @@
             });
         });
     });
-
+    $(document).on('click', '#closeIndustryEntity, .close', function () {
+        // Close the modal
+        $('#createIndustryModal').modal('hide');
+    });
 
 
 
@@ -332,7 +335,7 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
+    $(document).on('click', '#closeIndustryButton, .close', function () {
         // Close the modal
         $('#updateIndustryModal').modal('hide');
 

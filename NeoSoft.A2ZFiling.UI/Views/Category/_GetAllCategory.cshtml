@@ -201,7 +201,10 @@
             });
         });
     });
-
+    $(document).on('click', '#closeCategoryEntity, .close', function () {
+        // Close the modal
+        $('#createCategoryModal').modal('hide');
+    });
 
     // Function to show the delete modal
 
@@ -327,7 +330,7 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
+    $(document).on('click', '#closeCategoryButton, .close', function () {
         // Close the modal
         $('#updateCategoryModal').modal('hide');
     });

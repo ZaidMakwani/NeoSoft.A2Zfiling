@@ -204,7 +204,10 @@
         });
     });
 
-
+    $(document).on('click', '#closeSubStatusEntity, .close', function () {
+        // Close the modal
+        $('#createSubStatusModal').modal('hide');
+    });
     //-------------------------------------------------
     //function to handle edit modal
 
@@ -285,7 +288,7 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
+    $(document).on('click', '#closeSubStatusButton, .close', function () {
         // Close the modal
         $('#updateSubStatusModal').modal('hide');
     });

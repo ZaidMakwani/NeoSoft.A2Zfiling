@@ -322,7 +322,10 @@
                 });
             });
         });
-
+        $(document).on('click', '#closedEntity, .close', function () {
+            // Close the modal
+            $('#createModal').modal('hide');
+        });
 
 
         // Function to show the delete modal

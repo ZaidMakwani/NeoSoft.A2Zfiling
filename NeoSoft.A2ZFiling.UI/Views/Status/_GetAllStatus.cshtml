@@ -223,6 +223,11 @@
     });
 
 
+    $(document).on('click', '#closeStatusEntity, .close', function () {
+        // Close the modal
+        $('#createStatusModal').modal('hide');
+    });
+
     //function to handle edit status
 
     $(document).on('click', '.editStatus-button', function () {
@@ -307,7 +312,7 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
+    $(document).on('click', '#closeStatusButton, .close', function () {
         // Close the modal
         $('#updateStatusModal').modal('hide');
     });

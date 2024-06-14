@@ -238,6 +238,10 @@
     });
 
 
+    $(document).on('click', '#closeLicenseEntity, .close', function () {
+        // Close the modal
+        $('#createLicenseModal').modal('hide');
+    });
 
     //fucntion to handle delete modal
 
@@ -354,7 +358,7 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
+    $(document).on('click', '#closeLicenseButton, .close', function () {
         // Close the modal
         $('#updateLicenseModal').modal('hide');
     });
