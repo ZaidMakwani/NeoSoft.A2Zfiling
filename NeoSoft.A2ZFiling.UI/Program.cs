@@ -27,6 +27,7 @@ builder.Services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>))
 builder.Services.AddScoped<ILicenseType, LicenseTypeService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ILicenseService,LicenseService>();
+builder.Services.AddScoped<ILicenceMasterService,LicenseMasterService>();
 
 
 // Add services to the container.

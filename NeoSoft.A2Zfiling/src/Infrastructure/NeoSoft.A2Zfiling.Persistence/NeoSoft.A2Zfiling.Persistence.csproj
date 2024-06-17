@@ -6,6 +6,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20240611132400_licenseMapping.cs" />
+    <Compile Remove="Migrations\20240611132400_licenseMapping.Designer.cs" />
+    <Compile Remove="Migrations\20240612070915_licenseMappingIndustry.cs" />
+    <Compile Remove="Migrations\20240612070915_licenseMappingIndustry.Designer.cs" />
+    <Compile Remove="Migrations\20240613060630_changesinlicenseMaster.cs" />
+    <Compile Remove="Migrations\20240613060630_changesinlicenseMaster.Designer.cs" />
+    <Compile Remove="Migrations\MSSQL\20220105101648_InitialCreate.cs" />
+    <Compile Remove="Migrations\MSSQL\20220105101648_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\MSSQL\20240521045137_initial0.cs" />
+    <Compile Remove="Migrations\MSSQL\20240521045137_initial0.Designer.cs" />
+    <Compile Remove="Migrations\MSSQL\20240611051638_logininit.cs" />
+    <Compile Remove="Migrations\MSSQL\20240611051638_logininit.Designer.cs" />
+  </ItemGroup>
+
   <ItemGroup>    
     <Folder Include="Configurations\" />    
     <Folder Include="Migrations\MSSQL\" />
