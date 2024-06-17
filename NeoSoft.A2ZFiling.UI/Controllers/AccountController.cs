@@ -34,17 +34,18 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             //_tokenRepository = tokenRepository;
 
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-    
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
@@ -148,6 +149,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             TempData.Remove("token");
 
             return RedirectToAction("Index", "Account");
+
+        }
+        [HttpGet]
+        public IActionResult GenerateNewCaptcha()
+        {
+            return PartialView("_CaptchaPartial");
         }
     }
 }

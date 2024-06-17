@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeoSoft.A2Zfiling.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,12 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.Ge
         public int CityId { get; set; }
         public int StateId { get; set; }
         public bool IsActive { get; set; }
+        public string PinCode { get; set; }
+        public int CityId { get; set; }
+        public virtual City City { get; set; }
+        public int ZoneId { get; set; }
+        public virtual Zones Zones { get; set; }
+        public int StateId { get; set; }
+        public virtual State State { get; set; }
     }
 }

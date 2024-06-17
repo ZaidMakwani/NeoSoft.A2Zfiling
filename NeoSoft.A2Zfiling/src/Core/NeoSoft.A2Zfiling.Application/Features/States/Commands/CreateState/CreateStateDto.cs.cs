@@ -11,5 +11,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.States.Commands.CreateState
         public int StateId { get; set; }
         public string StateName { get; set; }
         public bool IsActive { get; set; }
+      
     }
 }

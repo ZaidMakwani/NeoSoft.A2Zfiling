@@ -27,7 +27,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.Ge
         public async Task<Response<IEnumerable<MunicipalListVM>>> Handle(GetMunicipalListQuery request, CancellationToken cancellationToken)
         {
 
-            var allMunicipals = (await _municipalRepository.ListAllAsync());
+            var allMunicipals = (await _municipalRepository.ListAllAsync("Zones","City","State"));
             var municipals = _mapper.Map<IEnumerable<MunicipalListVM>>(allMunicipals.Where(x => x.IsActive == true));
 
             return new Response<IEnumerable<MunicipalListVM>>(municipals, "success");

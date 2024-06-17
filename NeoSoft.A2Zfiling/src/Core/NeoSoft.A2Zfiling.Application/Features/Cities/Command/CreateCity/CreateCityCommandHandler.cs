@@ -2,11 +2,13 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
+using NeoSoft.A2Zfiling.Application.Features.States.Queries.GetStateById;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +38,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.Cities.Command.CreateCity
                     IsActive = true,
                     CreatedBy = "Admin",
                     CreatedDate = DateTime.Now,
+                    StateId = request.StateId,
+                    ZoneId = request.ZoneId,
+
+                 
+
+
+
+
                 };
                 var data = await _asyncRepository.AddAsync(city);
 
