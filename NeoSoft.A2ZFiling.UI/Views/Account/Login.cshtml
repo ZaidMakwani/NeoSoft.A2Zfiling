@@ -119,14 +119,14 @@
                     <span asp-validation-for="Password" class="text-danger"></span>
 
                     <div class="row">
-                        <div class="col-8">
+                        @* <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                <input type="checkbox" asp-for="IsRemember" id="remember">
                                 <label for="remember">
                                     Remember Me
                                 </label>
                             </div>
-                        </div>
+                        </div> *@
                         <div class="col-12">
                             <dnt-captcha asp-captcha-generator-max="999999"
                                          asp-captcha-generator-min="111111"
@@ -153,9 +153,9 @@
                     </div>
                 </form>
 
-                <p class="mb-1">
+               @*  <p class="mb-1">
                     <a href="forgot-password.html">I forgot my password</a>
-                </p>
+                </p> *@
             </div>
             <!-- /.card-body -->
         </div>
