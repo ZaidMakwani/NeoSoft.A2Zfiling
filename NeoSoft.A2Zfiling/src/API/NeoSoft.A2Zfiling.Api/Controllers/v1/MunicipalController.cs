@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Commands.CreateMunicipal;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Commands.DeleteMunicipal;
+using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.GetMunicipalByCity;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.GetMunicipalDetails;
 using NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.GetMunicipalList;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Commands.UpdateMunicipal;
@@ -29,6 +30,14 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
         {
             _logger.LogInformation("GetAllMunicipal Initiated");
             var dtos = await _mediator.Send(new GetMunicipalListQuery());
+            _logger.LogInformation("GetAllMunicipal Completed");
+            return Ok(dtos);
+        }
+        [HttpGet]
+        public async Task<ActionResult> GetAllMunicipalByCity(int cityId)
+        {
+            _logger.LogInformation("GetAllMunicipal Initiated");
+            var dtos = await _mediator.Send(new GetMunicipalByCityQuery() { CityId=cityId});
             _logger.LogInformation("GetAllMunicipal Completed");
             return Ok(dtos);
         }

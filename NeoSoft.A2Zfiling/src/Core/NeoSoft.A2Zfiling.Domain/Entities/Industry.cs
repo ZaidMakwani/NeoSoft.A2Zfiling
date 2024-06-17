@@ -13,6 +13,6 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
         public string IndustryName { get; set; }
         public string ShortName { get; set; }
         public bool IsActive { get; set; }
-
+        public virtual ICollection<LicenseMaster> LicenseMasters { get; set; }
     }
 }
