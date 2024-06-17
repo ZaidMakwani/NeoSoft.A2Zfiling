@@ -1,0 +1,464 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+
+@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.LicenseTypeVM>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminLTE 3 | DataTables</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Bootstrap 4 -->
+
+
+    <style>
+        .nav-tabs .nav-item .nav-link {
+            color: black ; 
+        }
+
+            .nav-tabs .nav-item .nav-link.active {
+                font-weight: bold; 
+            }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <section class="content m-5 ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row justify-content-end">
+                            <div class="col-lg-10">
+                                <!-- Nav tabs -->
+                                <div class="card-header">
+                                    <h3 class="card-title">License Configuration Setting</h3>
+                                </div>
+                         
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="table1-tab" data-toggle="tab" href="#table1" role="tab" aria-controls="table1" aria-selected="true">License Types</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table2-tab" data-toggle="tab" href="#table2" role="tab" aria-controls="table2" aria-selected="true">Industry Types</a>
+                                    </li>
+                                     <li class="nav-item">
+                                        <a class="nav-link" id="table3-tab" data-toggle="tab" href="#table3" role="tab" aria-controls="table3" aria-selected="true">Company Types</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table4-tab" data-toggle="tab" href="#table4" role="tab" aria-controls="table4" aria-selected="true">Categories </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table5-tab" data-toggle="tab" href="#table5" role="tab" aria-controls="table5" aria-selected="true">Licenses </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table6-tab" data-toggle="tab" href="#table6" role="tab" aria-controls="table6" aria-selected="true">Statuses </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table7-tab" data-toggle="tab" href="#table7" role="tab" aria-controls="table7" aria-selected="true">Sub Statuses </a>
+                                    </li>
+                                </ul>
+                               
+
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="table1" role="tabpanel" aria-labelledby="table1-tab">
+                                        <div class="card">
+                                           <div id="placeholder"></div> 
+                             
+                                            <div class="card-header">
+                                                <div class="float-right">
+                                                    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "LicenseType")">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+
+                                                    <div class="navbar-search-block">
+                                                        <form class="form-inline">
+                                                            <div class="input-group input-group-sm">
+                                                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-navbar" type="submit">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </button>
+                                                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+
+          
+                                            <div class="card-body">
+                                                <table id="example1" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.No</th>
+                                                            <th>Name</th>
+                                                            <th>Description</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.LicenseTypeId)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.LicenseName)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.Description)
+                                                                </td>
+                                                                <td>
+                                                                    @if (item.IsActive)
+                                                                    {
+                                                                        <span class="text-success font-weight-bold">Active</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="text-danger font-weight-bold">Inactive</span>
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                            data-url="@Url.Action("Edit", "LicenseType")" data-id="@item.LicenseTypeId">
+                                                                        <i class="fas fa-edit"></i> 
+                                                                    </button>
+
+
+                                                                    <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.LicenseTypeId">
+                                                                        <i class="fas fa-trash-alt"></i> 
+                                                                    </button>
+
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    </div>
+
+
+                                    <div class="tab-pane fade " id="table2" role="tabpanel" aria-labelledby="table2-tab">
+                                        <div id="industryDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table3" role="tabpanel" aria-labelledby="table3-tab">
+                                        <div id="companyDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table4" role="tabpanel" aria-labelledby="table4-tab">
+                                        <div id="categoryDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table5" role="tabpanel" aria-labelledby="table5-tab">
+                                        <div id="licenseDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table6" role="tabpanel" aria-labelledby="table6-tab">
+                                        <div id="statusDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table7" role="tabpanel" aria-labelledby="table7-tab">
+                                        <div id="subStatusDataPlaceholder"></div>
+                                    </div>
+
+
+
+                                    
+                                    
+
+
+
+                                @* </div> *@
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+            <!-- Delete Modal -->
+            <div id="myModal" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirm Deletion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this item?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger delete-confirm">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+        @* </section> *@
+    @* </div> *@
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- DataTables Buttons extension -->
+    <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <script src="~/js/script.js"></script>
+ 
+
+    <script>
+
+        console.log("Before DataTable initialization");
+
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "paging": true,
+            "pageLength": 4,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        })/* .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); */
+        $('#example1').DataTable().buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
+        console.log("After DataTable initialization");
+
+
+        //function to handle create modal
+
+
+        $('button[data-toggle="ajax-modal"]').click(function (event) {
+            var url = $(this).data('url');
+            console.log('Create modal URL:', url);
+            var decodeUrl = decodeURIComponent(url);
+            $.get(decodeUrl).done(function (data) {
+                $('#placeholder').html(data);
+                $('#createModal').modal('show');
+
+                // Unbind previously bound event handler
+                $('#placeholder').off('click', '[data-save="modal"]');
+
+                // Event delegation for dynamically loaded content
+                $('#placeholder').on('click', '[data-save="modal"]', function (event) {
+                    var form = $(this).parents('.modal').find('form');
+                    var actionUrl = form.attr('action');
+                    var url = '@Url.Action("Create", "LicenseType")';
+                    var sendData = form.serialize();
+
+                    $.post(url, sendData).done(function (data) {
+                        $('#placeholder').find('.modal').modal('hide');
+                        $('#placeholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "LicenseType Created Successfully." + '</div>');
+                        // card.find('.modal').modal('hide');
+                        location.reload();
+
+
+                    }).fail(function (xhr, status, error) {
+                        var errorMessage = xhr.responseText;
+                        console.log(errorMessage);
+                        // Update the modal content to display the error message
+                        // card.find('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                        $('#placeholder').find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+
+                    });
+                });
+            });
+        });
+        $(document).on('click', '#closedEntity, .close', function () {
+            // Close the modal
+            $('#createModal').modal('hide');
+        });
+
+
+        // Function to show the delete modal
+
+
+        $(document).on('click', '.trigger-modal', function () {
+            var LicenseId = $(this).data("id");
+            // Set data attribute of delete button inside modal for further reference
+            $('.delete-confirm').data('id', LicenseId);
+            $('#myModal').modal('show');
+        });
+
+        // Event delegation for handling delete button click inside the modal
+        $(document).on('click', '.delete-confirm', function () {
+            var LicenseId = $(this).data("id");
+            var deleteUrl = '@Url.Action("Delete", "LicenseType")' + '?id=' + LicenseId;
+
+            $.ajax({
+                url: deleteUrl,
+                type: 'GET',
+                success: function (result) {
+                    console.log('License Type deleted successfully.');
+                    //alert('Zone deleted successfully');
+                    $('#myModal').modal('hide');
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error deleting license type: ", error);
+                    alert("Error deleting license type. Please try again.");
+                }
+            });
+        });
+
+
+        //-------------------------------------------------------------------------------------------------
+        //function to handle editlicense in the modal
+
+
+        $(document).on('click', '.edit-button', function () {
+            var LicenseId = $(this).data("id");
+            var editUrl = '@Url.Action("Edit", "LicenseType")' + '?id=' + LicenseId;
+
+            // AJAX request to fetch data for editing
+            $.ajax({
+                url: editUrl,
+                type: 'GET',
+                success: function (data) {
+                    // Load the partial view into the placeholder div
+                    $('#placeholder').html(data);
+                    // Show the edit modal
+                    $('#updateModal').modal('show');
+
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching license type data: ", error);
+                    alert("Error fetching license type data. Please try again.");
+                }
+            });
+        });
+
+
+        // Function to update data after saving
+        function updateData() {
+            var LicenseId = $('#LicenseTypeId').val();
+            var editUrl = '@Url.Action("Edit", "LicenseType")' + '?id=' + LicenseId;
+
+            // AJAX request to fetch updated data
+            $.ajax({
+                url: editUrl,
+                type: 'GET',
+                success: function (data) {
+                    // Replace the content in the placeholder div with the updated data
+                    $('#placeholder').html(data);
+                    // Close the modal or perform any other action as needed
+                    $('#updateModal').modal('hide');
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching updated license type data: ", error);
+                    alert("Error fetching updated license type data. Please try again.");
+                }
+            });
+        }
+
+
+
+        $(document).on('click', '#saveButton', function () {
+            
+            // Perform validation and submit data via AJAX
+            $.ajax({
+                url: '@Url.Action("Edit", "LicenseType")',
+                type: 'POST',
+                data: $('#updateLicenseForm').serialize(),
+                success: function (response) {
+                    // Check if the response indicates success
+                    if (response) {
+                        updateData(); // Call function to update data
+                        // alert('City Updated successfully');
+                        $('#updateModal').modal('hide');
+                        var successHtml = '<div class="alert alert-success" role="alert">' + "License Type Updated Successfully." + '</div>';
+                        $('#updateModal .modal-body').prepend(successHtml);
+                        location.reload();
+                        // $('#updateModal').modal('hide');
+                    }
+                    else {
+                        var successHtml = '<div class="alert alert-danger" role="alert">' + "Error while updating License Type." + '</div>';
+                        $('#updateModal .modal-body').prepend(successHtml);
+                        location.reload();
+                        // alert("An error occurred while saving data. Please try again.");
+
+                    }
+                },
+
+
+                error: function (xhr, status, error) {
+                    // Display more detailed error message from server response
+                    var errorMessage = xhr.responseText;
+                    if (errorMessage) {
+                        var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
+                        $('#updateModal .modal-body').prepend(errorHtml); // Prepend error message to modal body
+                    } else {
+                        alert("An error occurred while saving data. Please try again.");
+                    }
+                }
+            });
+        });
+
+        $(document).on('click', '#closeButton, .close', function () {
+            // Close the modal
+            $('#updateModal').modal('hide');
+        });
+
+
+    </script>
+</body>
+</html>

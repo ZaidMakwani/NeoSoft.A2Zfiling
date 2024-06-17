@@ -31,6 +31,23 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             return View(companyList.Data);
         }
 
+
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            Response<List<CompanyVM>> companyList = new Response<List<CompanyVM>>();
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Company/GetAllCompanies/all").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                companyList = JsonConvert.DeserializeObject<Response<List<CompanyVM>>>(data);
+            }
+
+            return PartialView("_GetAllCompany",companyList.Data);
+        }
+
         //--------------------------------------------------Create Company--------------------------------------
         public IActionResult Create()
         {            
@@ -44,18 +61,32 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             string data = JsonConvert.SerializeObject(model); 
             StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/Company/Create",content).Result;
-
-            if (response.IsSuccessStatusCode)
+            if (string.IsNullOrEmpty(model.CompanyName))
             {
-                return RedirectToAction("Index");
+                return BadRequest("Please enter a valid Company name.");
             }
 
-            return View();
+            if (string.IsNullOrEmpty(model.ShortName))
+            {
+                return BadRequest("Please enter a valid Short name.");
+            }
+            if ((model.ShortName.Any(char.IsDigit)) || (model.CompanyName.Any(char.IsDigit)))
+            {
+                return BadRequest(" Name cannot contain numbers.");
+            }
+           
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed to create Company");
         }
 
 
-         
+
         //-----------------------------------------------Update Company------------------------------------------------
+        [HttpGet]
         public IActionResult Update(int id)
  {   
             Response<CompanyVM> company = new Response<CompanyVM>();
@@ -77,12 +108,25 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/Company/Update/", content).Result;
 
+            if (string.IsNullOrEmpty(model.CompanyName))
+            {
+                return BadRequest("Please enter a valid Company name.");
+            }
+
+            if (string.IsNullOrEmpty(model.ShortName))
+            {
+                return BadRequest("Please enter a valid Short name.");
+            }
+            if ((model.ShortName.Any(char.IsDigit)) || (model.CompanyName.Any(char.IsDigit)))
+            {
+                return BadRequest(" Name cannot contain numbers.");
+            }
             if (response.IsSuccessStatusCode)
             {
                 return Ok(response);
             }
 
-            return View();
+            return BadRequest("Failed to update Company");
         }
 
         //-----------------------------------------------Delete Company------------------------------------------------
@@ -91,7 +135,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             Response<CompanyVM> company = new Response<CompanyVM>();
             HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Company/Delete?Id={id}").Result;           
-            return RedirectToAction("Index");          
+            return Ok();          
         }
 
         //[HttpPost]

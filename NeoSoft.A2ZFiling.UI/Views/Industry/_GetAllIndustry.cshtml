@@ -1,0 +1,346 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.IndustryVM>
+
+
+
+        <div class="card">
+    <div id="Industryplaceholder"></div>      
+  @*   <div class="card-header">
+                <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
+                        data-url="@Url.Action("Create", "Industry")">
+                    <i class="fas fa-plus"></i> 
+                </button>
+            </div> *@
+
+
+    <div class="card-header">
+        <div class="float-right">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createIndustryModal" data-url="@Url.Action("Create", "Industry")">
+                <i class="fas fa-plus"></i>
+            </button>
+
+            <div class="navbar-search-block">
+                <form class="form-inline">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    <div class="card-body">
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Short Names</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+@*                         <input type="hidden" class="industry-id" value="@item.IndustryId" />
+ *@
+                        <td>@Html.DisplayFor(modelItem => item.IndustryId)</td>
+                       
+ 
+          
+
+
+
+                        <td>@Html.DisplayFor(modelItem => item.IndustryName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ShortName)</td>
+                        <td>
+
+                            <a class="btn btn-primary btn-sm editIndustry-button" data-toggle="ajax-modal" data-target="#updateModal"
+                               data-url="@Url.Action("Update", "Industry")" data-id="@item.IndustryId">
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+                            <a id="triggerModalButton" class="btn btn-danger btn-sm triggerIndustry-modal" data-id="@item.IndustryId">
+                                <i class="fas fa-trash-alt"></i>@* Delete  *@
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+    <!-- /.card-body -->
+    </div>
+  </div>
+
+
+<div id="myIndustryModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete-item">Delete</button>
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+
+
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- DataTables Buttons extension -->
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/jszip/jszip.min.js"></script>
+<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+
+<script>
+
+    console.log("Before DataTable initialization");
+    // var startIndex = 1;
+    $("#example2").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "paging": true,
+        "pageLength": 5,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        // "rowCallback": function (row, data, index) {
+        //     var table = $('#example2').DataTable();
+        //     var serialNumber = startIndex + index;
+        //     table.cell($('td:first', row)).data(serialNumber);
+        // }
+
+   
+    })/* .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); */
+    $('#example2').DataTable().buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+
+
+    console.log("After DataTable initialization");
+
+    //function to delete data 
+
+    $(document).on('click', '.triggerIndustry-modal', function () {
+        var IndustryId = $(this).data("id");
+        // Set data attribute of delete button inside modal for further reference
+        $('.delete-item').data('id', IndustryId);
+        $('#myIndustryModal').modal('show');
+    });
+
+    // Event delegation for handling delete button click inside the modal
+    $(document).on('click', '.delete-item', function () {
+        var IndustryId = $(this).data("id");
+        var deleteUrl = '@Url.Action("Delete", "Industry")' + '?id=' + IndustryId;
+
+        $.ajax({
+            url: deleteUrl,
+            type: 'GET',
+            success: function (result) {
+                console.log('Industry deleted successfully.');
+                //alert('Zone deleted successfully');
+                $('#myIndustryModal').modal('hide');
+                $('#table2-tab').tab('show');
+                // location.reload();
+                $('#industryDataPlaceholder').load('/Industry/GetAll', function () {
+                    console.log('Industry data reloaded.');
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error deleting industry: ", error);
+                alert("Error deleting industry. Please try again.");
+            }
+        });
+    });
+
+
+
+    //function to handle create modal
+
+    $('button[data-toggle="ajax-modal"]').click(function (event) {
+        var url = $(this).data('url');
+        console.log('Create modal URL:', url);
+        var decodeUrl = decodeURIComponent(url);
+        $.get(decodeUrl).done(function (data) {
+            $('#Industryplaceholder').html(data);
+            $('#createIndustryModal').modal('show');
+
+            // Unbind previously bound event handler
+            $('#Industryplaceholder').off('click', /* '[data-save="modal"]' */'#saveIndustryEntity');
+
+            // Event delegation for dynamically loaded content
+            $('#Industryplaceholder').on('click', /* '[data-save="modal"]' */ '#saveIndustryEntity', function (event) {
+                var form = $(this).parents('.modal').find('form');
+                var actionUrl = form.attr('action');
+                var url = '@Url.Action("Create", "Industry")';
+                var sendData = form.serialize();
+
+                $.post(url, sendData).done(function (data) {
+                     $('#Industryplaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Industry Created Successfully.</div>');
+                    $('#Industryplaceholder').find('.modal').modal('hide');
+                    $('#table2-tab').tab('show');
+                    // Reload industry data after creating a new industry
+                    $('#industryDataPlaceholder').load('/Industry/GetAll'
+                    , function () {
+                        console.log('Industry data reloaded.');
+                    }
+                    );
+
+                }).fail(function (xhr, status, error) {
+                    var errorMessage = xhr.responseText;
+                    console.log(errorMessage);
+                    // Update the modal content to display the error message
+                    $('#Industryplaceholder').find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                });
+            });
+        });
+    });
+    $(document).on('click', '#closeIndustryEntity, .close', function () {
+        // Close the modal
+        $('#createIndustryModal').modal('hide');
+    });
+
+
+
+
+
+    //function to handle editzone in the modal
+
+
+
+    $(document).on('click', '.editIndustry-button', function () {
+        var IndustryId = $(this).data("id");
+        var editUrl = '@Url.Action("Update", "Industry")' + '?id=' + IndustryId;
+
+        // AJAX request to fetch data for editing
+        $.ajax({
+            url: editUrl,
+            type: 'GET',
+            success: function (data) {
+                // Load the partial view into the placeholder div
+                $('#Industryplaceholder').html(data);
+                // Show the edit modal
+                $('#updateIndustryModal').modal('show');
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching Industry data: ", error);
+                alert("Error fetching Industry data. Please try again.");
+            }
+        });
+    });
+
+
+    // Function to update data after saving
+    function updateData() {
+        var IndustryId = $('#IndustryId').val(); // Assuming you have a hidden input field with the IndustryId
+        var editUrl = '@Url.Action("Update", "Industry")' + '?id=' + IndustryId;
+
+        // AJAX request to fetch updated data
+        $.ajax({
+            url: editUrl,
+            type: 'GET',
+            success: function (data) {
+                // Replace the content in the placeholder div with the updated data
+                $('#Industryplaceholder').html(data);
+                // Close the modal
+                $('#updateIndustryModal').modal('hide');
+                // $('#table2-tab').tab('show');
+                // // Reload industry data after creating a new industry
+                // $('#industryDataPlaceholder').load('/Industry/GetAll'
+                //     , function () {
+                //         console.log('Industry data reloaded.');
+                //     }
+                // );
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching updated Industry data: ", error);
+                //alert("Error fetching updated Industry data. Please try again.");
+            }
+        });
+    }
+
+    $(document).on('click', '#saveIndustryButton', function () {
+        // Perform validation and submit data via AJAX
+        $.ajax({
+            url: '@Url.Action("Update", "Industry")',
+            type: 'POST',
+            data: $('#updateIndustryForm').serialize(),
+            success: function (response) {
+                console.log(response);
+                // Check if the response indicates success
+                if (response) {
+                    updateData(); // Call function to update data
+                    $('#Industryplaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Industry Updated Successfully.</div>');
+                    $('#updateIndustryModal').modal('hide');
+                    $('#table2-tab').tab('show');
+                    // Reload industry data after creating a new industry
+                    $('#industryDataPlaceholder').load('/Industry/GetAll'
+                        , function () {
+                            console.log('Industry data reloaded.');
+                        }
+                    );
+                } else {
+                    console.log("An error occurred while saving data. Please try again.");
+                    //alert("An error occurred while saving data. Please try again.");
+                }
+            },
+            error: function (xhr, status, error) {
+                // Display more detailed error message from server response
+                var errorIndustryMessage = xhr.responseText;
+                $('#Industryplaceholder').find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+            }
+        });
+    });
+
+    $(document).on('click', '#closeIndustryButton, .close', function () {
+        // Close the modal
+        $('#updateIndustryModal').modal('hide');
+
+    });
+
+
+</script>
+ 

@@ -31,20 +31,45 @@
                         <div class="row justify-content-end">
                             <div class="col-lg-10">
                                 <div class="card">
-                                    <div class="card-header">
+
+                                    @* <div class="card-header">
                                         <h3 class="card-title">Permission</h3>
                                         <div class="card-tools">
-                                            @*  <button type="button" class="btn btn-primary" id="createButton">
-                                            Create
-                                            </button> *@
+                                           
 
                                             <div id="placeholder"></div>
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
                                                     data-url="@Url.Action("Create", "Permission")">
-                                                <i class="fas fa-plus"></i>   @* Create *@
+                                                <i class="fas fa-plus"></i>  
                                             </button>
                                         </div>
-                                    </div>
+                                    </div> *@
+
+                                    <div class="card-header">
+                                        <h3 class="card-title">Permission</h3>
+                                        <div id="placeholder"></div>
+                                        <div class="float-right">
+                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "Permission")">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+
+                                            <div class="navbar-search-block">
+                                                <form class="form-inline">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-navbar" type="submit">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example2" class="table table-bordered table-hover">
@@ -107,6 +132,7 @@
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
+            </div>
         </section>
 
 
@@ -139,6 +165,7 @@
 
 
 
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
@@ -173,7 +200,7 @@
             "paging": true,
             "pageLength": 4,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,
@@ -264,7 +291,7 @@
                 });
             });
         });
-
+    
 
 
 

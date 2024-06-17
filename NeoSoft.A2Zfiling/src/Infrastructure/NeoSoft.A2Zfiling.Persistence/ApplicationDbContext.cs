@@ -20,6 +20,13 @@ namespace NeoSoft.A2Zfiling.Persistence
            : base(options)
         {
         }
+
+        public DbSet<SubStatus> SubStatuses { get; set; }
+        public DbSet<Status> Statuses { get; set; }
+        public DbSet<LicenseMaster> LicenseMaster { get; set; }
+        public DbSet<License> Licenses { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<LicenseType> LicenseTypes { get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<Zones> Zones { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -39,6 +46,7 @@ namespace NeoSoft.A2Zfiling.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
@@ -47,8 +55,144 @@ namespace NeoSoft.A2Zfiling.Persistence
             //var musicalguid = guid.parse("{6313179f-7837-473a-a4d5-a5571b43e6a6}");
             //var playguid = guid.parse("{bf3f3002-7e53-441e-8b76-f6280be284aa}");
             //var conferenceguid = guid.parse("{fe98f549-e790-4e9f-aa16-18c2292a2ee9}");
+            modelBuilder.Entity<Zones>().HasKey(z => z.ZoneId);
+            modelBuilder.Entity<State>().HasKey(s => s.StateId);
+            modelBuilder.Entity<City>().HasKey(c => c.CityId);
+            modelBuilder.Entity<Domain.Entities.MunicipalCorp>().HasKey(mc => mc.MunicipalId);
+            
+            // Configure relationships
+            modelBuilder.Entity<City>()
+             .HasOne(c => c.State)
+             .WithMany(s => s.Cities)
+             .HasForeignKey(c => c.StateId)
+             .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<City>()
+                .HasOne(c => c.Zones)
+                .WithMany(z => z.Cities)
+                .HasForeignKey(c => c.ZoneId)
+                .OnDelete(DeleteBehavior.Restrict);
 
+            // Configure MunicipalCorp relationships
+            modelBuilder.Entity<MunicipalCorp>()
+                .HasOne(m => m.Zones)
+                .WithMany(z => z.MunicipalCorps)
+                .HasForeignKey(m => m.ZoneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MunicipalCorp>()
+                .HasOne(m => m.City)
+                .WithMany(c => c.MunicipalCorps)
+                .HasForeignKey(m => m.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //License Mapping
+            modelBuilder.Entity<LicenseMaster>(entity =>
+            {
+                entity.HasKey(e => e.LicenceMasterId);
+
+                entity.Property(e => e.LicenseName)
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Classification)
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.StandardRate)
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.StandardTAT)
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.FastTrackRate)
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.FastTrackTAT)
+                    .HasMaxLength(20);
+
+                entity.HasOne(e => e.City)
+                    .WithMany(c => c.LicenseMasters)
+                    .HasForeignKey(e => e.CityId);
+
+                entity.HasOne(e => e.MunicipalCorp)
+                    .WithMany(mc => mc.LicenseMasters)
+                    .HasForeignKey(e => e.MunicipalId);
+
+                entity.HasOne(e => e.State)
+                    .WithMany(s => s.LicenseMasters)
+                    .HasForeignKey(e => e.StateId);
+
+                entity.HasOne(e => e.Zones)
+                    .WithMany(z => z.LicenseMasters)
+                    .HasForeignKey(e => e.ZoneId);
+
+                entity.HasOne(e => e.Industry)
+                    .WithMany(i => i.LicenseMasters)
+                    .HasForeignKey(e => e.IndustryId);
+
+                entity.HasOne(e => e.Company)
+                   .WithMany(i => i.LicenseMasters)
+                   .HasForeignKey(e => e.CompanyId);
+            });
+            modelBuilder.Entity<City>(entity =>
+            {
+                entity.HasKey(e => e.CityId);
+                entity.HasMany(c => c.LicenseMasters)
+                    .WithOne(lm => lm.City)
+                    .HasForeignKey(lm => lm.CityId);
+            });
+
+            modelBuilder.Entity<MunicipalCorp>(entity =>
+            {
+                entity.HasKey(e => e.MunicipalId);
+                entity.HasMany(mc => mc.LicenseMasters)
+                    .WithOne(lm => lm.MunicipalCorp)
+                    .HasForeignKey(lm => lm.MunicipalId);
+            });
+
+            modelBuilder.Entity<State>(entity =>
+            {
+                entity.HasKey(e => e.StateId);
+                entity.HasMany(s => s.LicenseMasters)
+                    .WithOne(lm => lm.State)
+                    .HasForeignKey(lm => lm.StateId);
+            });
+
+            modelBuilder.Entity<Zones>(entity =>
+            {
+                entity.HasKey(e => e.ZoneId);
+                entity.HasMany(z => z.LicenseMasters)
+                    .WithOne(lm => lm.Zones)
+                    .HasForeignKey(lm => lm.ZoneId);
+            });
+
+            modelBuilder.Entity<Industry>(entity =>
+            {
+                entity.HasKey(e => e.IndustryId);
+                entity.HasMany(z => z.LicenseMasters)
+                    .WithOne(lm => lm.Industry)
+                    .HasForeignKey(lm => lm.IndustryId);
+            });
+
+            modelBuilder.Entity<Company>(entity =>
+            {
+                entity.HasKey(e => e.CompanyId);
+                entity.HasMany(z => z.LicenseMasters)
+                    .WithOne(lm => lm.Company)
+                    .HasForeignKey(lm => lm.CompanyId);
+            });
+            modelBuilder.Entity<LicenseMaster>()
+                .HasOne(lm => lm.License)
+                .WithMany()
+                .HasForeignKey(lm => lm.LicenseId);
+
+            modelBuilder.Entity<License>(entity =>
+            {
+                entity.HasKey(e => e.LicenseId);
+                entity.HasMany(z=>z.LicenseMasters)
+                    .WithOne(lm => lm.License)
+                    .HasForeignKey(lm => lm.LicenseId);
+
+            });
             modelBuilder.Entity<Message>()
                 .Property(s => s.Type)
                 .HasConversion<string>();

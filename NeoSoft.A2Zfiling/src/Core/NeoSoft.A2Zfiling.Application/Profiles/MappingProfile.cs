@@ -57,6 +57,39 @@ using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.CreateCom
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Queries;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.UpdateCompany;
 using NeoSoft.A2Zfiling.Application.Features.CompaniesFeature.Commands.DeleteCompany;
+using NeoSoft.A2Zfiling.Application.Features.LicenseTypes.Command.CreateLicenseType;
+using NeoSoft.A2Zfiling.Application.Features.LicenseTypes.Queries.GetLicenseTypeList;
+using NeoSoft.A2Zfiling.Application.Features.LicenseTypes.Queries.GetLicenseTypeById;
+using NeoSoft.A2Zfiling.Application.Features.LicenseTypes.Command.UpdateLicenseType;
+using NeoSoft.A2Zfiling.Application.Features.LicenseTypes.Command.DeleteLicenseType;
+using NeoSoft.A2Zfiling.Application.Features.Categories.Command.CreateCategory;
+using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoryList;
+using NeoSoft.A2Zfiling.Application.Features.Categories.Queries.GetCategoryById;
+using NeoSoft.A2Zfiling.Application.Features.Categories.Command.DeleteCategory;
+using NeoSoft.A2Zfiling.Application.Features.Categories.Command.UpdateCategory;
+using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.CreateLicense;
+using NeoSoft.A2Zfiling.Application.Features.Licenses.Queries.LicenseList;
+using NeoSoft.A2Zfiling.Application.Features.Licenses.Queries.LicenseListByid;
+using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.DeleteLicense;
+using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.UpdateLicense;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Commands.Create;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Queries.GetAllLicense;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Commands.Edit;
+
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Command.CreateStatus;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Queries.StatusList;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Queries.StatusListById;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Command.UpdateStatus;
+using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Command.DeleteStatus;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.CreateSubStatus;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Queries.SubStatusList;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Queries.SubStatusListById;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.UpdateSubStatus;
+using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.DeleteSubStatus;
+
+using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
+using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
+
 
 
 namespace NeoSoft.A2Zfiling.Application.Profiles
@@ -88,7 +121,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<Permission, UpdatePermissionCommand>().ReverseMap();
             CreateMap<Permission, UpdatePermissionDto>().ReverseMap();
             CreateMap<Permission, DeletePermissionDto>().ReverseMap();
-            
+
 
 
 
@@ -105,18 +138,17 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<Company, UpdateCompanyDto>().ReverseMap();
             CreateMap<Company, UpdateCompanyCommand>().ReverseMap();
             CreateMap<Company, DeleteCompanyDto>().ReverseMap();
-            
 
-                CreateMap<AppUser, RegisterDTO>().ReverseMap();
 
-                  
+            CreateMap<AppUser, RegisterDTO>().ReverseMap();
+
+
 
             CreateMap<Document, CreateDocumentDto>().ReverseMap();
 
             CreateMap<State, CreateStateDto>().ReverseMap();
             CreateMap<State, StateListVm>().ReverseMap();
             CreateMap<State, DeleteStateDto>().ReverseMap();
-
             CreateMap<State, UpdateStateDto>().ReverseMap();
             CreateMap<State, UpdateStateCommand>().ReverseMap();
             CreateMap<State, StateVM>().ReverseMap();
@@ -131,9 +163,6 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<PinCode, PinCodeVM>().ReverseMap();
             CreateMap<Login, LoginDto>().ReverseMap();
 
-
-
-
                 CreateMap<Role, CreateRolesDto>();
                 CreateMap<Role, RolesDto>();
                 CreateMap<Role, RolesListVM>();
@@ -141,18 +170,20 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
                 CreateMap<Role, GetRoleDto>();
            CreateMap<AppUser, RegisterDTO>();
             CreateMap<AppUser, LoginDto>();
-          
+            CreateMap<AppUser, AppUsersDto>().ReverseMap();
+            CreateMap<AppUser, UpdateUsersDto>().ReverseMap();
+
             CreateMap<Role, CreateRolesDto>();
-            CreateMap<Role,RolesDto>();
-            CreateMap<Role,RolesListVM>();
-            CreateMap<Role,UpdateRolesCommand>().ReverseMap();
+            CreateMap<Role, RolesDto>();
+            CreateMap<Role, RolesListVM>();
+            CreateMap<Role, UpdateRolesCommand>().ReverseMap();
             CreateMap<Role, GetRoleDto>();
 
-                CreateMap<MunicipalCorp, CreateMunicipalDto>();
-                CreateMap<MunicipalCorp, MunicipalListVM>();
-                CreateMap<MunicipalCorp, UpdateMunicipalCommand>().ReverseMap();
-                CreateMap<MunicipalCorp, MunicipalDto>();
-                CreateMap<MunicipalCorp, GetMunicipalDto>();
+            CreateMap<MunicipalCorp, CreateMunicipalDto>();
+            CreateMap<MunicipalCorp, MunicipalListVM>();
+            CreateMap<MunicipalCorp, UpdateMunicipalCommand>().ReverseMap();
+            CreateMap<MunicipalCorp, MunicipalDto>();
+            CreateMap<MunicipalCorp, GetMunicipalDto>();
 
                 CreateMap<UserPermission, CreateUserPermissionDto>().ReverseMap();
                 CreateMap<UserPermission, GetUserPermissionDto>().ReverseMap();
@@ -161,6 +192,47 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
                 CreateMap<UserPermission, DeleteUserPermissionDto>().ReverseMap();
                 CreateMap<UserPermission, UpdateUserPermissionCommand>().ReverseMap();
                 CreateMap<UserPermission, UpdateUserPermissionDto>().ReverseMap();
+
+            CreateMap<LicenseType,CreateLicenseTypeDto>().ReverseMap();
+            CreateMap<LicenseType,GetLicenseTypeListDto>().ReverseMap();
+            CreateMap<LicenseType,GetLicenseTypeByIdDto>().ReverseMap();
+            CreateMap<LicenseType,UpdateLicenseTypeCommand>().ReverseMap();
+            CreateMap<LicenseType,UpdateLicenseTypeDto>().ReverseMap();
+            CreateMap<LicenseType,DeleteLicenseTypeDto>().ReverseMap();
+
+            CreateMap<Category, CreateCategoryDto>().ReverseMap();
+            CreateMap<Category,GetCategoryListDto>().ReverseMap();
+            CreateMap<Category,GetCategoryByIdDto>().ReverseMap();
+            CreateMap<Category,DeleteCategoryDto>().ReverseMap();
+            CreateMap<Category,UpdateCategoryDto>().ReverseMap();
+            CreateMap<Category, UpdateCategoryCommand>().ReverseMap();
+
+            CreateMap<License,CreateLicenseDto>().ReverseMap();
+            CreateMap<License,LicenseListDto>().ReverseMap();
+            CreateMap<License,LicenseListByIdDto>().ReverseMap();
+            CreateMap<License,DeleteLicenseDto>().ReverseMap();
+            CreateMap<License,UpdateLicenseCommand>().ReverseMap();
+            CreateMap<License,UpdateLicenseDto>().ReverseMap();
+
+            CreateMap<Status,CreateStatusDto>().ReverseMap();
+            CreateMap<Status,StatusListDto>().ReverseMap();
+            CreateMap<Status,StatusListByIdDto>().ReverseMap();
+            CreateMap<Status, UpdateStatusCommand>().ReverseMap();
+            CreateMap<Status, UpdateStatusDto>().ReverseMap();
+            CreateMap<Status,DeleteStatusDto>().ReverseMap();
+
+            CreateMap<SubStatus,CreateSubStatusDto>().ReverseMap();
+            CreateMap<SubStatus,SubStatusListDto>().ReverseMap();
+            CreateMap<SubStatus, SubStatusListByIdDto>().ReverseMap();
+            CreateMap<SubStatus,UpdateSubStatusDto>().ReverseMap();
+            CreateMap<SubStatus,UpdateSubStatusCommand>().ReverseMap();
+            CreateMap<SubStatus,DeleteSubStatusDto>().ReverseMap();
+
+            CreateMap<LicenseMaster, CreateLicenceMappingDto>();
+            CreateMap<LicenseMaster, CreateLicenseMappingCommand>();
+            CreateMap<LicenseMaster, GetAllLicenseMasterVM>();
+            CreateMap<LicenseMaster, GetAllLicenseMasterQuery>();
+            CreateMap<LicenseMaster, UpdateLicenseMasterCommand>().ReverseMap();
             
         }
     }

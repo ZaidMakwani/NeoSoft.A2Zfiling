@@ -8,6 +8,9 @@ using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreatePinCodeCo
 using NeoSoft.A2Zfiling.Application.Features.Login;
 using NeoSoft.A2Zfiling.Persistence;
 using LoginCommand = NeoSoft.A2Zfiling.Application.Features.Login.Command.LoginCommand;
+using NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRolesList;
+using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
+using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
@@ -55,5 +58,39 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _logger.LogInformation("Login Completed");
             return Ok(response);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetUsers(string UserId)
+        {
+
+            _logger.LogInformation("Login Initiated");
+            var response = await _mediator.Send(new GetUsersDetailQuery() { UserId = UserId});
+
+            _logger.LogInformation("Login Completed");
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> UpdatePasswordApi(string UserId,string confirmPassword)
+        {
+
+            _logger.LogInformation("Login Initiated");
+            var response = await _mediator.Send(new UpdatePasswordApiQuery() { UserId = UserId , ConfirmPassword = confirmPassword});
+
+            _logger.LogInformation("Login Completed");
+            return Ok(response);
+        }
+
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateUsers(UpdateUsersCommand updateUsersCommand)
+        {
+            _logger.LogInformation("Login Initiated");
+            var response = await _mediator.Send(updateUsersCommand);
+
+            _logger.LogInformation("Login Completed");
+            return Ok(response);
+        }
+       
     }
 }

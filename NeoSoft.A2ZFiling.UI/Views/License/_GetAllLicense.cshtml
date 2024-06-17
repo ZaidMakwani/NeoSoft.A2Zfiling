@@ -1,0 +1,367 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.LicenseVM>
+
+
+
+<div class="card">
+    <div id="licensePlaceholder"></div>
+  @*   <div class="card-header">
+
+        <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
+                data-url="@Url.Action("Create", "License")">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div> *@
+
+    <div class="card-header">
+        <div class="float-right">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createLicenseModal" data-url="@Url.Action("Create", "License")">
+                <i class="fas fa-plus"></i>
+            </button>
+
+            <div class="navbar-search-block">
+                <form class="form-inline">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+
+    <div class="card-body">
+        <table id="example5" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Short Names</th>
+                    <th>Category</th>
+                    <th>Show On Portal</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LicenseId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LicenseName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShortName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShortList)
+                        </td>
+                        <td>
+                            @if (item.IsActive)
+                            {
+                                <span class="text-success font-weight-bold">Active</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger font-weight-bold">Inactive</span>
+                            }
+                        </td>
+                  @*       <td>
+                                <div class="btn-group">
+                            <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                    data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId">
+                                <i class="fas fa-edit"></i>
+                            </button>
+
+
+                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.LicenseId">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                          </div>
+                        </td> *@
+
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                                data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+
+                                        <button class="btn btn-danger btn-sm triggerLicense-modal" data-id="@item.LicenseId">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                                data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId" disabled>
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+
+                                        <button class="btn btn-danger btn-sm triggerLicense-modal" data-id="@item.LicenseId" disabled>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                }
+                            </td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
+    </div>
+
+<div id="myLicenseModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this item?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete-license">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ *@
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- DataTables Buttons extension -->
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/jszip/jszip.min.js"></script>
+<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ *@
+<script>
+
+    console.log("Before DataTable initialization");
+
+    $("#example5").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["csv"],
+        "paging": true,
+        "pageLength": 4,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true
+    })/* .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); */
+    $('#example5').DataTable().buttons().container().appendTo('#example5_wrapper .col-md-6:eq(0)');
+
+
+    console.log("After DataTable initialization");
+
+
+    //function to handle create modal
+
+    $('button[data-toggle="ajax-modal"]').click(function (event) {
+        var url = $(this).data('url');
+        console.log('Create modal URL:', url);
+        var decodeUrl = decodeURIComponent(url);
+        $.get(decodeUrl).done(function (data) {
+            $('#licensePlaceholder').html(data);
+            $('#createLicenseModal').modal('show');
+
+            // Unbind previously bound event handler
+            $('#licensePlaceholder').off('click', /* '[data-save="modal"]' */'#saveLicenseEntity');
+
+            // Event delegation for dynamically loaded content
+            $('#licensePlaceholder').on('click', /* '[data-save="modal"]' */ '#saveLicenseEntity', function (event) {
+                var form = $(this).parents('.modal').find('form');
+                var actionUrl = form.attr('action');
+                var url = '@Url.Action("Create", "License")';
+                var sendData = form.serialize();
+
+                $.post(url, sendData).done(function (data) {
+                    $('#licensePlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">License Created Successfully.</div>');
+                    $('#licensePlaceholder').find('.modal').modal('hide');
+                    $('#table5-tab').tab('show');
+                    // Reload industry data after creating a new industry
+                    $('#licenseDataPlaceholder').load('/License/GetAll'
+                        , function () {
+                            console.log('License data reloaded.');
+                        }
+                    );
+
+                }).fail(function (xhr, status, error) {
+                    var errorMessage = xhr.responseText;
+                    console.log(errorMessage);
+                    // Update the modal content to display the error message
+                    $('#licensePlaceholder').find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                });
+            });
+        });
+    });
+
+
+    $(document).on('click', '#closeLicenseEntity, .close', function () {
+        // Close the modal
+        $('#createLicenseModal').modal('hide');
+    });
+
+    //fucntion to handle delete modal
+
+    $(document).on('click', '.triggerLicense-modal', function () {
+        var LicenseId = $(this).data("id");
+        // Set data attribute of delete button inside modal for further reference
+        $('.delete-license').data('id', LicenseId);
+        $('#myLicenseModal').modal('show');
+    });
+
+    // Event delegation for handling delete button click inside the modal
+    $(document).on('click', '.delete-license', function () {
+        var LicenseId = $(this).data("id");
+        var deleteUrl = '@Url.Action("Delete", "License")' + '?id=' + LicenseId;
+
+        $.ajax({
+            url: deleteUrl,
+            type: 'GET',
+            success: function (result) {
+                console.log('License deleted successfully.');
+                //alert('Zone deleted successfully');
+                $('#myLicenseModal').modal('hide');
+                $('#table5-tab').tab('show');
+                // location.reload();
+                $('#licenseDataPlaceholder').load('/License/GetAll', function () {
+                    console.log('License data reloaded.');
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error deleting license: ", error);
+                alert("Error deleting license. Please try again.");
+            }
+        });
+    });
+
+
+    //-------------------------------------------------
+    //function to handle edit modal
+
+    $(document).on('click', '.editLicense-button', function () {
+        var LicenseId = $(this).data("id");
+        var editUrl = '@Url.Action("Update", "License")' + '?id=' + LicenseId;
+
+        // AJAX request to fetch data for editing
+        $.ajax({
+            url: editUrl,
+            type: 'GET',
+            success: function (data) {
+                // Load the partial view into the placeholder div
+                $('#licensePlaceholder').html(data);
+                // Show the edit modal
+                $('#updateLicenseModal').modal('show');
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching License data: ", error);
+                alert("Error fetching License data. Please try again.");
+            }
+        });
+    });
+
+
+    // Function to update data after saving
+    function updateData() {
+        var LicenseId = $('#LicenseId').val(); // Assuming you have a hidden input field with the IndustryId
+        var editUrl = '@Url.Action("Update", "License")' + '?id=' + LicenseId;
+
+        // AJAX request to fetch updated data
+        $.ajax({
+            url: editUrl,
+            type: 'GET',
+            success: function (data) {
+                // Replace the content in the placeholder div with the updated data
+                $('#licensePlaceholder').html(data);
+                // Close the modal
+                // $('#updateLicenseModal').modal('hide');
+                // $('#table5-tab').tab('show');
+                // $('#licenseDataPlaceholder').load('/License/GetAll', function () {
+                //     console.log('License data reloaded.');
+                // });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching updated License data: ", error);
+                alert("Error fetching updated License data. Please try again.");
+            }
+        });
+    }
+    $(document).on('click', '#licenseSaveButton', function () {
+        // Perform validation and submit data via AJAX
+        $.ajax({
+            url: '@Url.Action("Update", "License")',
+            type: 'POST',
+            data: $('#updateLicenseForm').serialize(),
+            success: function (response) {
+                console.log(response);
+                // Check if the response indicates success
+                if (response) {
+                    updateData(); // Call function to update data
+                    $('#licensePlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">License Updated Successfully.</div>');
+                    $('#updateLicenseModal').modal('hide');
+                    $('#table5-tab').tab('show');
+                    $('#licenseDataPlaceholder').load('/License/GetAll', function () {
+                        console.log('License data reloaded.');
+                    });
+                
+                } else {
+                    alert("An error occurred while saving data. Please try again.");
+                }
+            },
+            error: function (xhr, status, error) {
+                // Display more detailed error message from server response
+                var errorMessage = xhr.responseText;
+                $('#licensePlaceholder').find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+            }
+        });
+    });
+
+    $(document).on('click', '#closeLicenseButton, .close', function () {
+        // Close the modal
+        $('#updateLicenseModal').modal('hide');
+    });
+
+
+</script>

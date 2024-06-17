@@ -19,5 +19,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.Register.Command
         public string ContactNumber { get; set; }
         public string Address { get; set; }
         public int RoleId { get; set; }
+        public string? ProfileImagePath { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2ZFiling.UI.Interfaces;
+using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using Newtonsoft.Json;
 
@@ -21,22 +22,9 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
         [HttpGet]
         public IActionResult Index()
-
         {
 
             var response = _industryService.GetIndustryAsync();
-            
-
-            //Response<List<IndustryVM>> industryList = new Response<List<IndustryVM>>();
-            //HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Industry/GetAllIndustries/all").Result;
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    string data = response.Content.ReadAsStringAsync().Result;
-            //    industryList = JsonConvert.DeserializeObject<Response<List<IndustryVM>>>(data);
-            //}
-
-            //return View(industryList.Data);
 
             return View(response);
         }
@@ -51,21 +39,36 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(IndustryVM model)
+        public async Task<IActionResult> CreateAsync(IndustryVM model)
         {
+            if (string.IsNullOrEmpty(model.IndustryName))
+            {
+                return BadRequest("Please enter a valid Industry name.");
+            }
+
+            if (string.IsNullOrEmpty(model.ShortName))
+            {
+                return BadRequest("Please enter a valid Short name.");
+            }
+            if( (model.ShortName.Any(char.IsDigit)) || (model.IndustryName.Any(char.IsDigit)))
+            {
+                return BadRequest(" Name cannot contain numbers.");
+            }
+            var existingIndustry = ( _industryService.GetIndustryAsync()).Where(x => x.IndustryName.ToLower() == model.IndustryName.ToLower() || x.ShortName.ToLower() == model.ShortName.ToLower()).FirstOrDefault();
+            if (existingIndustry != null)
+            {
+                return BadRequest("Industry with this name already exists.");
+            }
             var response = _industryService.CreateIndustryAsync(model);
 
-            //string data = JsonConvert.SerializeObject(model);
-            //StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
-            //HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/Industry/Create", content).Result;
 
             if (response.IsSuccessStatusCode)
             {
-                //return RedirectToAction("Index");
+               // return PartialView("_GetAllIndustry");
                 return Ok();
             }
 
-            return View();
+            return BadRequest("Failed to create Industry");
         }
 
 
@@ -92,9 +95,23 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/Industry/Update/", content).Result;
 
+            if (string.IsNullOrEmpty(model.IndustryName))
+            {
+                return BadRequest("Please enter a valid Industry name.");
+            }
+
+            if (string.IsNullOrEmpty(model.ShortName))
+            {
+                return BadRequest("Please enter a valid Short name.");
+            }
+            if ((model.ShortName.Any(char.IsDigit)) || (model.IndustryName.Any(char.IsDigit)))
+            {
+                return BadRequest(" Name cannot contain numbers.");
+            }
+
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return Ok(response);
             }
 
             return View();
@@ -108,30 +125,16 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             Response<IndustryVM> industry = new Response<IndustryVM>();
             HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Industry/Delete?Id={id}").Result;
-            return RedirectToActionPermanent("Index");
+            return Ok();
         }
 
-
-        //----------------------------------------------Register Member----------------------------------------
-
-        public IActionResult RegisterMember()
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            return View();
+            var response = _industryService.GetIndustryAsync();
+            return PartialView("_GetAllIndustry",response);
+            //return View(response);
         }
 
-
-        [HttpPost]
-        public IActionResult RegisterMember(RegisterVM model)
-        {
-            string data = JsonConvert.SerializeObject(model);
-            StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/RegisterMember/Create/", content).Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
     }
 }

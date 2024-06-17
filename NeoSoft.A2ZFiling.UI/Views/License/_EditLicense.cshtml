@@ -1,0 +1,109 @@
+﻿@using NeoSoft.A2Zfiling.Domain.Entities
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model NeoSoft.A2ZFiling.UI.ViewModels.LicenseVM
+
+@{
+    ViewData["Title"] = "Update";
+
+    var selectedCategoryId = Model.CategoryId;
+
+}
+
+<!-- Create Modal -->
+
+<div id="updateLicenseModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Licenses</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="error-message-container"></div>
+                <form id="updateLicenseForm" asp-action="Update" asp-controller="License" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+
+                        <input asp-for="LicenseId" class="form-control" hidden />
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LicenseName">Enter License Name:</label>
+                        <input asp-for="LicenseName" class="form-control" />
+                        <span asp-validation-for="LicenseName" class="text-danger" id="entityName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ShortName"> ShortName:</label>
+                        <input asp-for="ShortName" class="form-control" />
+                        <span asp-validation-for="ShortName" class="text-danger" id="entityName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CategoryId">Category:</label>
+                        <select asp-for="CategoryId" class="form-control">
+                            <option value="">Choose Category</option>
+                            @foreach (var category in ViewBag.Categories as SelectList)
+                            {
+                               
+                                @* <option value="@category.Value" selected="@category.Value == Model.CategoryId.ToString()">
+                                    @category.Text
+                                </option> *@
+
+                                <option value="@category.Value">
+                                    @category.Text
+                                </option>
+                            }
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <label asp-for="ShortList">ShortList:</label>
+                        <select asp-for="ShortList" class="form-control">
+                            <option value="">Select Value</option>
+                            @foreach (var value in Enum.GetValues(typeof(ShortList)))
+                            {
+                                <option value="@value" selected="@value.Equals(Model.ShortList)">
+                                    @value
+                                </option>
+                            }
+                        </select>
+                        <span asp-validation-for="ShortList" class="text-danger"></span>
+                    </div>
+
+
+
+                    <input type="hidden" asp-for="IsActive" />
+
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="closeLicenseButton" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="licenseSaveButton" data-save="modal" data-dismiss="modal">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

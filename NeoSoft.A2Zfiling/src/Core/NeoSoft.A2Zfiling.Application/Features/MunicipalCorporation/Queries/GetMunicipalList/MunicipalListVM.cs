@@ -10,6 +10,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.Ge
     {
         public int MunicipalId { get; set; }
         public string MunicipalName { get; set; }
+        public int CityId { get; set; }
+        public int StateId { get; set; }
         public bool IsActive { get; set; }
     }
 }
