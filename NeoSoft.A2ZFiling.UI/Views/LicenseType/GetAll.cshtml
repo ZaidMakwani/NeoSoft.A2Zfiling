@@ -27,7 +27,6 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
 
 
     <style>
@@ -69,6 +68,12 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="table5-tab" data-toggle="tab" href="#table5" role="tab" aria-controls="table5" aria-selected="true">Licenses </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table6-tab" data-toggle="tab" href="#table6" role="tab" aria-controls="table6" aria-selected="true">Statuses </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="table7-tab" data-toggle="tab" href="#table7" role="tab" aria-controls="table7" aria-selected="true">Sub Statuses </a>
                                     </li>
                                 </ul>
                                
@@ -176,6 +181,14 @@
 
                                     <div class="tab-pane fade" id="table5" role="tabpanel" aria-labelledby="table5-tab">
                                         <div id="licenseDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table6" role="tabpanel" aria-labelledby="table6-tab">
+                                        <div id="statusDataPlaceholder"></div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="table7" role="tabpanel" aria-labelledby="table7-tab">
+                                        <div id="subStatusDataPlaceholder"></div>
                                     </div>
 
 
@@ -309,7 +322,10 @@
                 });
             });
         });
-
+        $(document).on('click', '#closedEntity, .close', function () {
+            // Close the modal
+            $('#createModal').modal('hide');
+        });
 
 
         // Function to show the delete modal

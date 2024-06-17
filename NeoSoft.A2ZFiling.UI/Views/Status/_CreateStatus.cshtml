@@ -1,0 +1,52 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model NeoSoft.A2ZFiling.UI.ViewModels.StatusVM
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+<!-- Create Modal -->     @* modal-dialog-centered *@
+@* <div id="createModal" class="modal" tabindex="-1" role="dialog"> *@
+<div id="createStatusModal" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="error-message-container"></div>
+                <form id="createStatusForm" asp-action="Create" asp-controller="Status" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="StatusName">Enter Name:</label>
+                        <input asp-for="StatusName" class="form-control" placeholder="Name" type="text"/>
+                        <span asp-validation-for="StatusName" class="text-danger" id="entityName"></span>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeStatusEntity">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEntity" data-save="statusModal" data-dismiss="modal">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

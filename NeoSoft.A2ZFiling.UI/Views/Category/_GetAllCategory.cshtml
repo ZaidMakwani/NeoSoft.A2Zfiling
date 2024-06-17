@@ -80,7 +80,7 @@
                             </button>
 
 
-                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.CategoryId">
+                            <button class="btn btn-danger btn-sm triggerCategory-modal" data-id="@item.CategoryId">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
 
@@ -94,7 +94,7 @@
 </div>
 
 <!-- Delete Modal -->
-<div id="myModal" class="modal" tabindex="-1" role="dialog">
+<div id="myCategoryModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -166,6 +166,7 @@
             $.get(decodeUrl).done(function (data) {
                 card.html(data);
                 card.find('.modal').modal('show');
+                $('#createCategoryModal').modal('show');
 
                 // Unbind previously bound event handler
                 card.off('click', '[data-save="categoryModal"]');
@@ -200,16 +201,19 @@
             });
         });
     });
-
+    $(document).on('click', '#closeCategoryEntity, .close', function () {
+        // Close the modal
+        $('#createCategoryModal').modal('hide');
+    });
 
     // Function to show the delete modal
 
 
-    $(document).on('click', '.trigger-modal', function () {
+    $(document).on('click', '.triggerCategory-modal', function () {
         var CategoryId = $(this).data("id");
         // Set data attribute of delete button inside modal for further reference
         $('.delete-category').data('id', CategoryId);
-        $('#myModal').modal('show');
+        $('#myCategoryModal').modal('show');
     });
 
     // Event delegation for handling delete button click inside the modal
@@ -223,7 +227,7 @@
             success: function (result) {
                 console.log('Category deleted successfully.');
                 // alert('Zone deleted successfully');
-                $('#myModal').modal('hide');
+                $('#myCategoryModal').modal('hide');
                 $('#table4-tab').tab('show');
                 // location.reload();
                 $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
@@ -256,7 +260,7 @@
                 // Load the partial view into the placeholder div
                 $('#categoryPlaceholder').html(data);
                 // Show the edit modal
-                $('#updateModal').modal('show');
+                $('#updateCategoryModal').modal('show');
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching Company data: ", error);
@@ -279,13 +283,13 @@
                 // Replace the content in the placeholder div with the updated data
                 $('#categoryPlaceholder').html(data);
                 // Close the modal
-                $('#updateModal').modal('hide');
+                // $('#updateCategoryModal').modal('hide');
 
-                $('#table4-tab').tab('show');
+                // $('#table4-tab').tab('show');
 
-                $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
-                    console.log('Category data reloaded.');
-                });
+                // $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
+                //     console.log('Category data reloaded.');
+                // });
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching updated Category data: ", error);
@@ -306,6 +310,14 @@
                 if (response) {
                     updateData(); // Call function to update data
                     $('#categoryPlaceholder').find('.modal-body').prepend('<div class="alert alert-success" role="alert">Category Updated Successfully.</div>');
+                    $('#updateCategoryModal').modal('hide');
+
+                    $('#table4-tab').tab('show');
+
+                    $('#categoryDataPlaceholder').load('/Category/GetAll', function () {
+                        console.log('Category data reloaded.');
+                    });
+                
                 } else {
                     alert("An error occurred while saving data. Please try again.");
                 }
@@ -318,9 +330,9 @@
         });
     });
 
-    $(document).on('click', '#closeButton, .close', function () {
+    $(document).on('click', '#closeCategoryButton, .close', function () {
         // Close the modal
-        $('#updateModal').modal('hide');
+        $('#updateCategoryModal').modal('hide');
     });
 
 </script>

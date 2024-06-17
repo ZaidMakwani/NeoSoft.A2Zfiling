@@ -8,6 +8,8 @@ using NeoSoft.A2Zfiling.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using NeoSoft.A2Zfiling.Persistence.Repositories;
+using Microsoft.AspNetCore.Hosting;
+using NuGet.Common;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
@@ -72,7 +74,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                         HttpContext.Session.SetString("Token", token);
 
                         _logger.LogInformation("Token value: {TokenValue}", token);
-                        return RedirectToAction("Index", "Home");
+                        TempData["token"] = "token";
+                        return RedirectToAction("Index", "Account");
                         
                     }
 
@@ -82,6 +85,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 // Handle login response being null
             }
 
+            TempData["login"] = "Login Failed. Wrong Password!";
+            
             // Handle invalid ModelState
             return View(model);
         }
@@ -98,6 +103,33 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             //string data = JsonConvert.SerializeObject(model);
             //StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             _logger.LogInformation("Registration is initiated");
+
+            var webHostEnvironment = HttpContext.RequestServices.GetService(typeof(IWebHostEnvironment)) as IWebHostEnvironment;
+
+            string webRootPath = webHostEnvironment.WebRootPath;
+            string uploadsFolder = Path.Combine(webRootPath, "images");
+
+            // Check and create the directory if it doesn't exist
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+            
+            string uniqueFileName = null;
+
+            if (model.ProfilePicture != null)
+            {
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfilePicture.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.ProfilePicture.CopyToAsync(fileStream);
+                }
+            }
+
+            model.ProfileImagePath = uniqueFileName != null ? $"/images/{uniqueFileName}" : null;
+
+
             var response = await _registerService.RegisterAsync(model);
             if (response != null)
             {
@@ -108,6 +140,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return View(model);
             }
 
+
+        }
+        public IActionResult Logout()
+        {
+            // Clear the token from TempData on logout
+            TempData.Remove("token");
+
+            return RedirectToAction("Index", "Account");
         }
     }
 }
