@@ -54,6 +54,7 @@ builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IMunicipalService,MunicipalService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<CustomAuthorizeAttribute>();
 

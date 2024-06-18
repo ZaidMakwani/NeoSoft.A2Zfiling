@@ -22,15 +22,17 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         private readonly IRegisterService _registerService;
         private readonly ILoginService _loginService;
         private readonly ILogger<AccountController> _logger;
+        private readonly IEmailSender _emailSender;
         //private readonly ITokenRepository _tokenRepository;
 
         public AccountController(IRegisterService registerService, ILogger<AccountController> logger,
-            IDNTCaptchaValidatorService captchaValidator, ILoginService loginService /*,ITokenRepository tokenRepository*/)
+            IDNTCaptchaValidatorService captchaValidator, ILoginService loginService /*,ITokenRepository tokenRepository*/, IEmailSender emailSender)
         {
             _registerService = registerService;
             _logger = logger;
             _captchaValidator = captchaValidator;
             _loginService = loginService;
+            _emailSender = emailSender;
             //_tokenRepository = tokenRepository;
 
         }
@@ -139,9 +141,40 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 return View(model);
             }
-
-
         }
+
+        //Forgot Password
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+           
+
+          
+            var resetLink = Url.Action("ResetPassword", "Account");
+
+            // Send email
+            await _emailSender.SendEmailAsync(model.Email, "Reset Password", $"Please reset your password by clicking <a href='{resetLink}'>here</a>.");
+
+            return RedirectToAction("ForgotPasswordConfirmation");
+        }
+
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
         public IActionResult Logout()
         {
             // Clear the token from TempData on logout
