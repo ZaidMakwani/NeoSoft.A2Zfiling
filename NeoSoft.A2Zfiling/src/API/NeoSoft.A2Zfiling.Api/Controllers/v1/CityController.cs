@@ -6,6 +6,7 @@ using NeoSoft.A2Zfiling.Application.Features.Cities.Command.CreateCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.DeleteCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Command.UpdateCity;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityById;
+using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityByState;
 using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Commands.DeleteZone;
 using NeoSoft.A2Zfiling.Application.Features.Zoneies.Queries.GetZoneList;
@@ -42,7 +43,21 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
                 throw ex;
             }
         }
-
+        [HttpGet]
+        public async Task<ActionResult> GetAllCityByState(int StateId)
+        {
+            try
+            {
+                _logger.LogInformation("GetAllCityByState Initiated");
+                var data = await _mediator.Send(new GetAllCityByStateQuery() { StateId=StateId});
+                _logger.LogInformation("GetAllCityByState Completed");
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         [HttpPost(Name = "AddCity")]
         public async Task<ActionResult> CreateCity([FromBody] CreateCityCommand model)
         {

@@ -58,7 +58,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands
                 // Collect errors and return a failure response
                 var loginDto = _mapper.Map<UpdateUsersDto>(user);
 
-                UpdatedUser = new Response<UpdateUsersDto>(loginDto, "success");
+                //UpdatedUser = new Response<UpdateUsersDto>(loginDto, "failed");
+
+                UpdatedUser = new Response<UpdateUsersDto>
+                {
+                    Succeeded = false,
+                    Message = "User update failed: " 
+                };
+
                 return UpdatedUser;
             }
 

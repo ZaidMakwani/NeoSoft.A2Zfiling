@@ -62,6 +62,9 @@
     </style>
 </head>
 <body class="hold-transition">
+
+
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#"><b>A2ZFiling</b></a>
@@ -86,6 +89,16 @@
         </div>
     </nav>
     <!-- /.navbar -->
+    @if (TempData["login"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" style="max-width: 300px; padding: 0.5rem; font-size: 0.875rem;">
+            @TempData["login"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="padding: 0.25rem 0.5rem;">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+    }
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
@@ -119,15 +132,15 @@
                     <span asp-validation-for="Password" class="text-danger"></span>
 
                     <div class="row">
-                        <div class="col-8">
+                        @* <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                <input type="checkbox" asp-for="IsRemember" id="remember">
                                 <label for="remember">
                                     Remember Me
                                 </label>
                             </div>
-                        </div>
-                       @*  <div class="col-12">
+                        </div> *@
+                        <div class="col-12">
                             <dnt-captcha asp-captcha-generator-max="999999"
                                          asp-captcha-generator-min="111111"
                                          asp-captcha-generator-language="English"
@@ -168,6 +181,58 @@
                             {
                                 <span class="text-danger">@TempData["captchaError"]</span>
                             }
+                        </div> *@
+                        <div class="mt-3">
+                            <dnt-captcha id="captchaControl"
+                                         asp-captcha-generator-max="999999"
+                                         asp-captcha-generator-min="111111"
+                                         asp-captcha-generator-language="English"
+                                         asp-captcha-generator-display-mode="ShowDigits"
+                                         asp-fore-color="#333333"
+                                         asp-back-color="#ccc"
+                                         asp-font-name="Tahoma"
+                                         asp-font-size="20"
+                                       
+                                         asp-use-relative-urls="true"
+                                         asp-placeholder="Enter Captcha"
+                                         asp-text-box-class="form-control"
+                                         asp-text-box-template="<span class='input-group-prepend'><span class='form-group-text'></span></span>{0}"
+                                         asp-validation-message-class="text-danger"
+                                         asp-use-noise="false" />
+                            @if (TempData["captchaError"] != null)
+                            {
+                                <span class="text-danger">@TempData["captchaError"]</span>
+                            }
+                        </div> *@
+                        <div class="mt-3">
+                            <dnt-captcha id="captchaControl"
+                                         asp-captcha-generator-max="999999"
+                                         asp-captcha-generator-min="111111"
+                                         asp-captcha-generator-language="English"
+                                         asp-captcha-generator-display-mode="ShowDigits"
+                                         asp-fore-color="#333333"
+                                         asp-back-color="#ccc"
+                                         asp-font-name="Tahoma"
+                                         asp-font-size="20"
+                                       
+                                         asp-use-relative-urls="true"
+                                         asp-placeholder="Enter Captcha"
+                                         asp-text-box-class="form-control"
+                                         asp-text-box-template="<span class='input-group-prepend'><span class='form-group-text'></span></span>{0}"
+                                         asp-validation-message-class="text-danger"
+                                         asp-use-noise="false" />
+                            @if (TempData["captchaError"] != null)
+                            {
+                                <span class="text-danger">@TempData["captchaError"]</span>
+                            }
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-link" id="refreshCaptcha">Refresh Captcha</button>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-link" id="refreshCaptcha">Refresh Captcha</button>
                         </div>
 
                         <div class="text-center mt-3">
@@ -180,9 +245,9 @@
                     </div>
                 </form>
 
-                <p class="mb-1">
+               @*  <p class="mb-1">
                     <a href="forgot-password.html">I forgot my password</a>
-                </p>
+                </p> *@
             </div>
             <!-- /.card-body -->
         </div>

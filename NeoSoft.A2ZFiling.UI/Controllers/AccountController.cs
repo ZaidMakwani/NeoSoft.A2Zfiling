@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using NeoSoft.A2Zfiling.Persistence.Repositories;
 using Microsoft.AspNetCore.Hosting;
+using NuGet.Common;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
@@ -74,7 +75,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                         HttpContext.Session.SetString("Token", token);
 
                         _logger.LogInformation("Token value: {TokenValue}", token);
-                        return RedirectToAction("Index", "Home");
+                        TempData["token"] = "token";
+                        return RedirectToAction("Index", "Account");
                         
                     }
 
@@ -84,6 +86,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 // Handle login response being null
             }
 
+            TempData["login"] = "Login Failed. Wrong Password!";
+            
             // Handle invalid ModelState
             return View(model);
         }
@@ -137,6 +141,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return View(model);
             }
 
+
+        }
+        public IActionResult Logout()
+        {
+            // Clear the token from TempData on logout
+            TempData.Remove("token");
+
+            return RedirectToAction("Index", "Account");
 
         }
         [HttpGet]
