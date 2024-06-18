@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Domain.Entities
@@ -23,6 +24,7 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
 
         public ShortList ShortList { get; set; }
         public bool IsActive { get; set; }
-
+        [JsonIgnore]
+        public virtual ICollection<LicenseMaster> LicenseMasters { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             _zoneService = zoneService;
         }
         public async Task<IActionResult> Index()
-            {
+        {
             var response= await _licenseMasterService.GetLicenseMasterAsync();
             //LicenseMasterVM license=new LicenseMasterVM()
             //{ 

@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row justify-content-end">
-                            <div class="col-lg-10">
+                            <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">Zones</h3>
@@ -42,11 +42,27 @@
                                             Create
                                             </button> *@
 
-                                            <div id="placeholder"></div>
+                                            <div id="placeholderZone"></div>
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal1"
                                                     data-url="@Url.Action("Create", "Zone")">
                                                 <i class="fas fa-plus"></i>   @* Create *@
                                             </button>
+
+                                            <div class="navbar-search-block">
+                                                <form class="form-inline">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control form-control-navbar" type="search" placeholderZone="Search" aria-label="Search">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-navbar" type="submit">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
@@ -178,7 +194,7 @@
             "paging": true,
             "pageLength": 4,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,
@@ -232,7 +248,7 @@
         //function to handle create modal
 
         $(function () {
-            var card = $('#placeholder');
+            var card = $('#placeholderZone');
 
             $('button[data-toggle="ajax-modal"]').click(function (event) {
                 var url = $(this).data('url');
@@ -288,8 +304,8 @@
                 url: editUrl,
                 type: 'GET',
                 success: function (data) {
-                    // Load the partial view into the placeholder div
-                    $('#placeholder').html(data);
+                    // Load the partial view into the placeholderZone div
+                    $('#placeholderZone').html(data);
                     // Show the edit modal
                     $('#updateModal2').modal('show');
                 },
@@ -311,8 +327,8 @@
                 url: editUrl,
                 type: 'GET',
                 success: function (data) {
-                    // Replace the content in the placeholder div with the updated data
-                    $('#placeholder').html(data);
+                    // Replace the content in the placeholderZone div with the updated data
+                    $('#placeholderZone').html(data);
                     // Close the modal or perform any other action as needed
                     // alert('Zone Updated successfully');
 

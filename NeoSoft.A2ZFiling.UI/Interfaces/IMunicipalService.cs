@@ -6,6 +6,7 @@ namespace NeoSoft.A2ZFiling.UI.Interfaces
     public interface IMunicipalService
     {
         Task<IEnumerable<MunicipalVM>> GetMunicipalAsync();
+        Task<IEnumerable<MunicipalVM>> GetMunicipalByCityAsync(int id);
         Task<MunicipalVM> CreateMunicipalAsync(MunicipalVM municipal);
         Task<MunicipalVM> GetMunicipalByIdAsync(int id);
         Task<MunicipalVM> UpdateMunicipalAsync(MunicipalVM municipal);

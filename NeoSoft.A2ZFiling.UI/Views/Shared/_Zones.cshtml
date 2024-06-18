@@ -3,7 +3,22 @@
 @model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.ZoneVM>
 
 
+    <!DOCTYPE html>
+<html lang="en">
+<body class="hold-transition sidebar-mini">
+    <meta http-equiv="refresh" content="600">
+    <div class="wrapper">
+        <section class="content m-5 ">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row justify-content-end">
+                            <div class="col-lg-12">
                                 <div class="card">
+       
+
+
+                              
                                     <div class="card-header">
                                         <h3 class="card-title">Zones</h3>
                                         <div class="card-tools">
@@ -11,7 +26,7 @@
                                             Create
                                             </button> *@
 
-                                            <div id="placeholder"></div>
+                                            <div id="placeholder4"></div>
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
                                                     data-url="@Url.Action("Create", "Zone")">
                                                 <i class="fas fa-plus"></i>   @* Create *@
@@ -19,7 +34,7 @@
                                             <div class="navbar-search-block">
                                                 <form class="form-inline">
                                                     <div class="input-group input-group-sm">
-                                                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                                        <input class="form-control form-control-navbar" type="search" placeholder4="Search" aria-label="Search">
                                                         <div class="input-group-append">
                                                             <button class="btn btn-navbar" type="submit">
                                                                 <i class="fas fa-search"></i>
@@ -37,7 +52,7 @@
                                     </div> *@
                                     <!-- /.card-header -->
                                     <div class="card-body">
-                                        <table id="example2" class="table table-bordered table-hover">
+                                        <table id="example3" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>Id</th>
@@ -88,9 +103,19 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <!-- /.card-body -->
-                                </div>
-                            </div>
+                             
+                                                        <!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+
                         
 
 
@@ -148,7 +173,7 @@
     <!-- Page specific script -->
     <script>
         // $(document).ready(function () {
-        $("#example2").DataTable({
+        $("#example3").DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
@@ -161,7 +186,7 @@
             "info": true,
             "autoWidth": false,
             "responsive": true
-        }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
 
 
         //-----------------------------------------------------------------------------------------------------------------------
@@ -210,7 +235,7 @@
         //function to handle create modal
 
         $(function () {
-            var card = $('#placeholder');
+            var card = $('#placeholder4');
 
             $('button[data-toggle="ajax-modal"]').click(function (event) {
                 var url = $(this).data('url');
@@ -267,7 +292,7 @@
                 type: 'GET',
                 success: function (data) {
                     // Load the partial view into the placeholder div
-                    $('#placeholder').html(data);
+                    $('#placeholder4').html(data);
                     // Show the edit modal
                     $('#updateModal').modal('show');
                 },
@@ -290,7 +315,7 @@
                 type: 'GET',
                 success: function (data) {
                     // Replace the content in the placeholder div with the updated data
-                    $('#placeholder').html(data);
+                    $('#placeholder4').html(data);
                     // Close the modal or perform any other action as needed
                     // alert('Zone Updated successfully');
 
@@ -356,6 +381,6 @@
 
         // })
     </script>
-@* 
+
 </body>
-</html> *@
+</html>

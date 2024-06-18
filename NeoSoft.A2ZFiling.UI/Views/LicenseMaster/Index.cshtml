@@ -1,0 +1,187 @@
+﻿@model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.LicenseMasterVM>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+    <section class="content m-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row justify-content-end">
+                        <div class="col-lg-10">
+                            <!-- Nav tabs -->
+
+                            <div class="tab-pane fade show active" id="table1" aria-labelledby="table1-tab" style="width:auto;height:auto;white-space: nowrap">
+                                <div class="card">
+                                    <div id="placeholder"></div>
+                                    <div class="card-header">
+                                        <h3 class="card-title">License Master</h3>
+                                        <div class="float-right">
+                                            <a class="btn btn-primary" asp-action="Create" asp-controller="LicenseMaster">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                            <div class="navbar-search-block">
+                                                <form class="form-inline">
+                                                    <div class="input-group input-group-sm">
+                                                        <input id="globalSearch" class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-navbar" type="submit">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <button id="downloadCsv" class="btn btn-success ml-2">
+                                                <i class="fas fa-download"></i> Download CSV
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                               @*  <label>Filter by Classification:</label><br /> *@
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="classificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-filter"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="classificationDropdown">
+                                                        @foreach (var item in Model.Select(x => x.LicenseType.LicenseName).Distinct())
+                                                        {
+                                                            <label class="dropdown-item">
+                                                                <input type="checkbox" class="filter-checkbox" value="@item"> @item
+                                                            </label>
+                                                        }
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>License Name</th>
+                                                    <th>Classification</th>
+                                                    <th>Visibility</th>
+                                                    <th>Validity</th>
+                                                    <th>Standard Rate</th>
+                                                    <th>Standard TAT</th>
+                                                    <th>Fast Track Rate</th>
+                                                    <th>Fast Track TAT</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>L - @Html.DisplayFor(modelItem => item.LicenceMasterId)</td>
+                                                        <td><a style="text-decoration:none" asp-route-id="@item.LicenceMasterId" asp-action="Edit" asp-controller="LicenseMaster">@Html.DisplayFor(modelItem => item.License.LicenseName)</a></td>
+                                                        <td>@Html.DisplayFor(modelItem => item.LicenseType.LicenseName)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.Visibilities)</td>
+                                                        <td>
+                                                            @if (item.Validity)
+                                                            {
+                                                                <span class="text-success font-weight-bold">Annual</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="text-success font-weight-bold">Biennial</span>
+                                                            }
+                                                        </td>
+                                                        <td>@Html.DisplayFor(modelItem => item.StandardRate)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.StandardTAT)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.FastTrackRate)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.FastTrackTAT)</td>
+                                                        <td>
+                                                            <a class="btn btn-sm trigger-modal" asp-route-id="@item.LicenceMasterId" asp-action="Delete" asp-controller="LicenseMaster">
+                                                                @if (@item.IsActive)
+                                                                {
+                                                                    <i class="fas fa-ban" style="color: green;"></i>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <i class="fas fa-ban " style="color: red;"></i>
+                                                                }
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#example1').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+
+            // Global search
+            $('#globalSearch').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+
+            // Custom filter for Classification
+            $('.filter-checkbox').on('change', function () {
+                var searchTerms = [];
+                $('.filter-checkbox:checked').each(function () {
+                    searchTerms.push($(this).val());
+                });
+                table.column(2).search(searchTerms.join('|'), true, false).draw();
+            });
+
+            // Initialize Bootstrap dropdown
+            $('.dropdown-toggle').dropdown();
+
+            // CSV Download
+            $('#downloadCsv').on('click', function () {
+                var csv = [];
+                var rows = document.querySelectorAll('#example1 tr');
+
+                for (var i = 0; i < rows.length; i++) {
+                    var row = [], cols = rows[i].querySelectorAll('td, th');
+                    for (var j = 0; j < cols.length; j++) {
+                        row.push(cols[j].innerText);
+                    }
+                    csv.push(row.join(','));
+                }
+
+                // Download CSV file
+                var csvFile = new Blob([csv.join('\n')], { type: 'text/csv' });
+                var downloadLink = document.createElement('a');
+                downloadLink.download = 'table_data.csv';
+                downloadLink.href = window.URL.createObjectURL(csvFile);
+                downloadLink.style.display = 'none';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            });
+        });
+    </script>
+}

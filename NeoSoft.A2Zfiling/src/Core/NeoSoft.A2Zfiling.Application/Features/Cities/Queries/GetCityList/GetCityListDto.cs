@@ -20,6 +20,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList
 
         public virtual City Cities { get; set; }
 
+        public int StateId { get; set; }
         public bool IsActive { get; set; }
     }
 }
