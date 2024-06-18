@@ -26,6 +26,6 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
         public virtual Zones Zones { get; set; }
         [JsonIgnore]
         public virtual ICollection<MunicipalCorp> MunicipalCorps { get; set; }
-
+        public virtual ICollection<LicenseMaster> LicenseMasters { get; set; }
     }
 }

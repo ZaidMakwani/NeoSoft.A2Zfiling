@@ -57,6 +57,14 @@ namespace NeoSoft.A2ZFiling.UI.Services
 
             return zones.Data;
         }
+        public async Task<IEnumerable<CityVM>> GetCityByStateAsync(int id)
+        {
+            _logger.LogInformation("GetAll City By State Service Initiated");
+            var zones = await _apiClient.GetAllAsync($"City?StateId={id}");
+            _logger.LogInformation("GetAll City By State Service Completed");
+
+            return zones.Data;
+        }
 
         public async Task<CityVM> UpdateCityAsync(CityVM role)
         {

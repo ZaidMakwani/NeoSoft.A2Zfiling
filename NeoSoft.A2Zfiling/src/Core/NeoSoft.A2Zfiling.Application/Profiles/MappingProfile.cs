@@ -72,6 +72,9 @@ using NeoSoft.A2Zfiling.Application.Features.Licenses.Queries.LicenseList;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Queries.LicenseListByid;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.DeleteLicense;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.UpdateLicense;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Commands.Create;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Queries.GetAllLicense;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Commands.Edit;
 
 using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Command.CreateStatus;
 using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Queries.StatusList;
@@ -231,6 +234,13 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<SubStatus,UpdateSubStatusDto>().ReverseMap();
             CreateMap<SubStatus,UpdateSubStatusCommand>().ReverseMap();
             CreateMap<SubStatus,DeleteSubStatusDto>().ReverseMap();
+
+            CreateMap<LicenseMaster, CreateLicenceMappingDto>();
+            CreateMap<LicenseMaster, CreateLicenseMappingCommand>();
+            CreateMap<LicenseMaster, GetAllLicenseMasterVM>();
+            CreateMap<LicenseMaster, GetAllLicenseMasterQuery>();
+            CreateMap<LicenseMaster, UpdateLicenseMasterCommand>().ReverseMap();
+            
         }
     }
 }
