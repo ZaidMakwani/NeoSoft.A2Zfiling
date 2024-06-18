@@ -137,6 +137,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return View(model);
             }
 
+
+        }
+        [HttpGet]
+        public IActionResult GenerateNewCaptcha()
+        {
+            return PartialView("_CaptchaPartial");
         }
     }
 }
