@@ -1,4 +1,5 @@
 ﻿using NeoSoft.A2Zfiling.Domain.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,5 +23,6 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
 
         [JsonIgnore]
         public virtual ICollection<MunicipalCorp> MunicipalCorps { get; set; }
+        public virtual ICollection<LicenseMaster> LicenseMasters { get; set; }
     }
 }

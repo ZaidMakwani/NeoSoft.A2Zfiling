@@ -28,6 +28,13 @@ namespace NeoSoft.A2ZFiling.UI.Services
             _logger.LogInformation("GetAllMunicipal Service conpleted");
             return Municipals.Data;
         }
+        public async Task<IEnumerable<MunicipalVM>> GetMunicipalByCityAsync(int id)
+        {
+            _logger.LogInformation("GetAllMunicipal Service initiated");
+            var Municipals = await _client.GetAllAsync($"v1/Municipal/?cityId={id}");
+            _logger.LogInformation("GetAllMunicipal Service conpleted");
+            return Municipals.Data;
+        }
         public async Task<MunicipalVM> CreateMunicipalAsync(MunicipalVM municipal)
         {
             _logger.LogInformation("CreateMunicipal Service initiated");
