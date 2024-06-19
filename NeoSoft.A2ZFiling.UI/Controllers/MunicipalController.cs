@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NeoSoft.A2Zfiling.Domain.Entities;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;

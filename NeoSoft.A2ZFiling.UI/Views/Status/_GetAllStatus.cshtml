@@ -80,7 +80,7 @@
                                 @if (item.IsActive)
                                 {
                                     <div class="btn-group">
-                                        <button class="btn btn-primary btn-sm editStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                        <button class="btn btn-primary btn-sm editStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateStatusModal"
                                                 data-url="@Url.Action("Update", "Status")" data-id="@item.StatusId">
                                             <i class="fas fa-edit"></i>
                                         </button>
@@ -93,7 +93,7 @@
                                 else
                                 {
                                     <div class="btn-group">
-                                        <button class="btn btn-primary btn-sm editStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                        <button class="btn btn-primary btn-sm editStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateStatusModal"
                                                 data-url="@Url.Action("Update", "Status")" data-id="@item.StatusId" disabled>
                                             <i class="fas fa-edit"></i>
                                         </button>
@@ -129,7 +129,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger delete-status">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnStatusButton">Close</button>
             </div>
         </div>
     </div>
@@ -227,6 +227,7 @@
         // Close the modal
         $('#createStatusModal').modal('hide');
     });
+
 
     //function to handle edit status
 
@@ -352,6 +353,11 @@
                 alert("Error deleting status. Please try again.");
             }
         });
+    });
+
+    $(document).on('click', '#btnStatusButton, .close', function () {
+        // Close the modal
+        $('#myStatusModal').modal('hide');
     });
 
 </script>

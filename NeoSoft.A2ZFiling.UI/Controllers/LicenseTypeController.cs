@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class LicenseTypeController : Controller
     {
         private readonly ILogger<LicenseTypeController> _logger;
@@ -15,6 +17,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             _licenseType = licenseType;
             _logger = logger;
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetAll()

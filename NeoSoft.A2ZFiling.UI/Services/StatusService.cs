@@ -44,7 +44,7 @@ namespace NeoSoft.A2ZFiling.UI.Services
                 }
                 var status = getById.Data;
                 status.IsActive = false;
-                var updatedData = await _apiClient.PutAsync($"Status/id", status);
+                var updatedData = await _apiClient.PutAsync($"Status/id?id={id}", status);
                 _logger.LogInformation("DeleteStatus Service Completed");
                 return updatedData.Data;
 
