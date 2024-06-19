@@ -107,7 +107,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger delete-item">Delete</button>
-                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal" id="btnIndustryButton">Close</button>
             </div>
         </div>
     </div>
@@ -197,6 +197,10 @@
     });
 
 
+    $(document).on('click', '#btnIndustryButton, .close', function () {
+        // Close the modal
+        $('#myIndustryModal').modal('hide');
+    });
 
     //function to handle create modal
 
@@ -239,6 +243,10 @@
         });
     });
 
+    $(document).on('click', '#closeIndustryEntity, .close', function () {
+        // Close the modal
+        $('#createIndustryModal').modal('hide');
+    });
 
 
 
@@ -332,10 +340,12 @@
         });
     });
 
-    // $(document).on('click', '#closeButton, .close', function () {
-    //     // Close the modal
-    //     $('#updateIndustryModal').modal('hide');
-    // });
+    $(document).on('click', '#closeIndustryButton, .close', function () {
+        // Close the modal
+        $('#updateIndustryModal').modal('hide');
+    });
+
+  
 
 
 </script>

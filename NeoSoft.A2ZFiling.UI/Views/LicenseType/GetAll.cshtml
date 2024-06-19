@@ -223,7 +223,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger delete-confirm">Delete</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCloseButton">Close</button>
                         </div>
                     </div>
                 </div>
@@ -282,7 +282,6 @@
 
         console.log("After DataTable initialization");
 
-
         //function to handle create modal
 
 
@@ -325,6 +324,13 @@
 
 
 
+        $(document).on('click', '#closedEntity, .close', function () {
+            // Close the modal
+            $('#createModal').modal('hide');
+        });
+
+
+
         // Function to show the delete modal
 
 
@@ -356,6 +362,10 @@
             });
         });
 
+        $(document).on('click', '#btnCloseButton, .close', function () {
+            // Close the modal
+            $('#myModal').modal('hide');
+        });
 
         //-------------------------------------------------------------------------------------------------
         //function to handle editlicense in the modal

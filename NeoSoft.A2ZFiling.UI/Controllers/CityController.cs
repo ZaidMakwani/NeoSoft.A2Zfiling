@@ -22,7 +22,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             _logger = logger;
              _cityService = cityService;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetAllCity()
         {
@@ -39,7 +39,6 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return StatusCode(500, "An error occurred while creating city.");
             }
         }
-
 
         [HttpGet]
         public IActionResult Create()

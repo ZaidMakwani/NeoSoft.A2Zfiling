@@ -101,7 +101,7 @@
                                 @if (item.IsActive)
                                 {
                                     <div class="btn-group">
-                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateLicenseModal"
                                                 data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId">
                                             <i class="fas fa-edit"></i>
                                         </button>
@@ -149,7 +149,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger delete-license">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnLicenseButton">Close</button>
             </div>
         </div>
     </div>
@@ -188,7 +188,7 @@
         "ordering": true,
         "info": true,
         "autoWidth": false,
-        "responsive": true
+        "responsive": true,
     })/* .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'); */
     $('#example5').DataTable().buttons().container().appendTo('#example5_wrapper .col-md-6:eq(0)');
 
@@ -237,6 +237,10 @@
         });
     });
 
+    $(document).on('click', '#closeLicenseEntity, .close', function () {
+        // Close the modal
+        $('#createLicenseModal').modal('hide');
+    });
 
 
     //fucntion to handle delete modal
@@ -273,6 +277,10 @@
         });
     });
 
+    $(document).on('click', '#btnLicenseButton, .close', function () {
+        // Close the modal
+        $('#myLicenseModal').modal('hide');
+    });
 
     //-------------------------------------------------
     //function to handle edit modal
@@ -354,10 +362,10 @@
         });
     });
 
-    // $(document).on('click', '#closeButton, .close', function () {
-    //     // Close the modal
-    //     $('#updateLicenseModal').modal('hide');
-    // });
+    $(document).on('click', '#closeLicenseButton, .close', function () {
+        // Close the modal
+        $('#updateLicenseModal').modal('hide');
+    });
 
 
 </script>

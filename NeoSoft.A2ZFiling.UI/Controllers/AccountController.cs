@@ -8,6 +8,7 @@ using NeoSoft.A2Zfiling.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using NeoSoft.A2Zfiling.Persistence.Repositories;
+using NuGet.Common;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
@@ -108,6 +109,16 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return View(model);
             }
 
+        }
+
+        public IActionResult Logout()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            _logger.LogInformation($"Token before clearing: {token}");
+            HttpContext.Session.Clear();
+            _logger.LogInformation($"Token after clearing: {HttpContext.Session.GetString("Token")}");
+
+            return RedirectToAction("Index", "Account");
         }
     }
 }
