@@ -3,7 +3,6 @@ using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using System.Security;
-using System.Security.Claims;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
@@ -25,12 +24,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 _logger.LogInformation("GetAll Permission Action Initiated");
 
-                var response = await _permission.GetPermissionAsync();
+               var response = await _permission.GetPermissionAsync(); 
                 _logger.LogInformation("GetAll Permission Action Completed");
                 return View(response);
             }
 
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 _logger.LogError("An error occurred whike getting all permission");
                 return StatusCode(500, ex.Message);
@@ -58,7 +57,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("Please enter a valid action name");
                 }
-                if ((model.ControllerName.Any(char.IsDigit)) || (model.ActionName.Any(char.IsDigit)))
+                if ((model.ControllerName.Any(char.IsDigit)) || (model.ActionName.Any(char.IsDigit)) )
                 {
                     return BadRequest("Name cannot contain number");
                 }
@@ -94,7 +93,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest(" Permission name already exist");
                 }
-
+               
 
                 var response = await _permission.CreatePermissionAsync(model/*, token*/);
                 if (response == null)
@@ -108,7 +107,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                     return Ok(response);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 _logger.LogError("An error occurred while creating permission");
                 return StatusCode(500, $"Error: {ex.Message}");

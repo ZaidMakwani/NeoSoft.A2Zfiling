@@ -3,6 +3,7 @@ using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using System.Security.Claims;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
@@ -42,6 +43,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 var userId = userClaim.Value;
 
                 var response = await _myProfileService.GetAccountDetailsAsync(userId);
+
+                var model = new CombinedViewModel
+                {
+                    AppUser = response,
+                    Password = new PasswordVM()
+                };
+
+               
 
                 return View(response);
             }
@@ -101,7 +110,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
                 var response = await _myProfileService.UpdatePassword(userId, confirmPassword);
 
-                TempData["Message"] = "Password updated successfully.";
+                TempData["SuccessMessage"] = "Password updated successfully.";
                 return RedirectToAction("Index", "MyProfile");
 
                 //return View(response);
@@ -117,10 +126,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         public async Task<IActionResult> UpdateUser(AppUserVM model)
          {
 
-            if (ModelState.IsValid) 
-            {
-                return View(model);
-            }
+            //if (!ModelState.IsValid) 
+            //{
+            //    return View(model);
+            //}
 
             var token = HttpContext.Session.GetString("Token");
 
@@ -149,6 +158,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 model.AppUserId = userId;
 
                 var response = await _myProfileService.UpdateAccountDetailsAsync(model);
+
+                TempData["SuccessMessage"] = "User Updated Successfully";
 
                 return RedirectToAction("Index", "MyProfile");
             }

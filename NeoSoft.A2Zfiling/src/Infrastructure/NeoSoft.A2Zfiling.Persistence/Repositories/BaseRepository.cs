@@ -31,10 +31,34 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
             return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task<IReadOnlyList<T>> ListAllAsync()
+
+        public async Task<IReadOnlyList<T>> ListAllAsync(string include1 = "", string include2 = "", string include3 = "")
         {
-            _logger.LogInformation("ListAllAsync Initiated");
-            return await _dbContext.Set<T>().ToListAsync();
+            if (!string.IsNullOrWhiteSpace(include1) && !string.IsNullOrWhiteSpace(include2) && !string.IsNullOrWhiteSpace(include3))
+            {
+                _logger.LogInformation("ListAllAsync Initiated");
+                return await _dbContext.Set<T>().Include(include1).Include(include2).Include(include3).ToListAsync();
+            }
+            else if (string.IsNullOrWhiteSpace(include1) && string.IsNullOrWhiteSpace(include2))
+            {
+                _logger.LogInformation("ListAllAsync Initiated");
+                return await _dbContext.Set<T>().ToListAsync();
+            }
+            else if (!string.IsNullOrWhiteSpace(include1) && string.IsNullOrWhiteSpace(include2))
+            {
+                _logger.LogInformation("ListAllAsync Initiated");
+                return await _dbContext.Set<T>().Include(include1).ToListAsync();
+            }
+            else if (!string.IsNullOrWhiteSpace(include2) && string.IsNullOrWhiteSpace(include1))
+            {
+                _logger.LogInformation("ListAllAsync Initiated");
+                return await _dbContext.Set<T>().Include(include2).ToListAsync();
+            }
+            else
+            {
+                _logger.LogInformation("ListAllAsync Initiated");
+                return await _dbContext.Set<T>().Include(include2).Include(include1).ToListAsync();
+            }
         }
 
 

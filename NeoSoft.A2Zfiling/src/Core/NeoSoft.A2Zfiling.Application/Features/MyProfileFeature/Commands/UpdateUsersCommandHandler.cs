@@ -49,7 +49,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands
             user.LastName = request.LastName;  
             user.FirstName = request.FirstName;
             user.PhoneNumber = request.ContactNumber.ToString();
-            user.ContactNumber = request.ContactNumber;
+            user.ContactNumber = request.ContactNumber.ToString();
 
             // Attempt to update the user
             var result = await _userManager.UpdateAsync(user);
@@ -58,7 +58,14 @@ namespace NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands
                 // Collect errors and return a failure response
                 var loginDto = _mapper.Map<UpdateUsersDto>(user);
 
-                UpdatedUser = new Response<UpdateUsersDto>(loginDto, "success");
+                //UpdatedUser = new Response<UpdateUsersDto>(loginDto, "failed");
+
+                UpdatedUser = new Response<UpdateUsersDto>
+                {
+                    Succeeded = false,
+                    Message = "User update failed: " 
+                };
+
                 return UpdatedUser;
             }
 

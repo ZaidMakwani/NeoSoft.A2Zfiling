@@ -38,5 +38,8 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
 
         [Required(ErrorMessage ="Select valid option")]
         public int RoleId { get; set; }
+
+        public IFormFile ProfilePicture { get; set; }
+        public string? ProfileImagePath { get; set; }
     }
 }

@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Application.Exceptions;
-using NeoSoft.A2Zfiling.Application.Features.Login.Command;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using System;
@@ -19,7 +18,6 @@ namespace NeoSoft.A2Zfiling.Application.Features.Permissionsss.Command.CreatePer
         private readonly IMapper _mapper; 
         private readonly IAsyncRepository<Permission> _asyncRepository;
         private readonly ILogger<CreatePermissionHandler> _logger;
-
 
         public CreatePermissionHandler(IMapper mapper, IAsyncRepository<Permission> asyncRepository, ILogger<CreatePermissionHandler> logger)    
         {
@@ -42,11 +40,9 @@ namespace NeoSoft.A2Zfiling.Application.Features.Permissionsss.Command.CreatePer
                     CreatedBy = "",
                     CreatedDate = DateTime.Now,
                 };
-                permission =  await _asyncRepository.AddAsync(permission);
+                permission =await _asyncRepository.AddAsync(permission);
 
                 response = new Response<CreatePermissionDto>(_mapper.Map<CreatePermissionDto>(permission), "Permission Created Successful.");
-
-               
 
 
                 _logger.LogInformation("Create Permission Handler Completed");

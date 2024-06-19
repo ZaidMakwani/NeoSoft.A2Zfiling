@@ -321,7 +321,10 @@
                 });
             });
         });
-
+        $(document).on('click', '#closedEntity, .close', function () {
+            // Close the modal
+            $('#createModal').modal('hide');
+        });
 
 
         $(document).on('click', '#closedEntity, .close', function () {
