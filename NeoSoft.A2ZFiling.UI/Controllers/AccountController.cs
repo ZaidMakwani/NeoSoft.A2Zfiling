@@ -17,7 +17,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
     {
 
         Uri baseAddres = new Uri("https://localhost:5000/api");
-        private readonly HttpClient _client;
+        //private readonly HttpClient _client;
         private readonly IDNTCaptchaValidatorService _captchaValidator;
         private readonly IRegisterService _registerService;
         private readonly ILoginService _loginService;
@@ -140,7 +140,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Account");
+            //return RedirectToAction("Index", "Account");
         }
 
         public IActionResult Logout()
