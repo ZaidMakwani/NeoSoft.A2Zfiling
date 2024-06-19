@@ -42,12 +42,12 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
         }
 
         [HttpPost(Name ="AddPermission")]
-        public async Task<ActionResult> Create([FromBody] CreatePermisssionCommand model)
+        public async Task<ActionResult> Create([FromBody] CreatePermisssionCommand model/*,string Token*/)
         {
             try
             {
                 _logger.LogInformation("Create Permission Action Initiated");
-
+                //model.Token = Token;
                 var data = await _mediator.Send(model);
                 _logger.LogInformation("Create Permission Action Completed");
                 return Ok(data);

@@ -65,7 +65,7 @@
                             <td>
                                         @if (item.IsActive)
                                         {
-                                            <button class="btn btn-primary btn-sm editSubStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                    <button class="btn btn-primary btn-sm editSubStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateSubStatusModal"
                                                     data-url="@Url.Action("Update", "SubStatus")" data-id="@item.SubStatusId">
                                                 <i class="fas fa-edit"></i>
                                             </button>
@@ -76,7 +76,7 @@
                                         }
                                         else
                                         {
-                                            <button class="btn btn-primary btn-sm editSubStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                    <button class="btn btn-primary btn-sm editSubStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateSubStatusModal"
                                                     data-url="@Url.Action("Update", "SubStatus")" data-id="@item.SubStatusId" disabled>
                                                 <i class="fas fa-edit"></i>
                                             </button>
@@ -112,7 +112,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger delete-substatus">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnSubStatusButton">Close</button>
             </div>
         </div>
     </div>
@@ -204,15 +204,16 @@
         });
     });
 
+
     $(document).on('click', '#closeSubStatusEntity, .close', function () {
         // Close the modal
         $('#createSubStatusModal').modal('hide');
     });
+
     //-------------------------------------------------
     //function to handle edit modal
 
     $(document).on('click', '.editSubStatus-button', function () {
-        debugger
         var SubStatusId = $(this).data("id");
         var editUrl = '@Url.Action("Update", "SubStatus")' + '?id=' + SubStatusId;
 
@@ -326,6 +327,11 @@
                 alert("Error deleting SubStatus. Please try again.");
             }
         });
+    });
+
+    $(document).on('click', '#btnSubStatusButton, .close', function () {
+        // Close the modal
+        $('#mySubStatusModal').modal('hide');
     });
 
  </script>
