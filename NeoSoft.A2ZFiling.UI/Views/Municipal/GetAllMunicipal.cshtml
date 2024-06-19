@@ -112,13 +112,13 @@
                                                                                 @Html.DisplayFor(modelItem => item.Pincode)
                                                                             </td>
                                                                             <td>
-                                                                                @Html.DisplayFor(modelItem => item.City.CityName)
+                                                                                @Html.DisplayFor(modelItem => item.CityName)
                                                                             </td>
                                                                             <td>
-                                                                                @Html.DisplayFor(modelItem => item.State.StateName)
+                                                                                @Html.DisplayFor(modelItem => item.StateName)
                                                                             </td>
                                                                             <td>
-                                                                                @Html.DisplayFor(modelItem => item.Zones.ZoneName)
+                                                                                @Html.DisplayFor(modelItem => item.ZoneName)
                                                                             </td>
                                                                             <td>
                                                                                 @if (item.IsActive)
@@ -131,7 +131,7 @@
                                                                                 }
                                                                             </td>
                                                                             <td>
-                                                                                <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal4"
+                                                                                <a class="btn btn-primary btn-sm edit-button-muncipal" data-toggle="ajax-modal" data-target="#updateModal4"
                                                                                    data-url="@Url.Action("Edit", "Municipal")" data-id="@item.MunicipalId">
                                                                                     <i class="fas fa-edit"></i>
                                                                                 </a>
@@ -317,7 +317,7 @@
         //function to handle editMunicipal in the modal
 
 
-        $(document).on('click', '.edit-button', function () {
+        $(document).on('click', '.edit-button-muncipal', function () {
             var MunicipalId = $(this).data("id");
             var editUrl = '@Url.Action("Edit", "Municipal")' + '?id=' + MunicipalId;
 

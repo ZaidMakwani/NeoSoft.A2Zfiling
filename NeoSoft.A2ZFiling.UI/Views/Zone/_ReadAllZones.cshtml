@@ -99,7 +99,7 @@
                                                                 }
                                                             </td>
                                                             <td>
-                                                                <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal2"
+                                                                <button class="btn btn-primary btn-sm edit-button-zone" data-toggle="ajax-modal" data-target="#updateModal2"
                                                                         data-url="@Url.Action("EditZone", "Zone")" data-id="@item.ZoneId">
                                                                     <i class="fas fa-edit"></i> @* Edit *@
                                                                 </button>
@@ -294,7 +294,7 @@
 
 
 
-        $(document).on('click', '.edit-button', function () {
+        $(document).on('click', '.edit-button-zone', function () {
 
             var ZoneId = $(this).data("id");
             var editUrl = '@Url.Action("EditZone", "Zone")' + '?id=' + ZoneId;

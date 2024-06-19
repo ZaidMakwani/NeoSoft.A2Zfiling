@@ -42,15 +42,16 @@ namespace NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList
                     ZoneId = x.ZoneId,
                    
                     StateId = x.StateId,
-
+                    StateName = x.State.StateName,
+                    ZoneName = x.Zones.ZoneName
 
 
                 }).ToList();
 
 
-                var cities = _mapper.Map<IEnumerable<GetCityListDto>>(allcities);
+                //var cities = _mapper.Map<IEnumerable<GetCityListDto>>(allcities);
                 _logger.LogInformation("Handler Completed");
-                return new Response<IEnumerable<GetCityListDto>>(cities, "Data Fetched Successfully");
+                return new Response<IEnumerable<GetCityListDto>>(licenseList, "Data Fetched Successfully");
             }
             catch (Exception ex)
             {

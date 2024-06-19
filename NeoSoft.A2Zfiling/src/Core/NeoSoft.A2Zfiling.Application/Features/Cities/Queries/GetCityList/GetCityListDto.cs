@@ -1,4 +1,5 @@
 ﻿using NeoSoft.A2Zfiling.Domain.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,18 @@ namespace NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList
 
         public string CityName { get; set; }
         public int StateId { get; set; }
+        public string StateName { get; set; }   
+        [JsonIgnore]
         public virtual State State { get; set; }
 
         public int ZoneId { get; set; }
+        public string ZoneName { get; set; }    
+        [JsonIgnore]
         public virtual Zones Zones { get; set; }
+        [JsonIgnore]
+        public virtual City City { get; set; }
 
-        public virtual City Cities { get; set; }
-
-        public int StateId { get; set; }
+       
         public bool IsActive { get; set; }
     }
 }

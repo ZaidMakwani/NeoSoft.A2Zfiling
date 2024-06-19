@@ -88,10 +88,10 @@
                                                         @Html.DisplayFor(modelItem => item.CityName)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.State.StateName)
+                                                        @Html.DisplayFor(modelItem => item.StateName)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.Zones.ZoneName)
+                                                        @Html.DisplayFor(modelItem => item.ZoneName)
                                                     </td>
                                                     <td>
                                                         @if (item.IsActive)
@@ -104,8 +104,8 @@
                                                         }
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal2"
-                                                           data-url="@Url.Action("EditCity", "City")" data-id="@item.CityId">
+                                                        <a class="btn btn-primary btn-sm edit-button-city" data-toggle="ajax-modal" data-target="#updateModal2"
+                                                            data-id="@item.CityId">
                                                             <i class="fas fa-edit"></i> @* Edit *@
                                                         </a>
 
@@ -280,7 +280,7 @@
         //function to handle editcity in the modal
 
 
-        $(document).on('click', '.edit-button', function () {
+        $(document).on('click', '.edit-button-city', function () {
             debugger
             var CityId = $(this).data("id");
             var editUrl = '@Url.Action("EditCity", "City")' + '?id=' + CityId;

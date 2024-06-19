@@ -21,8 +21,7 @@
     <Compile Remove="Migrations\MSSQL\20240611051638_logininit.Designer.cs" />
   </ItemGroup>
 
-  <ItemGroup>    
-  <ItemGroup>
+  <ItemGroup> 
     <Compile Remove="Migrations\MSSQL\20220105101648_InitialCreate.cs" />
     <Compile Remove="Migrations\MSSQL\20220105101648_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\MSSQL\20240521045137_initial0.cs" />

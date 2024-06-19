@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
+using NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityList;
+using NeoSoft.A2Zfiling.Application.Features.Pincodes.Queries.GetPinCode;
 using NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRolesList;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
@@ -28,9 +30,26 @@ namespace NeoSoft.A2Zfiling.Application.Features.MunicipalCorporation.Queries.Ge
         {
 
             var allMunicipals = (await _municipalRepository.ListAllAsync("Zones","City","State"));
-            var municipals = _mapper.Map<IEnumerable<MunicipalListVM>>(allMunicipals.Where(x => x.IsActive == true));
+            var licenseList = allMunicipals.Select(x => new MunicipalListVM
+            {
+                MunicipalId = x.MunicipalId,
+                MunicipalName = x.MunicipalName,
+                Pincode = x.Pincode,
+                CityId = x.CityId,
+                CityName = x.City.CityName,
 
-            return new Response<IEnumerable<MunicipalListVM>>(municipals, "success");
+                IsActive = x.IsActive,
+                ZoneId = x.ZoneId,
+
+                StateId = x.StateId,
+                StateName = x.State.StateName,
+                ZoneName = x.Zones.ZoneName
+
+
+            }).ToList();
+            //var municipals = _mapper.Map<IEnumerable<MunicipalListVM>>(allMunicipals.Where(x => x.IsActive == true));
+
+            return new Response<IEnumerable<MunicipalListVM>>(licenseList, "success");
         }
     }
 }

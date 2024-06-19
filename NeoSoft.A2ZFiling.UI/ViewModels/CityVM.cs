@@ -10,8 +10,10 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
 
         public bool IsActive { get; set; }
         public int StateId { get; set; }
+        public string? StateName { get; set; }
         public virtual State State { get; set; }
         public int ZoneId { get; set; }
+        public string? ZoneName { get; set; }
         public virtual Zones Zones {  get; set; }  
  
         public virtual ICollection<MunicipalCorp> MunicipalCorporations { get; set; }
