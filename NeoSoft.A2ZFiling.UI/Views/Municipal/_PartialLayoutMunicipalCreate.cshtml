@@ -1,42 +1,66 @@
 ﻿@model NeoSoft.A2ZFiling.UI.ViewModels.MunicipalVM;
-
-@{
-    ViewData["Title"] = "Create";
-
-}
-
-<!-- Create Modal -->     @*  modal-dialog-centered
-@ <div id="createModal" class="modal" tabindex="-1" role="dialog"> @ *@
-<div id="createModal" class="modal fade">
+<div id="createModal3" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Create Zone</h5>
+                <h5 class="modal-title">Create Municipal</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <!-- Debugging output -->
+                <div>
+                    States count: @(ViewBag.lstState != null ? (ViewBag.lstState as SelectList).Count().ToString() : "No States")
+                </div>
+                <div>
+                    City count: @(ViewBag.lstCity != null ? (ViewBag.lstCity as SelectList).Count().ToString() : "No City")
+                </div>
+                <div>
+                    States count: @(ViewBag.lstZone != null ? (ViewBag.lstZone as SelectList).Count().ToString() : "No Zones")
+                </div>
+
                 <form id="createMunicipalForm" asp-action="Create" asp-controller="Municipal" method="post">
-
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                     <div class="form-group">
                         <label asp-for="MunicipalName">Municipal Name:</label>
-                        <input asp-for="MunicipalName" class="form-control" />
+                        <input type="text" asp-for="MunicipalName" class="form-control" />
                         <span asp-validation-for="MunicipalName" class="text-danger" id="entityName"></span>
                     </div>
-
-
+                    <div class="form-group">
+                        <label asp-for="Pincode">PinCode:</label>
+                        <input type="number" asp-for="Pincode" class="form-control" />
+                        <span asp-validation-for="Pincode" class="text-danger" id="entityName"></span>
+                    </div>
+                   @*  <div class="form-group">
+                        <label asp-for="StateId">State:</label>
+                        @Html.DropDownList("StateID", ViewBag.lstState as SelectList, "-- Select State --", new { @class = "form-control" })
+                        <span asp-validation-for="StateId" class="text-danger"></span>
+                    </div> *@
+                    <div class="form-group">
+                        <label asp-for="CityId">City:</label>
+                        @Html.DropDownList("CityId", ViewBag.lstCity as SelectList, "-- Select City --", new { @class = "form-control" })
+                        <span asp-validation-for="CityId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ZoneId">Zone:</label>
+                        @Html.DropDownList("ZoneId", ViewBag.lstZone as SelectList, "-- Select Zone --", new { @class = "form-control" })
+                        <span asp-validation-for="ZoneId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StateId">State:</label>
+                        @Html.DropDownList("StateId", ViewBag.lstState as SelectList, "-- Select State --", new { @class = "form-control" })
+                        <span asp-validation-for="StateId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <input asp-for="IsActive" class="form-check-input" />
+                        <label asp-for="IsActive" class="form-check-label">Is Active</label>
+                    </div>
                 </form>
-
-
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="saveEntity" data-save="modal">Save</button>
-
             </div>
         </div>
     </div>
@@ -46,4 +70,43 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        $(function () {
+            var card = $('#placeholder2');
+
+            $('button[data-toggle="ajax-modal"]').click(function (event) {
+                var url = $(this).data('url');
+                $.get(url).done(function (data) {
+                    card.html(data);
+                    card.find('.modal').modal('show');
+
+                    card.off('click', '[data-save="modal"]');
+
+                    card.on('click', '[data-save="modal"]', function (event) {
+                        var form = $(this).parents('.modal').find('form');
+                        var actionUrl = form.attr('action');
+                        var sendData = form.serialize();
+
+                        $.post(actionUrl, sendData).done(function (data) {
+                            if (data.success) {
+                                card.find('.modal').modal('hide');
+                                location.reload();
+                            } else {
+                                var errorHtml = '<div class="alert alert-danger" role="alert">' + "Error creating Municipal. Please try again." + '</div>';
+                                card.find('.modal-body').prepend(errorHtml);
+                            }
+                        }).fail(function (xhr, status, error) {
+                            var errorMessage = xhr.responseText;
+                            var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
+                            card.find('.modal-body').prepend(errorHtml);
+                        });
+                    });
+                }).fail(function (xhr, status, error) {
+                    var errorMessage = xhr.responseText;
+                    var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
+                    card.find('.modal-body').prepend(errorHtml);
+                });
+            });
+        });
+    </script>
 }

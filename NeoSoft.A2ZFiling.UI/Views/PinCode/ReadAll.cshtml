@@ -205,6 +205,7 @@
                 success: function (result) {
                     console.log('PinCode deleted successfully.');
                     alert('PinCode deleted successfully');
+                    location.reload();
                     $('#myModal').modal('hide');
                     location.reload();
 
@@ -246,6 +247,7 @@
 
                         $.post(url, sendData).done(function (data) {
                             card.find('.modal-body').prepend('<div class="alert alert-success" role="alert">' + "PinCode Created Successful." + '</div>');
+                            location.reload();
                             card.find('.modal').modal('hide');
        
                         }).fail(function (xhr, status, error) {
@@ -282,6 +284,7 @@
                     $('#placeholder').html(data);
                     // Show the edit modal
                     $('#updateModal').modal('show');
+
                 },
                 error: function (xhr, status, error) {
                     console.error("Error fetching PinCode data: ", error);
@@ -305,6 +308,7 @@
                     $('#placeholder').html(data);
                     // Close the modal or perform any other action as needed
                     // alert('PinCode Updated successfully');
+
 
                     $('#updateModal').modal('hide');
                 },

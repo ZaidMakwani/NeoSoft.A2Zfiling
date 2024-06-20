@@ -103,6 +103,9 @@ namespace NeoSoft.A2ZFiling.UI.Filter
             context.Result = new UnauthorizedObjectResult("Unauthorized: Invalid Token");
             return;
 
+            //context.Result = new RedirectToActionResult("Login", "Account", null);
+            //return;
+
             //var roleId = roleIdClaim.Value;
 
             //var permissionRepository = context.HttpContext.RequestServices.GetService(typeof(IAsyncRepository<Permission>)) as IAsyncRepository<Permission>;

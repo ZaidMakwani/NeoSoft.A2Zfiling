@@ -154,7 +154,8 @@ namespace NeoSoft.A2Zfiling.Persistence
                 entity.HasKey(e => e.StateId);
                 entity.HasMany(s => s.LicenseMasters)
                     .WithOne(lm => lm.State)
-                    .HasForeignKey(lm => lm.StateId);
+                    .HasForeignKey(lm => lm.StateId)
+                    .OnDelete(DeleteBehavior.Restrict); 
             });
 
             modelBuilder.Entity<Zones>(entity =>
@@ -162,7 +163,8 @@ namespace NeoSoft.A2Zfiling.Persistence
                 entity.HasKey(e => e.ZoneId);
                 entity.HasMany(z => z.LicenseMasters)
                     .WithOne(lm => lm.Zones)
-                    .HasForeignKey(lm => lm.ZoneId);
+                    .HasForeignKey(lm => lm.ZoneId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Industry>(entity =>
@@ -170,7 +172,8 @@ namespace NeoSoft.A2Zfiling.Persistence
                 entity.HasKey(e => e.IndustryId);
                 entity.HasMany(z => z.LicenseMasters)
                     .WithOne(lm => lm.Industry)
-                    .HasForeignKey(lm => lm.IndustryId);
+                    .HasForeignKey(lm => lm.IndustryId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Company>(entity =>
@@ -178,19 +181,22 @@ namespace NeoSoft.A2Zfiling.Persistence
                 entity.HasKey(e => e.CompanyId);
                 entity.HasMany(z => z.LicenseMasters)
                     .WithOne(lm => lm.Company)
-                    .HasForeignKey(lm => lm.CompanyId);
+                    .HasForeignKey(lm => lm.CompanyId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
             modelBuilder.Entity<LicenseMaster>()
                 .HasOne(lm => lm.License)
                 .WithMany()
-                .HasForeignKey(lm => lm.LicenseId);
+                .HasForeignKey(lm => lm.LicenseId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<License>(entity =>
             {
                 entity.HasKey(e => e.LicenseId);
                 entity.HasMany(z=>z.LicenseMasters)
                     .WithOne(lm => lm.License)
-                    .HasForeignKey(lm => lm.LicenseId);
+                    .HasForeignKey(lm => lm.LicenseId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
             });
             modelBuilder.Entity<Message>()

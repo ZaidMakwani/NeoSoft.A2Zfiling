@@ -11,5 +11,8 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
         public string StateName { get; set; }
         [Required]
         public bool IsActive { get; set; }
+        [Required]
+        public int ZoneId { get; set; }
+        //public int ZoneName { get; set; }
     }
 }

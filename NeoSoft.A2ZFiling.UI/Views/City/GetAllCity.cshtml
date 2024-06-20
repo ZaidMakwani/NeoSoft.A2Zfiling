@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-</head>
+</head>x
 <body class="hold-transition sidebar-mini">
     <meta http-equiv="refresh" content="600">
     <div class="wrapper">
@@ -36,11 +36,27 @@
                                             </button> *@
 
 
-                                            <div id="placeholder"></div>
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
+                                            <div id="placeholder1"></div>
+                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal1"
                                                     data-url="@Url.Action("Create", "City")">
                                                 <i class="fas fa-plus"></i>   @* Create *@
                                             </button>
+                                            <div class="navbar-search-block">
+                                                <form class="form-inline">
+                                                    <div class="input-group input-group-sm">
+                                                        <input class="form-control form-control-navbar" type="search" placeholder1="Search" aria-label="Search">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-navbar" type="submit">
+                                                                <i class="fas fa-search"></i>
+                                                            </button>
+                                                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
@@ -50,7 +66,10 @@
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>City Name</th>
+                                                    <th>State Name</th>
+                                                    <th>Zone Name</th>
                                                     <th>Status</th>
+
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -65,6 +84,12 @@
                                                             @Html.DisplayFor(modelItem => item.CityName)
                                                         </td>
                                                         <td>
+                                                            @Html.DisplayFor(modelItem => item.StateName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ZoneName)
+                                                        </td>
+                                                        <td>
                                                             @if (item.IsActive)
                                                             {
                                                                 <span class="text-success font-weight-bold">Active</span>
@@ -75,10 +100,10 @@
                                                             }
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                            <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal2"
                                                                     data-url="@Url.Action("EditCity", "City")" data-id="@item.CityId">
                                                                 <i class="fas fa-edit"></i> @* Edit *@
-                                                            </button>
+                                                            </a>
 
 
                                                             <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.CityId">
@@ -159,7 +184,7 @@
             "paging": true,
             "pageLength": 4,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,
@@ -171,7 +196,7 @@
         //function to handle create modal
 
         $(function () {
-            var card = $('#placeholder');
+            var card = $('#placeholder1');
 
             $('button[data-toggle="ajax-modal"]').click(function (event) {
                 var url = $(this).data('url');
@@ -223,7 +248,7 @@
             $('.delete-confirm').data('id', CityId);
             $('#myModal').modal('show');
         });
-
+        
         // Event delegation for handling delete button click inside the modal
         $(document).on('click', '.delete-confirm', function () {
             var CityId = $(this).data("id");
@@ -234,7 +259,7 @@
                 type: 'GET',
                 success: function (result) {
                     console.log('City deleted successfully.');
-                    // alert('Zone deleted successfully');
+                    // alert('City deleted successfully');
                     $('#myModal').modal('hide');
                     location.reload();
                 },
@@ -250,18 +275,19 @@
 
 
         $(document).on('click', '.edit-button', function () {
-            var ZoneId = $(this).data("id");
-            var editUrl = '@Url.Action("EditCity", "City")' + '?id=' + ZoneId;
-
+            debugger
+            var CityId = $(this).data("id");
+            var editUrl = '@Url.Action("EditCity", "City")' + '?id=' + CityId;
+            
             // AJAX request to fetch data for editing
             $.ajax({
                 url: editUrl,
                 type: 'GET',
                 success: function (data) {
-                    // Load the partial view into the placeholder div
-                    $('#placeholder').html(data);
+                    // Load the partial view into the placeholder1 div
+                    $('#placeholder1').html(data);
                     // Show the edit modal
-                    $('#updateModal').modal('show');
+                    $('#updateModal2').modal('show');
                     
                 },
                 error: function (xhr, status, error) {
@@ -282,10 +308,10 @@
                 url: editUrl,
                 type: 'GET',
                 success: function (data) {
-                    // Replace the content in the placeholder div with the updated data
-                    $('#placeholder').html(data);
+                    // Replace the content in the placeholder1 div with the updated data
+                    $('#placeholder1').html(data);
                     // Close the modal or perform any other action as needed
-                    $('#updateModal').modal('hide');
+                    $('#updateModal2').modal('hide');
                     location.reload();
                 },
                 error: function (xhr, status, error) {
@@ -303,15 +329,15 @@
             $.ajax({
                 url: '@Url.Action("EditCity", "City")',
                 type: 'POST',
-                data: $('#updateCityForm').serialize(),
+                data: $('#cityForm').serialize(),
                 success: function (response) {
                     // Check if the response indicates success
                     if (response ) {
                         updateData(); // Call function to update data
                         // alert('City Updated successfully');
-                        $('#updateModal').modal('hide');
+                        $('#updateModal2').modal('hide');
                         var successHtml = '<div class="alert alert-success" role="alert">' + "City Updated Successfully." + '</div>';
-                        $('#updateModal .modal-body').prepend(successHtml);
+                        $('#updateModal2 .modal-body').prepend(successHtml);
                         location.reload();
                         // $('#updateModal').modal('hide');
                     }
@@ -326,7 +352,7 @@
                     var errorMessage = xhr.responseText;
                     if (errorMessage) {
                         var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
-                        $('#updateModal .modal-body').prepend(errorHtml); // Prepend error message to modal body
+                        $('#updateModal2 .modal-body').prepend(errorHtml); // Prepend error message to modal body
                     } else {
                         alert("An error occurred while saving data. Please try again.");
                     }
@@ -336,7 +362,7 @@
 
         $(document).on('click', '#closeButton, .close', function () {
             // Close the modal
-            $('#updateModal').modal('hide');
+            $('#updateModal2').modal('hide');
         });
 
 
