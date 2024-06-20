@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+   // [CustomAuthorize]
     public class StateController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:5000/api");
@@ -96,7 +96,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
 
         public IActionResult Update(int id)
-        {
+         {
             Response<StateVM> state = new Response<StateVM>();
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + $"/State/GetStateById?Id={id}").Result;
 

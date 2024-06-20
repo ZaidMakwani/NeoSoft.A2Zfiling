@@ -51,8 +51,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               @if(Model != null)
-                                                   {
+                                             
                                                     @foreach (var item in Model)
                                                     {
                                                         <tr>
@@ -84,7 +83,7 @@
                                                             </td>
                                                         </tr>
                                                     }
-                                                }
+                                                
                                                 
                                             </tbody>
                                         </table>
@@ -225,6 +224,7 @@
             });
         });
 
+        //function to update state
         $(document).on('click', '.edit-button', function () {
             var StateId = $(this).data("id");
             var editUrl = '@Url.Action("Update", "State")' + '?id=' + StateId;
@@ -235,7 +235,7 @@
                 success: function (data) {
                     $('#placeholder').html(data);
                     $('#updateModal').modal('show');
-                    location.reload();
+                    // location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error("Error fetching State data: ", error);
