@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.IdentityModel.Tokens;
 using NeoSoft.A2Zfiling.Domain.Entities;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using NuGet.Packaging;
@@ -9,6 +10,7 @@ using System.ComponentModel;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class LicenseController : Controller
     {
         private readonly ILogger<LicenseController> _logger;

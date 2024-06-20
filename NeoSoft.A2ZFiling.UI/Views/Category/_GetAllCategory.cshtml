@@ -74,7 +74,7 @@
                             }
                         </td>
                         <td>
-                            <button class="btn btn-primary btn-sm editCategory-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                <button class="btn btn-primary btn-sm editCategory-button" data-toggle="ajax-modal" data-target="#updateCategoryModal"
                                     data-url="@Url.Action("Update", "Category")" data-id="@item.CategoryId">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -108,7 +108,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger delete-category">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCategoryButton">Close</button>
             </div>
         </div>
     </div>
@@ -206,6 +206,11 @@
         $('#createCategoryModal').modal('hide');
     });
 
+    $(document).on('click', '#closeCategoryEntity, .close', function () {
+        // Close the modal
+        $('#createCategoryModal').modal('hide');
+    });
+
     // Function to show the delete modal
 
 
@@ -241,12 +246,15 @@
         });
     });
 
+    $(document).on('click', '#btnCategoryButton, .close', function () {
+        // Close the modal
+        $('#myCategoryModal').modal('hide');
+    });
+
 
 
 
     //function to handle editcategory in the modal
-
-
 
     $(document).on('click', '.editCategory-button', function () {
         var CategoryId = $(this).data("id");

@@ -108,4 +108,34 @@ $('#table7-tab').on('click', function () {
 });
 
 
+$('#tableB-tab').on('click', function () {
+    console.log("table-2 tab")
+    $.ajax({
+        url: '/Zone/GetAllZone',
+        type: 'GET',
+        success: function (data) {
+            $('#zonePlaceholderssss').html(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching industry data: ", error);
+            alert("Error fetching industry data. Please try again.");
+        }
+    });
+});
+
+
+$('#tableC-tab').on('click', function () {
+    console.log("table-3 tab")
+    $.ajax({
+        url: '/City/GetAllCity',
+        type: 'GET',
+        success: function (data) {
+            $('#cityPlaceholder').html(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching company data: ", error);
+            alert("Error fetching company data. Please try again.");
+        }
+    });
+});
 

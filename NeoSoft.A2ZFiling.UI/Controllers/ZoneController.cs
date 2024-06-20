@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class ZoneController : Controller
     {
         private readonly ILogger<ZoneController> _logger;
@@ -22,7 +24,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 _logger.LogInformation("Zone Action Initiated");
                 var response = await _zoneService.GetZoneAsync();
                 _logger.LogInformation("Zone Action Completed");
-                return View(response);
+               // return View(response);
+                return PartialView("_ReadAllZones", response);
             }
             catch (Exception ex)
             {

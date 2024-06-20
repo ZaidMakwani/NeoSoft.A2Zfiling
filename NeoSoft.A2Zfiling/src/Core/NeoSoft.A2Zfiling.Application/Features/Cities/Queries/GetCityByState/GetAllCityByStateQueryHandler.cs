@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityByState
 {
-    internal class GetAllCityByStateQueryHandler :IRequestHandler<GetAllCityByStateQuery, Response<IEnumerable<GetCityListDto>>>
+    public class GetAllCityByStateQueryHandler :IRequestHandler<GetAllCityByStateQuery, Response<IEnumerable<GetCityListDto>>>
     {
         private readonly IAsyncRepository<City> _asyncRepository;
         private readonly ILogger<GetAllCityByStateQueryHandler> _logger;

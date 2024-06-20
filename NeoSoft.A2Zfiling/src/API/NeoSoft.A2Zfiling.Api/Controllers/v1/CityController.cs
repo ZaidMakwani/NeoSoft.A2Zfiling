@@ -28,7 +28,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _mediator = mediator;
 
         }
-        [HttpGet("all", Name = "GetAllCity")]
+        [HttpGet("all")]
         public async Task<ActionResult> GetAllCity()
         {
             try

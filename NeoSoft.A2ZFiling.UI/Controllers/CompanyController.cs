@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Responses;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using Newtonsoft.Json;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class CompanyController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:5000/api");

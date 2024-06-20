@@ -18,6 +18,7 @@ namespace NeoSoft.A2ZFiling.UI.Filter
     {
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        
         {
             var httpContext = context.HttpContext;
 
@@ -42,6 +43,8 @@ namespace NeoSoft.A2ZFiling.UI.Filter
                 context.Result = new UnauthorizedObjectResult("Unauthorized: Invalid Token");
                 return;
             }
+
+
             if (jwtToken == null)
             {
                 // _logger.LogWarning("Unauthorized: Invalid JWT token");
@@ -99,6 +102,9 @@ namespace NeoSoft.A2ZFiling.UI.Filter
 
             context.Result = new UnauthorizedObjectResult("Unauthorized: Invalid Token");
             return;
+
+            //context.Result = new RedirectToActionResult("Login", "Account", null);
+            //return;
 
             //var roleId = roleIdClaim.Value;
 

@@ -291,7 +291,11 @@
                 });
             });
         });
-    
+
+        $(document).on('click', '#closeEntity, .close', function () {
+            // Close the modal
+            $('#createModal').modal('hide');
+        });
 
 
 

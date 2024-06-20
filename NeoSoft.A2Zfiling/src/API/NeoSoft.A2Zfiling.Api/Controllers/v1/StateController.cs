@@ -31,7 +31,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
         {
             _logger.LogInformation("GetAllStates Initiated");
             var dtos = await _mediator.Send(new GetStateListQuery());
-            _logger.LogInformation("GetAllSates Completed");
+                _logger.LogInformation("GetAllSates Completed");
             return Ok(dtos);
         }
 
