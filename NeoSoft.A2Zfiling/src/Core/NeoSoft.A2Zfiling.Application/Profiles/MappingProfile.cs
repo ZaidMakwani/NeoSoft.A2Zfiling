@@ -144,7 +144,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
 
 
 
-            CreateMap<Document, CreateDocumentDto>().ReverseMap();
+                    CreateMap<Document, CreateDocumentDto>().ReverseMap();
 
             CreateMap<State, CreateStateDto>().ReverseMap();
             CreateMap<State, StateListVm>().ReverseMap();
@@ -152,16 +152,23 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<State, UpdateStateDto>().ReverseMap();
             CreateMap<State, UpdateStateCommand>().ReverseMap();
             CreateMap<State, StateVM>().ReverseMap();
+                    CreateMap<State, CreateStateDto>().ReverseMap();
+                    CreateMap<State, StateListVm>().ReverseMap();
+                    CreateMap<State, DeleteStateDto>().ReverseMap();
+
+                    CreateMap<State, UpdateStateDto>().ReverseMap();
+                    CreateMap<State, UpdateStateCommand>().ReverseMap();
+                    CreateMap<State, StateVM>().ReverseMap();
 
 
 
-            CreateMap<PinCode, CreatePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, PinCodeListVm>().ReverseMap();
-            CreateMap<PinCode, DeletePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, UpdatePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, UpdatePinCodeCommand>().ReverseMap();
-            CreateMap<PinCode, PinCodeVM>().ReverseMap();
-            CreateMap<Login, LoginDto>().ReverseMap();
+                    CreateMap<PinCode, CreatePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, PinCodeListVm>().ReverseMap();
+                    CreateMap<PinCode, DeletePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, UpdatePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, UpdatePinCodeCommand>().ReverseMap();
+                    CreateMap<PinCode, PinCodeVM>().ReverseMap();
+                    CreateMap<Login, LoginDto>().ReverseMap();
 
                 CreateMap<Role, CreateRolesDto>();
                 CreateMap<Role, RolesDto>();

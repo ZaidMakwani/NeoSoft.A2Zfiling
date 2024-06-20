@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NeoSoft.A2Zfiling.Domain.Entities;
 using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
@@ -9,23 +10,40 @@ using NeosoftA2Zfilings.Views.ViewModels;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class MunicipalController : Controller
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<MunicipalController> _logger;
         private readonly IMunicipalService _municipalService;
+        private readonly IStateService _stateService;
+        private readonly IZoneService _zoneService;
+        private readonly ICityService _cityService;
 
-        public MunicipalController(ILogger<MunicipalController> logger, IMunicipalService municipalService)
+
+        public MunicipalController(ILogger<MunicipalController> logger, IMunicipalService municipalService, IStateService stateService, IZoneService zoneService, ICityService cityService)
         {
             _httpClient = new HttpClient();
             _logger = logger;
             _municipalService = municipalService;
-
+            _stateService = stateService;
+            _zoneService = zoneService;
+            _cityService = cityService;
         }
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return PartialView("_PartialLayoutMunicipalCreate");
+            var states = await _stateService.GetStateAsync();
+            ViewBag.lstState = new SelectList(states, "StateId", "StateName");
+            var zones = await _zoneService.GetZoneAsync();
+            ViewBag.lstZone = new SelectList(zones, "ZoneId", "ZoneName");
+
+       
+
+            var cities = await _cityService.GetCityAsync();
+            ViewBag.lstCity = new SelectList(cities, "CityId", "CityName");
+
+            return PartialView("_PartialCreateOriginal");
         }
         [HttpPost]
         public async Task<IActionResult> Create(MunicipalVM municipal)
@@ -34,7 +52,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             var response = await _municipalService.CreateMunicipalAsync(municipal);
             if (response != null)
             {
-                return RedirectToAction("GetAllMunicipal");
+                return Ok(response);
             }
             else
             {
@@ -48,28 +66,54 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
             return View(response);
         }
+
+
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            try
-            {
-                var result = await _municipalService.GetMunicipalByIdAsync(id);
+            var municipal = await _municipalService.GetMunicipalByIdAsync(id);
+            if (municipal == null) return NotFound();
 
-                return PartialView("_PartialLayoutMunicipalEdit", result);
-            }
-            catch (Exception ex)
+            var model = new MunicipalVM
             {
-                throw ex;
-            }
+                MunicipalId = municipal.MunicipalId,
+               MunicipalName = municipal.MunicipalName,
+                CityId = municipal.CityId,
+                Pincode=municipal.Pincode,
+                StateId = municipal.StateId,
+                ZoneId = municipal.ZoneId,
+                IsActive = municipal.IsActive,
+            };
+
+            ViewBag.lstCity = new SelectList(await _cityService.GetCityAsync(), "CityId", "CityName");
+            ViewBag.lstState = new SelectList(await _stateService.GetStateAsync(), "StateId", "StateName");
+
+            ViewBag.lstZone = new SelectList(await _zoneService.GetZoneAsync(), "ZoneId", "ZoneName");
+            return PartialView("_PartialLayoutMunicipalEdit", model);
         }
+
+        // POST: City/Edit
         [HttpPost]
-        public async Task<IActionResult> Edit(MunicipalVM municipal)
+        public async Task<IActionResult> Edit(MunicipalVM model)
         {
 
-            municipal.IsActive = true;
-            var result = await _municipalService.UpdateMunicipalAsync(municipal);
-            return Ok(result);
+            var municipal = await _municipalService.GetMunicipalByIdAsync(model.MunicipalId);
+            if (municipal == null) return NotFound();
 
+            municipal.MunicipalName = model.MunicipalName;
+            municipal.CityId = model.CityId;
+            municipal.Pincode = model.Pincode;
+            municipal.ZoneId = model.ZoneId;
+            municipal.StateId = model.StateId;
+            municipal.IsActive = model.IsActive;
+
+            await _municipalService.UpdateMunicipalAsync(municipal);
+            return Ok(municipal);
+
+
+            //ViewBag.lstState = new SelectList(await _stateService.GetStateAsync(), "StateId", "StateName");
+            //ViewBag.lstZone = new SelectList(await _zoneService.GetZoneAsync(), "ZoneId", "ZoneName");
+            //return PartialView("CityForm", model);
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int id)

@@ -1460,4 +1460,10 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="NeoSoft.A2Zfiling.Persistence">
+      <HintPath>..\NeoSoft.A2Zfiling\src\Infrastructure\NeoSoft.A2Zfiling.Persistence\bin\Debug\net6.0\NeoSoft.A2Zfiling.Persistence.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

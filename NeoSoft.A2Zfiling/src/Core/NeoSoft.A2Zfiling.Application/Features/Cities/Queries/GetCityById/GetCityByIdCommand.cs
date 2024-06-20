@@ -11,5 +11,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.Cities.Queries.GetCityById
     public class GetCityByIdCommand:IRequest<Response<GetCityByIdDto>>
     {
         public int CityId { get; set; }
+        public int StateId { get; set; }
+        public int ZoneId { get; set; }
+
     }
 }

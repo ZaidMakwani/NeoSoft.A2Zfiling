@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2Zfiling.Domain.Entities;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
@@ -11,6 +12,7 @@ using NuGet.Protocol.Core.Types;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class LicenseMasterController : Controller
     {
         private readonly ILogger<LicenseMasterController> _logger;

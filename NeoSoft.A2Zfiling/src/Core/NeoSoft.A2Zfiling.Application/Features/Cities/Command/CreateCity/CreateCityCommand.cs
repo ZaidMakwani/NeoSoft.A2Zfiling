@@ -11,5 +11,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.Cities.Command.CreateCity
     public class CreateCityCommand : IRequest<Response<CreateCityDto>>
     {
         public string CityName { get; set; }
+        public bool IsActive { get; set; }
+        public int StateId { get; set; }
+        public int ZoneId { get; set; }
     }
 }
