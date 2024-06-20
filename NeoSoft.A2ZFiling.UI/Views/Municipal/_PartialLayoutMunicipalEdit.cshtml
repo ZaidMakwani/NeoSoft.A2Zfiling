@@ -50,7 +50,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                <button type="button" class="btn btn-primary" id="saveButtonMuncipal">Save</button>
             </div>
         </div>
     </div>
@@ -70,9 +70,9 @@
                     placeholder2.html(data);
                     placeholder2.find('.modal').modal('show');
 
-                    placeholder2.off('click', '#saveButton');
+                    placeholder2.off('click', '#saveButtonMuncipal');
 
-                    placeholder2.on('click', '#saveButton', function (event) {
+                    placeholder2.on('click', '#saveButtonMuncipal', function (event) {
                         var form = placeholder2.find('form');
                         var actionUrl = form.attr('action');
                         var sendData = form.serialize();

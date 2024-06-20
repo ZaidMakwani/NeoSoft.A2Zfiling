@@ -187,7 +187,7 @@
                     <p>Are you sure you want to delete this item?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger delete-confirm">Delete</button>
+                    <button type="button" class="btn btn-danger delete-confirm-muncipal">Delete</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -288,12 +288,12 @@
         $(document).on('click', '.trigger-modal', function () {
             var MunicipalId = $(this).data("id");
             // Set data attribute of delete button inside modal for further reference
-            $('.delete-confirm').data('id', MunicipalId);
+            $('.delete-confirm-muncipal').data('id', MunicipalId);
             $('#myModal').modal('show');
         });
 
         // Event delegation for handling delete button click inside the modal
-        $(document).on('click', '.delete-confirm', function () {
+        $(document).on('click', '.delete-confirm-muncipal', function () {
             var MunicipalId = $(this).data("id");
             var deleteUrl = '@Url.Action("Delete", "Municipal")' + '?id=' + MunicipalId;
 
@@ -365,7 +365,7 @@
 
 
 
-        $(document).on('click', '#saveButton', function () {
+        $(document).on('click', '#saveButtonMuncipal', function () {
 
             // Perform validation and submit data via AJAX
             $.ajax({

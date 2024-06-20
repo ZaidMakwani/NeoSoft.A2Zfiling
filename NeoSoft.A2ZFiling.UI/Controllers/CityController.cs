@@ -9,6 +9,7 @@ using NeoSoft.A2ZFiling.UI.ViewModels;
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
     //[CustomAuthorize]
+    [CustomAuthorize]
     public class CityController : Controller
     {
         private readonly ILogger<CityController> _logger;
