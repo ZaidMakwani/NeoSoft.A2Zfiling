@@ -18,7 +18,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
     {
 
         Uri baseAddres = new Uri("https://localhost:5000/api");
-        private readonly HttpClient _client;
+        //private readonly HttpClient _client;
         private readonly IDNTCaptchaValidatorService _captchaValidator;
         private readonly IRegisterService _registerService;
         private readonly ILoginService _loginService;
@@ -41,17 +41,18 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             //_tokenRepository = tokenRepository;
 
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-    
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
@@ -200,10 +201,18 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
         public IActionResult Logout()
         {
-            // Clear the token from TempData on logout
+            var token = HttpContext.Session.GetString("Token");
+            _logger.LogInformation($"Token before clearing: {token}");
+            HttpContext.Session.Clear();
+            _logger.LogInformation($"Token after clearing: {HttpContext.Session.GetString("Token")}");
             TempData.Remove("token");
-
             return RedirectToAction("Index", "Account");
+
+        }
+        [HttpGet]
+        public IActionResult GenerateNewCaptcha()
+        {
+            return PartialView("_CaptchaPartial");
         }
     }
 }

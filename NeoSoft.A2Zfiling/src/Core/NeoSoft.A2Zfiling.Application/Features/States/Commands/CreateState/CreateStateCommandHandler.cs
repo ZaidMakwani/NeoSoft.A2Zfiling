@@ -37,7 +37,7 @@ public class CreateStateCommandHandler : IRequestHandler<CreateStateCommand, Res
             }
             else
             {
-                var state = new State() { StateName = request.StateName, IsActive=request.IsActive };
+                var state = new State() { StateName = request.StateName, IsActive=true };
             state = await _stateRepsitory.AddAsync(state);
             createStateCommandResponse = new Response<CreateStateDto>(_mapper.Map<CreateStateDto>(state), "success");
             }

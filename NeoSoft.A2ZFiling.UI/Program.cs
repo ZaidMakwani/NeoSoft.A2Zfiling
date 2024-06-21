@@ -21,6 +21,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IZoneService, ZoneService>();
 builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IStateService, StateService>();
+
 builder.Services.AddScoped<IMyProfileService, MyProfileService>();
 builder.Services.AddScoped<IPermissionService,PermissionService>();
 builder.Services.AddScoped<IUserPermission,UserPermissionService>();
@@ -30,6 +32,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ILicenseService,LicenseService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
 builder.Services.AddScoped<ISubStatusService,SubStatusService>();
+builder.Services.AddScoped<ILicenceMasterService,LicenseMasterService>();
 builder.Services.AddScoped<IUserInfoService, UserInfoService>();
 
 

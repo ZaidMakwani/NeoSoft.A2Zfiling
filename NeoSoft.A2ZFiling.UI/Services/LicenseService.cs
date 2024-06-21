@@ -42,9 +42,9 @@ namespace NeoSoft.A2ZFiling.UI.Services
                     _logger.LogError("License not found.");
                     return null;
                 }
-                var license = getById.Data;
-                license.IsActive = false;
-                var updatedata = await _httpClient.PutAsync($"License/id?id={id}", license);
+                var licenseData = getById.Data;
+                licenseData.IsActive = false;
+                var updatedata = await _httpClient.PutAsync($"License/id?id={id}", licenseData);
                 _logger.LogInformation("DeleteLicense Service Completed");
                 return updatedata.Data;
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using NeoSoft.A2Zfiling.Domain.Entities;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace NeoSoft.A2ZFiling.UI.ViewModels
@@ -6,11 +7,16 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
     public class StateVM
     {
         public int StateId { get; set; }
-        [Required]
-        //[DisplayName("State Name")]
 
+        [Required]
         public string StateName { get; set; }
+
         [Required]
         public bool IsActive { get; set; }
+
+
+        
+
+        public virtual ICollection<City>? Cities { get; set; }
     }
 }

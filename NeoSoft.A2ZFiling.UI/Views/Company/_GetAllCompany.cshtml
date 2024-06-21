@@ -75,7 +75,7 @@
                             }
                         </td>
                         <td>
-                            <button class="btn btn-primary btn-sm editCompany-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                <button class="btn btn-primary btn-sm editCompany-button" data-toggle="ajax-modal" data-target="#updateCompanyModal"
                                     data-url="@Url.Action("Update", "Company")" data-id="@item.CompanyId">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -109,7 +109,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger delete-company">Delete</button>
-                <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary"  data-dismiss="modal" id="btnCompanyButton">Close</button>
             </div>
         </div>
     </div>
@@ -189,6 +189,10 @@
         });
     });
 
+    $(document).on('click', '#btnCompanyButton, .close', function () {
+        // Close the modal
+        $('#myCompanyModal').modal('hide');
+    });
  
  
 
@@ -238,6 +242,8 @@
         // Close the modal
         $('#createCompanyModal').modal('hide');
     });
+
+
     //----------------------------------------------------------------------------------------------------
 
     //function to handle edit company in the modal

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
@@ -6,6 +7,7 @@ using System.Security;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class PermissionController : Controller
     {
         private readonly ILogger<PermissionController> _logger;
@@ -61,14 +63,41 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("Name cannot contain number");
                 }
-                var existingAction = (await _permission.GetPermissionAsync()).Where(x=>x.ActionName.ToLower()==model.ActionName.ToLower() && x.ControllerName.ToLower()==model.ControllerName.ToLower()).FirstOrDefault();
+
+
+                //getting token and sending user information inside permissionVM
+
+                //var token = HttpContext.Session.GetString("Token");
+
+                //if (string.IsNullOrEmpty(token))
+                //{
+                //    return BadRequest();
+                //}
+
+
+                // Token found in session
+                // Perform other operations with the token as needed
+
+                //ClaimsPrincipal claimsPrincipal = JwtDecoder.DecodeJwtToken(token);
+
+                //foreach (var claim in claimsPrincipal.Claims)
+                //{
+                //    Console.WriteLine($"{claim.Type}: {claim.Value}");
+                //}
+
+
+                //var userClaim = claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "userId");
+                //var userId = userClaim.Value;
+
+
+                var existingAction = (await _permission.GetPermissionAsync()).Where(x=> x.ControllerName.ToLower() == model.ControllerName.ToLower() && x.ActionName.ToLower() == model.ActionName.ToLower()).FirstOrDefault();
                 if (existingAction != null)
                 {
                     return BadRequest(" Permission name already exist");
                 }
                
 
-                var response = await _permission.CreatePermissionAsync(model);
+                var response = await _permission.CreatePermissionAsync(model/*, token*/);
                 if (response == null)
                 {
                     _logger.LogError("Failed to create permission");

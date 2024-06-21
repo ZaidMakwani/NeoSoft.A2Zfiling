@@ -1,5 +1,5 @@
 ﻿
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +22,11 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/registrations/registration-12/assets/css/registration-12.css">
 
-
-
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+   
+  
+   
     
    
 </head>
@@ -41,7 +44,7 @@
                     <a class="nav-link" asp-action="Index" asp-controller="Home">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a class="nav-link" asp-action="Login" asp-controller="Account">Login</a>
+                    <a class="nav-link" asp-action="Logout" asp-controller="Account">Logout</a>
                            
 
                 </li>
@@ -226,46 +229,47 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="GetAll" asp-controller="UserPermission">User Permission</a>
+                                <a class="nav-link" asp-action="GetAll" asp-controller="UserPermission">Role Permission</a>
                             </li>
 
 
-                          
+                          @* 
                             <li class="nav-item">
                                 <a asp-action="GetAllMunicipal" asp-controller="Municipal" class="nav-link ">
                                    
-                                    <p>Municipal Corporations</p></a>
+                                    <p>Location Settings</p></a>
                                
-                            </li>
+                            </li> *@
                              <li class="nav-item">
-                                @* @ <i class="far fa-circle nav-icon"></i> @ *@
                                 <a class="nav-link" asp-action="ReadAll" asp-controller="PinCode">PinCodes</a>                                    
-                                    @* @ <p>Roles</p> @ *@
+
                                 
                             </li>
                             <li class="nav-item">
-                                @* @ <i class="far fa-circle nav-icon"></i> @ *@
-                                <a class="nav-link" asp-action="ReadAll" asp-controller="State">States</a>
-                                @* @ <p>Roles</p> @ *@
-                               
+                                <a class="nav-link" asp-action="ReadAll" asp-controller="State">States</a>    
                             </li>
+                            @*
                             <li class="nav-item">
-                                @* @ <i class="far fa-circle nav-icon"></i> @ *@
                                 <a class="nav-link" asp-action="Index" asp-controller="Company">Company</a>
-                                @* @ <p>Roles</p> @ *@
-                               
                             </li>
                             <li class="nav-item">
-                                @* @ <i class="far fa-circle nav-icon"></i> @ *@
-                                <a class="nav-link" asp-action="Index" asp-controller="Industry">Industry</a>
-                                @* @ <p>Roles</p> @ *@
-                               
-                            </li>
+                                <a class="nav-link" asp-action="Index" asp-controller="Industry">Industry</a>                           
+                            </li> *@
                             </ul>
+
+                    <li class="nav-item ">
+                        <a asp-action="Index" asp-controller="LicenseMaster" class="nav-link active">
+                            <i class="nav-icon fas fa-regular fa-id-card"></i>
+                            <p>
+                                License Master
+
+                            </p>
+                        </a>
+                    </li>
 
                             <li class="nav-item ">
                         <a class="nav-link active" asp-action="GetAll" asp-controller="LicenseType">
-                                    @* <i class="nav-icon fas fa-solid fa-user"></i> *@
+                            <i class="nav-icon fas fa-solid fa-gears"></i>
                                     <p>
                                         License Configuration Setting
 @*                                         <i class="right fas fa-angle-left"></i>
@@ -300,15 +304,45 @@
                                 </a>
                             </li> *@
                         @* </ul> *@
+
+                    <li class="nav-item ">
+
+                        <a asp-action="GetAllMunicipal" asp-controller="Municipal" class="nav-link active">
+                            <i class="nav-icon fas fa-solid fa-location-dot"></i>
+                            <p>
+                                Location Settings
+
+                            </p>
+                        </a>
                     </li>
+
+                    <li class="nav-item ">
 
                     <a asp-action="Index" asp-controller="MyProfile" class="nav-link active">
                         <i class="nav-icon fas fa-solid fa-user"></i>
                         <p>
                             MyAccount
-                            <i class="right fas fa-angle-left"></i>
+                           
                         </p>
                     </a>
+                    </li>
+                 @*  <div>
+                    <li class="nav-item menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-solid fa-user"></i>
+                            <p>
+                                License Mapping
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="LicenseMaster">License Master</a>
+                            </li>
+                        </ul>
+                    </li>
+        </div> *@
+                   
                    </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -318,11 +352,12 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            
         </main>
     </div>
 
-    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   @*  <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 @*     <script src="~/js/site.js" asp-append-version="true"></script>
  *@    <!-- REQUIRED SCRIPTS -->
@@ -343,6 +378,11 @@
     <script src="~/plugins/jquery-mapael/maps/usa_states.min.js"></script>
     <!-- ChartJS -->
     <script src="~/plugins/chart.js/Chart.min.js"></script>
+
+
+   
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
     <!-- AdminLTE for demo purposes -->
     <script src="~/dist/js/demo.js"></script>

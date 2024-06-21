@@ -7,7 +7,7 @@ namespace NeoSoft.A2ZFiling.UI.Interfaces
     {
         Task<IEnumerable<PermissionVM>> GetPermissionAsync();
 
-        Task<PermissionVM> CreatePermissionAsync(PermissionVM role);
+        Task<PermissionVM> CreatePermissionAsync(PermissionVM role/*, string UserId)*/);
 
         Task<PermissionVM> GetByIdAsync(int id);
         Task<PermissionVM> UpdatePermissionAsync(PermissionVM role);

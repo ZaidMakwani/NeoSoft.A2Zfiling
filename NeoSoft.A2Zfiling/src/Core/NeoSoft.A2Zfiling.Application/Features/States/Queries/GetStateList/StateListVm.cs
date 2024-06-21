@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeoSoft.A2Zfiling.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,9 @@ namespace NeoSoft.A2Zfiling.Application.Features.States.Queries.GetStateList
         public int StateId { get; set; }
         public string StateName { get; set; }
         public bool IsActive { get; set; }
+        //public int ZoneId { get; set; }
+        //public int ZoneName { get; set; }
+        //public virtual Zones Zones { get; set; }
 
 
     }

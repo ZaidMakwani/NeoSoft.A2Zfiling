@@ -72,6 +72,9 @@ using NeoSoft.A2Zfiling.Application.Features.Licenses.Queries.LicenseList;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Queries.LicenseListByid;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.DeleteLicense;
 using NeoSoft.A2Zfiling.Application.Features.Licenses.Command.UpdateLicense;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Commands.Create;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Queries.GetAllLicense;
+using NeoSoft.A2Zfiling.Application.Features.License_Master.Commands.Edit;
 
 using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Command.CreateStatus;
 using NeoSoft.A2Zfiling.Application.Features.Stuatuses.Queries.StatusList;
@@ -142,7 +145,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
 
 
 
-            CreateMap<Document, CreateDocumentDto>().ReverseMap();
+                    CreateMap<Document, CreateDocumentDto>().ReverseMap();
 
             CreateMap<State, CreateStateDto>().ReverseMap();
             CreateMap<State, StateListVm>().ReverseMap();
@@ -150,16 +153,23 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<State, UpdateStateDto>().ReverseMap();
             CreateMap<State, UpdateStateCommand>().ReverseMap();
             CreateMap<State, StateVM>().ReverseMap();
+                    CreateMap<State, CreateStateDto>().ReverseMap();
+                    CreateMap<State, StateListVm>().ReverseMap();
+                    CreateMap<State, DeleteStateDto>().ReverseMap();
+
+                    CreateMap<State, UpdateStateDto>().ReverseMap();
+                    CreateMap<State, UpdateStateCommand>().ReverseMap();
+                    CreateMap<State, StateVM>().ReverseMap();
 
 
 
-            CreateMap<PinCode, CreatePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, PinCodeListVm>().ReverseMap();
-            CreateMap<PinCode, DeletePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, UpdatePinCodeDto>().ReverseMap();
-            CreateMap<PinCode, UpdatePinCodeCommand>().ReverseMap();
-            CreateMap<PinCode, PinCodeVM>().ReverseMap();
-            CreateMap<Login, LoginDto>().ReverseMap();
+                    CreateMap<PinCode, CreatePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, PinCodeListVm>().ReverseMap();
+                    CreateMap<PinCode, DeletePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, UpdatePinCodeDto>().ReverseMap();
+                    CreateMap<PinCode, UpdatePinCodeCommand>().ReverseMap();
+                    CreateMap<PinCode, PinCodeVM>().ReverseMap();
+                    CreateMap<Login, LoginDto>().ReverseMap();
 
                 CreateMap<Role, CreateRolesDto>();
                 CreateMap<Role, RolesDto>();
@@ -225,6 +235,13 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<SubStatus,UpdateSubStatusDto>().ReverseMap();
             CreateMap<SubStatus,UpdateSubStatusCommand>().ReverseMap();
             CreateMap<SubStatus,DeleteSubStatusDto>().ReverseMap();
+
+            CreateMap<LicenseMaster, CreateLicenceMappingDto>();
+            CreateMap<LicenseMaster, CreateLicenseMappingCommand>();
+            CreateMap<LicenseMaster, GetAllLicenseMasterVM>();
+            CreateMap<LicenseMaster, GetAllLicenseMasterQuery>();
+            CreateMap<LicenseMaster, UpdateLicenseMasterCommand>().ReverseMap();
+            
 
             CreateMap<AppUser, GetUserIdByEmailDto>().ReverseMap();
         }

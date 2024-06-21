@@ -1,0 +1,426 @@
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.LicenseMasterVM;
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card card-default col-md-12" style="margin-left:30%;margin-top:5%;width:70%">
+    <div class="card-header">
+        <h3 class="card-title">License Mapping</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Select License</label>
+                            <select class="form-control select2bs4" id="licenseDropdown" asp-for="@Model.LicenseId" style="width: 100%;">
+                                <option value="">--- Select ---</option> 
+                            </select>
+                            @Html.ValidationMessageFor(m => m.LicenseId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Select Classification</label>
+                            <select class="form-control select2bs4" id="licenseTypeDropdown" asp-for="@Model.LicenseTypeId" style="width: 100%;">
+                                <option value="">--- Select ---</option>
+                            </select>
+                             @Html.ValidationMessageFor(m => m.LicenseTypeId, "", new { @class = "text-danger" })
+                        </div>
+                        @* <label>Is Online/Offline/Semi-Online?</label>
+                        <select class="form-control select2bs4" asp-for="@Model.Visibilities" style="width: 100%;">
+                            <option value="">--- Select ---</option>
+                        </select> *@
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Visibilities, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Visibilities, Model.VisibilityList, "Select Visibility", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Visibilities, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                @Html.ValidationMessageFor(m => m.Validity, "", new { @class = "text-danger" })
+                                <input type="checkbox" class="custom-control-input" asp-for="@Model.Validity" id="validity">
+                                <label class="custom-control-label" for="validity">Is Valid for lifetime?</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Related License</label>
+                            <select class="form-control select2bs4" style="width: 100%;">
+                                <option selected="selected">None</option>
+                            </select>
+                        </div>
+
+                        <hr />
+                        <div class="form-group clearfix">
+                            <div class="icheck-primary d-inline">
+                                <input type="checkbox" id="selectAll">
+                                <label for="selectAll">Select All Options</label>
+                                <div><p><b>Note:</b>Check "SelectAll Option" when the checklist is applicable to PAN India</p></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select Region</label>
+                            @Html.ValidationMessageFor(m => m.ZoneId, "", new { @class = "text-danger" })
+                            <select class="form-control select2bs4" id="zoneDropdown" asp-for="@Model.ZoneId" style="width: 100%;">
+                                <option value="">Choose Region</option>                               
+                            </select>
+                        </div>
+                    </div>
+
+                  @*   <!-- /.col -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Select State</label>
+                            <select class="form-control select2bs4" style="width: 100%;">
+                                <option value="">Choose State</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select City</label>
+                            <select class="form-control select2bs4" style="width: 100%;">
+                                <option value="">Choose City</option>
+                               
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Municipal Corporation</label>
+                            <select class="form-control select2bs4" style="width: 100%;">
+                                <option value="">Choose Municipal Corporation</option>
+                                
+                            </select>
+                        </div> *@
+                    <div class="col-md-6">
+                    <div class="form-group">
+                            
+                        @Html.LabelFor(m => m.StateId, new { @class = "control-label" })
+                            @Html.ValidationMessageFor(m => m.StateId, "", new { @class = "text-danger" })
+                        <select id="state-dropdown" name="StateId" class="form-control">
+                            <option value="">Select State</option>
+                            @foreach (var state in Model.States)
+                            {
+                                <option value="@state.StateId">@state.StateName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CityId, new { @class = "control-label" })
+                            @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
+                        <select id="city-dropdown" name="CityId" class="form-control">
+                            <option value="">Select City</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.MunicipalId, new { @class = "control-label" })
+                            @Html.ValidationMessageFor(m => m.MunicipalId, "", new { @class = "text-danger" })
+                        <select id="municipal-dropdown" name="MunicipalId" class="form-control">
+                            <option value="">Select Municipal Corporation</option>
+                        </select>
+                    </div>
+
+                        <div class="form-group">
+                            <label>Industry Type</label>
+                            @Html.ValidationMessageFor(m => m.IndustryId, "", new { @class = "text-danger" })
+                            <select class="form-control select2bs4" id="IndustryDropdown" asp-for="@Model.IndustryId" style="width: 100%;">
+                                <option value="">Choose Industry Type</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Company Type</label>
+                            @Html.ValidationMessageFor(m => m.CompanyId, "", new { @class = "text-danger" })
+                            <select class="form-control select2bs4" id="CompanyDropdown" asp-for="@Model.CompanyId" style="width: 100%;">
+                                <option value="">Choose Company Type</option>
+                               
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            @Html.ValidationMessageFor(m => m.WorkflowType, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.WorkflowType)
+                            <div class="form-check">
+                                @Html.RadioButtonFor(model => model.WorkflowType, "TalkToExpert", new { @class = "form-check-input" })
+                                <label>Talk to Expert</label>
+                            </div>
+                            <div class="form-check">
+                                @Html.RadioButtonFor(model => model.WorkflowType, "Payment", new { @class = "form-check-input" })
+                                <label>Payment</label>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                           
+                            @Html.LabelFor(model => model.StandardRate)
+                            @Html.ValidationMessageFor(m => m.StandardRate, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.StandardRate, new { @class = "form-control", maxlength = "30", type = "number" })
+                        </div>
+                        <div class="form-group">
+                           
+                            @Html.LabelFor(model => model.StandardTAT)
+                            @Html.ValidationMessageFor(m => m.StandardTAT, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.StandardTAT, new { @class = "form-control", maxlength = "30", type = "number" })
+                        </div>
+                        <div class="form-group">
+                            
+                            @Html.LabelFor(model => model.FastTrackRate)
+                            @Html.ValidationMessageFor(m => m.FastTrackRate, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.FastTrackRate, new { @class = "form-control", maxlength = "30", type = "number" })
+                        </div>
+                        <div class="form-group">
+                            
+                            @Html.LabelFor(model => model.FastTrackTAT)
+                            @Html.ValidationMessageFor(m => m.FastTrackTAT, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.FastTrackTAT, new { @class = "form-control", maxlength = "30", type = "number" })
+                        </div>
+                    </div>
+                    
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+                <div class="form-group row">
+                    <div class="col-sm-10 offset-sm-2">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            
+        }
+    </div>
+   
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+
+        //licenseNameDropdown
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchLicense();
+        });
+
+        function fetchLicense() {
+            var apiUrl = '@Url.Action("GetAllLicense", "LicenseMaster")';
+            console.log(apiUrl);
+            fetch(apiUrl) // Replace with the actual API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    const licenseDropdown = document.getElementById('licenseDropdown');
+                    if (data && Array.isArray(data)) {
+                        data.forEach(license => {
+                            const option = document.createElement('option');
+                            option.value = license.licenseId;
+                            option.textContent = license.licenseName;
+                            licenseDropdown.appendChild(option);
+                        });
+                    } else {
+                        console.log(typeof data);
+                        console.error('Error: Data is undefined or not an array');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching License :', error);
+                });
+        }
+
+
+        // licenseTypeDropdown
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchLicensetype();
+        });
+
+        function fetchLicensetype() {
+            var apiUrl = '@Url.Action("GetAllLicenseType", "LicenseMaster")';
+            console.log(apiUrl);
+            fetch(apiUrl) // Replace with the actual API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    const licenseTypeDropdown = document.getElementById('licenseTypeDropdown');
+                    if (data && Array.isArray(data)) {
+                        data.forEach(license => {
+                            const option = document.createElement('option');
+                            option.value = license.licenseTypeId;
+                            option.textContent = license.licenseName;
+                            licenseTypeDropdown.appendChild(option);
+                        });
+                    } else {
+                        console.log(typeof data);
+                        console.error('Error: Data is undefined or not an array');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching License Types:', error);
+                });
+        }
+
+        //IndustryDropdown
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchIndustry();
+        });
+
+        function fetchIndustry() {
+            var apiUrl = '@Url.Action("GetAllIndustry", "LicenseMaster")';
+            console.log(apiUrl);
+            fetch(apiUrl) // Replace with the actual API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    const IndustryDropdown = document.getElementById('IndustryDropdown');
+                    if (data && Array.isArray(data)) {
+                        data.forEach(industry => {
+                            const option = document.createElement('option');
+                            option.value = industry.industryId;
+                            option.textContent = industry.industryName;
+                            IndustryDropdown.appendChild(option);
+                        });
+                    } else {
+                        console.log(typeof data);
+                        console.error('Error: Data is undefined or not an array');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching industry:', error);
+                });
+        }
+
+        //CompanyDropdown
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchCompany();
+        });
+
+        function fetchCompany() {
+            var apiUrl = '@Url.Action("GetAllCompany", "LicenseMaster")';
+            console.log(apiUrl);
+            fetch(apiUrl) // Replace with the actual API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    const CompanyDropdown = document.getElementById('CompanyDropdown');
+                    if (data && Array.isArray(data)) {
+                        data.forEach(company => {
+                            const option = document.createElement('option');
+                            option.value = company.companyId;
+                            option.textContent = company.companyName;
+                            CompanyDropdown.appendChild(option);
+                        });
+                    } else {
+                        console.log(typeof data);
+                        console.error('Error: Data is undefined or not an array');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching Company:', error);
+                });
+        }
+
+        //zoneDropdown
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchZone();
+        });
+
+        function fetchZone() {
+            var apiUrl = '@Url.Action("GetAllZone", "LicenseMaster")';
+            console.log(apiUrl);
+            fetch(apiUrl) // Replace with the actual API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    const zoneDropdown = document.getElementById('zoneDropdown');
+                    if (data && Array.isArray(data)) {
+                        data.forEach(zone => {
+                            const option = document.createElement('option');
+                            option.value = zone.zoneId;
+                            option.textContent = zone.zoneName;
+                            zoneDropdown.appendChild(option);
+                        });
+                    } else {
+                        console.log(typeof data);
+                        console.error('Error: Data is undefined or not an array');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching zone:', error);
+                });
+        }
+
+
+        //Cascading dropdown
+        $(document).ready(function () {
+            console.log('dropdown1');
+            $('#state-dropdown').change(function () {
+                var stateId = $(this).val();
+                if (stateId) {
+                    $.getJSON('@Url.Action("GetAllCityByState", "LicenseMaster")', { id: stateId }, function (data) {
+                        var items = '<option>Select City</option>';
+                        console.log(items);
+                        $.each(data, function (i, city) {
+                            items += "<option value='" + city.cityId + "'>" + city.cityName + "</option>";
+                        });
+                        $('#city-dropdown').html(items);
+                        $('#municipal-dropdown').html('<option>Select Municipal Corporation</option>'); // Reset municipal dropdown
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error('Error fetching cities: ' + textStatus);
+                    });
+                } else {
+                    $('#city-dropdown').html('<option>Select City</option>');
+                    $('#municipal-dropdown').html('<option>Select Municipal Corporation</option>'); // Reset municipal dropdown
+                }
+            });
+
+            $('#city-dropdown').change(function () {
+                var cityId = $(this).val();
+                if (cityId) {
+                    $.getJSON('@Url.Action("GetAllMunicipalByCity", "LicenseMaster")', { id: cityId }, function (data) {
+                        var items = '<option>Select Municipal Corporation</option>';
+                        $.each(data, function (i, municipal) {
+                            items += "<option value='" + municipal.municipalId + "'>" + municipal.municipalName + "</option>";
+                        });
+                        $('#municipal-dropdown').html(items);
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        console.error('Error fetching municipal corporations: ' + textStatus);
+                    });
+                } else {
+                    $('#municipal-dropdown').html('<option>Select Municipal Corporation</option>');
+                }
+            });
+        });
+    </script>
+    
