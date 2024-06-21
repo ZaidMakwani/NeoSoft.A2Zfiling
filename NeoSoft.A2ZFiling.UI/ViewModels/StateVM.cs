@@ -8,7 +8,7 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
     {
         public int StateId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="State Name is required")]
         public string StateName { get; set; }
 
         [Required]

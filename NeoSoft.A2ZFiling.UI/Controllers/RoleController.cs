@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeosoftA2Zfilings.Views.ViewModels;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+    [CustomAuthorize]
     public class RoleController : Controller
     {
 
