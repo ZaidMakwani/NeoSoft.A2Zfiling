@@ -86,6 +86,7 @@ using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.DeleteSubStatus
 
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
+using NeoSoft.A2Zfiling.Application.Features.UserInfo.Queries;
 
 
 
@@ -224,6 +225,8 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<SubStatus,UpdateSubStatusDto>().ReverseMap();
             CreateMap<SubStatus,UpdateSubStatusCommand>().ReverseMap();
             CreateMap<SubStatus,DeleteSubStatusDto>().ReverseMap();
+
+            CreateMap<AppUser, GetUserIdByEmailDto>().ReverseMap();
         }
     }
 }

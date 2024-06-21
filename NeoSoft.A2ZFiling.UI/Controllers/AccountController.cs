@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using NeoSoft.A2Zfiling.Persistence.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using NuGet.Common;
+using NeoSoft.A2ZFiling.UI.Services;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
@@ -23,16 +24,20 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         private readonly ILoginService _loginService;
         private readonly ILogger<AccountController> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUserInfoService _userInfoService;
+        private readonly IMyProfileService _myProfileService;
         //private readonly ITokenRepository _tokenRepository;
 
         public AccountController(IRegisterService registerService, ILogger<AccountController> logger,
-            IDNTCaptchaValidatorService captchaValidator, ILoginService loginService /*,ITokenRepository tokenRepository*/, IEmailSender emailSender)
+            IDNTCaptchaValidatorService captchaValidator, ILoginService loginService /*,ITokenRepository tokenRepository*/, IEmailSender emailSender, IUserInfoService userInfoService, IMyProfileService myProfileService)
         {
             _registerService = registerService;
             _logger = logger;
             _captchaValidator = captchaValidator;
             _loginService = loginService;
             _emailSender = emailSender;
+            _userInfoService = userInfoService;
+            _myProfileService = myProfileService;
             //_tokenRepository = tokenRepository;
 
         }
@@ -159,11 +164,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 return View(model);
             }
 
+            //write logic to get the userid by email and then pass it into the url as a parameter.
+
+              var userId = await _userInfoService.GetUserIdByEmailAsync(model.Email);
+
+            var resetLink = Url.Action("ResetPassword", "Account", new { UserId = userId.Id }, protocol: Request.Scheme);
            
-
-          
-            var resetLink = Url.Action("ResetPassword", "Account");
-
             // Send email
             await _emailSender.SendEmailAsync(model.Email, "Reset Password", $"Please reset your password by clicking <a href='{resetLink}'>here</a>.");
 
@@ -173,6 +179,23 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string UserId)
+        {
+            var model = new ResetPasswordVM
+            {
+                UserId = UserId
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordVM model)
+        {
+            var response = _myProfileService.UpdatePassword(model.UserId,model.confirmPassword);
+            return RedirectToAction("Login", "Account");
         }
 
         public IActionResult Logout()

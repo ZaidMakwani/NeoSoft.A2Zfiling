@@ -11,6 +11,7 @@ using LoginCommand = NeoSoft.A2Zfiling.Application.Features.Login.Command.LoginC
 using NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRolesList;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
+using NeoSoft.A2Zfiling.Application.Features.UserInfo.Queries;
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
@@ -91,6 +92,17 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _logger.LogInformation("Login Completed");
             return Ok(response);
         }
-       
+
+
+        [HttpGet]
+        public async Task<ActionResult> GetUserIdByEmail(string Email)
+        {
+
+            _logger.LogInformation("Login Initiated");
+            var response = await _mediator.Send(new GetUserIdByEmailQuery() { Email = Email });
+
+            _logger.LogInformation("Login Completed");
+            return Ok(response);
+        }
     }
 }

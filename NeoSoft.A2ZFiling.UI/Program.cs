@@ -30,6 +30,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ILicenseService,LicenseService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
 builder.Services.AddScoped<ISubStatusService,SubStatusService>();
+builder.Services.AddScoped<IUserInfoService, UserInfoService>();
 
 
 // Add services to the container.

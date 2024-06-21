@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <Folder Include="Contracts\Infrastructure\" />
+    <Folder Include="Features\UserInfo\Commands\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
 
