@@ -38,7 +38,6 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             var zones = await _zoneService.GetZoneAsync();
             ViewBag.lstZone = new SelectList(zones, "ZoneId", "ZoneName");
 
-       
 
             var cities = await _cityService.GetCityAsync();
             ViewBag.lstCity = new SelectList(cities, "CityId", "CityName");
@@ -49,7 +48,29 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         public async Task<IActionResult> Create(MunicipalVM municipal)
         {
             _logger.LogInformation("Create Role action is initiated");
+            if (string.IsNullOrEmpty(municipal.MunicipalName))
+            {
+                return BadRequest("Please enter a valid municipal name.");
+            }
+            else if (string.IsNullOrEmpty(municipal.Pincode))
+            {
+                return BadRequest("Please enter a valid pincode name.");
+            }
+            else if (string.IsNullOrEmpty(municipal.CityName))
+            {
+                return BadRequest("Please enter a valid city name.");
+            }
+            else if (string.IsNullOrEmpty(municipal.ZoneName))
+            {
+                return BadRequest("Please enter a valid zone name.");
+            }
+            else if (string.IsNullOrEmpty(municipal.StateName))
+            {
+                return BadRequest("Please enter a valid state name.");
+            }
             var response = await _municipalService.CreateMunicipalAsync(municipal);
+
+          
             if (response != null)
             {
                 return Ok(response);

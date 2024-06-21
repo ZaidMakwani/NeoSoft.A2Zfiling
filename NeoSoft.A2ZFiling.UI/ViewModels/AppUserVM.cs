@@ -10,10 +10,12 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
         public string? AppUserId { get; set; }
         [Required(ErrorMessage = "First name is required")]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "First name must contain only alphabetic characters")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last name is required")]
         [StringLength(50, ErrorMessage = "Last name cannot be longer than 50 characters")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "First name must contain only alphabetic characters")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Username is required")]
