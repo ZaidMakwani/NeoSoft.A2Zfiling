@@ -55,15 +55,21 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var states = await _stateService.GetStateAsync();
-            ViewBag.lstState = new SelectList(states, "StateId", "StateName");
-            var zones = await _zoneService.GetZoneAsync();
-            ViewBag.lstZone = new SelectList(zones, "ZoneId", "ZoneName");
+            try {
+                var states = await _stateService.GetStateAsync();
+                ViewBag.lstState = new SelectList(states, "StateId", "StateName");
+                var zones = await _zoneService.GetZoneAsync();
+                ViewBag.lstZone = new SelectList(zones, "ZoneId", "ZoneName");
 
 
 
-            return PartialView("_CreateCity", new CityVM());
-        }
+                return PartialView("_CreateCity", new CityVM());
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            }
 
         [HttpPost]
         public async Task<IActionResult> Create(CityVM model)
@@ -79,6 +85,19 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 if (model.CityName.Any(char.IsDigit))
                 {
                     return BadRequest("City Name cannot contain numbers.");
+                }
+                if (model.CityName.Length < 3 || model.CityName.Length > 50)
+                {
+                    return BadRequest("City Name must be between 5 and 50 characters.");
+                }
+
+                if (string.IsNullOrEmpty(model.StateId.ToString()) || model.StateId == 0)
+                {
+                    return BadRequest("Please enter a valid State name.");
+                }
+                if (string.IsNullOrEmpty(model.ZoneId.ToString()) || model.ZoneId == 0)
+                {
+                    return BadRequest("Please enter a valid Zone name.");
                 }
                 var existingCity = (await _cityService.GetCityAsync()).Where(x => x.CityName.ToLower() == model.CityName.ToLower()).FirstOrDefault();
                 if (existingCity != null)
@@ -147,9 +166,28 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> EditCity(CityVM model)
         {
-            
-                var city = await _cityService.GetByIdAsync(model.CityId);
-                if (city == null) return NotFound();
+       
+            var city = await _cityService.GetByIdAsync(model.CityId);
+            if (string.IsNullOrEmpty(model.CityName))
+            {
+                return BadRequest("Please enter a valid city name.");
+            }
+            if (model == null) return NotFound();
+
+           
+            if (model.ZoneId == 0 || model.StateId == 0 || model.ZoneId == null || model.StateId == null)
+            {
+                return BadRequest("Please select from the dropdown");
+            }
+            if (model.CityName.Any(char.IsDigit))
+            {
+                return BadRequest("City Name cannot contain numbers.");
+            }
+            if (model.CityName.Length < 5 || model.CityName.Length > 50)
+            {
+                return BadRequest("City Name must be between 5 and 50 characters.");
+            }
+            if (city == null) return NotFound();
 
                 city.CityName = model.CityName;
                 city.StateId = model.StateId;

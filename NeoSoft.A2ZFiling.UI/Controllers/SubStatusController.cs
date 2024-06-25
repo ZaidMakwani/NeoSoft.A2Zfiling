@@ -67,7 +67,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 //{
                 //    return BadRequest(" Name cannot contain numbers.");
                 //}
-
+                if (model.SubStatusName.Length < 5 || model.SubStatusName.Length > 50)
+                {
+                    return BadRequest("SubStatus Name must be between 5 and 50 characters.");
+                }
                 if (model.StatusId == 0)
                 {
                     return BadRequest("Please select a Status.");
@@ -152,7 +155,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 //{
                 //    return BadRequest(" Name cannot contain numbers.");
                 //}
-
+                if (model.SubStatusName.Length < 5 || model.SubStatusName.Length > 50)
+                {
+                    return BadRequest("SubStatus Name must be between 5 and 50 characters.");
+                }
                 if (model.StatusId == 0)
                 {
                     return BadRequest("Please select a Status.");

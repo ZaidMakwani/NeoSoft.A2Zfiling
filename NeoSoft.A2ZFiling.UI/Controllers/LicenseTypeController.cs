@@ -64,6 +64,16 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("License Name cannot contain numbers.");
                 }
+
+                if (model.LicenseName.Length < 5 || model.LicenseName.Length > 50)
+                {
+                    return BadRequest("License Name must be between 5 and 50 characters.");
+                }
+                if (model.Description.Length < 10 || model.Description.Length > 100)
+                {
+                    return BadRequest("License Name must be between 10 and 100 characters.");
+                }
+
                 var existingCity = (await _licenseType.GetLicenseTypeAsync()).Where(x => x.LicenseName.ToLower() == model.LicenseName.ToLower()).FirstOrDefault();
                 if (existingCity != null)
                 {
@@ -151,6 +161,15 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 if (model.LicenseName.Any(char.IsDigit))
                 {
                     return BadRequest("License Name cannot contain numbers.");
+                }
+
+                if (model.LicenseName.Length < 5 || model.LicenseName.Length > 50)
+                {
+                    return BadRequest("License Name must be between 5 and 50 characters.");
+                }
+                if (model.Description.Length < 10 || model.Description.Length > 100)
+                {
+                    return BadRequest("License Name must be between 10 and 100 characters.");
                 }
                 //var existingCity = (await _licenseType.GetLicenseTypeAsync()).Where(x => x.LicenseName.ToLower() == model.LicenseName.ToLower()).FirstOrDefault();
                 //if (existingCity != null)

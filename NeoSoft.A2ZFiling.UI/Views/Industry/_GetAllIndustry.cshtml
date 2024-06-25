@@ -162,6 +162,8 @@
 
     console.log("After DataTable initialization");
 
+
+
     //function to delete data 
 
     $(document).on('click', '.triggerIndustry-modal', function () {
@@ -230,8 +232,7 @@
                     $('#industryDataPlaceholder').load('/Industry/GetAll'
                     , function () {
                         console.log('Industry data reloaded.');
-                    }
-                    );
+                    });
 
                 }).fail(function (xhr, status, error) {
                     var errorMessage = xhr.responseText;
