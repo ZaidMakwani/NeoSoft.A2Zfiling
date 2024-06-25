@@ -5,7 +5,7 @@ using NeosoftA2Zfilings.Views.ViewModels;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    
     public class RoleController : Controller
     {
 
