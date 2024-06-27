@@ -63,6 +63,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest(" Name cannot contain numbers.");
                 }
+                if (model.CategoryName.Length < 5 || model.CategoryName.Length > 50)
+                {
+                    return BadRequest("Category Name must be between 5 and 50 characters.");
+                }
+                if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+                {
+                    return BadRequest("Category Name must be between 2 and 10 characters.");
+                }
                 var existingCategory = (await _categoryService.GetCategoryAsync()).Where(x => x.CategoryName.ToLower() == model.CategoryName.ToLower() || x.ShortName.ToLower()==model.ShortName.ToLower()).FirstOrDefault();
                 if (existingCategory != null)
                 {
@@ -154,6 +162,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 if ((model.CategoryName.Any(char.IsDigit)) || (model.ShortName.Any(char.IsDigit)))
                 {
                     return BadRequest(" Name cannot contain numbers.");
+                }
+                if (model.CategoryName.Length < 5 || model.CategoryName.Length > 50)
+                {
+                    return BadRequest("Category Name must be between 5 and 50 characters.");
+                }
+                if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+                {
+                    return BadRequest("Category Name must be between 2 and 10 characters.");
                 }
                 //var existingCategory = (await _categoryService.GetCategoryAsync()).Where(x => x.CategoryName.ToLower() == model.CategoryName.ToLower()).FirstOrDefault();
                 //if (existingCategory != null)

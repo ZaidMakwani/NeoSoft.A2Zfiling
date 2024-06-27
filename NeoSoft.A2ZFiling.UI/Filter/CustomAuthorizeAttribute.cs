@@ -62,6 +62,13 @@ namespace NeoSoft.A2ZFiling.UI.Filter
                 Console.WriteLine($"{claim.Type}: {claim.Value}");
             }
 
+            // Console.WriteLine(claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "role").Value);
+
+            //if (claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "role").Value == "Admin")
+            //{
+            //    await next();
+            //}
+
             var permissionsClaim = claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "permissions");
 
 

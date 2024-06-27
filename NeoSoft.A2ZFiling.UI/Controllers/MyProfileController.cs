@@ -73,6 +73,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 // Current password does not match the stored password
                 ModelState.AddModelError(nameof(model.CurrentPassword), "Current password is incorrect.");
+                TempData["SuccessMessage"] = "Current Password is incorrect";
                 return RedirectToAction("Index", "MyProfile");
             }
 

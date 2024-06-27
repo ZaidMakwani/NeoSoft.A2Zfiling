@@ -6,6 +6,7 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
     public class MunicipalVM
     {
         public int MunicipalId { get; set; }
+        [Required(ErrorMessage = "Municipal is required")]
         public string MunicipalName { get; set; }
         [RegularExpression("^[0-9]*$", ErrorMessage = "Pincode must be numeric.")]
         public string? Pincode { get; set; }

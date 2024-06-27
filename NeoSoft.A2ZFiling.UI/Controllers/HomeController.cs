@@ -3,7 +3,7 @@ using NeoSoft.A2ZFiling.UI.Filter;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    //[CustomAuthorize]
+    [CustomAuthorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

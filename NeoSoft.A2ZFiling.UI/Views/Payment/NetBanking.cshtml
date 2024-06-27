@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetBanking Payment Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .payment-form {
+            max-width: 500px;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="payment-form">
+            <h2 class="text-center">NetBanking Payment</h2>
+            <form action="/Payment/ProcessNetBanking" method="post">
+                <div class="form-group">
+                    <label for="bankName">Select Bank</label>
+                    <select class="form-control" id="bankName" name="bankName" required>
+                        <option value="">--Select Bank--</option>
+                        <option value="Bank1">Bank 1</option>
+                        <option value="Bank2">Bank 2</option>
+                        <option value="Bank3">Bank 3</option>
+                        <!-- Add more bank options as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="accountNumber">Account Number</label>
+                    <input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="1234567890" required>
+                </div>
+                <div class="form-group">
+                    <label for="ifscCode">IFSC Code</label>
+                    <input type="text" class="form-control" id="ifscCode" name="ifscCode" placeholder="IFSC0001234" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit Payment</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -76,7 +76,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 return BadRequest(" Name cannot contain numbers.");
             }
-           
+            if (model.CompanyName.Length < 5 || model.CompanyName.Length > 50)
+            {
+                return BadRequest("Company Name must be between 5 and 50 characters.");
+            }
+            if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+            {
+                return BadRequest("Company Name must be between 2 and 10 characters.");
+            }
             if (response.IsSuccessStatusCode)
             {
                 return Ok();
@@ -122,6 +129,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             if ((model.ShortName.Any(char.IsDigit)) || (model.CompanyName.Any(char.IsDigit)))
             {
                 return BadRequest(" Name cannot contain numbers.");
+            }
+            if (model.CompanyName.Length < 5 || model.CompanyName.Length > 50)
+            {
+                return BadRequest("Company Name must be between 5 and 50 characters.");
+            }
+            if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+            {
+                return BadRequest("Company Name must be between 2 and 10 characters.");
             }
             if (response.IsSuccessStatusCode)
             {

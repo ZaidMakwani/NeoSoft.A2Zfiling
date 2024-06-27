@@ -52,7 +52,8 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
         {
             Response<LoginDto> loginCommandResponse=null;
             var user = await _userManager.FindByNameAsync(request.Username);
-            if (user != null && await _userManager.CheckPasswordAsync(user, request.Password))
+            var checkPassword =  await _userManager.CheckPasswordAsync(user, request.Password);
+            if (user != null &&  checkPassword)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 

@@ -70,7 +70,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest(" Name cannot contain numbers.");
                 }
-
+                if (model.LicenseName.Length < 5 || model.LicenseName.Length > 50)
+                {
+                    return BadRequest("License Name must be between 5 and 50 characters.");
+                }
+                if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+                {
+                    return BadRequest("License Name must be between 2 and 10 characters.");
+                }
                 if (model.CategoryId == 0)
                 {
                     return BadRequest("Please select a Category.");
@@ -183,7 +190,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest(" Name cannot contain numbers.");
                 }
-
+                if (model.LicenseName.Length < 5 || model.LicenseName.Length > 50)
+                {
+                    return BadRequest("License Name must be between 5 and 50 characters.");
+                }
+                if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+                {
+                    return BadRequest("License Name must be between 2 and 10 characters.");
+                }
                 if (model.CategoryId == 0)
                 {
                     return BadRequest("Please select a Category.");
