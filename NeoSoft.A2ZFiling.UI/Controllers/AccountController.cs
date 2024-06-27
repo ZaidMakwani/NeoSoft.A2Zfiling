@@ -186,17 +186,23 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         public IActionResult ResetPassword(string UserId)
         {
             var model = new ResetPasswordVM
-            {
+            { 
                 UserId = UserId
             };
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult ResetPassword(ResetPasswordVM model)
+        public IActionResult ResetPassword(ResetPasswordVM model)  
         {
             var response = _myProfileService.UpdatePassword(model.UserId,model.confirmPassword);
             return RedirectToAction("Login", "Account");
+        }
+
+        [HttpGet]
+        public IActionResult ServiceRegistration()
+        {
+            return View(); 
         }
 
         public IActionResult Logout()

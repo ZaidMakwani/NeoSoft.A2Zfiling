@@ -107,9 +107,9 @@ $('#table7-tab').on('click', function () {
     });
 });
 
-
+//-----------------------------------------------------------------------------
 $('#tableB-tab').on('click', function () {
-    console.log("table-2 tab")
+    console.log("table-B tab")
     $.ajax({
         url: '/Zone/GetAllZone',
         type: 'GET',

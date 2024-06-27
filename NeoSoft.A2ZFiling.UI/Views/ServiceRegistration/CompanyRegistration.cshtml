@@ -1,0 +1,239 @@
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.OtpRequest;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #004085;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+            header .logo img {
+                height: 50px;
+            }
+
+            header nav ul {
+                list-style: none;
+                padding: 0;
+            }
+
+                header nav ul li {
+                    display: inline;
+                    margin: 0 10px;
+                }
+
+                    header nav ul li a {
+                        color: #fff;
+                        text-decoration: none;
+                        font-weight: bold;
+                    }
+
+        main {
+            padding: 20px;
+        }
+
+        .gst-registration {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+            .gst-registration h1 {
+                color: #004085;
+            }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .documents-list {
+            width: 60%;
+        }
+
+            .documents-list h2 {
+                color: #004085;
+            }
+
+        .document-category {
+            margin-bottom: 20px;
+        }
+
+            .document-category h3 {
+                color: #d9534f;
+            }
+
+            .document-category ul {
+                list-style: none;
+                padding: 0;
+            }
+
+                .document-category ul li {
+                    margin: 5px 0;
+                }
+
+        .registration-form {
+            width: 35%;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+            .registration-form h2 {
+                color: #004085;
+            }
+
+            .registration-form form {
+                display: flex;
+                flex-direction: column;
+            }
+
+                .registration-form form label {
+                    margin: 10px 0 5px;
+                }
+
+                .registration-form form input {
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                }
+
+                .registration-form form button {
+                    padding: 10px;
+                    color: #fff;
+                    background-color: #004085;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+
+        .pricing-summary {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .info {
+            margin-top: 20px;
+        }
+
+            .info h2, .info h3 {
+                color: #004085;
+            }
+
+            .info p {
+                margin-bottom: 20px;
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Business Setup</a></li>
+                <li><a href="#">IP Registrations</a></li>
+                <li><a href="#">Taxation</a></li>
+                <li><a href="#">Registrations</a></li>
+                <li><a href="#">Licenses</a></li>
+                <li><a href="#">SPN</a></li>
+                <li><a href="#">Signup/Login</a></li>
+                <li><a href="#">Partner With Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="gst-registration">
+            <h1>Company Registration</h1>
+            <div class="content">
+                <div class="documents-list">
+                    <h2>List of documents required for Company registration.</h2>
+                    <div class="document-category">
+                        <h3>Private Limited Company</h3>
+                        <ul>
+                            <li>Certificate of Incorporation</li>
+                            <li>PAN Card of Company</li>
+                            <li>Articles of Association</li>
+                            <li>Memorandum of Association</li>
+                            <li>Resolution Signed By Board Members</li>
+                            <li>Identity And Address Proof of Directors</li>
+                            <li>Digital Signature</li>
+                            <li>Director's Proof of Address</li>
+                        </ul>
+                    </div>
+                    <div class="document-category">
+                        <h3>LLP - Limited Liability Partnership</h3>
+                        <ul>
+                            <li>PAN Card of LLP</li>
+                            <li>LLP Agreement</li>
+                            <li>Partners' Names and Address Proof</li>
+                            <li>Director's Proof of Address</li>
+                        </ul>
+                    </div>
+                    <div class="document-category">
+                        <h3>Individual / Proprietorship</h3>
+                        <ul>
+                            <li>PAN Card</li>
+                            <li>Address proof of proprietor</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="registration-form">
+                    <h2>Initiate Company Registration</h2>
+
+
+                    <form asp-action="SendOtp" asp-controller="ServiceRegistration" method="post">
+                        <div class="form-group">
+                            <label asp-for="MobileNumber"></label>
+                            <input asp-for="MobileNumber" class="form-control" />
+                            <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send OTP</button>
+                    </form>
+
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-success">@ViewBag.Message</div>
+                    }
+                    <div class="pricing-summary">
+                        <p>Pricing Summary</p>
+                        <p>INR 2000/- excluding GST</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="info">
+            <h2>How Does Company Registration Work For You?</h2>
+            <p>Any business offering sale of goods with annual turnover of 40 lacs or service with annual turnover of 20 lacs would require the registration for Company and have a valid Company Number.</p>
+            <h3>What are the components of Company?</h3>
+            <p>Company will have 3 tax components, which includes a central component (Central Goods and Services Tax or CCompany) and a state component (State Goods and Services Tax or SCompany) where centre and state will levy Company on all entities. i.e., when a transaction happens within a state. Integrated Company or ICompany will be levied by the centre, i.e. when a transaction happens one state to another.</p>
+            <h3>What is input tax credit?</h3>
+            <p>Input tax credit lets you reduce your tax already paid on inputs and pay the remaining amount at the time of paying tax. You pay taxes on the purchase when a product is purchased from a registered seller, and when you sell the product, you too collect a tax. With input credit, you can adjust the taxes paid at the time of purchase with the amount of tax on sales (output tax) and pay the balance liability of tax, i.e. on sale minus tax on the purchase.</p>
+            <h3>CompanyIN</h3>
+            <p>Goods and Services Tax Identification Number(CompanyIN) registration number is a unique 15-character identity number given to the businesses that register for Company.</p>
+            <h3>CompanyN</h3>
+            <p>Goods and Services Tax Network (CompanyN) is a non-profit, public-private partnership company that provides IT infrastructure and services for the implementation of Company.</p>
+        </section>
+    </main>
+
+</body>
+
+</html>

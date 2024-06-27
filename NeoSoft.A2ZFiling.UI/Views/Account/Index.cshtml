@@ -166,7 +166,7 @@
 
 
 
-            @if (TempData["token"] != null)
+            @if (TempData.Peek("token") != null)
             {
                 <a asp-controller="Account" asp-action="Logout" class="btn">Logout</a>
             }
@@ -190,22 +190,22 @@
             <div class="service">
                 <img src="~/dist/img/GST-registration-2.png" alt="GST Registration">
                 <h2>GST Registration</h2>
-                <button class="btn" onclick="location.href='@Url.Action("Index", "Home")'">Let's Proceed</button>
+                <button class="btn" onclick="location.href='@Url.Action("Index", "ServiceRegistration")'">Let's Proceed</button>
             </div>
             <div class="service">
                 <img src="~/dist/img/CompanyLandingimg2.jpg" alt="Company Registration">
                 <h2>Company Registration</h2>
-                <button class="btn" onclick="location.href='@Url.Action("Index", "Home")'">Let's Proceed</button>
+                <button class="btn" onclick="location.href='@Url.Action("CompanyRegistration", "ServiceRegistration")'">Let's Proceed</button>
             </div>
             <div class="service">
                 <img src="~/dist/img/FSSAI Registration2 land.png" alt="FSSAI Registration">
                 <h2>FSSAI Registration</h2>
-                <button class="btn" onclick="location.href='@Url.Action("Index", "Home")'">Let's Proceed</button>
+                <button class="btn" onclick="location.href='@Url.Action("FSSAIRegistration", "ServiceRegistration")'">Let's Proceed</button>
             </div>
             <div class="service">
                 <img src="~/dist/img/Business Setup2 landing.png" alt="Business Setup">
                 <h2>Business Setup</h2>
-                <button class="btn" onclick="location.href='@Url.Action("Index", "Home")'">Let's Proceed</button>
+                <button class="btn" onclick="location.href='@Url.Action("BuisnessSetupRegistration", "ServiceRegistration")'">Let's Proceed</button>
             </div>
         </section>
     </main>

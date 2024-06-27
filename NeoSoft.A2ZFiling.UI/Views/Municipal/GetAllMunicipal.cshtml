@@ -44,8 +44,10 @@
                                                 <a class="nav-link" id="tableC-tab" data-toggle="tab" href="#tableC" role="tab" aria-controls="tableC" aria-selected="true">Cities</a>
                                             </li>
 
-                                        </ul>
+                                           
 
+                                        </ul>
+                                            
 
                                         <!-- Tab panes -->
                                         <div class="tab-content">
@@ -152,13 +154,16 @@
                                                 </div>
                                             </div>
 
-                                            <div class="tab-pane fade " id="tableB" role="tabpanel" aria-labelledby="tableB-tab">
+                                            <div class="tab-pane fade" id="tableB" role="tabpanel" aria-labelledby="tableB-tab">
                                                 <div id="zonePlaceholderssss"></div>
                                             </div>
 
                                             <div class="tab-pane fade" id="tableC" role="tabpanel" aria-labelledby="tableC-tab">
                                                 <div id="cityPlaceholder"></div>
                                             </div>
+
+                                           
+
                                         </div>
                                         <!-- /.col -->
                                     </div>
@@ -193,16 +198,18 @@
             </div>
         </div>
     </div>
-
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
+    
+    <script src="~/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- DataTables Buttons extension -->
     <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script src="../../plugins/jszip/jszip.min.js"></script>
@@ -235,6 +242,23 @@
         }).buttons().container().appendTo('#example5_wrapper .col-md-6:eq(0)');
 
         //-----------------------------------------------------------------------------------------------------------------------
+
+
+        // $('#tableB-tab').on('click', function () {
+        //     console.log("table-B tab")
+        //     $.ajax({
+        //         url: '/Zone/GetAllZone',
+        //         type: 'GET',
+        //         success: function (data) {
+        //             $('#zonePlaceholderssss').html(data);
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error("Error fetching industry data: ", error);
+        //             alert("Error fetching industry data. Please try again.");
+        //         }
+        //     });
+        // });
+
 
         //function to handle create modal
 
