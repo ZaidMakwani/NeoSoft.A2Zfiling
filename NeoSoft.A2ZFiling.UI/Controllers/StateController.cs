@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NeoSoft.A2Zfiling.Domain.Entities;
 using NeoSoft.A2ZFiling.UI.Filter;
 using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.Responces;
@@ -53,8 +54,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 try
                 {
+                    
                     // Serialize the StateVM object to JSON
                     string json = JsonConvert.SerializeObject(state);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -66,6 +69,9 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                     {
                         string responseData = await response.Content.ReadAsStringAsync();
                         var result = JsonConvert.DeserializeObject<Response<CreateStateVm>>(responseData);
+
+
+                    
 
                         if (result != null && result.Succeeded)
                         {
@@ -85,6 +91,15 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     ModelState.AddModelError(string.Empty, $"An error occurred: {ex.Message}");
                 }
+            }
+
+            if (string.IsNullOrEmpty(state.StateName))
+            {
+                return BadRequest("Please enter a valid state name.");
+            }
+            if (state.StateName.Any(char.IsDigit))
+            {
+                return BadRequest("state Name cannot contain numbers.");
             }
 
             // Repopulate ViewBag.lstZone before returning the view to ensure the dropdown is populated
@@ -112,6 +127,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         [HttpPost]
         public IActionResult Update(StateVM model)
         {
+            if (string.IsNullOrEmpty(model.StateName))
+            {
+                return BadRequest("Please enter a  state name.");
+            }
+            if (model.StateName.Any(char.IsDigit))
+            {
+                return BadRequest("state Name cannot contain numbers.");
+            }
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/State/Update/", content).Result;
@@ -123,6 +146,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
             return View();
         }
+
+
 
 
 

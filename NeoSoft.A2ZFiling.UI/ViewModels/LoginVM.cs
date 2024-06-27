@@ -6,6 +6,7 @@ namespace NeosoftA2Zfilings.Views.ViewModels
     public class LoginVM
     {
         [Required(ErrorMessage = "Username is required")]
+        [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "Enter Valid Username!!")]
         [StringLength(50)]
         [MaxLength(50)]
         public string Username { get; set; }
