@@ -159,5 +159,27 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             return PartialView("_CaptchaPartial");
         }
+
+        public IActionResult FAQ()
+        {
+            return View();
+        }
+        public IActionResult TermsOfUse()
+        {
+            return View();
+        }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+        public IActionResult ServiceRequest()
+        {
+            return View();
+
+        }
     }
 }

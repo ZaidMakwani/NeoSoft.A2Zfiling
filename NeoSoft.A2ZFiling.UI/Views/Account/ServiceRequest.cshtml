@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Service Request";
+    Layout = null; // This ensures the page does not use a shared layout
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Request - A2Z-LandingPage</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles specific to Service Request page */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px; /* Adjust container width as needed */
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Service Request</h2>
+
+        <div class="form-group">
+            <label for="services">Services Offered:</label>
+            <textarea id="services" class="form-control" rows="6" readonly>
+Information regarding the services offered such as 
+GST Registration
+Business Setup
+FSSAI Registration
+Company Registration.
+            </textarea>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">About Us</h5>
+                <form>
+                    <div class="form-group">
+                        <label for="aboutText">About Company:</label>
+                        <textarea id="aboutText" class="form-control" rows="8" readonly>
+
+        We provide services like license management system. The standard processing time for completing the license process is 15 days. However, if you require expedited service, you have the option to pay an additional fee of 1000 rupees. By doing so, you can receive your license within just 2 days. This expedited service ensures prompt delivery without compromising on quality. Our dedicated team ensures thorough processing and compliance with all regulatory requirements. Feel free to contact us for more details or to discuss your specific licensing needs
+                        </textarea>
+                    </div>
+                   @*  <div class="form-group text-center">
+                        <button type="button" class="btn btn-primary" onclick="editAbout()">Edit</button>
+                        <button type="button" class="btn btn-secondary ml-2" onclick="redirectBack()">Back</button>
+                        <button type="button" class="btn btn-success ml-2" id="saveButton" style="display: none;">Save</button>
+                    </div> *@
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function editAbout() {
+            document.getElementById('aboutText').readOnly = false;
+            document.getElementById('saveButton').style.display = 'inline-block';
+        }
+
+        function redirectBack() {
+            window.location.href = '/Home/Index'; // Replace with appropriate URL
+        }
+    </script>
+</body>
+</html>

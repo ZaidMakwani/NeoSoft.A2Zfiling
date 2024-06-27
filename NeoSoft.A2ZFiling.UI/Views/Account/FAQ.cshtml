@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "FAQ";
+    Layout = null; // This ensures the page does not use a shared layout
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - A2Z-LandingPage</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles specific to FAQ page */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .faq-section {
+            padding: 50px 20px;
+            background: #f9f9f9;
+        }
+
+            .faq-section h2 {
+                font-size: 2.5em;
+                margin-bottom: 30px;
+            }
+
+            .faq-section .accordion-item {
+                margin-bottom: 20px;
+            }
+
+            .faq-section .accordion-header {
+                cursor: pointer;
+                background-color: #f1f1f1;
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+                .faq-section .accordion-header:hover {
+                    background-color: #e1e1e1;
+                }
+
+            .faq-section .accordion-body {
+                padding: 10px 15px;
+                border: 1px solid #ddd;
+                border-top: none;
+                border-radius: 0 0 5px 5px;
+                display: none;
+            }
+
+                .faq-section .accordion-body.show {
+                    display: block;
+                }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="faq-section">
+
+                    <h2 class="text-center mb-4">FAQ</h2>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" data-toggle="collapse" data-target="#faq1">
+                            What documents are required for registration?
+                        </div>
+                        <div id="faq1" class="accordion-body collapse">
+                            <p>
+                                <ul>
+                                    <li>Adharcard</li>
+                                    <li>Pan-Card</li>
+                                    <li>VoterId</li>
+                                    <li>Driving License</li>
+                                    <li>SSC marksheet</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" data-toggle="collapse" data-target="#faq2">
+                            How long does the registration process take?
+                        </div>
+                        <div id="faq2" class="accordion-body collapse">
+                            <p>
+                               It takes five minuts to complete the registration
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" data-toggle="collapse" data-target="#faq3">
+                            What payment methods do you accept?
+                        </div>
+                        <div id="faq3" class="accordion-body collapse">
+                            <p>
+                               <ul>
+                                    <li>UPI</li>
+                                    <li>NetBanking</li>
+                                   <li>Cards</li>
+                               </ul>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header" data-toggle="collapse" data-target="#faq4">
+                            How long does the license process take to complete?
+
+                        </div>
+                        <div id="faq4" class="accordion-body collapse">
+                            <p>
+                                It takes 15 days to complete the license process. However, if you want it sooner, you can pay an additional 1000 rupees, and you will receive it within 2 days
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

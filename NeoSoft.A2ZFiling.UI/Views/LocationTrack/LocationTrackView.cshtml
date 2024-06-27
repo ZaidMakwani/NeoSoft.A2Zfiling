@@ -1,0 +1,51 @@
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.CityViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select City</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- jQuery Validation Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Select Your City</h1>
+        @using (Html.BeginForm("SubmitCity", "LocationTrack", FormMethod.Post, new { @class = "form-inline", id = "cityForm" }))
+        {
+            @Html.LabelFor(model => model.SelectedCity, "Choose a city:", new { @class = "mr-2" })
+            @Html.DropDownListFor(model => model.SelectedCity, Model.CityList, "Select a city", new { @class = "form-control mr-2", id = "cities" })
+            @Html.ValidationMessageFor(model => model.SelectedCity, "", new { @class = "text-danger" })
+            <button type="submit" class="btn btn-primary">Submit</button>
+        }
+    </div>
+
+    <!-- JavaScript for client-side validation -->
+    <script>
+        $(document).ready(function () {
+            $('#cityForm').validate({
+                rules: {
+                    'SelectedCity': {
+                        required: true
+                    }
+                },
+                messages: {
+                    'SelectedCity': {
+                        required: "Please choose a city"
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+@*     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+ *@    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
