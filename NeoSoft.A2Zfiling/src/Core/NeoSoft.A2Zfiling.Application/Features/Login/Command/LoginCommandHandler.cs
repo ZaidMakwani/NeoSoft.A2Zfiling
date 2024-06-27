@@ -52,18 +52,19 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
         {
             Response<LoginDto> loginCommandResponse=null;
             var user = await _userManager.FindByNameAsync(request.Username);
-            if (user != null && await _userManager.CheckPasswordAsync(user, request.Password))
+            var checkPassword =  await _userManager.CheckPasswordAsync(user, request.Password);
+            if (user != null &&  checkPassword)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
 
                 var roleString = userRoles.FirstOrDefault();
 
-                var roleCurrent = _roleAsyncRepository.GetRoleIdAsync(roleString);
+                var roleCurrent = await _roleAsyncRepository.GetRoleIdAsync(roleString);
 
                 var userId = user.Id;
 
                 var userPermissions = await _userPermissionRepository.ListAllAsync();
-                var rolePermissions = userPermissions.Where(x => x.RoleId.ToString() == roleCurrent.Result.RoleId.ToString()).Select(x => x.PermissionId);
+                var rolePermissions = userPermissions.Where(x => x.RoleId.ToString() == roleCurrent.RoleId.ToString()).Select(x => x.PermissionId);
                 var permissions =( await _permissionRepository.ListAllAsync()).Where(p => rolePermissions.Contains(p.PermissionId));
                 var permissionEntityList = permissions.Select(p => (p.ControllerName, p.ActionName)).ToList();
 
@@ -76,7 +77,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Login.Command
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim("roleid",roleCurrent.Result.RoleId.ToString()),
+                    new Claim("roleid",roleCurrent.RoleId.ToString()),
                     new Claim("permissions",permissionsJson),
                     new Claim("userId",userId),
                 };

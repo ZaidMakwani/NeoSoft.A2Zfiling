@@ -15,6 +15,7 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Username is required")]
+        [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "Only alphanumeric characters are allowed")]
         [StringLength(30, ErrorMessage = "UserName must not exceed 30 characters")]
         public string Username { get; set; }
 
