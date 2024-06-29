@@ -21,6 +21,12 @@ namespace NeoSoft.A2Zfiling.Persistence
         {
         }
 
+        public DbSet<UserDetail> UserDetails { get; set; }
+        public DbSet<DocumentDetail> DocumentDetails { get; set; }
+
+        public DbSet<DocumentMaster> DocumentMasters { get; set; }
+
+
         public DbSet<SubStatus> SubStatuses { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<LicenseMaster> LicenseMaster { get; set; }

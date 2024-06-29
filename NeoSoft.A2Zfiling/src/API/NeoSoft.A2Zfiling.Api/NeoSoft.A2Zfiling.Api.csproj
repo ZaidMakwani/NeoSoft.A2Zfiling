@@ -50,6 +50,7 @@
 		<Folder Include="Extensions\" />
 		<Folder Include="swaggerhelper\" />
 		<Folder Include="scripts\" />
+		<Folder Include="wwwroot\uploads\" />
 	</ItemGroup>
 
 	<ItemGroup>

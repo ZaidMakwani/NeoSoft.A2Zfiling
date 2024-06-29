@@ -63,6 +63,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest(" Name cannot contain numbers.");
                 }
+                if (model.CategoryName.Length < 5 || model.CategoryName.Length > 50)
+                {
+                    return BadRequest("Category Name must be between 5 and 50 characters.");
+                }
+            
                 var existingCategory = (await _categoryService.GetCategoryAsync()).Where(x => x.CategoryName.ToLower() == model.CategoryName.ToLower() || x.ShortName.ToLower()==model.ShortName.ToLower()).FirstOrDefault();
                 if (existingCategory != null)
                 {
@@ -160,6 +165,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 //{
                 //    return BadRequest("Category with this name already exists.");
                 //}
+                if (model.CategoryName.Length < 5 || model.CategoryName.Length > 50)
+                {
+                    return BadRequest("Category Name must be between 5 and 50 characters.");
+                }
                 var response = await _categoryService.UpdateCategoryAsync(model);
                 if (response == null)
                 {

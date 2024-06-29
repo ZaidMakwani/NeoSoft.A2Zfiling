@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-   // [CustomAuthorize]
+    [CustomAuthorize]
     public class StateController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:5000/api");

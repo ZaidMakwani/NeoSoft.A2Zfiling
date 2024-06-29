@@ -12,7 +12,7 @@ using NuGet.Protocol.Core.Types;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class LicenseMasterController : Controller
     {
         private readonly ILogger<LicenseMasterController> _logger;

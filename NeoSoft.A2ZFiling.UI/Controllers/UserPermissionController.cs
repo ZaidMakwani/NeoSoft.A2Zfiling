@@ -9,7 +9,7 @@ using System.Data;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class UserPermissionController : Controller
     {
         private readonly ILogger<UserPermissionController> _logger;

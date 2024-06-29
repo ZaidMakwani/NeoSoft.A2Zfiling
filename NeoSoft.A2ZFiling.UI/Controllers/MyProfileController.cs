@@ -8,7 +8,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class MyProfileController : Controller
     {
         private readonly IMyProfileService _myProfileService;

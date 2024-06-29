@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NeoSoft.A2Zfiling.Application.Responses;
 using NeoSoft.A2ZFiling.UI.Filter;
+using NeoSoft.A2ZFiling.UI.Interfaces;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 using Newtonsoft.Json;
 
@@ -11,11 +12,13 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:5000/api");
         private readonly HttpClient _client;
+		private readonly ICompanyService _companyService;
 
-        public CompanyController()
+		public CompanyController(ICompanyService companyService)
         {
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
+            _companyService = companyService;
         }
 
         [HttpGet]
@@ -40,6 +43,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             Response<List<CompanyVM>> companyList = new Response<List<CompanyVM>>();
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Company/GetAllCompanies/all").Result;
+
+
 
             if (response.IsSuccessStatusCode)
             {
@@ -76,7 +81,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 return BadRequest(" Name cannot contain numbers.");
             }
-           
+            if (model.CompanyName.Length < 5 || model.CompanyName.Length > 50)
+            {
+                return BadRequest("Company Name must be between 5 and 50 characters.");
+            }
+            if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+            {
+                return BadRequest("Short Name must be between 2 and 10 characters.");
+            }
             if (response.IsSuccessStatusCode)
             {
                 return Ok();
@@ -122,6 +134,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             if ((model.ShortName.Any(char.IsDigit)) || (model.CompanyName.Any(char.IsDigit)))
             {
                 return BadRequest(" Name cannot contain numbers.");
+            }
+            if (model.CompanyName.Length < 5 || model.CompanyName.Length > 50)
+            {
+                return BadRequest("Company Name must be between 5 and 50 characters.");
+            }
+            if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+            {
+                return BadRequest("Short Name must be between 2 and 10 characters.");
             }
             if (response.IsSuccessStatusCode)
             {

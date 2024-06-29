@@ -65,6 +65,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest(" Name cannot contain numbers.");
                 }
+                if (model.StatusName.Length < 5 || model.StatusName.Length > 50)
+                {
+                    return BadRequest("Status Name must be between 5 and 50 characters.");
+                }
+               
                 var existingCategory = (await _statusService.GetStatusAsync()).Where(x => x.StatusName.ToLower() == model.StatusName.ToLower()).FirstOrDefault();
                 if (existingCategory != null)
                 {
@@ -132,6 +137,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 if (model.StatusName.Any(char.IsDigit))
                 {
                     return BadRequest(" Name cannot contain numbers.");
+                }
+                if (model.StatusName.Length < 5 || model.StatusName.Length > 50)
+                {
+                    return BadRequest("Status Name must be between 5 and 50 characters.");
                 }
                 var response = await _statusService.UpdateStatusAsync(model);
                 if (response == null)

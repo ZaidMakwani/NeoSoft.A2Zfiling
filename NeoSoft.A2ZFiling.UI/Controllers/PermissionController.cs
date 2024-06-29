@@ -7,7 +7,7 @@ using System.Security;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class PermissionController : Controller
     {
         private readonly ILogger<PermissionController> _logger;

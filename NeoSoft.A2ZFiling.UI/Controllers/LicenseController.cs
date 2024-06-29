@@ -80,6 +80,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("Please select a ShortList .");
                 }
+                if (model.LicenseName.Length < 5 || model.LicenseName.Length > 50)
+                {
+                    return BadRequest("License Name must be between 5 and 50 characters.");
+                }
+                if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+                {
+                    return BadRequest("Short Name must be between 2 and 10 characters.");
+                }
                 var existingLicense = (await _licenseService.GetLicenseAsync()).Where(x => x.LicenseName.ToLower() == model.LicenseName.ToLower() || x.ShortName.ToLower()==model.ShortName.ToLower()).FirstOrDefault();
                 if (existingLicense != null)
                 {
@@ -192,7 +200,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 //{
                 //    return BadRequest("Please select a valid ShortList value.");
                 //}
-
+                if (model.LicenseName.Length < 5 || model.LicenseName.Length > 50)
+                {
+                    return BadRequest("License Name must be between 5 and 50 characters.");
+                }
+                if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+                {
+                    return BadRequest("Short Name must be between 2 and 10 characters.");
+                }
                 var response = await _licenseService.UpdateLicenseAsync(model);
                 if (response == null)
                 {

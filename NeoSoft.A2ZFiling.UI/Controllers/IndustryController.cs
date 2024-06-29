@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class IndustryController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:5000/api");
@@ -56,11 +56,20 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 return BadRequest(" Name cannot contain numbers.");
             }
+            if (model.IndustryName.Length < 5 || model.IndustryName.Length > 50)
+            {
+                return BadRequest("Industry Name must be between 5 and 50 characters.");
+            }
+            if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+            {
+                return BadRequest("Short Name must be between 2 and 10 characters.");
+            }
             var existingIndustry = ( _industryService.GetIndustryAsync()).Where(x => x.IndustryName.ToLower() == model.IndustryName.ToLower() || x.ShortName.ToLower() == model.ShortName.ToLower()).FirstOrDefault();
             if (existingIndustry != null)
             {
                 return BadRequest("Industry with this name already exists.");
             }
+
             var response = _industryService.CreateIndustryAsync(model);
 
 
@@ -110,7 +119,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             {
                 return BadRequest(" Name cannot contain numbers.");
             }
-
+            if (model.IndustryName.Length < 5 || model.IndustryName.Length > 50)
+            {
+                return BadRequest("Industry Name must be between 5 and 50 characters.");
+            }
+            if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
+            {
+                return BadRequest("Short Name must be between 2 and 10 characters.");
+            }
             if (response.IsSuccessStatusCode)
             {
                 return Ok(response);

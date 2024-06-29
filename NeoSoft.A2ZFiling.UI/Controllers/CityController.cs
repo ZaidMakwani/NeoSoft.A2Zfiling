@@ -8,7 +8,6 @@ using NeoSoft.A2ZFiling.UI.Services;
 using NeoSoft.A2ZFiling.UI.ViewModels;
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    //[CustomAuthorize]
     [CustomAuthorize]
     public class CityController : Controller
     {

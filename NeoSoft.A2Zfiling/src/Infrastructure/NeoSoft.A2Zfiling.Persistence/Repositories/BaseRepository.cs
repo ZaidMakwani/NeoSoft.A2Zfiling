@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using NeoSoft.A2Zfiling.Domain.Entities;
+using System.Linq.Expressions;
+
 
 namespace NeoSoft.A2Zfiling.Persistence.Repositories
 {
@@ -60,6 +63,17 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
             }
         }
 
+        public IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _dbContext.Set<T>();
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return query;
+        }
 
         public async virtual Task<IReadOnlyList<T>> GetPagedReponseAsync(int page, int size)
         {
@@ -73,6 +87,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
 
             return entity;
         }
+
 
         public async Task UpdateAsync(T entity)
         {
@@ -100,6 +115,8 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
             return await _dbContext.Database.ExecuteSqlRawAsync(string.Format("{0} {1}", storedProcedureName, string.Join(",", parameterNames)), parameters);
         }
 
+       
+
         private string[] GetParameterNames(SqlParameter[] parameters)
         {
             var parameterNames = new string[parameters.Length];
@@ -108,6 +125,11 @@ namespace NeoSoft.A2Zfiling.Persistence.Repositories
                 parameterNames[i] = parameters[i].ParameterName;
             }
             return parameterNames;
+        }
+
+        public async Task<IList<T>> StoredProcedureQueryAsync(string storedProcedureName)
+        {
+            return await _dbContext.Set<T>().FromSqlRaw(string.Format("{0}", storedProcedureName)).ToListAsync();
         }
     }
 }
