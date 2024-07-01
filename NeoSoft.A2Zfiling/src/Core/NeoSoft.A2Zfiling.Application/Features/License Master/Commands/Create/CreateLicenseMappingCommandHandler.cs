@@ -36,6 +36,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.License_Master.Commands.Create
                     LicenseTypeId= request.LicenseTypeId,
                     Validity = request.Validity,
                     Visibilities = request.Visibilities,
+                    Workflow=request.Workflow,
                     ZoneId = request.ZoneId,
                     StateId = request.StateId,
                     CityId = request.CityId,

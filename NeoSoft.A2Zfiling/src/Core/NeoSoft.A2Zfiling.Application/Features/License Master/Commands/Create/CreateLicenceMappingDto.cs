@@ -17,6 +17,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.License_Master.Commands.Create
         public string? Classification { get; set; }
         public string Visibilities { get; set; }
         public bool Validity { get; set; }
+        public string Workflow {  get; set; }
         public int ZoneId { get; set; }
         public int StateId { get; set; }
         public int CityId { get; set; }

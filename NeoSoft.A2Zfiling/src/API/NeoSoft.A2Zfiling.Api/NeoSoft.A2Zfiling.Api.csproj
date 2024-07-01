@@ -50,7 +50,11 @@
 		<Folder Include="Extensions\" />
 		<Folder Include="swaggerhelper\" />
 		<Folder Include="scripts\" />
+<<<<<<< HEAD
 		<Folder Include="wwwroot\uploads\" />
+=======
+		<Folder Include="wwwroot\SampleFormat\" />
+>>>>>>> development-shivam-1
 	</ItemGroup>
 
 	<ItemGroup>

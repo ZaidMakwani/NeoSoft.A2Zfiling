@@ -33,8 +33,12 @@ builder.Services.AddScoped<ILicenseService,LicenseService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
 builder.Services.AddScoped<ISubStatusService,SubStatusService>();
 builder.Services.AddScoped<ILicenceMasterService,LicenseMasterService>();
+<<<<<<< HEAD
 builder.Services.AddScoped<IUserDetail, UserDetailService>();
 
+=======
+builder.Services.AddScoped<IDocumentMasterService, DocumentMasterService>();
+>>>>>>> development-shivam-1
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
