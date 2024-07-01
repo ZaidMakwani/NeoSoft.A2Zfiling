@@ -20,7 +20,8 @@ namespace NeoSoft.A2Zfiling.Persistence
            : base(options)
         {
         }
-
+        public DbSet<DocumentMasters> DocumentMasters { get; set; }
+        public DbSet<LicenseDocument> LicenseDocuments { get; set; }
         public DbSet<SubStatus> SubStatuses { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<LicenseMaster> LicenseMaster { get; set; }
@@ -33,7 +34,6 @@ namespace NeoSoft.A2Zfiling.Persistence
         public DbSet<Role> Role { get; set; }               
         public DbSet<PinCode> Pincodes { get; set; }
         public DbSet<State> States { get; set; }
-        public DbSet<Document> Documents { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<MunicipalCorp> MunicipalCorporations { get; set; }
         public DbSet<Industry> Industries { get; set; }
@@ -199,6 +199,16 @@ namespace NeoSoft.A2Zfiling.Persistence
                     .OnDelete(DeleteBehavior.Restrict);
 
             });
+
+            modelBuilder.Entity<DocumentMasters>()
+                .HasMany(e => e.LicenseMasters)
+                .WithMany(e => e.DocumentMaster)
+                .UsingEntity<LicenseDocument>(
+                l => l.HasOne(e => e.LicenseMaster).WithMany(e => e.LicenseDocuments),
+                r => r.HasOne(e => e.DocumentMaster).WithMany(e => e.LicenseDocuments)
+                );
+
+
             modelBuilder.Entity<Message>()
                 .Property(s => s.Type)
                 .HasConversion<string>();
