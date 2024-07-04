@@ -1,0 +1,236 @@
+Inheritance is a parent-child relationship, where one class inherit the properties and method from another class.
+There are 4 types of inheritance:
+Single Inheritance:In this, a derived class can inherit the property and method from only one base class
+Multiple Inheritance:In this, a derived class can inherit from more than one base class
+Multilevel inheritance:In this, a derived class inherti from a base class and another derived inherit from tthis derived class.It forms a chain.
+Hierarchical Inheritance:In this, a single base can be used for multiple derived classes. 
+Multiple inheritance is not allowed in C#
+
+Dependency Injection allows us to develop loosely coupled appication.It is achieve through interface
+
+SOLID Principle is a a principle that should be follwed while building an appplication.
+Here, 
+'S' stands for Single Responsibility Principle: It states that every class should have only one responsibility and one reason to change.
+eg:-
+public class Employee{
+public int GetSalary(){
+return "1000";
+}
+public string GetCourse(){
+return "Python developer";
+}
+}
+public class EmployeeData{
+public void save(Employee e){
+//save the database code 
+}
+}
+
+'O' stands for open closed principle: It states that application should be open for extension but close for  modification.
+eg:
+public class AccountDetails{
+public string name{get;set;}
+public string address{get;set;}
+public double balance{get;set;}
+}
+public interface IAccount{
+double calculateinterest();
+}
+public double savingaccount:IAccount{
+public void calculateinterest(AccountDetails account)
+{
+return account.balance*0.3;
+}
+}
+public double otheraccount:IAccount{
+public void calculateinterest(AccountDetails account)
+{
+return account.balance*0.7;
+}
+}
+
+'L' stands for Liskov substitution principle.It states that an object of child class must replace the object of parent class.
+public class Employee{
+public virtual int calculate(){
+return 24000;
+}
+public virtual int bonus(){
+return 1000;
+}
+}
+public class Permanentemployee:Employee{
+public ovveride int calculate(){
+return 260000;
+}
+}
+
+Employee e = new Permanentemployee();
+e.calculate();
+
+'I' stands for Interface segregation principle.It states that a class should not forced to implement interface that it does not use
+eg:
+public interface IDrive{void Drive();}
+public interface IFly {void fly();} 
+public class Drive:IDrive{
+public void Drive(){
+Console.WriteLine("Car");
+}
+}
+public class vehicle:IDrive,IFly{
+public void fly(){
+Console.WriteLine("flying....");
+}
+public void Drive(){
+Console.WriteLine("Car");
+}
+}
+
+'D' stands for dependency inversion.It states that high level class should not depend on low level class.
+
+Polymorphism means multiple forms. It is of two types Compile-time polymorphism and run-time polymorphism.
+Compile-time polymorphism(method overloading):In method overloading, a class can have more than one method with the same name but different parameter.
+eg:
+public class Operation{
+public void add(int a,int b){
+return a+b;
+}
+public void add(int a, int b,int c){
+return a+b+c;
+}
+}
+Runtime polymorphism (method overriding):In method overriding, a class can override the method that is already present in the base class.It uses virual and override keyword .It needs inhertance
+public class Operation{
+public virtual void add(int a, int b){
+return a+b;
+}
+}
+public class OperationDerived:Operation{
+public override void add(int a,int b, int c){
+return a+b+c;
+}
+}
+
+Abstract class is declared with abstract keyword whereas inheritance is declared with interface keyword.In abstract class, we can have method definition and method declaration whereas in interface we can have only declaration.Abstract class does not support multiple inheritance whereas interface support multiple inheritance.
+
+Constructor is a method with the same name as the class name.It is called when the object is created. 
+Types of Constructor are:
+Default constructor:a constructor without any parameter
+Parameterized constructor:a constructor with parameter
+static constructor:static constructor is called before the static method
+copy constructor:the constructor which creates an object by copying the variable of another object.
+private constructor:It is declared with private keyword. we cannot create an object and other classes cannot derive from it.
+
+Boxing means converting value type to reference type whereas unboxing means converting reference type to value type.Boxing is implicit conversion process whereas unboxing is explicit conversion process.
+eg:
+int a = 12;
+object o = i;//boxing
+int j = (int) o;//unboxing
+
+String is immutable i.e. if we create an string we cannot modify it rather it will create a new string in the memory  whereas stringbuilder is immutable i.e. if we create an string we can modify it and it will not create a new string in the memory.string builder is better for performance if we have to change the string multiple times.
+
+Throw will preserve the stack trace whereas throw ex will reset the stack trace.In throw ex the errow will be shown at the line where it is written and the stack trace ends at the method of the line where throw ex is there.
+in throw ex we will lose the information about the method that caused the exception in the first place.
+
+IQuerable is just like IEnumerable.It is used to iterate over a collection. It is available in System.LINQ namespace.
+if we use IEnumerable,the request will go to the database and bring the whole data from the database and then filter the data at server side. bringing the whole data from the database with impact the performance whereas if we use IQueryable,the data will go to the database,filter the data there only and send back the filtered data not the whole data which is good for the performance.
+
+Array are of same type whereas arraylist of different type. Array is of fixed whereas arraylist we can increase and decrease the arraylist.
+
+Delegates is a variable that holds the reference to o method. we can pass a method as a paramater
+
+Static class is a class with static keyword.whose object cannot be creatednot we can inherit it.
+It is used as a container for static member like methods,constructor,variable,etc..
+
+.NET framework is used to create window based applicationlike console application,Desktop application,etc.It is window based only.
+
+The component of .NET framework  are 
+CLR[Common language runtime]:It manages the execution of the programs written in any lanaguage the uses .net framework like C#,F# ,etc. 
+CLS[Common Language specification]:it is a set of rules how a data type should be declared,defined and user in the program
+CTS[Common Type system]:It is a set of rules and restriction that every language must follow chich runs under .net framework
+BCL[Base Class Library]:It is a collection of classes,namespace,interface that are used in .net application.
+
+CLR manages the application execution 
+Role of CLR:manages the garbage collection,exception handling,security check,provide multiple language execution of code by converting the code into MSIL code.
+,convert MSIL code into machine code with the help of JIT compiler.
+
+Garbage collection is an automatic memory management system.
+IDisposable interface is used to release unmanaged resource like database connections. It have dispose method.
+Generation in garbase collection:
+Generation 0:contains short lived objects
+Generation 1:contains objects that survived one garbage collection cycle
+Generation 2:contains long lived objects that survived multiple garbage collection cycle.
+
+Exception handling is used to handle the error in the program.It is a runtime error 
+The main component are:
+try,catch and finally
+
+Dispose is a method of IDisposable interface.inside the method we write the code to clean or destroy the object whereas finalize is called by garbage collector automatically.
+
+Yes, we can have try block without catch block but then we have to use a finally block
+
+.NET core is a open-source,light-weight  application developed by Microsoft.It is cross-platform.
+
+.NET core is new and .NET framework is quite old
+.NET core is cross platoform but .NET framework is not it is window based
+.NET core is light-weight but .net framework include so many libraried and classes.
+.NET core is an open source but .net framework is not.
+.NET core is faster then .NET framework 
+.NET core is relatively easy to upgrade and modify.
+.NET core has multiple IDE support(VScode and Visual Studio) not .NET framework does not
+In .NET core dependency injection is by default implemented
+
+Middleware is a request pipeline.It is used to hadle request and response. eg. Session,Routing,Authentication
+
+Order of Middleware is Error handling,security,static files,routing,authentication,authorization,custom middleware
+
+Both mvc and mvc core are architectures which helps us to organize our code base
+mvc core upgraded version of ASP.NET MVC(old)
+It is open-source 
+MVC core is used with.NET core
+MVC core performs better than old MVC framework
+Middlewares can be used in MVC core only
+It provide efficient memory usage as compared to old MVC
+In MVC core dependency injection is implemented by default
+
+Routing is used to decide which code to execute when a url is requested
+
+The Hypertext Transfer Protocol (HTTP) is used to load webpages using hypertext links. 
+
+REST establishes communication between computer systems on the web, facilitating seamless interaction.
+
+Different types of Http:
+GET: retrieve a specific resource 
+POST: create a new resource.
+PUT: update a specific resource 
+DELETE: remove a specific resource
+PATCH: update a part of a resource
+
+100- server has received the request and is continuing the process
+200 - OK
+301 - a page has been permanently moved to a new location
+404 - page not found
+500 - internal Server Error
+
+Clustered index defined the order in which data is physically stored in table whereas in a non-clustered index is stored at one plcae and table data is stored in another
+a table can have only one clusteres index whereas a table can have multiple non-clustered index
+clustered index is fast whereas non-clustered index is slower.
+
+There are 4 types of join:
+inner join:returns matching records from both the table 
+left outer join:returns all the records from the left table and matching records from the right table
+right outer join:returns all the records from the right table and matching records from the left table
+full outer join:returns  matching records both either left or right table
+
+SELECT MIN(Salary) AS SecondLowestSalary
+FROM Employees
+WHERE Salary > (SELECT MIN(Salary) FROM Employees);
+
+union is used to combine two table result into one and eliminate duplicates values
+union all  includes all records even if they are duplicates
+
+stored procedure may or may return a value but function must return a value
+we can call funtion inside stored procedure but we cannot call stored procedure from a function
+we can use transaction inside stored procedure but not function
+we can use try block inside in stored procedure but not in function
+
+

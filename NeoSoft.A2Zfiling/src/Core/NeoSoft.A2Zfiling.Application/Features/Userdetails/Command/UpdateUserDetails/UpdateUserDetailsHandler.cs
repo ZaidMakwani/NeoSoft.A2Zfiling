@@ -16,6 +16,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.UpdateUserDetails
 {
+    //-------------------
     public class UpdateUserDetailsHandler : IRequestHandler<UpdateUserDetailsCommand, Response<UpdateUserDetailsDto>>
     {
         private readonly ILogger<UpdateUserDetailsHandler> _logger;

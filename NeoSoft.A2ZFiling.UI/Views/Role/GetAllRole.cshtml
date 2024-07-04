@@ -19,6 +19,45 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            box-sizing: content-box;
+            display: inline-block;
+            min-width: auto;
+            text-align: center;
+            padding: 0;
+            border: none;
+            text-decoration: none !important;
+            cursor: pointer;
+            background-color: transparent;
+            border-radius: 0;
+            transition: none;
+            margin: 0;
+        }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+            }
+
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+        }
+
+            .page-item.active .page-link:hover {
+                color: #fff;
+                background-color: #007bff;
+                border-color: grey;
+            }
+    </style>
 
 
 
@@ -32,22 +71,28 @@
                         <div class="row justify-content-end">
                             <div class="col-lg-10">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Roles</h3>
-                                        <div class="card-tools">
-                                            @*  <button type="button" class="btn btn-primary" id="createButton">
-                                            Create
-                                            </button> *@
+                                     <div id="placeholder"></div>
 
-                                            <div id="placeholder"></div>
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
+                                        <div class="card-header" style="background-color:#007BFF">
+                                            <h3 class="card-title" style="color:white; font-weight:bold;font-size:23px;">Role </h3>
+
+                                        </div>
+
+                         
+
+                                           
+                                           @*  <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
+                                                    data-url="@Url.Action("Create", "Role")">
+                                                <i class="fas fa-plus"></i>
+                                            </button> *@
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="float-left">
+                                           <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal"
                                                     data-url="@Url.Action("Create", "Role")">
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         </div>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
                                         <table id="example2" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
@@ -119,7 +164,7 @@
             <!-- /.container-fluid -->
         </section>
 
-
+        </div>
 
 
 
@@ -183,7 +228,7 @@
             "paging": true,
             "pageLength": 4,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,

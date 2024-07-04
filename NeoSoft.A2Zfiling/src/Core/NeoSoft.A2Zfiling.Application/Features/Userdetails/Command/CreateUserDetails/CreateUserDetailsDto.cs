@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.CreateUserDetails
 {
+    //----------------
     public class CreateUserDetailsDto
     {
         public int UserDetailId { get; set; }

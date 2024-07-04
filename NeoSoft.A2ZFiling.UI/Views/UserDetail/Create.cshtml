@@ -25,7 +25,7 @@
             display: flex;
 			margin:18px;
             width: 90%;
-			height:40rem;
+			/* height:40rem; */
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
@@ -170,54 +170,60 @@
                 </div>
      </aside>
 
-		<main style="margin:15px">
+		<main style="margin:15px; margin-bottom: 26px;">
 		 <h2>Upload Documents</h2>
 			<p>Kindly proceed to upload documents for <strong>GST Registration</strong></p>
+
 			<form enctype="multipart/form-data" asp-action="Create" asp-controller="UserDetail" method="post">
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 		<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 				<span class="input-group-text" id="basic-addon1">Company Registered Name</span>
 			  </div>
 			  <input type="text" asp-for="CompanyName" class="form-control"  aria-label="name" aria-describedby="basic-addon1" size="60">
-					<span asp-validation-for="CompanyName" class="text-danger" id="entityName"></span>
-		  </div>
+				</div>
+			<span asp-validation-for="CompanyName" class="text-danger" ></span>
+		  
 
 		<div class="input-group mb-3">
 			<div class="input-group-prepend">
-					<span class="input-group-text" id="basic-addon1">Company Registered Address</span>
+					<span class="input-group-text" id="basic-addon2">Company Registered Address</span>
 			</div>
-			<input type="text" asp-for="CompanyAddress" class="form-control"  aria-label="address" aria-describedby="basic-addon1" size="60">
-			<span asp-validation-for="CompanyAddress" class="text-danger" id="entityName"></span>
-		</div>
+			<input type="text" asp-for="CompanyAddress" class="form-control"  aria-label="address" aria-describedby="basic-addon2" size="60">
+				</div>
+			<span asp-validation-for="CompanyAddress" class="text-danger" ></span>
+		
 
 			<div class="input-group mb-3">
 				<div class="row">
 					<div class="col">
 						<div class="input-group " style="margin-right:170px">
-							<select class="form-select" aria-label="Select Company Type" asp-for="CompanyId">
+							<select class="form-select" aria-label="Select Company Type" asp-for="CompanyId" required>
 									<option value="">Select Company Type</option>
 									@foreach (var company in ViewBag.Companies as SelectList)
 									{
 										<option value="@company.Value">@company.Text</option>
 									}
 							</select>
-								<span asp-validation-for="CompanyId" class="text-danger" id="entityName"></span>
+								<span asp-validation-for="CompanyId" class="text-danger" ></span>
+							</div>
 						</div>
-					</div>
+			
 
 					<div class="col">
 						<div class="input-group " style="margin-right:170px">
-							<select class="form-select"  aria-label="Select Industry Type" asp-for="IndustryId">
+							<select class="form-select"  aria-label="Select Industry Type" asp-for="IndustryId" required>
 									<option value="">Select Industry Type</option>
 									@foreach (var industry in ViewBag.Industries as SelectList)
 									{
 										<option value="@industry.Value">@industry.Text</option>
 									}
 							</select>
-								<span asp-validation-for="IndustryId" class="text-danger" id="entityName"></span>
+							</div>
+								<span asp-validation-for="IndustryId" class="text-danger" ></span>
 						</div>
-					</div>
+					
 				</div>
 			</div>
 
@@ -226,67 +232,93 @@
 				<div class="row">
 					<div class="col">
 						<div class="input-group " style="margin-right:100px">
-							<select class="form-select" aria-label="Select State " asp-for="StateId">
+							<select class="form-select" aria-label="Select State " asp-for="StateId" required>
 									<option value="">Select State </option>
 									@foreach (var state in ViewBag.States as SelectList)
 									{
 										<option value="@state.Value">@state.Text</option>
 									}
 							</select>
-								<span asp-validation-for="StateId" class="text-danger" id="entityName"></span>
-						</div>
+							</div>
+								<span asp-validation-for="StateId" class="text-danger" ></span>
+						
 					</div>
 
 					<div class="col">
 						<div class="input-group " style="margin-right:100px">
-							<select class="form-select" aria-label="Select City " asp-for="CityId">
+							<select class="form-select" aria-label="Select City " asp-for="CityId" required>
 									<option value="">Select City </option>
 									@foreach (var city in ViewBag.Cities as SelectList)
 									{
 										<option value="@city.Value">@city.Text</option>
 									}
 							</select>
-								<span asp-validation-for="CityId" class="text-danger" id="entityName"></span>
-						</div>
+							</div>
+								<span asp-validation-for="CityId" class="text-danger" ></span>
+						
 					</div>
 
 					<div class="col">
 						<div class="input-group" style="margin-right:100px">
-							<select class="form-select" aria-label="Select Municipality " asp-for="MunicipalId">
+							<select class="form-select" aria-label="Select Municipality " asp-for="MunicipalId" required>
 									<option value="">Select Municipality </option>
 									@foreach (var municipal in ViewBag.Municipalies as SelectList)
 									{
 										<option value="@municipal.Value">@municipal.Text</option>
 									}
 							</select>
-								<span asp-validation-for="MunicipalId" class="text-danger" id="entityName"></span>
+								<span asp-validation-for="MunicipalId" class="text-danger" ></span>
 						</div>
 					</div>
 				</div>
 			</div>
 
+
 			<section style="margin:15px">
 			<h5><strong>List of Documents</strong></h5>
 
-			<div class="file-upload-container">
+			
 
-						<div class="file-upload-section" >
-							<label for="file1" style="flex: 1;"><strong>Certificate of Incorporation:</strong></label>
-							<input type="file" id="file1" name="file1" style="flex: 1; margin-left: 189px;">
+
+
+
+						<div class="file-upload-container">
+							@{
+								var documentList = ViewBag.DocumentName as SelectList;
+							}
+							@foreach (var item in documentList)
+							{
+								<div class="file-upload-section">
+									<label for="file@(item.Value)" style="flex: 1;"><strong>@item.Text</strong></label>
+									<input type="hidden" name="DocumentMasterId" value="@item.Value" />
+
+									<input type="file" id="file@(item.Value)" name="FileName" style="flex: 1; margin-left: 189px;" asp-for="FileName" multiple>
+									<span asp-validation-for="FileName" class="text-danger" ></span>
+								</div>
+								@if (!item.Equals(documentList.Last()))
+								{
+									<hr />
+								}
+							}
 						</div>
-						<hr />
- 					<div class="file-upload-section" >
-							<label for="file2" style="flex: 1;"><strong>PAN Card of Company:</strong></label>
-							<input type="file" id="file2" name="file2" style="flex: 1; margin-left: 189px;">
-						</div>
 
 
-			</div>
+
+
+
+				
+
+		
 
 
 			</section>
 
-				<button type="button" class="btn btn-warning" style="margin-left: 600px; font-weight: bold;">Submit Documents</button>
+				<button type="submit" class="btn btn-primary create-button" style="margin-left: 698px; font-weight: bold;">Submit Documents</button>
+
+				@* 	<div class="text-center">
+					<button type="button" class="btn btn-warning" style="font-weight: bold;margin-left: 600px;">Submit Documents</button>
+				</div> *@
+			
 			</form>
 	 </main>
 
@@ -301,10 +333,42 @@
 
 
 
-
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
+	<script>
+
+		$(document).on('click', '.create-button', function () {
+			var createUrl = '@Url.Action("Create", "UserDetail")';
+			$.ajax({
+				url: createUrl,
+				type: 'POST',
+				success: function (data) {
+					// if (data.success) {
+						console.log("Details created successfully");
+						//alert("Detail Created Successfully");
+						const progressItems = document.querySelectorAll('.StepProgress-item');
+						progressItems[1].classList.remove('current');
+						progressItems[1].classList.add('is-done');
+					// }
+					
+					
+				},
+				error: function (xhr, status, error) {
+					console.error("Error creating user detail : ", error);
+					alert("Error fetching user detail . Please try again.");
+				}
+			});
+		});
+
+	</script>
+
+	@section Scripts {
+		@{
+			await Html.RenderPartialAsync("_ValidationScriptsPartial");
+		}
+	}
 	
 </body>
 </html>

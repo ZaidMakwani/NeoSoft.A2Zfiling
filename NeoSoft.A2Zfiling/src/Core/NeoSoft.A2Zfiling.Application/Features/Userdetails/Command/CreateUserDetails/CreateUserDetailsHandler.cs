@@ -33,7 +33,31 @@ namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.CreateUserD
             {
                 _logger.LogInformation("Handler User Details Handler Initiated");
 
-                var details = new UserDetail()
+				var documentDetails = new List<DocumentDetail>();
+                for(int i=0;i<request.FileCollection.Count; i++)
+                {
+                    var fileName = request.FileCollection[i];
+                    var documentMasterId = request.DocumentMasterId[i];
+                    if (!string.IsNullOrEmpty(fileName))
+                    {
+                        var name = Path.GetFileName(fileName);//get only the file name with extension
+                        var fileType = Path.GetExtension(fileName); //get the file extension
+                        var documenDetail = new DocumentDetail
+                        {
+                            FileName = fileName,
+                            FileType = fileType,
+                            IsActive=true,
+                            DocumentMasterId=documentMasterId,
+                        };
+                        documentDetails.Add(documenDetail); 
+                    }
+                }
+                //foreach(var  documentDetail in documentDetails)
+                //{
+                //    await _documentRepository.AddAsync(documentDetail);
+                //}
+
+				var details = new UserDetail
                 {
                     CompanyName = request.CompanyName,
                     CompanyAddress = request.CompanyAddress,
@@ -42,64 +66,15 @@ namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.CreateUserD
                     CityId = request.CityId,
                     StateId = request.StateId,
                     MunicipalId = request.MunicipalId,
+                    DocumentDetails=documentDetails,
                     IsActive=true
+                   
                 };
-                
-                var userDetail = _mapper.Map<UserDetail>(details);
-                await _asyncRepository.AddAsync(userDetail);
-
-                // Check if files are present in the request
-                if (request.FileName == null || request.FileName.Count == 0)
-                {
-                    return new Response<CreateUserDetailsDto>("No files uploaded or file count is 0.");
-                }
-
-                var fileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
-
-                // Create directory if it doesn't exist
-                if (!Directory.Exists(fileDirectory))
-                {
-                    Directory.CreateDirectory(fileDirectory);
-                }
-
-                // List to store responses for uploaded documents
-                var uploadInfoResponses = new List<CreateUserDetailsDto>();
-                var documentDetails = new List<DocumentDetail>();
-
-                for (int i = 0; i < request.FileName.Count; i++)
-                {
-                    var uploadFile = request.FileName[i];  // Retrieve the current file
-                    var documentMasterId = request.DocumentMasterId[i]; // Retrieve the corresponding document master id for the file
-
-                    var uniqueFileName = Path.GetFileName(uploadFile.FileName); // Get the file name 
-                    var filePath = Path.Combine(fileDirectory, uniqueFileName); // Construct the full path to be stored
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await uploadFile.CopyToAsync(stream);
-                    }
-
-                    var documentDetail = new DocumentDetail
-                    {
-                        FileName = uploadFile.FileName,
-                        FileType = Path.GetExtension(uploadFile.FileName),
-                        IsActive = true,
-                        UserDetailId = userDetail.UserDetailId,
-                        DocumentMasterId = documentMasterId,
-                        
-                    };
-
-                    documentDetails.Add(documentDetail);
-
-                    _logger.LogInformation($"File '{uploadFile.FileName}' uploaded and saved as '{uniqueFileName}' to '{fileDirectory}' on the file system.");
-                }
-                foreach (var documentDetail in documentDetails)
-                {
-                    await _documentRepository.AddAsync(documentDetail);
-                }
+                await _asyncRepository.AddAsync(details);
+                             
                 _logger.LogInformation("Handler User Details Handler Completed");
 
-                var responseDto = _mapper.Map<CreateUserDetailsDto>(userDetail);
+                var responseDto = _mapper.Map<CreateUserDetailsDto>(details);
 
                 return new Response<CreateUserDetailsDto>(responseDto, "User details created successfully.");
             }

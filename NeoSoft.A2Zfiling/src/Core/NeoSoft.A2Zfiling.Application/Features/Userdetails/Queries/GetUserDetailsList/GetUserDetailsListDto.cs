@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Queries.GetUserDetailsList
 {
+    //--------------
     public class GetUserDetailsListDto
     {
         

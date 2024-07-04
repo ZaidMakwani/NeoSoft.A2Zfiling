@@ -62,7 +62,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
         }
 
         [HttpPost(Name = "AddUserDetail")]
-        public async Task<ActionResult> Create([FromForm] CreateUserDetailsCommand model)
+        public async Task<ActionResult> Create([FromBody] CreateUserDetailsCommand model)
         {
             try
             {

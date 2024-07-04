@@ -32,10 +32,10 @@ namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.CreateUserD
         [ForeignKey("MunicipalCorp")]
         public int MunicipalId { get; set; }
 
-        [ForeignKey("DocumentMaster")]
+        [ForeignKey("DocumentMasters")]
         public List<int> DocumentMasterId { get; set; }
 
-        public List<IFormFile> FileName { get; set; }
+        public List<string> FileCollection { get; set; }
 
         //public List<string> FileType { get; set; }
 

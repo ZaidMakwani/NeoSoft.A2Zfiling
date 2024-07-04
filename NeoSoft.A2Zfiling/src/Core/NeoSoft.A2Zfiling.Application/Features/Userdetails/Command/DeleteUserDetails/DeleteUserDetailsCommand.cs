@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.DeleteUserDetails
 {
+    //------------
     public class DeleteUserDetailsCommand:IRequest<Response<DeleteUserDetailsDto>>
     {
         public int UserDetailId { get; set; }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Queries.GetUserDetailsById
 {
+    //---------------
     public class GetUserDetailByIdQuery:IRequest<Response<GetUserDetailByIdDto>>
     {
         public int UserDetailId { get; set; }

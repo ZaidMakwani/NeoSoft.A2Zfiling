@@ -17,7 +17,7 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
         [ForeignKey("UserDetail")]
         public int UserDetailId { get; set; }
 
-        [ForeignKey("DocumentMaster")]
+        [ForeignKey("DocumentMasters")]
         public int DocumentMasterId { get; set; }
 
        

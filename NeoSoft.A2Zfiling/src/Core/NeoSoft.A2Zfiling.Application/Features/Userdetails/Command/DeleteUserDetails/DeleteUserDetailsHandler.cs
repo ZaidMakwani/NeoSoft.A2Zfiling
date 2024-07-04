@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.DeleteUserDetails
 {
+    //------------------
     public class DeleteUserDetailsHandler : IRequestHandler<DeleteUserDetailsCommand, Response<DeleteUserDetailsDto>>
     {
         private readonly ILogger<DeleteUserDetailsHandler> _logger;

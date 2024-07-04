@@ -24,11 +24,13 @@ namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Queries.GetUserDeta
         private readonly IAsyncRepository<City> _cityRepository;
         private readonly IAsyncRepository<MunicipalCorp> _municipalRepositoty;
         private readonly IAsyncRepository<DocumentDetail> _documentDetailRepository;
+        private readonly IAsyncRepository<DocumentMasters> _documentMastersRepository;
         private readonly IMapper _mapper;
 
         public GetUserDetailByIdHandler(ILogger<GetUserDetailByIdHandler> logger, IAsyncRepository<UserDetail> asyncRepository, IMapper mapper,
             IAsyncRepository<Company> companyRepository, IAsyncRepository<Industry> industryRepository, IAsyncRepository<State> stateRepository,
-            IAsyncRepository<City> cityRepository, IAsyncRepository<MunicipalCorp> municipalRepositoty, IAsyncRepository<DocumentDetail> documentDetailRepository)
+            IAsyncRepository<City> cityRepository, IAsyncRepository<MunicipalCorp> municipalRepositoty, IAsyncRepository<DocumentDetail> documentDetailRepository,
+            IAsyncRepository<DocumentMasters> documentMastersRepository)
         {
             _asyncRepository = asyncRepository;
             _mapper = mapper;
@@ -39,6 +41,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Queries.GetUserDeta
             _cityRepository = cityRepository;
             _municipalRepositoty = municipalRepositoty;
             _documentDetailRepository = documentDetailRepository;
+            _documentMastersRepository = documentMastersRepository;
         }
         public async Task<Response<GetUserDetailByIdDto>> Handle(GetUserDetailByIdQuery request, CancellationToken cancellationToken)
         {
@@ -92,7 +95,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Queries.GetUserDeta
                         DocumentMaster = new DocumentMasterDto
                         {
                             DocumentMasterId = d.DocumentMasterId,
-                            //DocumentName = d.DocumentMaster != null ? d.DocumentMaster.DocumentName : null,
+                            DocumentName = _documentMastersRepository.GetByIdAsync(d.DocumentMasterId)?.Result.DocumentName,
                             IsActive = d.IsActive
                         }
                     }).Where(d => d.IsActive == true).ToList()

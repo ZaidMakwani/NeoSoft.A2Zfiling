@@ -31,7 +31,7 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
         [ForeignKey("MunicipalCorp")]
         public int MunicipalId { get; set; }
 
-        public List<DocumentMaster> DocumentMasters { get; set; }
+        public List<DocumentMasters> DocumentMasters { get; set; }
         public List<DocumentDetail> DocumentDetails{ get; set; }
 
         public bool IsActive { get; set; }

@@ -29,5 +29,37 @@ namespace NeoSoft.A2ZFiling.UI.Services
                 throw ex;
             }
         }
-    }
+
+		public async Task<UserDetailVM> GetByIdAsync(int id)
+		{
+			try
+			{
+				_logger.LogInformation("GetUserDetailById Service Initiated");
+				var userDetail = await _apiClient.GetByIdAsync($"UserDetail/id?id={id}");
+				_logger.LogInformation("GetUserDetailById Service Completed");
+				return userDetail.Data;
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError("An error occurred while getting a particular data ");
+				throw ex;
+			}
+		}
+
+		public async Task<IEnumerable<UserDetailVM>> GetUserDetailAsync()
+		{
+			try
+			{
+				_logger.LogInformation("GetUserDetail Service Initiated");
+				var userDetail = await _apiClient.GetAllAsync("UserDetail/all");
+				_logger.LogInformation("GetUserDetail Service Completed");
+				return userDetail.Data;
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError("An error occurred while retrieving the data ");
+				throw ex;
+			}
+		}
+	}
 }

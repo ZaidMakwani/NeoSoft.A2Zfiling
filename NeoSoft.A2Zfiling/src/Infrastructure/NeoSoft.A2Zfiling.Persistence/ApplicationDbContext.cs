@@ -20,18 +20,13 @@ namespace NeoSoft.A2Zfiling.Persistence
            : base(options)
         {
         }
-<<<<<<< HEAD
 
         public DbSet<UserDetail> UserDetails { get; set; }
         public DbSet<DocumentDetail> DocumentDetails { get; set; }
 
-        public DbSet<DocumentMaster> DocumentMasters { get; set; }
-
-
-=======
         public DbSet<DocumentMasters> DocumentMasters { get; set; }
         public DbSet<LicenseDocument> LicenseDocuments { get; set; }
->>>>>>> development-shivam-1
+
         public DbSet<SubStatus> SubStatuses { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<LicenseMaster> LicenseMaster { get; set; }

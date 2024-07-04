@@ -33,7 +33,7 @@ namespace NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.UpdateUserD
         [ForeignKey("MunicipalCorp")]
         public int MunicipalId { get; set; }
 
-        [ForeignKey("DocumentMaster")]
+        [ForeignKey("DocumentMasters")]
         public List<int> DocumentMasterId { get; set; }
 
         public List<IFormFile> FileName { get; set; }

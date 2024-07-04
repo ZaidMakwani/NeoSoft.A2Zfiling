@@ -50,7 +50,9 @@ namespace NeoSoft.A2Zfiling.Common.Helper.ApiHelper
 
         public async Task<Response<T>> PostAsync<TEntity>(string apiUrl, TEntity entity)
         {
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(entity), System.Text.Encoding.UTF8, "application/json");
+            var body = JsonConvert.SerializeObject(entity);
+
+			StringContent stringContent = new StringContent(body, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage responseMessage = await _httpClient.PostAsync(apiUrl, stringContent);
             return await ValidateResponse(responseMessage);
         }

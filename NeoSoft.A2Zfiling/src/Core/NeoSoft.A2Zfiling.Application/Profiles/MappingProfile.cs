@@ -89,20 +89,25 @@ using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.DeleteSubStatus
 
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
-<<<<<<< HEAD
+
 using NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.CreateUserDetails;
 using NeoSoft.A2Zfiling.Application.Features.Userdetails.Queries.GetUserDetailsList;
 using NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.UpdateUserDetails;
 using NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.DeleteUserDetails;
-=======
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.CreateDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Queries.GetAllDocumentMasterQuery;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.UpdateDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.DeleteDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Queries.GetDocumentMaster;
+
+
+
+
 using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.CreateDocumentMaster;
 using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Queries.GetAllDocumentMasterQuery;
 using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Queries.GetDocumentMaster;
 using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.UpdateDocumentMaster;
 using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.DeleteDocumentMaster;
->>>>>>> development-shivam-1
-
-
 
 namespace NeoSoft.A2Zfiling.Application.Profiles
 {
@@ -253,13 +258,11 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<LicenseMaster, GetAllLicenseMasterQuery>();
             CreateMap<LicenseMaster, UpdateLicenseMasterCommand>().ReverseMap();
 
-<<<<<<< HEAD
 
             CreateMap<UserDetail,CreateUserDetailsDto>().ReverseMap();
             CreateMap<UserDetail,UpdateUserDetailsDto>().ReverseMap();
             CreateMap<UserDetail,DeleteUserDetailsDto>().ReverseMap();
           
-=======
             CreateMap<DocumentMasters, CreateDocumentMasterCommandDto>();
             CreateMap<DocumentMasters, CreateDocumentMasterCommand>();
             CreateMap<DocumentMasters, GetAllDocumentMasterQuery>();
@@ -269,7 +272,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<DocumentMasters, UpdateDocumentMasterCommand>().ReverseMap();
             CreateMap<DocumentMasters, DeleteDocumentMasterDto>();
             CreateMap<DocumentMasters, DeleteDocumentMasterCommand>().ReverseMap();
->>>>>>> development-shivam-1
+
         }
     }
 }

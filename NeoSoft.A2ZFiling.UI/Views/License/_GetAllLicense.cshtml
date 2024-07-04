@@ -18,12 +18,12 @@
     </div> *@
 
     <div class="card-header">
-        <div class="float-right">
+        <div @* class="float-left" *@ style="margin-left: 19px;">
             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createLicenseModal" data-url="@Url.Action("Create", "License")">
                 <i class="fas fa-plus"></i>
             </button>
 
-            <div class="navbar-search-block">
+            @* <div class="navbar-search-block">
                 <form class="form-inline">
                     <div class="input-group input-group-sm">
                         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> *@
         </div>
     
 
