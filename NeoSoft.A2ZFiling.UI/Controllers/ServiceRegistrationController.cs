@@ -40,10 +40,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         {
             return View("BusinessSetupRegistration");
         }
-
+         
         [HttpPost]
         public IActionResult SendOtp(OtpRequest model)
         {
+
             if (!string.IsNullOrWhiteSpace(model.MobileNumber))
             {
                 TwilioClient.Init(accountSid, authToken);
@@ -53,6 +54,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
                 TempData["OTP"] = otp;
                 TempData["MobileNumber"] = model.MobileNumber;
+                if(model.Otp != null)
+                {
+                    TempData["Message"] = "OTP sent again. Please Try Again!";
+                }
 
                 return PartialView("_OtpInputPartial", model);
             }

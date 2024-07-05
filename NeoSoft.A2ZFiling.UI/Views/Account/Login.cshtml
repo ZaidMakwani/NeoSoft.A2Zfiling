@@ -74,14 +74,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-action="Index" asp-controller="Account">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                @*  <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-                </li> *@
+
+              
                 <li class="nav-item">
                     <a class="nav-link" asp-action="Registration" asp-controller="Account">Register</a>
                 </li>
@@ -103,10 +99,11 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="~index2.html" class="h1"><b>Login</b></a>
+                 @* <h2>Login</h2> *@
+                <img src="~/dist/img/logo-transparent-png.png" style="width: 100%;" />
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <h3 class="login-box-msg text-center">Login</h3>
 
                 <form asp-action="Login" asp-controller="Account" method="post" class="form" id="loginForm">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -140,7 +137,7 @@
                                 </label>
                             </div>
                         </div> *@
-                        <div class="col-12">
+                        <div class="col-12 mb-3">
                             <dnt-captcha asp-captcha-generator-max="999999"
                                          asp-captcha-generator-min="111111"
                                          asp-captcha-generator-language="English"
@@ -152,7 +149,7 @@
                                          asp-use-relative-urls="true"
                                          asp-placeholder="Enter Captcha"
                                          asp-text-box-class="form-control"
-                                         asp-text-box-template="<span class='input-group-prepend'><span class='form-group-text'></span></span>{0}"
+                                         asp-text-box-template="<span class='input-group-prepend'><span class='form-group-text mb-3'></span></span>{0}"
                                          asp-validation-message-class="text-danger"
                                          asp-use-noise="false" />
                             @if (TempData["captchaError"] != null)
@@ -188,13 +185,13 @@
                         </div> *@
                        
                         <div class="col-12">
-                            <button type="submit" class="btn btn-custom btn-block m-2">Sign In</button>
+                            <button type="submit" class="btn btn-custom btn-block">Sign In</button>
                         </div>
                     </div>
                 </form>
 
-                <p class="mb-1">
-                    <a asp-controller="Account" asp-action="ForgotPassword">I forgot my password</a>
+                <p class="mb-1 float-right">
+                    <a asp-controller="Account" asp-action="ForgotPassword">Forget Password</a>
                 </p>    
 
             </div>

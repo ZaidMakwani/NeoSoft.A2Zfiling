@@ -117,6 +117,31 @@
                                 <div class="form-group">
                                     <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Verify OTP" type="submit">
                                 </div>
+                                
+                                @if (TempData["Message"] != null)
+                                {
+                                    <p>@TempData["Message"]</p>
+                                }
+
+                                <input type="hidden" class="hide" name="token" id="token" value="">
+                            </form>
+                            <form asp-action="SendOtp" asp-controller="ServiceRegistration" id="register-form" role="form" autocomplete="off" class="form" method="post">
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                       
+                                        <input asp-for="MobileNumber" id="otp" placeholder="otp" class="form-control" type="hidden" value="@Model.MobileNumber">
+                                    </div>
+                                    <div class="input-group">
+                                       
+                                        <input asp-for="Otp" id="otp" placeholder="otp" class="form-control" type="hidden" value="otp">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input name="recover-submit" class="button-as-link" value="Resend OTP" type="submit">
+                                </div>
+
+
 
                                 <input type="hidden" class="hide" name="token" id="token" value="">
                             </form>

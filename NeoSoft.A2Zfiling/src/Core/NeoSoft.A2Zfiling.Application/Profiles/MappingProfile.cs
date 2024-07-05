@@ -241,7 +241,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<LicenseMaster, GetAllLicenseMasterVM>();
             CreateMap<LicenseMaster, GetAllLicenseMasterQuery>();
             CreateMap<LicenseMaster, UpdateLicenseMasterCommand>().ReverseMap();
-            
+            CreateMap<List<GetUserIdsByRoleDto>, IList<AppUser>>().ReverseMap();
 
             CreateMap<AppUser, GetUserIdByEmailDto>().ReverseMap();
         }
