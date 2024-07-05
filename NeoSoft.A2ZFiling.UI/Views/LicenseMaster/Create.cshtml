@@ -3,7 +3,7 @@
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<div class="card card-default col-md-12" style="margin-left:30%;margin-top:5%;width:70%">
+<div class="card card-default col-md-12" style="margin-left:3%;margin-top:5%;width:auto">
     <div class="card-header">
         <h3 class="card-title">License Mapping</h3>
         <div class="card-tools">
@@ -78,33 +78,11 @@
                         </div>
                     </div>
 
-                  @*   <!-- /.col -->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Select State</label>
-                            <select class="form-control select2bs4" style="width: 100%;">
-                                <option value="">Choose State</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Select City</label>
-                            <select class="form-control select2bs4" style="width: 100%;">
-                                <option value="">Choose City</option>
-                               
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Select Municipal Corporation</label>
-                            <select class="form-control select2bs4" style="width: 100%;">
-                                <option value="">Choose Municipal Corporation</option>
-                                
-                            </select>
-                        </div> *@
+                 
                     <div class="col-md-6">
                     <div class="form-group">
                             
-                        @Html.LabelFor(m => m.StateId, new { @class = "control-label" })
+                        @Html.LabelFor(m => m.StateId,"State", new { @class = "control-label" })
                             @Html.ValidationMessageFor(m => m.StateId, "", new { @class = "text-danger" })
                         <select id="state-dropdown" name="StateId" class="form-control">
                             <option value="">Select State</option>
@@ -116,7 +94,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(m => m.CityId, new { @class = "control-label" })
+                        @Html.LabelFor(m => m.CityId,"City", new { @class = "control-label" })
                             @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
                         <select id="city-dropdown" name="CityId" class="form-control">
                             <option value="">Select City</option>
@@ -124,7 +102,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(m => m.MunicipalId, new { @class = "control-label" })
+                        @Html.LabelFor(m => m.MunicipalId,"Municipal Corporation", new { @class = "control-label" })
                             @Html.ValidationMessageFor(m => m.MunicipalId, "", new { @class = "text-danger" })
                         <select id="municipal-dropdown" name="MunicipalId" class="form-control">
                             <option value="">Select Municipal Corporation</option>
@@ -190,13 +168,15 @@
                 </div>
                 <!-- /.row -->
                 <div class="form-group row">
-                    <div class="col-sm-10 offset-sm-2">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                    <div class="text-center">
+                    <input type="submit" value="Save" class="btn btn-primary col-3" style="font-weight: bold;font-size:20px" />
                     </div>
                 </div>
             
         }
     </div>
+    </div>
+
    
 @section Scripts {
     @{
