@@ -1,6 +1,8 @@
-﻿@{
-    ViewData["Title"] = "About Us";
-    Layout = null; // This ensures the page does not use a shared layout
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.AboutVM
+@using System.Net
+@{
+    ViewData["Title"] = "about";
+    Layout = "_Layout"; // This ensures the page does not use a shared layout
 }
 
 <!DOCTYPE html>
@@ -8,26 +10,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - A2Z-LandingPage</title>
+    <title>about of Use - A2Z-LandingPage</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Custom styles specific to About Us page */
+        /* Custom styles specific to Terms of Use page */
         body {
             font-family: Arial, sans-serif;
         }
 
-        .about-section {
+        .terms-section {
             padding: 50px 20px;
-            background: #f9f9f9;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-            .about-section h2 {
+            .terms-section h2 {
                 font-size: 2.5em;
                 margin-bottom: 30px;
             }
 
-            .about-section p {
+            .terms-section p {
                 font-size: 1.1em;
                 line-height: 1.6;
             }
@@ -37,30 +41,24 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <div class="about-section">
-                    <h2 class="text-center mb-4">About Us</h2>
-                    <p>
-
-                        An extremely delivery oriented engine that promises delivery by
-                        the committed TAT for all your licenses making
-                        compliance simple and affordable
-                    </p>
-                    <p>
-                        A2Z-filing is dedicated to revolutionizing document management systems
-                        by offering innovative solutions that streamline document handling,
-                        enhance security, and improve efficiency. Our mission is to empower businesses
-                        of all sizes to manage their documents seamlessly, ensuring compliance and facilitating growth.
-                    </p>
-                    <p>
-                        With a commitment to delivering cutting-edge technology and exceptional service
-                        , we strive to be a trusted partner in your journey towards efficient document
-                        management. Whether it's document digitization, workflow automation,
-                        or secure storage solutions, A2Z-LandingPage is here to support your needs.
-                    </p>
+                <div class="terms-section">
+                    @Html.Raw(WebUtility.HtmlDecode(Model.About))
                 </div>
             </div>
         </div>
     </div>
+    <div class="form-group text-center">
+     @*    @if (TempData["Role"].ToString() == "Admin")
+        {
+            <a type="submit" asp-controller="Account" asp-action="EditAboutUs" class="btn btn-success mr-2">Edit</a>
+        } *@
+        <a type="submit" asp-controller="Account" asp-action="EditAboutUs" class="btn btn-success mr-2">Edit</a>
+
+        <a type="button" asp-controller="Account" asp-action="Index" class="btn btn-secondary mr-2">Back</a>
+
+    </div>
+
+
 
     <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

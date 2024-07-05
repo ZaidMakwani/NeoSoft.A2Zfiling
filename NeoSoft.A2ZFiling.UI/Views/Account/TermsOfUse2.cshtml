@@ -1,0 +1,98 @@
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.TermsAndConditionsVM;
+
+@{
+    ViewData["Title"] = "Edit About Us";
+    // Layout = "_Layout"; // This ensures the page does not use a shared layout
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Request</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Bootstrap default background */
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            background-color: #fff; /* White background for container */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Shadow for container */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class>
+        <h2 class="text-center mb-4">Terms & Condition</h2>
+
+        <div id="viewMode">
+            <p>About Service Request</p>
+            <div id="aboutUsText">@Html.Raw(Model.TermsDescrption)</div>
+            <button id="editButton" class="btn btn-primary mb-3">Edit</button>
+        </div>
+
+        <form id="editMode" method="post" asp-action="TermsOfUse" asp-controller="Account" style="display: none;">
+            <div class="form-group">
+                <label asp-for="TermsDescrption" class="font-weight-bold">About Service Request:</label>
+                <textarea asp-for="TermsDescrption" class="form-control" rows="8" id="aboutUsTextArea">@Model.TermsDescrption</textarea>
+                <span asp-validation-for="TermsDescrption" class="text-danger"></span>
+                <small id="wordCount" class="form-text text-muted">Words remaining: 100</small>
+            </div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-success mr-2">Save</button>
+                <button type="button" id="cancelButton" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Edit button click handler
+            $('#editButton').click(function () {
+                $('#viewMode').hide();
+                $('#editMode').show();
+                $('#aboutUsTextArea').focus(); // Set focus on textarea
+            });
+
+            // Cancel button click handler
+            $('#cancelButton').click(function () {
+                $('#editMode').hide();
+                $('#viewMode').show();
+            });
+
+            // Word count and validation
+            var maxWords = 100;
+            $('#aboutUsTextArea').keyup(function () {
+                var words = this.value.match(/\S+/g).length;
+                var wordsRemaining = maxWords - words;
+                $('#wordCount').text('Words remaining: ' + wordsRemaining);
+                if (words > maxWords) {
+                    var trimmedText = $(this).val().split(/\s+/, maxWords).join(" ");
+                    $(this).val(trimmedText);
+                    $('#wordCount').text('Words remaining: 0');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

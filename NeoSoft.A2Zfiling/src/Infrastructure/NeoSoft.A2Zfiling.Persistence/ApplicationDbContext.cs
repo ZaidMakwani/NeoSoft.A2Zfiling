@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using NeoSoft.A2Zfiling.Application.Features.ContentService.Command.Edit;
 
 namespace NeoSoft.A2Zfiling.Persistence
 {
@@ -17,10 +18,17 @@ namespace NeoSoft.A2Zfiling.Persistence
     public class ApplicationDbContext:IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-           : base(options)
+        : base(options)
         {
         }
+        public DbSet<FAQ> FAQ { get; set; }
 
+        public DbSet<ContactUS> ContactUS { get; set; }
+
+        public DbSet<AboutUsDetail> AboutUsDetail { get; set; }
+
+        public DbSet<TermsAndConditionsss> TermsAndConditionsss { get; set; }
+        public DbSet<ServiceRequest> ServiceRequests { get; set; }
         public DbSet<SubStatus> SubStatuses { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<LicenseMaster> LicenseMaster { get; set; }

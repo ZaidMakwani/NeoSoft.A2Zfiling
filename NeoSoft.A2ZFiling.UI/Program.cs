@@ -22,6 +22,14 @@ builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IZoneService, ZoneService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IStateService, StateService>();
+builder.Services.AddScoped<IServiceRequest, ServiceRequest>();
+builder.Services.AddScoped<ITermsAndConditionsServices, TermsAndConditionsServices>();
+builder.Services.AddScoped<IAboutUsDetailService, AboutUsDetailService>();
+builder.Services.AddScoped<IFAQService, FAQService>();
+builder.Services.AddScoped<IFormService, FormService>();
+
+
+
 
 builder.Services.AddScoped<IMyProfileService, MyProfileService>();
 builder.Services.AddScoped<IPermissionService,PermissionService>();

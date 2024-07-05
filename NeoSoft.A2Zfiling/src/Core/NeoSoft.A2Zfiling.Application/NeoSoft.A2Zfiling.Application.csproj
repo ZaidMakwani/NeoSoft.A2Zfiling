@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <Folder Include="Contracts\Infrastructure\" />
+    <Folder Include="Features\ContactUsFeatures\Command\DeletForm\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
 

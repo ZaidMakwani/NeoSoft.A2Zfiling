@@ -1,11 +1,13 @@
-﻿@{
+﻿@model NeoSoft.A2ZFiling.UI.ViewModels.TermsAndConditionsVM
+@using System.Net
+@{
     ViewData["Title"] = "Terms of Use";
-    Layout = null; // This ensures the page does not use a shared layout
+    Layout = "_Layout"; // This ensures the page does not use a shared layout
 }
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Use - A2Z-LandingPage</title>
@@ -17,10 +19,12 @@
             font-family: Arial, sans-serif;
         }
 
-        .terms-section {
-            padding: 50px 20px;
-            background: #f9f9f9;
-        }
+    .terms-section {
+        padding: 50px 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
             .terms-section h2 {
                 font-size: 2.5em;
@@ -32,29 +36,29 @@
                 line-height: 1.6;
             }
     </style>
-</head>
+
 <body>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="terms-section">
-                    <h2 class="text-center mb-4">Terms of Use</h2>
-                    <p>
-                        By using A2Z-Filing's services and accessing our website, you agree to comply with these terms and conditions. These terms govern your use of our platform, including but not limited to the following:
-                    </p>
-                    <ul>
-                        <li>Users are responsible for providing accurate and complete documentation.</li>
-                        <li>Users must adhere to all legal and regulatory requirements related to document submission.</li>
-                        <li>A2Z-Filing reserves the right to verify and validate all submitted documentation.</li>
-                        <li>Failure to comply with these terms may result in account suspension or termination.</li>
-                    </ul>
-                    <p>
-                        Please review our full terms and conditions for detailed information regarding your obligations and our responsibilities.
-                    </p>
+                    @Html.Raw(WebUtility.HtmlDecode(Model.TermsDescrption))
                 </div>
             </div>
         </div>
     </div>
+    <div class="form-group text-center">
+
+        @* @if (TempData["Role"].ToString() == "Admin")
+        {
+            <a type="submit" asp-controller="Account" asp-action="EditTnC" class="btn btn-success mr-2">Edit</a>
+        } *@
+        <a type="submit" asp-controller="Account" asp-action="EditTnC" class="btn btn-success mr-2">Edit</a>
+
+        <a type="button" asp-controller="Account" asp-action="Index" class="btn btn-secondary mr-2">Back</a>
+    </div>
+
+    
 
     <!-- Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

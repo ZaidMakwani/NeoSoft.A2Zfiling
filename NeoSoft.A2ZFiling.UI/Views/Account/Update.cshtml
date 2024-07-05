@@ -1,0 +1,106 @@
+﻿ @model NeoSoft.A2ZFiling.UI.ViewModels.ContactUSVM
+@using System.Net
+@{
+    Layout = "_Layout";
+}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - A2Z-LandingPage</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles specific to Contact Us page */
+       /*  body {
+            font-family: Arial, sans-serif;
+        } */
+
+        .contact-form {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                font-weight: bold;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-submit {
+            padding: 10px 20px;
+            background-color: #00aaff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+            .btn-submit:hover {
+                background-color: #0088cc;
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="contact-form">
+                    <h2 class="text-center mb-4">Update</h2>
+                    <form id="contactForm" asp-action="Update" asp-controller="Account" method="post" data-ajax="true" data-ajax-method="POST">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="YourName"> Enter Your Name</label>
+                            <input asp-for="YourName" class="form-control" />
+                            <span asp-validation-for="YourName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="YourEmail"> Enter your Email ID</label>
+                            <input asp-for="YourEmail" class="form-control" />
+                            <span asp-validation-for="YourEmail" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Message"></label>
+                            <textarea asp-for="Message" rows="5" class="form-control"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <a type="button" asp-controller="Account" asp-action="Index" class="btn btn-secondary mr-2">Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- jQuery Validation Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+</body>
+

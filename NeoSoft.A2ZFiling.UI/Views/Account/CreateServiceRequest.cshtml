@@ -1,0 +1,179 @@
+﻿@* @model NeoSoft.A2ZFiling.UI.ViewModels.ServiceRequestVM
+
+@{
+    ViewData["Title"] = "Edit About Us";
+    Layout = "_Layout"; // This ensures the page does not use a shared layout
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit About Us - A2Z-LandingPage</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Bootstrap default background */
+           /*  display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0; */
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            background-color: #fff; /* White background for container */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Shadow for container */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+
+
+       
+
+      
+    </style>
+</head>
+<body>
+    <div>
+        <h2 class="text-center mb-4">Edit About Us</h2>
+
+        <form asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="AboutUs" class="font-weight-bold">About Company:</label>
+                <textarea asp-for="AboutUs" class="form-control" rows="8"></textarea>
+                <span asp-validation-for="AboutUs" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-success mr-2">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+ *@
+
+                @model NeoSoft.A2ZFiling.UI.ViewModels.ServiceRequestVM
+
+@{
+    ViewData["Title"] = "Edit About Us";
+    Layout = "_Layout"; // This ensures the page does not use a shared layout
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editing Service</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Bootstrap default background */
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            background-color: #fff; /* White background for container */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Shadow for container */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class>
+        <h2 class="text-center mb-4">Edited Services</h2>
+
+        <form asp-action="CreateServiceRequest" asp-controller="Account">
+            <div class="form-group">
+                <label asp-for="AboutUs" class="font-weight-bold">About Company (up to 100 words):</label>
+                <textarea asp-for="AboutUs" class="form-control" rows="8" id="aboutUsTextArea"></textarea>
+                <span asp-validation-for="AboutUs" class="text-danger"></span>
+                <small id="wordCount" class="form-text text-muted">Words remaining: 100</small>
+            </div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group text-center">
+@*                 <button type="submit" class="btn btn-success mr-2">Save</button>
+                *@ <a asp-controller="Account" asp-action="GetallServiceRequest" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for word count -->
+    <script>
+
+        $(document).ready(function () {
+            $('#saveButton').click(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Perform AJAX request
+                $.ajax({
+                    url: '/Account/GetallServiceRequest', // URL to your controller action
+                    type: 'GET', // HTTP method (GET, POST, etc.)
+                    success: function (response) {
+                        // Handle success response here
+                        console.log('Request successful');
+                        console.log(response); // Log the response to the console
+                        // You can optionally handle the response data here
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            var maxWords = 100;
+            $('#aboutUsTextArea').keyup(function () {
+                var words = this.value.match(/\S+/g).length;
+                var wordsRemaining = maxWords - words;
+                $('#wordCount').text('Words remaining: ' + wordsRemaining);
+                if (words > maxWords) {
+                    // Trim excess words
+                    var trimmedText = $(this).val().split(/\s+/, maxWords).join(" ");
+                    $(this).val(trimmedText);
+                    $('#wordCount').text('Words remaining: 0');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

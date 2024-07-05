@@ -1,7 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Contact Us";
-    Layout = null; // This ensures the page does not use a shared layout
-}
+﻿
+ @model NeoSoft.A2ZFiling.UI.ViewModels.ContactUSVM
+@using System.Net
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +17,14 @@
         }
 
         .contact-form {
-            max-width: 600px;
+            max-width: 800px;
             margin: auto;
             padding: 20px;
-            background: #f9f9f9;
+            background: white;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        
 
         .form-group {
             margin-bottom: 20px;
@@ -62,20 +62,29 @@
             <div class="col-md-8 offset-md-2">
                 <div class="contact-form">
                     <h2 class="text-center mb-4">Contact Us</h2>
-                    <form id="contactForm">
+                    <form id="contactForm" asp-action="ContactUs" asp-controller="Account" method="post" data-ajax="true" data-ajax-method="POST">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                         <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <label asp-for="YourName"> Enter Your Name</label>
+                            <input asp-for="YourName" class="form-control" />
+                            <span asp-validation-for="YourName" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <label asp-for="YourEmail"> Enter your Email ID</label>
+                            <input asp-for="YourEmail" class="form-control" />
+                            <span asp-validation-for="YourEmail" class="text-danger"></span>
                         </div>
+
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+                            <label asp-for="Message"></label>
+                            <textarea asp-for="Message" rows="5" class="form-control"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
                         </div>
-                        <button type="submit" class="btn btn-submit btn-block">Submit</button>
+
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <a type="button" asp-controller="Account" asp-action="Index" class="btn btn-secondary mr-2">Back</a>
                     </form>
                 </div>
             </div>
@@ -86,31 +95,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        // Handle form submission
-        $(function () {
-            $('#contactForm').submit(function (e) {
-                e.preventDefault(); // Prevent the form from submitting normally
+    <!-- jQuery Validation Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
-                // Serialize form data
-                var formData = $(this).serialize();
+    
 
-                // AJAX POST request
-                $.post({
-                    url: '@Url.Action("Index", "Account")', // Replace with your controller and action method
-                    data: formData,
-                    success: function (response) {
-                        // Show success message
-                        alert("You have successfully sent your message.");
-                        // Optionally redirect to another page
-                        window.location.href = '@Url.Action("Index", "Account")'; // Replace with your success view
-                    },
-                    error: function () {
-                        alert('Error submitting form. Please try again.'); // Optional: Handle error
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

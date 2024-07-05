@@ -89,6 +89,19 @@ using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.DeleteSubStatus
 
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
+using NeoSoft.A2Zfiling.Application.Features.ContentService.Command.Edit;
+using NeoSoft.A2Zfiling.Application.Features.ContentService.Query.GettAll;
+using NeoSoft.A2Zfiling.Application.Features.TermsAndConditions.Query.GetAll;
+using NeoSoft.A2Zfiling.Application.Features.TermsAndConditions.Commands.Edit;
+using NeoSoft.A2Zfiling.Application.Features.AboutUs.Query.GetAll;
+using NeoSoft.A2Zfiling.Application.Features.AboutUs.Command.Edit;
+using NeoSoft.A2Zfiling.Application.Features.FAQFeatures.Query.GetAll;
+using NeoSoft.A2Zfiling.Application.Features.FAQFeatures.Command.Edit;
+using NeoSoft.A2Zfiling.Application.Features.ContactUsFeatures.Command.SubmitForm;
+using NeoSoft.A2Zfiling.Application.Features.ContactUsFeatures.Query.GetAllMessagees;
+using NeoSoft.A2Zfiling.Application.Features.ContactUsFeatures.Query.GetMessagesById;
+using NeoSoft.A2Zfiling.Application.Features.ContactUsFeatures.Command.UpdateForm;
+
 
 
 
@@ -240,7 +253,51 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<LicenseMaster, GetAllLicenseMasterVM>();
             CreateMap<LicenseMaster, GetAllLicenseMasterQuery>();
             CreateMap<LicenseMaster, UpdateLicenseMasterCommand>().ReverseMap();
-            
+
+
+            CreateMap<ServiceRequest, ContentServiceEditDTO>().ReverseMap();
+            CreateMap<ServiceRequest, ServiceRequestVM>().ReverseMap();
+            CreateMap<ServiceRequest, ServiceRequestQuery>();
+            CreateMap<ServiceRequest, ContentServiceEditCommand>().ReverseMap();
+
+
+            CreateMap<TermsAndConditionsss, TermAndConitionEditDTO>().ReverseMap();
+            CreateMap<TermsAndConditionsss, GetAllTermsAndConditionsDto>().ReverseMap();
+              CreateMap<TermsAndConditionsss, GetAllTermsAndConditionsQuery>();
+            CreateMap<TermsAndConditionsss, GetAllTermsAndConditionsDto>().ReverseMap();
+
+            CreateMap<AboutUsDetail, AboutEditCommandDTO>().ReverseMap();
+            CreateMap<AboutUsDetail, GetAboutDto>().ReverseMap();
+            CreateMap<AboutUsDetail, GetAllAboutQuery>();
+            CreateMap<AboutUsDetail, GetAboutDto>().ReverseMap();
+
+            CreateMap<FAQ, FAQEditCommandDTO>().ReverseMap();
+            CreateMap<FAQ, GetFAQDto>().ReverseMap();
+            CreateMap<FAQ, GetAllFAQQuery>();
+            CreateMap<FAQ, GetFAQDto>().ReverseMap();
+
+            CreateMap<ContactUS, CreateFormDTO>().ReverseMap();
+            CreateMap<ContactUS, GetAllMessagesListCommand>().ReverseMap();
+            CreateMap<ContactUS, GetAllMessagesListDTO>().ReverseMap();
+            CreateMap<ContactUS,GetContactUsByIdDto>().ReverseMap();
+            CreateMap<ContactUS, UpdateContactUsDto>().ReverseMap();
+            CreateMap<ContactUS, UpdateContactUsCommand>().ReverseMap();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
