@@ -32,13 +32,12 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
         [HttpGet]
         public async Task<IActionResult> Create()
-        {
+            {
             var states = await _stateService.GetStateAsync();
             ViewBag.lstState = new SelectList(states, "StateId", "StateName");
             var zones = await _zoneService.GetZoneAsync();
             ViewBag.lstZone = new SelectList(zones, "ZoneId", "ZoneName");
 
-       
 
             var cities = await _cityService.GetCityAsync();
             ViewBag.lstCity = new SelectList(cities, "CityId", "CityName");
@@ -49,7 +48,34 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         public async Task<IActionResult> Create(MunicipalVM municipal)
         {
             _logger.LogInformation("Create Role action is initiated");
+            if (string.IsNullOrEmpty(municipal.MunicipalName))
+            {
+                return BadRequest("Please enter a valid municipal name.");
+            }
+             if (string.IsNullOrEmpty(municipal.Pincode))
+            {
+                return BadRequest("Please enter a valid pincode number.");
+            }
+            if (municipal.CityId == 0 || (municipal.ZoneId == 0 || municipal.StateId == 0))
+            {
+                return BadRequest("Please select from the dropdown");
+            }
+            //if (municipal.CityId == 0 )
+            //{
+            //    return BadRequest("Please select city");
+            //}
+            // if (municipal.ZoneId == 0)
+            //{
+            //    return BadRequest("Please select zone");
+            //}
+            // if ( )
+            //{
+            //    return BadRequest("Please select state");
+            //}
+           
             var response = await _municipalService.CreateMunicipalAsync(municipal);
+
+          
             if (response != null)
             {
                 return Ok(response);
@@ -97,9 +123,22 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         public async Task<IActionResult> Edit(MunicipalVM model)
         {
 
-            var municipal = await _municipalService.GetMunicipalByIdAsync(model.MunicipalId);
-            if (municipal == null) return NotFound();
+            if (model == null) return NotFound();
 
+            if (string.IsNullOrEmpty(model.MunicipalName))
+            {
+                return BadRequest("Please enter a  municipal name.");
+            }
+            if (string.IsNullOrEmpty(model.Pincode))
+            {
+                return BadRequest("Please enter a  pincode number.");
+            }
+            if (model.CityId == 0 || model.ZoneId == 0 || model.StateId == 0 || model.CityId == null || model.ZoneId == null || model.StateId == null)
+            {
+                return BadRequest("Please select from the dropdown");
+            }
+
+            var municipal = await _municipalService.GetMunicipalByIdAsync(model.MunicipalId);
             municipal.MunicipalName = model.MunicipalName;
             municipal.CityId = model.CityId;
             municipal.Pincode = model.Pincode;

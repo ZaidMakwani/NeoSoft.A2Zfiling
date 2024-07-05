@@ -89,6 +89,7 @@ using NeoSoft.A2Zfiling.Application.Features.SubStatuses.Command.DeleteSubStatus
 
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
+using NeoSoft.A2Zfiling.Application.Features.UserInfo.Queries;
 
 using NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.CreateUserDetails;
 using NeoSoft.A2Zfiling.Application.Features.Userdetails.Queries.GetUserDetailsList;
@@ -257,6 +258,7 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<LicenseMaster, GetAllLicenseMasterVM>();
             CreateMap<LicenseMaster, GetAllLicenseMasterQuery>();
             CreateMap<LicenseMaster, UpdateLicenseMasterCommand>().ReverseMap();
+<<<<<<< HEAD
 
 
             CreateMap<UserDetail,CreateUserDetailsDto>().ReverseMap();
@@ -273,6 +275,11 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<DocumentMasters, DeleteDocumentMasterDto>();
             CreateMap<DocumentMasters, DeleteDocumentMasterCommand>().ReverseMap();
 
+=======
+            CreateMap<List<GetUserIdsByRoleDto>, IList<AppUser>>().ReverseMap();
+
+            CreateMap<AppUser, GetUserIdByEmailDto>().ReverseMap();
+>>>>>>> origin/development-mayur
         }
     }
 }

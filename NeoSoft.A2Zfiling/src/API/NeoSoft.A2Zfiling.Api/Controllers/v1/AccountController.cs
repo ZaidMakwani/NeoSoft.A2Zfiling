@@ -1,16 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NeoSoft.A2Zfiling.Application.Features.Login.Command;
 using NeoSoft.A2Zfiling.Application.Features.Register.Command;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using NeoSoft.A2Zfiling.Application.Features.Categories.Commands.CreatePinCodeCommand;
-using NeoSoft.A2Zfiling.Application.Features.Login;
-using NeoSoft.A2Zfiling.Persistence;
 using LoginCommand = NeoSoft.A2Zfiling.Application.Features.Login.Command.LoginCommand;
-using NeoSoft.A2Zfiling.Application.Features.Roles.Queries.GetRolesList;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
+using NeoSoft.A2Zfiling.Application.Features.UserInfo.Queries;
 
 namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 {
@@ -50,11 +44,11 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
         }
         [HttpPost]
         public async Task<ActionResult> Login([FromBody] LoginCommand loginCommand)
+        
         {
 
             _logger.LogInformation("Login Initiated");
             var response = await _mediator.Send(loginCommand);
-
             _logger.LogInformation("Login Completed");
             return Ok(response);
         }
@@ -91,6 +85,28 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _logger.LogInformation("Login Completed");
             return Ok(response);
         }
-       
+
+
+        [HttpGet]
+        public async Task<ActionResult> GetUserIdByEmail(string Email)
+        {
+
+            _logger.LogInformation("Login Initiated");
+            var response = await _mediator.Send(new GetUserIdByEmailQuery() { Email = Email });
+
+            _logger.LogInformation("Login Completed");
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetUserIdsByRole(string Role)
+        {
+
+            _logger.LogInformation("Login Initiated");
+            var response = await _mediator.Send(new GetUserIdsByRoleQuery() { Role = Role });
+
+            _logger.LogInformation("Login Completed");
+            return Ok(response);
+        }
     }
 }

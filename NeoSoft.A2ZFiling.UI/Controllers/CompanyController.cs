@@ -87,7 +87,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
             if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
             {
+<<<<<<< HEAD
                 return BadRequest("Short Name must be between 2 and 10 characters.");
+=======
+                return BadRequest("Company Name must be between 2 and 10 characters.");
+>>>>>>> origin/development-mayur
             }
             if (response.IsSuccessStatusCode)
             {
@@ -141,7 +145,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
             if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
             {
+<<<<<<< HEAD
                 return BadRequest("Short Name must be between 2 and 10 characters.");
+=======
+                return BadRequest("Company Name must be between 2 and 10 characters.");
+>>>>>>> origin/development-mayur
             }
             if (response.IsSuccessStatusCode)
             {

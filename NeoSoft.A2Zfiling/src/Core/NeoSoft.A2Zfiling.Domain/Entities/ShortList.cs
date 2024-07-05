@@ -8,7 +8,12 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
 {
     public enum ShortList
     {
+
         No, //0
         Yes //1
+
+        //Select, //0
+        // Yes, //1
+        //    No //2
     }
 }

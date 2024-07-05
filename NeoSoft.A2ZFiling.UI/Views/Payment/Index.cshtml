@@ -1,0 +1,270 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f7fa;
+        }
+
+        .container {
+            display: flex;
+            width: 900px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .sidebar {
+            background-color: #e9f3ff;
+            padding: 20px;
+            width: 30%;
+        }
+
+            .sidebar h2 {
+                margin-top: 0;
+            }
+
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .sidebar li {
+                padding: 10px 0;
+                border-bottom: 1px solid #ddd;
+                color: #555;
+                display: flex;
+                align-items: center;
+            }
+
+                .sidebar li.completed {
+                    color: green;
+                    font-weight: bold;
+                }
+
+                .sidebar li.active {
+                    color: blue;
+                    font-weight: bold;
+                }
+
+            .sidebar .circle {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background-color: #ddd;
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+                .sidebar .circle.completed {
+                    background-color: green;
+                }
+
+                .sidebar .circle.active {
+                    background-color: blue;
+                }
+
+        .payment-section {
+            padding: 40px;
+            width: 70%;
+            background-color: #fff;
+        }
+
+            .payment-section h1 {
+                margin-top: 0;
+                color: #333;
+            }
+
+            .payment-section .amount {
+                font-size: 24px;
+                margin: 20px 0;
+            }
+
+                .payment-section .amount small {
+                    font-size: 14px;
+                    color: #999;
+                }
+
+            .payment-section button {
+                background-color: #ffc107;
+                color: #000;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+                .payment-section button:hover {
+                    background-color: #e0a800;
+                }
+
+            .payment-section label {
+                display: block;
+                margin-top: 20px;
+                color: #555;
+            }
+
+                .payment-section label input {
+                    margin-right: 10px;
+                }
+
+        .progress-bar {
+            position: relative;
+            height: 5px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            width: 15%; /* Adjust this width to represent the current progress */
+            background-color: blue;
+            border-radius: 5px;
+        }
+
+        .progress-step {
+            position: absolute;
+            top: -10px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+
+            .progress-step.completed {
+                background-color: green;
+            }
+
+            .progress-step.active {
+                background-color: blue;
+            }
+
+            .progress-step:nth-child(1) {
+                left: 0%;
+            }
+
+            .progress-step:nth-child(2) {
+                left: 14.3%;
+            }
+
+            .progress-step:nth-child(3) {
+                left: 28.6%;
+            }
+
+            .progress-step:nth-child(4) {
+                left: 42.9%;
+            }
+
+            .progress-step:nth-child(5) {
+                left: 57.2%;
+            }
+
+            .progress-step:nth-child(6) {
+                left: 71.5%;
+            }
+
+            .progress-step:nth-child(7) {
+                left: 85.8%;
+            }
+
+            .progress-step:nth-child(8) {
+                left: 100%;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Welcome!<br>Swastik Gupta</h2>
+            <ul>
+                <li class="completed">
+                    <div class="circle completed"></div>
+                    Registration Completed
+                </li>
+                <li class="active">
+                    <div class="circle active"></div>
+                    Upload Documents
+                </li>
+                <li>
+                    <div class="circle"></div>
+                    Process Payment
+                </li>
+                <li>
+                    <div class="circle"></div>
+                    Execute Assigned
+                </li>
+                <li>
+                    <div class="circle"></div>
+                    Application Submitted To Authority
+                </li>
+                <li>
+                    <div class="circle"></div>
+                    Application Under Process With Authority
+                </li>
+                <li>
+                    <div class="circle"></div>
+                    Registration Completed
+                </li>
+                <li>
+                    <div class="circle"></div>
+                    Courier Dispatch Status
+                </li>
+            </ul>
+        </aside>
+        <main class="payment-section">
+            <h1>Make Payment</h1>
+            <div class="progress-bar">
+                <div class="progress-bar-inner"></div>
+                <div class="progress-step completed"></div>
+                <div class="progress-step active"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+            </div>
+            <p>Your service reference number is <strong>#121212</strong></p>
+            <p>Kindly proceed to make payment for <strong>GST Registration</strong> for SRN <strong>#121212</strong></p>
+            <div class="amount">
+                <span>INR 2000</span> <small>excluding GST</small>
+            </div>
+
+            @* <a id="paymentButton" asp-action="PaymentOption" asp-controller="Payment">Proceed for Payment</a> *@
+            @* <a id="paymentButton" asp-action="PaymentOption" asp-controller="Payment" class="btn" role="button" type="button">Proceed for Payment</a> *@
+            <a id="paymentButton" asp-action="PaymentOption" asp-controller="Payment" class="btn btn-primary" role="button">Proceed for Payment</a>
+
+
+
+            <label>
+                <input type="checkbox"> Opt for fast track processing with an additional Rs 1000
+            </label>
+        </main>
+    </div>
+  
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+
+
+</body>
+</html>

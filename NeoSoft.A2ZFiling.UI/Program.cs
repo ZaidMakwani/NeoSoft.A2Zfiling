@@ -22,6 +22,7 @@ builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IZoneService, ZoneService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IStateService, StateService>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
 
 builder.Services.AddScoped<IMyProfileService, MyProfileService>();
 builder.Services.AddScoped<IPermissionService,PermissionService>();
@@ -33,6 +34,7 @@ builder.Services.AddScoped<ILicenseService,LicenseService>();
 builder.Services.AddScoped<IStatusService, StatusService>();
 builder.Services.AddScoped<ISubStatusService,SubStatusService>();
 builder.Services.AddScoped<ILicenceMasterService,LicenseMasterService>();
+builder.Services.AddScoped<IUserInfoService, UserInfoService>();
 
 builder.Services.AddScoped<IUserDetail, UserDetailService>();
 
@@ -63,6 +65,7 @@ builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IMunicipalService,MunicipalService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<CustomAuthorizeAttribute>();
 
