@@ -7,7 +7,7 @@ using NeoSoft.A2ZFiling.UI.ViewModels;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class StatusController : Controller
     {
         private readonly ILogger<StatusController> _logger;

@@ -81,7 +81,7 @@
                                                         <tr>
                                                             <td>L - @Html.DisplayFor(modelItem => item.DocumentMasterId)</td>
                                                             <td>@Html.DisplayFor(modelItem => item.DocumentName) </td>
-                                                            <td><a href="~/@item.SampleFormat"> @Html.DisplayFor(modelItem => item.SampleFormat)</a></td>
+                                                            <td><a href="~/@item.SampleFormat" style="text-decoration:none"> @* @Html.DisplayFor(modelItem =>  item.SampleFormat) *@ @item.SampleFormat.Split("\\").Last() </a></td>
                                                             <td>@Html.DisplayFor(modelItem => item.DocumentFormat)</td>
                                                            
                                                             <td>
@@ -94,6 +94,10 @@
                                                                     {
                                                                         <i class="fas fa-ban " style="color: red;"></i>
                                                                     }
+                                                                </a>
+                                                                <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                   data-url="@Url.Action("Update", "DocumentMaster")" data-id="@item.DocumentMasterId">
+                                                                    <i class="fas fa-edit"></i>
                                                                 </a>
                                                             </td>
                                                         </tr>
@@ -207,24 +211,152 @@
                                 var errorMessage = xhr.responseText;
                                 console.log(errorMessage);
                                 // Display error message in modal body
-                                $('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                                // $('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                                card.find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+
                             }
                         });
-                        // $.post(url, sendData).done(function (data) {
-
-                        //     card.find('.modal').modal('hide');
-                        //     location.reload();
-
-                        // }).fail(function (xhr, status, error) {
-                        //     var errorMessage = xhr.responseText;
-                        //     console.log(errorMessage);
-                        //     // Update the modal content to display the error message
-                        //     card.find('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
-                        // });
                     });
                 });
             });
         });
+
+        //Update
+
+
+        $(document).on('click', '.edit-button', function () {
+            var DocId = $(this).data("id");
+            var editUrl = $(this).data("url") + '?id=' + DocId;
+
+            $.ajax({
+                url: editUrl,
+                type: 'GET',
+                success: function (data) {
+                    $('#placeholder').html(data);
+                    $('#updateModal').modal('show'); 
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                    alert("Error fetching Document data. Please try again.");
+                }
+            });
+        });
+
+
+        // Function to update data after saving
+        $(document).on('click', '#updateDocumentButton', function () {
+            console.log("Update button clicked"); // Debug statement
+            var card = $('#placeholder');
+            var form = $('#updateDocumentForm')[0]; // Get the form element
+            var formData = new FormData(form); // Create FormData object
+
+            console.log(formData); // Debug statement to log formData
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Update", "DocumentMaster")',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.success) {
+                        console.log("Update successful"); // Debug statement
+                        $('#updateModal').modal('hide');
+                        alert(data.message);
+                        location.reload();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error:", status, error); // Debug statement
+                    var errorMessage = xhr.responseText || "An error occurred while updating the Document Master.";
+                    //alert(errorMessage);
+                    // Optionally, display the error message in the modal
+                    card.find('.error-message-container-update').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                }
+            });
+        });
+
+
+
+
+        $(function () {
+            var card = $('#placeholder'); // Assuming you have a placeholder element
+
+            // Event handler for the button click
+            $('#updateDocumentButton').click(function (event) {
+                debugger
+                var form = $('#updateDocumentForm')[0]; // Get the form element
+                var url = '@Url.Action("Update", "DocumentMaster")'; // URL to your Update action
+                var formData = new FormData(form); // Create FormData object
+
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    processData: false,  // Important: prevent jQuery from automatically processing the data
+                    contentType: false,  // Important: tell jQuery not to set contentType
+                    success: function (data) {
+                        // Close the modal and reload the page on success
+                        $('#updateModal').modal('hide');
+                        location.reload(); // You might want to replace this with a more specific update approach
+                    },
+                    error: function (xhr, status, error) {
+                        var errorMessage = xhr.responseText;
+                        console.log(errorMessage);
+                        // Display error message in modal body
+                        // $('.modal-body').prepend('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+                        card.find('.error-message-container-update').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
+
+                    }
+                });
+            });
+        });
+
+
+
+
+        // $(document).on('click', '#saveButton', function () {
+        //     // Perform validation and submit data via AJAX
+        //     var form = $(this).parents('.modal').find('form')[0];
+        //     var url = '@Url.Action("Update", "DocumentMaster")';
+        //     var formData = new FormData(form); // Create FormData object
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: url,
+        //         data: formData,
+        //         processData: false,  // Important: prevent jQuery from automatically processing the data
+        //         contentType: false,  // Important: tell jQuery not to set contentType
+        //         success: function (response) {
+        //             console.log(response);
+        //             // Check if the response indicates success
+        //             if (response) {
+        //                 var DocId = $('#DocumentMasterId').val(); // Assuming you have a hidden input field with the DocumentMasterId
+        //                 updateData(DocId); // Call function to update data
+        //                 alert('Document Master Updated successfully');
+        //                 $('#updateModal').modal('hide');
+        //                 location.reload();
+        //             } else {
+        //                 alert("An error occurred while saving data. Please try again.");
+        //             }
+        //         },
+        //         error: function (xhr, status, error) {
+        //             // Display more detailed error message from server response
+        //             var errorMessage = xhr.responseText;
+        //             if (errorMessage) {
+        //                 var errorHtml = '<div class="alert alert-danger" role="alert">' + errorMessage + '</div>';
+        //                 $('#updateModal .modal-body').prepend(errorHtml); // Prepend error message to modal body
+        //             } else {
+        //                 alert("An error occurred while saving data. Please try again.");
+        //             }
+        //         }
+        //     });
+        // });
+
+        $(document).on('click', '#closeButton, .close', function () {
+            // Close the modal
+            $('#updateModal').modal('hide');
+        });
+
 
 
     </script>

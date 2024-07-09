@@ -18,6 +18,9 @@
                                     <div class="card-header">
                                         <h3 class="card-title">License Master</h3>
                                         <div class="float-right">
+                                            <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="classificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-filter"></i>
+                                            </button>
                                             <a class="btn btn-primary" asp-action="Create" asp-controller="LicenseMaster">
                                                 <i class="fas fa-plus"></i>
                                             </a>
@@ -46,9 +49,7 @@
                                             <div class="col-md-12">
                                                @*  <label>Filter by Classification:</label><br /> *@
                                                 <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="classificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-filter"></i>
-                                                    </button>
+                                                   
                                                     <div class="dropdown-menu" aria-labelledby="classificationDropdown">
                                                         @foreach (var item in Model.Select(x => x.LicenseType.LicenseName).Distinct())
                                                         {

@@ -24,7 +24,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _logger = logger;
         }
         [HttpPost]
-        public async Task<ActionResult> Create([FromForm] CreateDocumentMasterCommand createDocumentMasterCommand)
+        public async Task<ActionResult> Create([FromBody] CreateDocumentMasterCommand createDocumentMasterCommand)
         {
             var response = await _mediator.Send(createDocumentMasterCommand);
             return Ok(response);
@@ -43,7 +43,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             return Ok(response);
         }
         [HttpPut]
-        public async Task<ActionResult> Update([FromForm]UpdateDocumentMasterCommand updateDocumentMasterCommand)
+        public async Task<ActionResult> Update([FromBody]UpdateDocumentMasterCommand updateDocumentMasterCommand)
         {
             var response = await _mediator.Send(updateDocumentMasterCommand);
             return Ok(response);

@@ -1,18 +1,17 @@
 ﻿@model NeoSoft.A2ZFiling.UI.ViewModels.LicenseMasterVM;
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "License Mapping";
 }
 
-<div class="card card-default col-md-12" style="margin-left:30%;margin-top:5%;width:70%">
+<div class="card card-default col-md-12" style="margin-left:18%;margin-top:4%;width:auto">
     <div class="card-header">
         <h3 class="card-title">License Mapping</h3>
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                 <i class="fas fa-minus"></i>
             </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-            </button>
+           
         </div>
     </div>
     <!-- /.card-header -->
@@ -104,7 +103,7 @@
                     <div class="col-md-6">
                     <div class="form-group">
                             
-                        @Html.LabelFor(m => m.StateId, new { @class = "control-label" })
+                        @Html.LabelFor(m => m.StateId,"State", new { @class = "control-label" })
                             @Html.ValidationMessageFor(m => m.StateId, "", new { @class = "text-danger" })
                         <select id="state-dropdown" name="StateId" class="form-control">
                             <option value="">Select State</option>
@@ -116,7 +115,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(m => m.CityId, new { @class = "control-label" })
+                        @Html.LabelFor(m => m.CityId,"City", new { @class = "control-label" })
                             @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
                         <select id="city-dropdown" name="CityId" class="form-control">
                             <option value="">Select City</option>
@@ -124,7 +123,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(m => m.MunicipalId, new { @class = "control-label" })
+                        @Html.LabelFor(m => m.MunicipalId,"Municipal Corporation", new { @class = "control-label" })
                             @Html.ValidationMessageFor(m => m.MunicipalId, "", new { @class = "text-danger" })
                         <select id="municipal-dropdown" name="MunicipalId" class="form-control">
                             <option value="">Select Municipal Corporation</option>
@@ -159,6 +158,14 @@
                                 <label>Payment</label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="DocumentMasters">Select Documents:</label>
+                            @foreach (var opt in Model.DocumentMasters)
+                            {
+                                <input type="checkbox" name="DocumentFormatList" value="@opt.DocumentMasterId" @* checked="@(Model.DocumentFormatList.Contains(opt) ? "checked" : null)" *@ />
+                                <label>@opt.DocumentName</label>
+                            }
+                        </div>
                     </div>
                         <div class="form-group">
                            
@@ -190,8 +197,8 @@
                 </div>
                 <!-- /.row -->
                 <div class="form-group row">
-                    <div class="col-sm-10 offset-sm-2">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                    <div class="col-sm-12 offset-sm-2">
+                        <input type="submit" value="Save" class="btn btn-primary" />
                     </div>
                 </div>
             

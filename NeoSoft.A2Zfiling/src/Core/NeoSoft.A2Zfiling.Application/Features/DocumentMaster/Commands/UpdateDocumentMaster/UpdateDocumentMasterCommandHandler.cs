@@ -26,44 +26,26 @@ namespace NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.UpdateD
         public async Task<Response<UpdateDocumentMasterCommandDto>> Handle(UpdateDocumentMasterCommand request, CancellationToken cancellationToken)
         {
             var document=await _asyncRepository.GetByIdAsync(request.DocumentMasterId);
-            if (document == null || document.IsActive == false)
+            if (document == null )
             {
-                return new Response<UpdateDocumentMasterCommandDto>(null, "Not Found or InActive");
+                return new Response<UpdateDocumentMasterCommandDto>(null, "Not Found");
             }
             else
             {
-                var uploadFile = request.SampleFormat;
-                if (uploadFile != null || uploadFile.Length > 0)
-                {
-                    var fileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFormat");
-
-                    if (!Directory.Exists(fileDirectory))
-                    {
-                        Directory.CreateDirectory(fileDirectory);
-                    }
-
-                    var filePath = Path.Combine(fileDirectory, uploadFile.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await uploadFile.CopyToAsync(stream);
-
-                    }
-                    //_logger.LogInformation($"File '{uploadFile.FileName}' uploaded and saved to '{filePath}' on the file system.");
-                }
                     var documentObj = new DocumentMasters()
                     {
                         DocumentName = request.DocumentName,
                         DocumentFormat = String.Join(",", request.DocumentFormat),
-                        SampleFormat = request.SampleFormat.FileName,
+                        SampleFormat = request.SampleFormat,
                         IsActive = request.IsActive,
                         LastModifiedDate = DateTime.Now,
                     };
 
                     _mapper.Map(request, documentObj);
-                    document.IsActive = true;
+                    document.IsActive = request.IsActive;
                     document.DocumentName = request.DocumentName;
                     document.LastModifiedDate = DateTime.Now;
-                    document.SampleFormat = request.SampleFormat.FileName;
+                    document.SampleFormat = request.SampleFormat;
                     document.DocumentFormat = string.Join(",", request.DocumentFormat);
                     await _asyncRepository.UpdateAsync(document);
                     var updateDocument = _mapper.Map<UpdateDocumentMasterCommandDto>(document);

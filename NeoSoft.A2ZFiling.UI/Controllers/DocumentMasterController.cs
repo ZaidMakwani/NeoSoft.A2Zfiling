@@ -26,34 +26,120 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Create(DocumentMasterVM documentMasterVM)
+
         {
-            _logger.LogInformation("Create Document Master is Initiated");
-            var isExist=  _documentMasterService.GetAllDocumentAsync().Result.Where(x=>x.DocumentName==documentMasterVM.DocumentName);
-            if (isExist.Any())
+          _logger.LogInformation("Create Document Master is Initiated");
+            if (string.IsNullOrEmpty(documentMasterVM.DocumentName))
             {
-                return BadRequest("Already Exists!!");
+                return BadRequest("Document Name is Required");
+            }
+            if (documentMasterVM.SampleFormatFile ==null)
+            {
+                return BadRequest("Sample Document is Required");
+            }
+            if (documentMasterVM.DocumentFormatList ==null)
+            {
+                return BadRequest("Select atleast one option");
+            }
+
+            var isExist = _documentMasterService.GetAllDocumentAsync().Result.Where(x => x.DocumentName == documentMasterVM.DocumentName);
+                if (isExist.Any())
+                {
+                    return BadRequest("Already Exists!!");
+                }
+                else
+                {
+                    var fileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFormat");
+
+                    if (!Directory.Exists(fileDirectory))
+                    {
+                        Directory.CreateDirectory(fileDirectory);
+                    }
+
+                    var filePath = Path.Combine(fileDirectory, documentMasterVM.SampleFormatFile.FileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await documentMasterVM.SampleFormatFile.CopyToAsync(stream)
+        ;
+                    }
+                    documentMasterVM.IsActive = true;
+                    documentMasterVM.SampleFormat = Path.Combine("SampleFormat", documentMasterVM.SampleFormatFile.FileName);
+                    documentMasterVM.DocumentFormat = String.Join(",", documentMasterVM.DocumentFormatList);
+                    var response = await _documentMasterService.CreateDocumentAsync(documentMasterVM);
+                }
+                return Json(new { success = true, message = "Document created successfully." });
+            }
+        
+       
+        
+
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var result = await _documentMasterService.GetDocumentAsync(id);
+            if (result != null)
+            {
+                result.DocumentFormatList = result.DocumentFormat.Split(',').ToList();
+
+                return PartialView("_PartialDocumentMasterUpdate", result);
             }
             else
             {
-                var fileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFormat");
+                //return Json(new { success = false, message = "Not an Active." });
+                return NotFound("Not an Active");
+            }
+        }
 
-                if (!Directory.Exists(fileDirectory))
-                {
-                    Directory.CreateDirectory(fileDirectory);
-                }
+        [HttpPost]
+        public async Task<IActionResult> Update(DocumentMasterVM documentMasterVM)
+        {
+            if (string.IsNullOrEmpty(documentMasterVM.DocumentName))
+            {
+                return BadRequest("Document Name is Required");
+            }
+            if (documentMasterVM.DocumentFormatList == null)
+            {
+                return BadRequest("Select atleast one option");
+            }
+            var documentById= await _documentMasterService.GetDocumentAsync(documentMasterVM.DocumentMasterId);
 
+            var fileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "SampleFormat");
+
+            if (!Directory.Exists(fileDirectory))
+            {
+                Directory.CreateDirectory(fileDirectory);
+            }
+            if (documentMasterVM.SampleFormatFile != null)
+            {
                 var filePath = Path.Combine(fileDirectory, documentMasterVM.SampleFormatFile.FileName);
-
+                var alreadyfilePath = Path.Combine(fileDirectory, documentById.SampleFormat);
+                if (alreadyfilePath == filePath)
+                {
+                    System.IO.File.Delete(alreadyfilePath);
+                }
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await documentMasterVM.SampleFormatFile.CopyToAsync(stream)
-    ;
+                    await documentMasterVM.SampleFormatFile.CopyToAsync(stream);
                 }
-                documentMasterVM.SampleFormat = Path.Combine("SampleFormat",documentMasterVM.SampleFormatFile.FileName);
-                documentMasterVM.DocumentFormat = String.Join(",", documentMasterVM.DocumentFormatList);
-                var response= await _documentMasterService.CreateDocumentAsync(documentMasterVM);
+                documentMasterVM.SampleFormat = Path.Combine("SampleFormat", documentMasterVM.SampleFormatFile.FileName);
             }
-            return Json(new { success = true, message = "Document created successfully." });
+            else
+            {
+                documentMasterVM.SampleFormat = Path.Combine("SampleFormat", documentById.SampleFormat.Split("\\")[1]);
+            }
+                documentMasterVM.IsActive = true;
+                documentMasterVM.DocumentFormat = String.Join(",", documentMasterVM.DocumentFormatList);
+            
+           
+            var result= await _documentMasterService.UpdateDocumentAsync(documentMasterVM);
+            return Json( new {success = true, message = "Success"});
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result= await _documentMasterService.DeleteDocumentAsync(id);
+            return RedirectToAction("GetAllList");
         }
     }
 }

@@ -100,10 +100,11 @@ namespace NeoSoft.A2ZFiling.UI.ViewModels
         public bool IsActive { get; set; }
         public bool IsDelete { get; set; }
         public DateTime LastModifiedDate { get; set; }
-
+        public List<int> DocumentFormatList { get; set; }
         public IEnumerable<SelectListItem> VisibilityList { get; set; }
         public List<StateVM> States { get; set; }
         public List<City> Cities { get; set; }
         public List<MunicipalCorp> Municipalities { get; set; }
+        public List<DocumentMasterVM> DocumentMasters { get; set;}
     }
 }

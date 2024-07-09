@@ -6,9 +6,9 @@ namespace NeoSoft.A2ZFiling.UI.Interfaces
     {
         Task<DocumentMasterVM> CreateDocumentAsync(DocumentMasterVM documentMasterVM);
 
-        //Task<DocumentMasterVM> GetDocumentAsync(int id);
-        //Task<DocumentMasterVM> UpdateDocumentAsync(DocumentMasterVM documentMasterVM);
+        Task<DocumentMasterVM> GetDocumentAsync(int id);
+        Task<DocumentMasterVM> UpdateDocumentAsync(DocumentMasterVM documentMasterVM);
         Task<IEnumerable<DocumentMasterVM>> GetAllDocumentAsync();
-        //Task<DocumentMasterVM> DeleteDocumentAsync(int id);
+        Task<DocumentMasterVM> DeleteDocumentAsync(int id);
     }
 }

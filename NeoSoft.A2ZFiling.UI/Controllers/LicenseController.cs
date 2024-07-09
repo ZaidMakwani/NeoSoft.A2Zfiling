@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class LicenseController : Controller
     {
         private readonly ILogger<LicenseController> _logger;

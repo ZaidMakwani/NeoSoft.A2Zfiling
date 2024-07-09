@@ -12,7 +12,7 @@ using NuGet.Protocol.Core.Types;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+   // [CustomAuthorize]
     public class LicenseMasterController : Controller
     {
         private readonly ILogger<LicenseMasterController> _logger;
@@ -23,12 +23,14 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         private readonly ICityService _cityService;
         private readonly IMunicipalService _municipalService;
         private readonly IZoneService _zoneService;
-        
+        private readonly IDocumentMasterService _documentMasterService;
+
         Uri baseAddress = new Uri("https://localhost:5000/api");
         private readonly HttpClient _client;
 
-        public LicenseMasterController(IZoneService zoneService,IMunicipalService municipalService,ICityService cityService, IIndustryService industryService, ILicenseService licenseService,ILicenceMasterService licenseMasterService, ILicenseType licenseType,ILogger<LicenseMasterController> logger)
+        public LicenseMasterController(IDocumentMasterService documentMasterService, IZoneService zoneService,IMunicipalService municipalService,ICityService cityService, IIndustryService industryService, ILicenseService licenseService,ILicenceMasterService licenseMasterService, ILicenseType licenseType,ILogger<LicenseMasterController> logger)
         {
+            _documentMasterService = documentMasterService;
             _licenseMasterService = licenseMasterService;
             _licenseType = licenseType;
             _logger = logger;
@@ -50,10 +52,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             return View(response);
         }
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             Response<List<StateVM>> stateList = new Response<List<StateVM>>();
             HttpResponseMessage response =  _client.GetAsync(_client.BaseAddress + "/State/GetAllStates/all").Result;
+            var doc = await _documentMasterService.GetAllDocumentAsync();
             
             string data = response.Content.ReadAsStringAsync().Result;
             stateList = JsonConvert.DeserializeObject<Response<List<StateVM>>>(data);
@@ -66,7 +69,8 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                     Text = e.ToString()
                 }).ToList(),
 
-                States=stateList.Data
+                States=stateList.Data,
+                DocumentMasters=doc.Where(x=>x.IsActive==true).ToList(),
                 
             };
             return View(model);

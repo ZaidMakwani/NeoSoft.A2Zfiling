@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    [CustomAuthorize]
+    //[CustomAuthorize]
     public class CompanyController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:5000/api");
