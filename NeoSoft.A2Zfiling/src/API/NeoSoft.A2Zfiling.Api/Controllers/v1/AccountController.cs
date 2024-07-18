@@ -97,5 +97,16 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
             _logger.LogInformation("Login Completed");
             return Ok(response);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetUserIdsByRole(string Role)
+        {
+
+            _logger.LogInformation("Login Initiated");
+            var response = await _mediator.Send(new GetUserIdsByRoleQuery() { Role = Role });
+
+            _logger.LogInformation("Login Completed");
+            return Ok(response);
+        }
     }
 }

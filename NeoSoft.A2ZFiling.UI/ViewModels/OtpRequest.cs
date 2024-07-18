@@ -3,6 +3,6 @@
     public class OtpRequest
     {
         public string MobileNumber { get; set; }
-        public string Otp { get; set; }
+        public string? Otp { get; set; }
     }
 }

@@ -23,5 +23,14 @@ namespace NeoSoft.A2ZFiling.UI.Services
             _logger.LogInformation("MyProfile Service completed");
             return UserId.Data;
         }
+
+        public async Task<IEnumerable<AppUserVM>> GetUserIdsByRoleAsync(string role)
+        {
+            _logger.LogInformation("MyProfile Service initiated");
+            var UserId = await _client.GetAllAsync($"v1/Account/GetUsersIdByRole?Role={role}");
+
+            _logger.LogInformation("MyProfile Service completed");
+            return UserId.Data;
+        }
     }
 }

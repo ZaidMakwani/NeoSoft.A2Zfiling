@@ -18,12 +18,12 @@
     </div> *@
 
     <div class="card-header">
-        <div class="float-right">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createLicenseModal" data-url="@Url.Action("Create", "License")">
+        <div @* class="float-left" *@ style="margin-left: 19px;">
+            <button type="button" class="btn btn-primary" title="Add License" data-toggle="ajax-modal" data-target="#createLicenseModal" data-url="@Url.Action("Create", "License")">
                 <i class="fas fa-plus"></i>
             </button>
 
-            <div class="navbar-search-block">
+            @* <div class="navbar-search-block">
                 <form class="form-inline">
                     <div class="input-group input-group-sm">
                         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> *@
         </div>
     
 
@@ -101,12 +101,12 @@
                                 @if (item.IsActive)
                                 {
                                     <div class="btn-group">
-                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateLicenseModal"
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" title="Edit License" data-toggle="ajax-modal" data-target="#updateLicenseModal"
                                                 data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId">
                                             <i class="fas fa-edit"></i>
                                         </button>
 
-                                        <button class="btn btn-danger btn-sm triggerLicense-modal" data-id="@item.LicenseId">
+                                        <button class="btn btn-danger btn-sm triggerLicense-modal" title="Delete License" data-id="@item.LicenseId">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
@@ -114,12 +114,12 @@
                                 else
                                 {
                                     <div class="btn-group">
-                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" data-toggle="ajax-modal" data-target="#updateModal"
+                                        <button class="btn btn-primary btn-sm editLicense-button mr-1" title="Edit License" data-toggle="ajax-modal" data-target="#updateModal"
                                                 data-url="@Url.Action("Update", "License")" data-id="@item.LicenseId" disabled>
                                             <i class="fas fa-edit"></i>
                                         </button>
 
-                                        <button class="btn btn-danger btn-sm triggerLicense-modal" data-id="@item.LicenseId" disabled>
+                                        <button class="btn btn-danger btn-sm triggerLicense-modal" title="Delete License" data-id="@item.LicenseId" disabled>
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>

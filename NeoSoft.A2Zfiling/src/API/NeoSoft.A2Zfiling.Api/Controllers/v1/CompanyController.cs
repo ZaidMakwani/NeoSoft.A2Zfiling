@@ -51,7 +51,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
         }
 
 
-        [HttpGet(Name = "GetCompaniesById")]
+        [HttpGet("Id", Name = "GetCompaniesById")]
         //[ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetCompaniesById(int Id)
         {
@@ -85,7 +85,7 @@ namespace NeoSoft.A2Zfiling.Api.Controllers.v1
 
 
 
-        [HttpDelete(Name = "DeleteCompany")]
+        [HttpDelete("Id", Name = "DeleteCompany")]
         public async Task<ActionResult> Delete(int Id)
         {
             DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand()

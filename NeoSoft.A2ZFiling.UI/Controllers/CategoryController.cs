@@ -176,6 +176,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 //{
                 //    return BadRequest("Category with this name already exists.");
                 //}
+                if (model.CategoryName.Length < 5 || model.CategoryName.Length > 50)
+                {
+                    return BadRequest("Category Name must be between 5 and 50 characters.");
+                }
                 var response = await _categoryService.UpdateCategoryAsync(model);
                 if (response == null)
                 {

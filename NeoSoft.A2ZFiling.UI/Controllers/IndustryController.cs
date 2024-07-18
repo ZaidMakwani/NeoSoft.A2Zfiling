@@ -62,13 +62,18 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
             if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
             {
-                return BadRequest("Industry Name must be between 2 and 10 characters.");
+
+                return BadRequest("Short Name must be between 2 and 10 characters.");
+
+                //return BadRequest("Industry Name must be between 2 and 10 characters.");
+
             }
             var existingIndustry = ( _industryService.GetIndustryAsync()).Where(x => x.IndustryName.ToLower() == model.IndustryName.ToLower() || x.ShortName.ToLower() == model.ShortName.ToLower()).FirstOrDefault();
             if (existingIndustry != null)
             {
                 return BadRequest("Industry with this name already exists.");
             }
+
             var response = _industryService.CreateIndustryAsync(model);
 
 
@@ -124,7 +129,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
             if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
             {
-                return BadRequest("Industry Name must be between 2 and 10 characters.");
+
+                return BadRequest("Short Name must be between 2 and 10 characters.");
+
+              
+
             }
             if (response.IsSuccessStatusCode)
             {

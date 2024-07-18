@@ -8,12 +8,12 @@
     <div id="subStatusPlaceholder"></div>
 
     <div class="card-header">
-        <div class="float-right">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "SubStatus")">
+        <div @* class="float-left" *@ style="margin-left: 19px;">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" title="Add SubStatus" data-target="#createModal" data-url="@Url.Action("Create", "SubStatus")">
                 <i class="fas fa-plus"></i>
             </button>
 
-            <div class="navbar-search-block">
+           @*  <div class="navbar-search-block">
                 <form class="form-inline">
                     <div class="input-group input-group-sm">
                         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> *@
         </div>
 
 
@@ -65,23 +65,23 @@
                             <td>
                                         @if (item.IsActive)
                                         {
-                                    <button class="btn btn-primary btn-sm editSubStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateSubStatusModal"
+                                    <button class="btn btn-primary btn-sm editSubStatus-button mr-1" title="Edit SubStatus" data-toggle="ajax-modal" data-target="#updateSubStatusModal"
                                                     data-url="@Url.Action("Update", "SubStatus")" data-id="@item.SubStatusId">
                                                 <i class="fas fa-edit"></i>
                                             </button>
 
-                                            <button class="btn btn-danger btn-sm triggerSubStatus-modal" data-id="@item.SubStatusId">
+                                            <button class="btn btn-danger btn-sm triggerSubStatus-modal" title="Delete SubStatus" data-id="@item.SubStatusId">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         }
                                         else
                                         {
-                                    <button class="btn btn-primary btn-sm editSubStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateSubStatusModal"
+                                    <button class="btn btn-primary btn-sm editSubStatus-button mr-1" title="Edit SubStatus" data-toggle="ajax-modal" data-target="#updateSubStatusModal"
                                                     data-url="@Url.Action("Update", "SubStatus")" data-id="@item.SubStatusId" disabled>
                                                 <i class="fas fa-edit"></i>
                                             </button>
 
-                                    <button class="btn btn-danger btn-sm triggerSubStatus-modal" data-id="@item.SubStatusId" disabled>
+                                    <button class="btn btn-danger btn-sm triggerSubStatus-modal" title="Delete SubStatus" data-id="@item.SubStatusId" disabled>
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         }

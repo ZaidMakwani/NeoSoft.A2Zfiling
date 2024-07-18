@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="row justify-content-end">
-                        <div class="col-lg-10">
+                        <div class="col-lg-12">
                             <!-- Nav tabs -->
 
                             <div class="tab-pane fade show active" id="table1" aria-labelledby="table1-tab" style="width:auto;height:auto;white-space: nowrap">
@@ -18,7 +18,21 @@
                                     <div class="card-header">
                                         <h3 class="card-title">License Master</h3>
                                         <div class="float-right">
-                                            <a class="btn btn-primary" asp-action="Create" asp-controller="LicenseMaster">
+                                           
+                                            <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="classificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-filter"></i>
+                                               
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="classificationDropdown">
+                                                @foreach (var item in Model.Select(x => x.LicenseType.LicenseName).Distinct())
+                                                {
+                                                    <label class="dropdown-item">
+                                                        <input type="checkbox" class="filter-checkbox" value="@item"> @item
+                                                    </label>
+                                                }
+                                            </div>
+                                           
+                                            <a class="btn btn-primary" title="Add License Master" asp-action="Create" asp-controller="LicenseMaster">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                             <div class="navbar-search-block">
@@ -45,19 +59,10 @@
                                         <div class="row mb-3">
                                             <div class="col-md-12">
                                                @*  <label>Filter by Classification:</label><br /> *@
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="classificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-filter"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="classificationDropdown">
-                                                        @foreach (var item in Model.Select(x => x.LicenseType.LicenseName).Distinct())
-                                                        {
-                                                            <label class="dropdown-item">
-                                                                <input type="checkbox" class="filter-checkbox" value="@item"> @item
-                                                            </label>
-                                                        }
-                                                    </div>
-                                                </div>
+                                                
+                                                   
+                                                   
+                                               
 
                                             </div>
                                         </div>
@@ -82,7 +87,7 @@
                                                 {
                                                     <tr>
                                                         <td>L - @Html.DisplayFor(modelItem => item.LicenceMasterId)</td>
-                                                        <td><a style="text-decoration:none" asp-route-id="@item.LicenceMasterId" asp-action="Edit" asp-controller="LicenseMaster">@Html.DisplayFor(modelItem => item.License.LicenseName)</a></td>
+                                                        <td><a style="text-decoration:none" asp-route-id="@item.LicenceMasterId" title="Edit License Master" asp-action="Edit" asp-controller="LicenseMaster">@Html.DisplayFor(modelItem => item.License.LicenseName)</a></td>
                                                         <td>@Html.DisplayFor(modelItem => item.LicenseType.LicenseName)</td>
                                                         <td>@Html.DisplayFor(modelItem => item.Visibilities)</td>
                                                         <td>
@@ -100,7 +105,7 @@
                                                         <td>@Html.DisplayFor(modelItem => item.FastTrackRate)</td>
                                                         <td>@Html.DisplayFor(modelItem => item.FastTrackTAT)</td>
                                                         <td>
-                                                            <a class="btn btn-sm trigger-modal" asp-route-id="@item.LicenceMasterId" asp-action="Delete" asp-controller="LicenseMaster">
+                                                            <a class="btn btn-sm trigger-modal" title="Delete License Master" asp-route-id="@item.LicenceMasterId" asp-action="Delete" asp-controller="LicenseMaster">
                                                                 @if (@item.IsActive)
                                                                 {
                                                                     <i class="fas fa-ban" style="color: green;"></i>

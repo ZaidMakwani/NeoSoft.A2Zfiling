@@ -5,6 +5,8 @@
 
 @model IEnumerable<NeoSoft.A2ZFiling.UI.ViewModels.CompanyVM>
 
+
+
 <div class="card">
     <div id="companyPlaceholder"></div>
    @*  <div class="card-header">
@@ -16,12 +18,12 @@
     </div> *@
 
     <div class="card-header">
-        <div class="float-right">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createCompanyModal" data-url="@Url.Action("Create", "Company")">
+        <div class="float-left ml-4">
+            <button type="button" class="btn btn-primary" title="Add Company" data-toggle="ajax-modal" data-target="#createCompanyModal" data-url="@Url.Action("Create", "Company")">
                 <i class="fas fa-plus"></i>
             </button>
 
-            <div class="navbar-search-block">
+           @*  <div class="navbar-search-block">
                 <form class="form-inline">
                     <div class="input-group input-group-sm">
                         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -35,7 +37,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> *@
         </div>
         
 
@@ -75,13 +77,13 @@
                             }
                         </td>
                         <td>
-                                <button class="btn btn-primary btn-sm editCompany-button" data-toggle="ajax-modal" data-target="#updateCompanyModal"
+                                <button class="btn btn-primary btn-sm editCompany-button" title="Edit Company" data-toggle="ajax-modal" data-target="#updateCompanyModal"
                                     data-url="@Url.Action("Update", "Company")" data-id="@item.CompanyId">
                                 <i class="fas fa-edit"></i>
                             </button>
 
 
-                                <button  class="btn btn-danger btn-sm triggerCompany-modal" data-id="@item.CompanyId">
+                                <button  class="btn btn-danger btn-sm triggerCompany-modal" title="Delete Company" data-id="@item.CompanyId">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
 
@@ -233,7 +235,7 @@
                     console.log(errorMessage);
                     $('#companyPlaceholder').find('.error-message-container').html('<div class="alert alert-danger" role="alert">' + errorMessage + '</div>');
 
-                });
+                 });
             });
         });
     });

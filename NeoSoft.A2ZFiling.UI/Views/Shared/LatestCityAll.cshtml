@@ -41,7 +41,7 @@
 
 
                                             <div id="placeholder1"></div>
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal1"
+                                            <button type="button" class="btn btn-primary" title="Add City" data-toggle="ajax-modal" data-target="#createModal1"
                                                     data-url="@Url.Action("Create", "City")">
                                                 <i class="fas fa-plus"></i>   @* Create *@
                                             </button>
@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @* </div> *@
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example3" class="table table-bordered table-hover">
@@ -104,13 +104,13 @@
                                                         }
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-primary btn-sm edit-button-city" data-toggle="ajax-modal" data-target="#updateModal2"
+                                                        <a class="btn btn-primary btn-sm edit-button-city" title="Edit City" data-toggle="ajax-modal" data-target="#updateModal2"
                                                             data-id="@item.CityId">
                                                             <i class="fas fa-edit"></i> @* Edit *@
                                                         </a>
 
 
-                                                        <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.CityId">
+                                                        <button class="btn btn-danger btn-sm trigger-modal" title="Delete City" data-id="@item.CityId">
                                                             <i class="fas fa-trash-alt"></i> @* Delete *@
                                                         </button>
 
@@ -119,6 +119,7 @@
                                             }
                                         </tbody>
                                     </table>
+                                </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

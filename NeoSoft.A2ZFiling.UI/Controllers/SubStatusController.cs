@@ -75,6 +75,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("Please select a Status.");
                 }
+                 if (model.SubStatusName.Length < 5 || model.SubStatusName.Length > 50)
+                {
+                    return BadRequest("SubStatus Name must be between 5 and 50 characters.");
+                }
                 var existingLicense = (await _subStatusService.GetSubStatusAsync()).Where(x => x.SubStatusName.ToLower() == model.SubStatusName.ToLower()).FirstOrDefault();
                 if (existingLicense != null)
                 {
@@ -163,7 +167,10 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("Please select a Status.");
                 }
-
+                if (model.SubStatusName.Length < 5 || model.SubStatusName.Length > 50)
+                {
+                    return BadRequest("SubStatus Name must be between 5 and 50 characters.");
+                }
                 var response = await _subStatusService.UpdateSubStatusAsync(model);
                 if (response == null)
                 {

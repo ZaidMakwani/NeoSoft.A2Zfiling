@@ -91,7 +91,24 @@ using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Queries;
 using NeoSoft.A2Zfiling.Application.Features.MyProfileFeature.Commands;
 using NeoSoft.A2Zfiling.Application.Features.UserInfo.Queries;
 
+using NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.CreateUserDetails;
+using NeoSoft.A2Zfiling.Application.Features.Userdetails.Queries.GetUserDetailsList;
+using NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.UpdateUserDetails;
+using NeoSoft.A2Zfiling.Application.Features.Userdetails.Command.DeleteUserDetails;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.CreateDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Queries.GetAllDocumentMasterQuery;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.UpdateDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.DeleteDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Queries.GetDocumentMaster;
 
+
+
+
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.CreateDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Queries.GetAllDocumentMasterQuery;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Queries.GetDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.UpdateDocumentMaster;
+using NeoSoft.A2Zfiling.Application.Features.DocumentMaster.Commands.DeleteDocumentMaster;
 
 namespace NeoSoft.A2Zfiling.Application.Profiles
 {
@@ -241,9 +258,27 @@ namespace NeoSoft.A2Zfiling.Application.Profiles
             CreateMap<LicenseMaster, GetAllLicenseMasterVM>();
             CreateMap<LicenseMaster, GetAllLicenseMasterQuery>();
             CreateMap<LicenseMaster, UpdateLicenseMasterCommand>().ReverseMap();
-            
+
+
+
+            CreateMap<UserDetail,CreateUserDetailsDto>().ReverseMap();
+            CreateMap<UserDetail,UpdateUserDetailsDto>().ReverseMap();
+            CreateMap<UserDetail,DeleteUserDetailsDto>().ReverseMap();
+          
+            CreateMap<DocumentMasters, CreateDocumentMasterCommandDto>();
+            CreateMap<DocumentMasters, CreateDocumentMasterCommand>();
+            CreateMap<DocumentMasters, GetAllDocumentMasterQuery>();
+            CreateMap<DocumentMasters, GetAllDocumentMasterQueryVM>();
+            CreateMap<DocumentMasters, GetDocumentMasterByIdQuery>();
+            CreateMap<DocumentMasters, UpdateDocumentMasterCommandDto>();
+            CreateMap<DocumentMasters, UpdateDocumentMasterCommand>().ReverseMap();
+            CreateMap<DocumentMasters, DeleteDocumentMasterDto>();
+            CreateMap<DocumentMasters, DeleteDocumentMasterCommand>().ReverseMap();
+
+            CreateMap<List<GetUserIdsByRoleDto>, IList<AppUser>>().ReverseMap();
 
             CreateMap<AppUser, GetUserIdByEmailDto>().ReverseMap();
+
         }
     }
 }

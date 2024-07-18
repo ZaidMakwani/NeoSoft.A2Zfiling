@@ -24,6 +24,7 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
         public string? Classification { get; set; }
         public Visibility Visibilities { get; set; }
         public bool Validity { get; set; }
+        public string Workflow {  get; set; }
         [MaxLength(20)]
         public string StandardRate { get; set; }
         [MaxLength(20)]
@@ -46,7 +47,8 @@ namespace NeoSoft.A2Zfiling.Domain.Entities
         public virtual Company Company { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
-        
+        public virtual ICollection<DocumentMasters> DocumentMaster { get; set; }
+        public virtual ICollection<LicenseDocument> LicenseDocuments { get; set; }
 
     }
     

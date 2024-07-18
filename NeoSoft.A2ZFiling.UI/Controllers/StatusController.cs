@@ -69,7 +69,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
                 {
                     return BadRequest("Status Name must be between 5 and 50 characters.");
                 }
-             
+
                 var existingCategory = (await _statusService.GetStatusAsync()).Where(x => x.StatusName.ToLower() == model.StatusName.ToLower()).FirstOrDefault();
                 if (existingCategory != null)
                 {

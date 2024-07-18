@@ -14,7 +14,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly string accountSid = "ACa217336b6f13ecd2ba825f26cdc9f952";
-        private readonly string authToken = "63d862f8332758153ab11b4afb0637d8";
+        private readonly string authToken = "dc1f7ba8dc168e8a6c086aa210a51fd6";
         private readonly string fromPhoneNumber = "+17178825643";
 
         public ServiceRegistrationController(IConfiguration configuration)
@@ -23,27 +23,32 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
         }
         public IActionResult Index()
         {
+            TempData["Service"] = "GST Registration";
             return View("Index");
         }
 
         public IActionResult FSSAIRegistration()
         {
+            TempData["Service"] = "FSSAI Registration";
             return View("FSSAIRegistration");
         }
 
         public IActionResult CompanyRegistration()
         {
+            TempData["Service"] = "Company Registration";
             return View("CompanyRegistration");
         }
 
         public IActionResult BuisnessSetupRegistration()
         {
+            TempData["Service"] = "Buisness Setup Registration";
             return View("BusinessSetupRegistration");
         }
-
+         
         [HttpPost]
         public IActionResult SendOtp(OtpRequest model)
         {
+
             if (!string.IsNullOrWhiteSpace(model.MobileNumber))
             {
                 TwilioClient.Init(accountSid, authToken);
@@ -53,6 +58,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
                 TempData["OTP"] = otp;
                 TempData["MobileNumber"] = model.MobileNumber;
+                if(model.Otp != null)
+                {
+                    TempData["Message"] = "OTP sent again. Please Try Again!";
+                }
+
 
                 return PartialView("_OtpInputPartial", model);
             }
@@ -71,13 +81,25 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
             if (model.Otp == storedOtp)
             {
-                ViewBag.Message = "OTP verified successfully!";
+                TempData["Message"] = "OTP verified successfully!";
+                return RedirectToActionPermanent("Create", "UserDetail");
+            }
+            else if (storedOtp == "otp")
+            {
+                TempData["Message"] = "OTP sent again. Please Try Again!";
+                return PartialView("_OtpInputPartial");
             }
             else
             {
-                ViewBag.Message = "Invalid OTP.";
+                
+                ViewBag.Message = "Invalid OTP. Please try Again!";
+                var otpRequestModel = new OtpRequest
+                {
+                    MobileNumber = storedMobileNumber
+                };
+                return PartialView("_OtpInputPartial",otpRequestModel);
             }
-            return View("Index");
+            
         }
 
 

@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20240612070915_licenseMappingIndustry.Designer.cs" />
     <Compile Remove="Migrations\20240613060630_changesinlicenseMaster.cs" />
     <Compile Remove="Migrations\20240613060630_changesinlicenseMaster.Designer.cs" />
+    <Compile Remove="Migrations\20240624062904_licensedocument.cs" />
+    <Compile Remove="Migrations\20240624062904_licensedocument.Designer.cs" />
     <Compile Remove="Migrations\MSSQL\20220105101648_InitialCreate.cs" />
     <Compile Remove="Migrations\MSSQL\20220105101648_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\MSSQL\20240521045137_initial0.cs" />

@@ -22,6 +22,7 @@ builder.Services.AddScoped(typeof(IApiClient<>), typeof(ApiClient<>));
 builder.Services.AddScoped<IZoneService, ZoneService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IStateService, StateService>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
 
 builder.Services.AddScoped<IMyProfileService, MyProfileService>();
 builder.Services.AddScoped<IPermissionService,PermissionService>();
@@ -35,9 +36,15 @@ builder.Services.AddScoped<ISubStatusService,SubStatusService>();
 builder.Services.AddScoped<ILicenceMasterService,LicenseMasterService>();
 builder.Services.AddScoped<IUserInfoService, UserInfoService>();
 
+builder.Services.AddScoped<IUserDetail, UserDetailService>();
+
+
+builder.Services.AddScoped<IDocumentMasterService, DocumentMasterService>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IIndustryService, IndustryService>();
 
 
