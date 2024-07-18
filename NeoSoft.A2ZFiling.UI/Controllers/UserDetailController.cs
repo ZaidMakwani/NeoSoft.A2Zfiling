@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NeoSoft.A2Zfiling.Application.Contracts.Persistence;
@@ -14,6 +15,7 @@ using Newtonsoft.Json;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
+	[CustomAuthorize]
 	public class UserDetailController : Controller
 	{
 		private readonly ILogger<UserDetailController> _logger;
@@ -42,10 +44,23 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
 
 		[HttpGet]
 		public async Task<IActionResult> Create()
-		{
-			try
+        {
+            try
 			{
-				var industry = _industryService.GetIndustryAsync();
+                var token = HttpContext.Session.GetString("Token");
+				var name = "";
+                if (!string.IsNullOrEmpty(token))
+                {
+                    var claimsPrincipal = JwtDecoder.DecodeJwtToken(token);
+                    var nameClaim = claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name");
+                    if (nameClaim != null)
+                    {
+                        name = nameClaim.Value;
+						TempData["Username"]=name;
+                    }
+                }
+
+                var industry = _industryService.GetIndustryAsync();
 				ViewBag.Industries = new SelectList(industry, "IndustryId", "IndustryName");
 				var company = await _companyService.GetCompanyAsync();
 				ViewBag.Companies = new SelectList(company, "CompanyId", "CompanyName");

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace NeoSoft.A2ZFiling.UI.Controllers
 {
-    //[CustomAuthorize]
+    [CustomAuthorize]
     public class IndustryController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:5000/api");
@@ -62,11 +62,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
             if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
             {
-<<<<<<< HEAD
+
                 return BadRequest("Short Name must be between 2 and 10 characters.");
-=======
-                return BadRequest("Industry Name must be between 2 and 10 characters.");
->>>>>>> origin/development-mayur
+
+                //return BadRequest("Industry Name must be between 2 and 10 characters.");
+
             }
             var existingIndustry = ( _industryService.GetIndustryAsync()).Where(x => x.IndustryName.ToLower() == model.IndustryName.ToLower() || x.ShortName.ToLower() == model.ShortName.ToLower()).FirstOrDefault();
             if (existingIndustry != null)
@@ -129,11 +129,11 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
             }
             if (model.ShortName.Length < 2 || model.ShortName.Length > 10)
             {
-<<<<<<< HEAD
+
                 return BadRequest("Short Name must be between 2 and 10 characters.");
-=======
-                return BadRequest("Industry Name must be between 2 and 10 characters.");
->>>>>>> origin/development-mayur
+
+              
+
             }
             if (response.IsSuccessStatusCode)
             {

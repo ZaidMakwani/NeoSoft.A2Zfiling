@@ -27,18 +27,18 @@
         height: 200px;
         width: 200px;
         object-fit: cover;
-        border-radius: 45%;
-        border: 5px solid #fff; /* Rounded border for profile image */
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        transition: transform 0.3s ease; /* Transition effect */
+        border-radius: 10%;
+        border: 5px solid #fff; 
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+        transition: transform 0.3s ease; 
     }
 
         .profile-image:hover {
-            transform: scale(1.1); /* Scale up on hover */
+            transform: scale(1.1); 
         }
 
     .tab-content {
-        padding-top: 2rem; /* Space between tabs and content */
+        padding-top: 2rem; 
     }
 
     .nav-tabs .nav-link {
@@ -51,30 +51,30 @@
     }
 
         .nav-tabs .nav-link.active {
-            border-color: #007bff; /* Active tab underline color */
-            color: #007bff; /* Active tab text color */
+            border-color: #007bff; 
+            color: #007bff; 
         }
 
         .nav-tabs .nav-link:hover {
-            border-color: #007bff; /* Hovered tab underline color */
-            color: #007bff; /* Hovered tab text color */
+            border-color: #007bff; 
+            color: #007bff; 
         }
 
     .card.widget-card {
         border: none;
         border-radius: 15px;
-        overflow: hidden; /* Ensure content inside card doesn't overflow */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        background-color: ##fff; /* Very faint light blue background */
-        transition: transform 0.3s ease; /* Transition effect */
+        overflow: hidden; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        background-color: #fff;
+        transition: transform 0.3s ease; 
     }
 
         .card.widget-card:hover {
-            transform: scale(1.02); /* Scale up on hover */
+            transform: scale(1.02); 
         }
 
         .card.widget-card .card-body {
-            padding: 2rem; /* Padding inside card body */
+            padding: 2rem; 
         }
 
     .form-label {
@@ -82,58 +82,50 @@
     }
 
     .form-control {
-        border-radius: 8px; /* Rounded corners for form inputs */
+        border-radius: 8px; 
     }
 
     .btn-primary {
-        background-color: #007bff; /* Primary button background color */
+        background-color: #007bff; 
         border: none;
     }
 
         .btn-primary:hover {
-            background-color: #0056b3; /* Darker shade on button hover */
+            background-color: #0056b3; 
         }
 
         .btn-primary:focus {
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* Focus state */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); 
         }
 
-    /* Added border to the section */
+
     .section-border {
-        border: 2px solid #007bff; /* Blue border */
+        border: 2px solid #007bff;
         border-radius: 15px;
-        padding: 1rem; /* Padding inside the border */
-        background-color: #f8f9fa; /* Light background color */
+        padding: 1rem; 
+        background-color: #f8f9fa; 
     }
 
-    /* Row colors */
+  
     .row-color:nth-child(odd) {
-        background-color: #e9f7ff; /* Light blue background for odd rows */
+        background-color: #e9f7ff; 
     }
 
     .row-color:nth-child(even) {
-        background-color: #f7fbff; /* Slightly lighter blue background for even rows */
+        background-color: #f7fbff; 
     }
 </style>
-<!-- Profile 1 - Bootstrap Brain Component -->
-<section class="bg-light py-3 py-md-1 py-xl-8">
-    @* <div class="container">
-    <div class="row justify-content-md-center">
-    <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-    <h2 class="mb-1 display-5 text-center">My Profile</h2>
-    <p class="text-secondary text-center lead fs-4 mb-5"></p>
-    <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
-    </div>
-    </div>
-    </div> *@
+
+@* <section class="bg-light py-3 py-md-1 py-xl-8"> *@
+ 
 
 
-    <div class="container mt-3 mb-3">
+   @*  <div class="container mt-3 mb-3">
         <div class="row justify-content-md-center">
             <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 pt-3 pb-3">
                 <h2 class="mb-1 display-5 text-center">My Profile</h2>
-                <p class="text-secondary text-center lead fs-4 mb-0"></p> <!-- Remove mb-5 class -->
-                <hr class="w-50 mx-auto mb-0 mt-0 mb-xl-3 mt-xl-3 border-dark-subtle"> <!-- Adjust mb-xl-9 to mb-xl-3 -->
+                <p class="text-secondary text-center lead fs-4 mb-0"></p> 
+                <hr class="w-50 mx-auto mb-0 mt-0 mb-xl-3 mt-xl-3 border-dark-subtle"> 
             </div>
             @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
             {
@@ -144,24 +136,15 @@
                 <p>No profile image available</p>
             }
         </div>
-    </div>
+    </div> *@
 
 
 
 
-    <div class="container">
-        <div class="row gy-4 gy-lg-0">
-            <div class="col-12 col-lg-4 col-xl-3">
-                <div class="row gy-4">
-                    <div class="col-12">
-                        
-                    </div>
-
-
-                   
-                </div>
-            </div>
-            <div class="col-12 col-lg-8 col-xl-9">
+    <div class="container mt-5">
+        <div class="row gy-4 gy-lg-10">
+        
+            <div class="col-12 col-lg-8 col-xl-12">
                 <div class="card widget-card border-light shadow-sm">
                     <div class="card-body p-4">
                         <ul class="nav nav-tabs" id="profileTab" role="tablist">
@@ -171,109 +154,78 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
                             </li>
-                            @*  <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email-tab-pane" type="button" role="tab" aria-controls="email-tab-pane" aria-selected="false">Emails</button>
-                            </li> *@
+                            
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" type="button" role="tab" aria-controls="password-tab-pane" aria-selected="false">Password</button>
                             </li>
                         </ul>
                         <div class="tab-content pt-4" id="profileTabContent">
-                            <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
-                                @* <h5 class="mb-3">About</h5>
-                                <p class="lead mb-3">Ethan Leo is a seasoned and results-driven Project Manager who brings experience and expertise to project management. With a proven track record of successfully delivering complex projects on time and within budget, Ethan Leo is the go-to professional for organizations seeking efficient and effective project leadership.</p> *@
-                                <h5 class="mb-3">Profile</h5>
-                                <div class="row g-0">
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">First Name</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">@Model.FirstName</div>
-                                    </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">Last Name</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">@Model.LastName</div>
-                                    </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">Username</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">@Model.UserName</div>
-                                    </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">Email</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">@Model.Email</div>
-                                    </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">ContactNumber</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">@Model.ContactNumber</div>
-                                    </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">Address</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">@Model.Address</div>
-                                    </div>
-                                    @*  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                    <div class="p-2">Address</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                    <div class="p-2">@Model.PasswordCurr</div>
-                                    </div> *@
-                                    @* <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                    <div class="p-2">Password</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                    <div class="p-2">@Model.PasswordCurr</div>
-                                    </div> *@
 
-                                    @*  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                    <div class="p-2">Role</div>
+                        <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
+                            <div class="row justify-content-md-center">
+                                <!-- Left column for information -->
+                                <div class="col-12 col-md-6">
+                                    <div class="row g-0">
+                                        <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                            <div class="p-2">First Name</div>
+                                        </div>
+                                        <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                            <div class="p-2">@Model.FirstName</div>
+                                        </div>
+                                        <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                            <div class="p-2">Last Name</div>
+                                        </div>
+                                        <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                            <div class="p-2">@Model.LastName</div>
+                                        </div>
+                                        <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                            <div class="p-2">Username</div>
+                                        </div>
+                                        <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                            <div class="p-2">@Model.UserName</div>
+                                        </div>
+                                        <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                            <div class="p-2">Email</div>
+                                        </div>
+                                        <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                            <div class="p-2">@Model.Email</div>
+                                        </div>
+                                        <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                            <div class="p-2">Contact Number</div>
+                                        </div>
+                                        <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                            <div class="p-2">@Model.ContactNumber</div>
+                                        </div>
+                                        <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                            <div class="p-2">Address</div>
+                                        </div>
+                                        <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                            <div class="p-2">@Model.Address</div>
+                                        </div>
                                     </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                    <div class="p-2">HR</div>
-                                    </div> *@
-                                    @*  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                    <div class="p-2">GitHub Inc</div>
-                                    </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                    <div class="p-2">Phone</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                    <div class="p-2">+1 (248) 679-8745</div>
-                                    </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                    <div class="p-2">Email</div>
-                                    </div>
-                                    <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                    <div class="p-2">leo@example.com</div>
-                                    </div> *@
+                                </div>
+                                <!-- Right column for profile image -->
+                                <div class="col-12 col-md-6  pt-3 pb-3 ">
+                                   @*  <h2 class="mb-1 display-5 text-center">My Profile</h2>
+                                    <p class="text-secondary text-center lead fs-4 mb-0"></p>
+                                    <hr class="w-50 mx-auto mb-0 mt-0 mb-xl-3 mt-xl-3 border-dark-subtle"> *@
+                                    @if (!string.IsNullOrEmpty(Model.ProfileImagePath))
+                                    {
+                                        <img src="@Url.Content(Model.ProfileImagePath)" alt="Profile Image" class="profile-image img-fluid" />
+                                    }
+                                    else
+                                    {
+                                        <p>No profile image available</p>
+                                    }
                                 </div>
                             </div>
+                        </div>
+
+
+
                             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                                 <form asp-action="UpdateUser" asp-controller="MyProfile" method="post" class="row gy-3 gy-xxl-4">
-                                    @* <div class="col-12">
-                                    <div class="row gy-2">
-                                    <label class="col-12 form-label m-0">Profile Image</label>
-                                    <div class="col-12">
-                                    <img src="./assets/img/profile-img-1.jpg" class="img-fluid" alt="Luna John">
-                                    </div>
-                                    <div class="col-12">
-                                    <a href="#!" class="d-inline-block bg-primary link-light lh-1 p-2 rounded">
-                                    <i class="bi bi-upload"></i>
-                                    </a>
-                                    <a href="#!" class="d-inline-block bg-danger link-light lh-1 p-2 rounded">
-                                    <i class="bi bi-trash"></i>
-                                    </a>
-                                    </div>
-                                    </div>
-                                    </div> *@
+                              
                                     <div class="col-12 col-md-6">
                                         <label asp-for="@Model.FirstName" class="form-label">First Name</label>
                                         <input asp-for="@Model.FirstName" type="text" class="form-control" id="inputFirstName" value="@Model.FirstName">
@@ -289,10 +241,7 @@
                                         <input asp-for="@Model.UserName" type="text" class="form-control" id="inputEducation" value="@Model.UserName">
                                         <span asp-validation-for="@Model.UserName" class="text-danger"></span>
                                     </div>
-                                    @*  <div class="col-12 col-md-6">
-                                    <label for="inputSkills" class="form-label">Skills</label>
-                                    <input type="text" class="form-control" id="inputSkills" value="HTML, SCSS, Javascript, React, Vue, Angular, UI, UX">
-                                    </div>*@
+
                                     <div class="col-12 col-md-6">
                                         <label asp-for="@Model.ContactNumber" class="form-label">Phone</label>
                                         <input asp-for="@Model.ContactNumber" type="number" class="form-control" id="inputPhone" value="@Model.ContactNumber">
@@ -314,69 +263,28 @@
                                     </div>
                                 </form>
                             </div>
-                            @* <div class="tab-pane fade" id="email-tab-pane" role="tabpanel" aria-labelledby="email-tab" tabindex="0">
-                            <form action="#!">
-                            <fieldset class="row gy-3 gy-md-0">
-                            <legend class="col-form-label col-12 col-md-3 col-xl-2">Email Alerts</legend>
-                            <div class="col-12 col-md-9 col-xl-10">
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="emailChange">
-                            <label class="form-check-label" for="emailChange">
-                            Email Changed
-                            </label>
-                            </div>
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="passwordChange">
-                            <label class="form-check-label" for="passwordChange">
-                            Password Changed
-                            </label>
-                            </div>
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="weeklyNewsletter">
-                            <label class="form-check-label" for="weeklyNewsletter">
-                            Weekly Newsletter
-                            </label>
-                            </div>
-                            <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="productPromotions">
-                            <label class="form-check-label" for="productPromotions">
-                            Product Promotions
-                            </label>
-                            </div>
-                            </div>
-                            </fieldset>
-                            <div class="row">
-                            <div class="col-12">
-                            <button type="submit" class="btn btn-primary mt-4">Save Changes</button>
-                            </div>
-                            </div>
-                            </form>
-                            </div> *@
+                          
                             <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
                                 <form asp-controller="MyProfile" asp-action="ComparePassword" method="post">
                                     <div class="row gy-3 gy-xxl-4">
                                         <div class="col-12">
                                             <label for="CurrentPassword" class="form-label">Current Password</label>
-                                            @* <input type="password" class="form-control" id="CurrentPassword" name="CurrentPassword"> *@
                                             <input asp-for="@Model.CurrentPassword" type="password" class="form-control" id="inputLastName">
                                             <span asp-validation-for="@Model.CurrentPassword" class="text-danger"></span>
 
                                         </div>
                                         <div class="col-12">
                                             <label for="NewPassword" class="form-label">New Password</label>
-                                            @* <input type="password" class="form-control" id="NewPassword" name="NewPassword"> *@
                                             <input asp-for="@Model.NewPassword" type="password" class="form-control" id="inputLastName">
                                             <span asp-validation-for="@Model.NewPassword" class="text-danger"></span>
                                         </div>
                                         <div class="col-12">
                                             <label for="ConfirmPassword" class="form-label">Confirm Password</label>
-                                            @* <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword"> *@
                                             <input asp-for="@Model.ConfirmPassword" type="password" class="form-control" id="inputLastName">
                                             <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
                                         </div>
                                         <div class="col-12">
                                             <label for="PasswordCurr" class="form-label"></label>
-                                            @* <input type="hidden" class="form-control" id="PasswordCurr" name="PasswordCurr" value="@Model.AppUser.PasswordCurr"> *@
                                             <input asp-for="@Model.PasswordCurr" type="hidden" class="form-control" id="inputLastName" value="@Model.PasswordCurr">
                                             <span asp-validation-for="@Model.PasswordCurr" class="text-danger"></span>
                                         </div>
@@ -394,7 +302,7 @@
         </div>
     </div>
 
-</section>
+@* </section> *@
 
 
 <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -114,22 +114,22 @@
 
                                     <div class="card-header" style="background-color:#007BFF">
                                         <h3 class="card-title" style="color:white; font-weight:bold;font-size:23px;">Permission</h3>
-                                        @* <div class="float-left ">
+                                        </div>
+
+                                        <div class="float-left mt-2 ml-2" >
+                                            <button type="button" class="btn btn-primary" title="Add Permission" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "Permission")">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+
+                                        </div>
+
+                                    <div class="card-body">
+                                      @*   <div class="float-left mt-2 ">
                                             <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "Permission")">
                                                 <i class="fas fa-plus"></i>
                                             </button>
 
                                         </div> *@
-
-                                        </div>
-
-                                    <div class="card-body">
-                                        <div class="float-left ">
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "Permission")">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-
-                                        </div>
                                         <table id="example2" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
@@ -164,13 +164,13 @@
                                                             }
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                            <button class="btn btn-primary btn-sm edit-button" title="Edit Permission" data-toggle="ajax-modal" data-target="#updateModal"
                                                                     data-url="@Url.Action("Edit", "Permission")" data-id="@item.PermissionId">
                                                                 <i class="fas fa-edit"></i> @* Edit *@
                                                             </button>
 
 
-                                                            <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.PermissionId">
+                                                            <button class="btn btn-danger btn-sm trigger-modal" title="Delete Permission" data-id="@item.PermissionId">
                                                                 <i class="fas fa-trash-alt"></i> @* Delete *@
                                                             </button>
 
@@ -217,7 +217,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
 
 

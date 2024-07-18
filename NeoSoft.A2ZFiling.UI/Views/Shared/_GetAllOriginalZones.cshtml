@@ -15,7 +15,7 @@
                                             </button> *@
 
                                             <div id="placeholder"></div>
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal1"
+                                            <button type="button" class="btn btn-primary" title="Add Zone" data-toggle="ajax-modal" data-target="#createModal1"
                                                     data-url="@Url.Action("Create", "Zone")">
                                                 <i class="fas fa-plus"></i>   @* Create *@
                                             </button>
@@ -55,13 +55,13 @@
                                                                 }
                                                             </td>
                                                             <td>
-                                                                <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal2"
+                                                                <a class="btn btn-primary btn-sm edit-button" title="Edit Zone" data-toggle="ajax-modal" data-target="#updateModal2"
                                                                         data-url="@Url.Action("EditZone", "Zone")" data-id="@item.ZoneId">
                                                                     <i class="fas fa-edit"></i> @* Edit *@
                                                                 </a>
 
 
-                                                                <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.ZoneId">
+                                                                <button class="btn btn-danger btn-sm trigger-modal" title="Delete Zone" data-id="@item.ZoneId">
                                                                     <i class="fas fa-trash-alt"></i> @* Delete *@
                                                                 </button>
 

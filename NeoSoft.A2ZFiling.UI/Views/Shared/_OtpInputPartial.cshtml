@@ -1,4 +1,5 @@
 ﻿@model NeoSoft.A2ZFiling.UI.ViewModels.OtpRequest;
+
 @{
     Layout = null;
 }
@@ -50,14 +51,14 @@
 
         .icheck-primary input[type="checkbox"] {
             transform: scale(0.8);
-            / Scale down the checkbox / margin-right: 5px;
-            / Add some space between the checkbox and the label / width: 10px;
+           /*  / Scale down the checkbox / margin-right: 5px;
+            / Add some space between the checkbox and the label / width: 10px; */
             height: 10px;
         }
 
         .icheck-primary label {
             font-size: 18px;
-            / Adjust the label size if necessary /
+         
         }
     </style>
 
@@ -67,7 +68,7 @@
 </head>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#"><b>A2ZFiling</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -120,7 +121,11 @@
                                 
                                 @if (TempData["Message"] != null)
                                 {
-                                    <p>@TempData["Message"]</p>
+                                    <p style="color:red">@TempData["Message"]</p>
+                                }
+                                @if (ViewBag.Message != null)
+                                {
+                                    <p style="color:red">@ViewBag.Message</p>
                                 }
 
                                 <input type="hidden" class="hide" name="token" id="token" value="">

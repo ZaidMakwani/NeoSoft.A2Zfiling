@@ -17,8 +17,8 @@
 
 
     <div class="card-header">
-        <div class="float-left">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createIndustryModal" data-url="@Url.Action("Create", "Industry")">
+        <div class="float-left ml-4">
+            <button type="button" class="btn btn-primary" title="Add Industry " data-toggle="ajax-modal" data-target="#createIndustryModal" data-url="@Url.Action("Create", "Industry")">
                 <i class="fas fa-plus"></i>
             </button>
 
@@ -69,12 +69,12 @@
                         <td>@Html.DisplayFor(modelItem => item.ShortName)</td>
                         <td>
 
-                            <a class="btn btn-primary btn-sm editIndustry-button" data-toggle="ajax-modal" data-target="#updateModal"
+                            <a class="btn btn-primary btn-sm editIndustry-button" title="Edit Industry" data-toggle="ajax-modal" data-target="#updateModal"
                                data-url="@Url.Action("Update", "Industry")" data-id="@item.IndustryId">
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <a id="triggerModalButton" class="btn btn-danger btn-sm triggerIndustry-modal" data-id="@item.IndustryId">
+                            <a id="triggerModalButton" class="btn btn-danger btn-sm triggerIndustry-modal" title="Delete Industry" data-id="@item.IndustryId">
                                 <i class="fas fa-trash-alt"></i>@* Delete  *@
                             </a>
 

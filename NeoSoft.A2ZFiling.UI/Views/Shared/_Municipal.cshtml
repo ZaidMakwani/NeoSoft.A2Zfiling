@@ -12,7 +12,7 @@
 
 
                                             <div id="placeholder2"></div>
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal3"
+                                            <button type="button" class="btn btn-primary" title="Add Municipal" data-toggle="ajax-modal" data-target="#createModal3"
                                                     data-url="@Url.Action("Create", "Municipal")">
                                                 <i class="fas fa-plus"></i>   @* Create *@
                                             </button>
@@ -86,13 +86,13 @@
                                                         }
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal4"
+                                                        <a class="btn btn-primary btn-sm edit-button" title="Edit Municipal" data-toggle="ajax-modal" data-target="#updateModal4"
                                                            data-url="@Url.Action("Edit", "Municipal")" data-id="@item.MunicipalId">
                                                             <i class="fas fa-edit"></i> @* Edit *@
                                                         </a>
 
 
-                                                        <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.MunicipalId">
+                                                        <button class="btn btn-danger btn-sm trigger-modal" title="Delete Municipal" data-id="@item.MunicipalId">
                                                             <i class="fas fa-trash-alt"></i> @* Delete *@
                                                         </button>
 

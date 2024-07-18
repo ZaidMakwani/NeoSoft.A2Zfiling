@@ -62,12 +62,30 @@ namespace NeoSoft.A2ZFiling.UI.Filter
                 Console.WriteLine($"{claim.Type}: {claim.Value}");
             }
 
-            // Console.WriteLine(claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "role").Value);
+            //Console.WriteLine(claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "role").Value);
 
             //if (claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "role").Value == "Admin")
             //{
             //    await next();
             //}
+
+            // Assuming claimsPrincipal is of type ClaimsPrincipal and represents the authenticated user
+            var roleClaim = claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role");
+
+            if (roleClaim != null && roleClaim.Value == "Admin")
+            {
+                // User is authorized as Admin, proceed with the next operation
+                await next();
+                return;
+            }
+            else
+            {
+                // User is not authorized as Admin, handle unauthorized access
+                Console.WriteLine("Unauthorized access.");
+                
+            }
+
+
 
             var permissionsClaim = claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "permissions");
 

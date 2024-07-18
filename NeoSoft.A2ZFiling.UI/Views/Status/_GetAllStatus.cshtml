@@ -10,7 +10,7 @@
 
     <div class="card-header">
         <div @* class="float-left" *@ style=" margin-left: 19px;">
-            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "Status")">
+            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" title="Add Status" data-target="#createModal" data-url="@Url.Action("Create", "Status")">
                 <i class="fas fa-plus"></i>
             </button>
 
@@ -80,12 +80,12 @@
                                 @if (item.IsActive)
                                 {
                                     <div class="btn-group">
-                                        <button class="btn btn-primary btn-sm editStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateStatusModal"
+                                        <button class="btn btn-primary btn-sm editStatus-button mr-1" title="Edit Status" data-toggle="ajax-modal" data-target="#updateStatusModal"
                                                 data-url="@Url.Action("Update", "Status")" data-id="@item.StatusId">
                                             <i class="fas fa-edit"></i>
                                         </button>
 
-                                        <button class="btn btn-danger btn-sm triggerStatus-modal" data-id="@item.StatusId">
+                                        <button class="btn btn-danger btn-sm triggerStatus-modal" title="Delete Status" data-id="@item.StatusId">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
@@ -93,12 +93,12 @@
                                 else
                                 {
                                     <div class="btn-group">
-                                        <button class="btn btn-primary btn-sm editStatus-button mr-1" data-toggle="ajax-modal" data-target="#updateStatusModal"
+                                        <button class="btn btn-primary btn-sm editStatus-button mr-1" title="Edit Status" data-toggle="ajax-modal" data-target="#updateStatusModal"
                                                 data-url="@Url.Action("Update", "Status")" data-id="@item.StatusId" disabled>
                                             <i class="fas fa-edit"></i>
                                         </button>
 
-                                        <a class="btn btn-danger btn-sm triggerStatus-modal" data-id="@item.StatusId" disabled>
+                                        <a class="btn btn-danger btn-sm triggerStatus-modal" title="Delete Status" data-id="@item.StatusId" disabled>
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </div>

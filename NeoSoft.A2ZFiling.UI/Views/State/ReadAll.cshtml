@@ -32,7 +32,7 @@
                                         <h3 class="card-title">States</h3>
                                         <div class="card-tools">
                                             <div id="placeholder"></div>
-                                            <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "State")">
+                                            <button type="button" class="btn btn-primary" title="Add State" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "State")">
                                                 <i class="fas fa-plus"></i> Create State
                                             </button>
                                         </div>
@@ -73,11 +73,11 @@
                                                                 }
                                                             </td>
                                                             <td>
-                                                                <a class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                <a class="btn btn-primary btn-sm edit-button" title="Edit State" data-toggle="ajax-modal" data-target="#updateModal"
                                                                    data-url="@Url.Action("Update", "State")" data-id="@item.StateId">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a class="btn btn-danger btn-sm trigger-modal" data-id="@item.StateId">
+                                                                <a class="btn btn-danger btn-sm trigger-modal" title="Delete State" data-id="@item.StateId">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
                                                             </td>

@@ -1,4 +1,20 @@
-﻿
+﻿@{
+    var token = Context.Session.GetString("Token");
+    var roleName = ""; // Initialize role name
+
+    if (!string.IsNullOrEmpty(token))
+    {
+        var claimsPrincipal = JwtDecoder.DecodeJwtToken(token);
+        var roleClaim = claimsPrincipal.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role");
+        if (roleClaim != null)
+        {
+            roleName = roleClaim.Value;
+        }
+    }
+}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,97 +158,104 @@
                 <span class="brand-text font-weight-bolder ">A2Z Filing</span>
             </div>
 
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-solid fa-user"></i>
-                            <p>
-                                User Management
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-action="GetAllRole" asp-controller="Role">Roles</a>
-                            </li>
-                            @* <li class="nav-item">
-                                <a class="nav-link" asp-action="GetAllZone" asp-controller="Zone">Zones</a>
+            @if (!string.IsNullOrEmpty(roleName) && roleName == "Admin")
+                {
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                            <li class="nav-item menu-open">
+                                <a href="#" class="nav-link active">
+                                    <i class="nav-icon fas fa-solid fa-user"></i>
+                                    <p>
+                                        User Management
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-action="GetAllRole" asp-controller="Role">Roles</a>
+                                    </li>
+                                    @* <li class="nav-item">
+                            <a class="nav-link" asp-action="GetAllZone" asp-controller="Zone">Zones</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="GetAllCity" asp-controller="City">City</a>
+                            <a class="nav-link" asp-action="GetAllCity" asp-controller="City">City</a>
                             </li>
- *@
+                            *@
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-action="GetAllPermission" asp-controller="Permission">Permission</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-action="GetAll" asp-controller="UserPermission">Role Permission</a>
+                                    </li>
+
+                                    @* <li class="nav-item">
+                            <a class="nav-link" asp-action="ReadAll" asp-controller="PinCode">PinCodes</a>
+
+
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-action="GetAllPermission" asp-controller="Permission">Permission</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" asp-action="GetAll" asp-controller="UserPermission">Role Permission</a>
-                            </li>
-
-                            @* <li class="nav-item">
-                                <a class="nav-link" asp-action="ReadAll" asp-controller="PinCode">PinCodes</a>
-
-
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-action="ReadAll" asp-controller="State">States</a>
+                            <a class="nav-link" asp-action="ReadAll" asp-controller="State">States</a>
                             </li> *@
-                         
+
+                                </ul>
+
+                                <li class="nav-item ">
+                                    <a asp-action="Index" asp-controller="LicenseMaster" class="nav-link active">
+                                        <i class="nav-icon fas fa-regular fa-id-card"></i>
+                                        <p>
+                                            License Master
+
+                                        </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a class="nav-link active" asp-action="GetAll" asp-controller="LicenseType">
+                                        <i class="nav-icon fas fa-solid fa-gears"></i>
+                                        <p>
+                                            License Configuration Setting
+
+                                        </p>
+                                    </a>
+
+                                </li>
+
+
+
+
+                                <li class="nav-item ">
+
+                                    <a asp-action="GetAllMunicipal" asp-controller="Municipal" class="nav-link active">
+                                        <i class="fa-solid fa-location-pin"></i>
+                                        <p>
+                                            Location Settings
+
+                                        </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item ">
+
+                                    <a asp-action="Index" asp-controller="MyProfile" class="nav-link active">
+                                        <i class="nav-icon fas fa-solid fa-user"></i>
+                                        <p>
+                                            MyAccount
+
+                                        </p>
+                                    </a>
+                                </li>
+
+
                         </ul>
-
-                    <li class="nav-item ">
-                        <a asp-action="Index" asp-controller="LicenseMaster" class="nav-link active">
-                            <i class="nav-icon fas fa-regular fa-id-card"></i>
-                            <p>
-                                License Master
-
-                            </p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item ">
-                        <a class="nav-link active" asp-action="GetAll" asp-controller="LicenseType">
-                            <i class="nav-icon fas fa-solid fa-gears"></i>
-                            <p>
-                                License Configuration Setting
-                             
-                            </p>
-                        </a>
-
-                    </li>
-
-
-
-
-                    <li class="nav-item ">
-
-                        <a asp-action="GetAllMunicipal" asp-controller="Municipal" class="nav-link active">
-                        <i class="nav-icon  fas fa-regular fa-id-card"></i>
-                            <p>
-                                Location Settings
-
-                            </p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item ">
-
-                        <a asp-action="Index" asp-controller="MyProfile" class="nav-link active">
-                            <i class="nav-icon fas fa-solid fa-user"></i>
-                            <p>
-                                MyAccount
-
-                            </p>
-                        </a>
-                    </li>
-                       
-
-                </ul>
-            </nav>
+                </nav>
+            }
+            else if(!string.IsNullOrEmpty(roleName) && roleName == "End User")
+            {
+                @Html.Partial("_EndUser");
+            }
 
         </aside>
 

@@ -147,7 +147,7 @@
 <body>
         <div class="container">
             <aside class="sidebar1">
-                <h2>Welcome!<br>Abhinandan Kumar</h2>
+            <h2>Welcome!<br>@TempData["Username"]</h2>
                 <div class="wrapper">
                     <ul class="StepProgress">
                         <li class="StepProgress-item is-done"><strong>Registration <br>Completed</strong></li>
@@ -164,7 +164,7 @@
 
             <div class="main-content">
                 <h2>Upload Documents</h2>
-                <p>Kindly proceed to upload documents for <strong>GST Registration</strong></p>
+            <p>Kindly proceed to upload documents for <strong>@TempData["Service"]</strong></p>
 
                 <form enctype="multipart/form-data" asp-action="Create" asp-controller="UserDetail" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>

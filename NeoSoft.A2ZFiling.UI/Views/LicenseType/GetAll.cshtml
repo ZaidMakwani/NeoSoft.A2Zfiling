@@ -160,19 +160,12 @@
 
                                             <div class="card-header">
 
-                                                <div class="float-left ">
-                                                    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "LicenseType")">
+                                                <div class="float-left ml-4" >
+                                                    <button type="button" class="btn btn-primary"  title="Add License Type" data-toggle="ajax-modal" data-target="#createModal" data-url="@Url.Action("Create", "LicenseType")">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
-
-                                             
                                                 </div>
- *@
-
-
-                                            
  
-          
                                             <div class="card-body">
                                                 <table id="example1" class="table table-bordered table-striped">
                                                     <thead>
@@ -208,13 +201,13 @@
                                                                     }
                                                                 </td>
                                                                 <td>
-                                                                    <button class="btn btn-primary btn-sm edit-button" data-toggle="ajax-modal" data-target="#updateModal"
+                                                                    <button class="btn btn-primary btn-sm edit-button" title="Edit License Type" data-toggle="ajax-modal" data-target="#updateModal"
                                                                             data-url="@Url.Action("Edit", "LicenseType")" data-id="@item.LicenseTypeId">
                                                                         <i class="fas fa-edit"></i> 
                                                                     </button>
 
 
-                                                                    <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.LicenseTypeId">
+                                                                    <button class="btn btn-danger btn-sm trigger-modal" title="Delete License Type" data-id="@item.LicenseTypeId">
                                                                         <i class="fas fa-trash-alt"></i> 
                                                                     </button>
 

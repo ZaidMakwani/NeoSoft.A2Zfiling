@@ -363,38 +363,6 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.Document", b =>
-                {
-                    b.Property<int>("DocumentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentId"), 1L, 1);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DocumentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("DocumentId");
-
-                    b.ToTable("Documents");
-                });
-
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.DocumentDetail", b =>
                 {
                     b.Property<int>("DocumentDetailId")
@@ -439,7 +407,7 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                     b.ToTable("DocumentDetails");
                 });
 
-            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.DocumentMaster", b =>
+            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.DocumentMasters", b =>
                 {
                     b.Property<int>("DocumentMasterId")
                         .ValueGeneratedOnAdd()
@@ -447,15 +415,39 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentMasterId"), 1L, 1);
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DocumentFormat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DocumentName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DocumentType")
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SampleFormat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserDetailId")
+                        .HasColumnType("int");
+
                     b.HasKey("DocumentMasterId");
+
+                    b.HasIndex("UserDetailId");
 
                     b.ToTable("DocumentMasters");
                 });
@@ -536,6 +528,32 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                     b.HasKey("LicenseId");
 
                     b.ToTable("Licenses");
+                });
+
+            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.LicenseDocument", b =>
+                {
+                    b.Property<int>("LicenseDocumentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LicenseDocumentId"), 1L, 1);
+
+                    b.Property<int>("DocumentMasterId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LicenseMasterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LicenseDocumentId");
+
+                    b.HasIndex("DocumentMasterId");
+
+                    b.HasIndex("LicenseMasterId");
+
+                    b.ToTable("LicenseDocuments");
                 });
 
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.LicenseMaster", b =>
@@ -619,6 +637,10 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
 
                     b.Property<int>("Visibilities")
                         .HasColumnType("int");
+
+                    b.Property<string>("Workflow")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ZoneId")
                         .HasColumnType("int");
@@ -996,64 +1018,6 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                     b.ToTable("Tokens");
                 });
 
-            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.UploadedInfo", b =>
-                {
-                    b.Property<int>("UploadedInfoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UploadedInfoId"), 1L, 1);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DocumentMasterId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IndustryId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MunicipalId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StateId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UploadDocument")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UploadedInfoId");
-
-                    b.ToTable("UploadedInfos");
-                });
-
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.UserDetail", b =>
                 {
                     b.Property<int>("UserDetailId")
@@ -1244,10 +1208,36 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.DocumentDetail", b =>
                 {
                     b.HasOne("NeoSoft.A2Zfiling.Domain.Entities.UserDetail", null)
-                        .WithMany("Documents")
+                        .WithMany("DocumentDetails")
                         .HasForeignKey("UserDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.DocumentMasters", b =>
+                {
+                    b.HasOne("NeoSoft.A2Zfiling.Domain.Entities.UserDetail", null)
+                        .WithMany("DocumentMasters")
+                        .HasForeignKey("UserDetailId");
+                });
+
+            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.LicenseDocument", b =>
+                {
+                    b.HasOne("NeoSoft.A2Zfiling.Domain.Entities.DocumentMasters", "DocumentMaster")
+                        .WithMany("LicenseDocuments")
+                        .HasForeignKey("DocumentMasterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NeoSoft.A2Zfiling.Domain.Entities.LicenseMaster", "LicenseMaster")
+                        .WithMany("LicenseDocuments")
+                        .HasForeignKey("LicenseMasterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DocumentMaster");
+
+                    b.Navigation("LicenseMaster");
                 });
 
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.LicenseMaster", b =>
@@ -1356,6 +1346,11 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
                     b.Navigation("LicenseMasters");
                 });
 
+            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.DocumentMasters", b =>
+                {
+                    b.Navigation("LicenseDocuments");
+                });
+
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.Industry", b =>
                 {
                     b.Navigation("LicenseMasters");
@@ -1364,6 +1359,11 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.License", b =>
                 {
                     b.Navigation("LicenseMasters");
+                });
+
+            modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.LicenseMaster", b =>
+                {
+                    b.Navigation("LicenseDocuments");
                 });
 
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.LicenseType", b =>
@@ -1387,7 +1387,9 @@ namespace NeoSoft.A2Zfiling.Persistence.Migrations.MSSQL
 
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.UserDetail", b =>
                 {
-                    b.Navigation("Documents");
+                    b.Navigation("DocumentDetails");
+
+                    b.Navigation("DocumentMasters");
                 });
 
             modelBuilder.Entity("NeoSoft.A2Zfiling.Domain.Entities.Zones", b =>
