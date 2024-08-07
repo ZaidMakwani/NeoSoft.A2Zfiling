@@ -14,7 +14,7 @@ namespace NeoSoft.A2ZFiling.UI.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly string accountSid = "ACa217336b6f13ecd2ba825f26cdc9f952";
-        private readonly string authToken = "63d862f8332758153ab11b4afb0637d8";
+        private readonly string authToken = "601be24ae06b9131a05f794f5aef29c3";
         private readonly string fromPhoneNumber = "+17178825643";
 
         public ServiceRegistrationController(IConfiguration configuration)
