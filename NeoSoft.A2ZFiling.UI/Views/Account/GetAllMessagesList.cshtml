@@ -94,10 +94,10 @@
                                                             </td>
                                                             
                                                             <td>
-                                                                <button class="btn btn-primary btn-sm edit-button-zone" data-toggle="ajax-modal" data-target="#updateModal2"
+                                                                <a class="btn btn-primary btn-sm edit-button-zone" data-toggle="ajax-modal" data-target="#updateModal2"
                                                                         data-url="@Url.Action("Update", "Account")" data-id="@item.Id">
                                                                     <i class="fas fa-edit"></i> @* Edit *@
-                                                                </button>
+                                                                </a>
 
 
                                                               @*   <button class="btn btn-danger btn-sm trigger-modal" data-id="@item.ZoneId">
@@ -292,8 +292,8 @@
         $(document).on('click', '.edit-button-zone', function () {
 
             var ZoneId = $(this).data("id");
-            var editUrl = '@Url.Action("Update", "Account")' + '?id=' + Id;
-
+            var editUrl = '@Url.Action("Update", "Account")' + '?Id=' + Id;
+            debugger
             // AJAX request to fetch data for editing
             $.ajax({
                 url: editUrl,
@@ -315,7 +315,7 @@
         // Function to update data after saving
         function updateData() {
             var ZoneId = $('#Id').val(); // Assuming you have a hidden input field with the ZoneId
-            var editUrl = '@Url.Action("Update", "Account")' + '?id=' + Id;
+            var editUrl = '@Url.Action("Update", "Account")' + '?Id=' + Id;
 
             // AJAX request to fetch updated data
             $.ajax({
